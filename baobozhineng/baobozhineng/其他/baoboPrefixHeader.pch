@@ -1,0 +1,26 @@
+//
+//  baoboPrefixHeader.pch
+//  baobozhineng
+//
+//  Created by 魏俊阳 on 2017/12/25.
+//  Copyright © 2017年 魏俊阳. All rights reserved.
+// 
+
+#ifndef baoboPrefixHeader_pch
+#define baoboPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "UtilsMacro.h"
+#import "CommonCode.h"
+#import "APIManager.h"
+#import "SVProgressHUD+SomeThingDefine.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import "RadioButton.h"
+#import "ParentViewController.h"
+#import "AutoKeyboardField.h"
+#import "MainParentViewController.h"
+#import "RadioView.h"
+#import "UIView+MydefineView.h"
+#import "AlertManager.h"
+#endif /* baoboPrefixHeader_pch */

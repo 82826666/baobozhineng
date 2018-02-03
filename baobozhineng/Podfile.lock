@@ -1,0 +1,41 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - IQKeyboardManager (4.0.3)
+  - JCore (1.1.7)
+  - JPush (3.0.8):
+    - JCore (~> 1.1.7)
+  - MJExtension (3.0.13)
+  - SVProgressHUD (2.0.3)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.1.0)
+  - IQKeyboardManager (~> 4.0.3)
+  - JPush
+  - MJExtension
+  - SVProgressHUD (~> 2.0.3)
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  IQKeyboardManager: be9695ffc5a52077deb4847608f338771022d6d1
+  JCore: f7459c81c135281a874a6beafdd321666adcc834
+  JPush: 9574d072cc37e93fa293ba69b43ce763c440943a
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
+
+PODFILE CHECKSUM: 5bf490e75c9d0bc2b4f51ae5c99bf2b0aadb71f9
+
+COCOAPODS: 1.4.0

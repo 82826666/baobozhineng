@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="MFU-h2-LUU">
+            <objects>
+                <viewController storyboardIdentifier="HomeViewController" id="wEC-pb-fx7" customClass="HomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5iV-sw-VI7"/>
+                        <viewControllerLayoutGuide type="bottom" id="65h-6i-Rt6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oW6-xa-He8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zeq-aj-2Pi" customClass="NavBarView">
+                                <rect key="frame" x="0.0" y="-30" width="375" height="94"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="家居" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQw-Zb-HUS">
+                                        <rect key="frame" x="0.0" y="40" width="375" height="54"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="54" id="cFQ-vd-vk0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.74509803919999995" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="94" id="1Kk-gf-5LB"/>
+                                    <constraint firstItem="YQw-Zb-HUS" firstAttribute="leading" secondItem="zeq-aj-2Pi" secondAttribute="leading" id="3dw-Nb-EoM"/>
+                                    <constraint firstAttribute="bottom" secondItem="YQw-Zb-HUS" secondAttribute="bottom" id="4u2-Vf-so6"/>
+                                    <constraint firstAttribute="trailing" secondItem="YQw-Zb-HUS" secondAttribute="trailing" id="Cfw-MN-V1h"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zeq-aj-2Pi" firstAttribute="leading" secondItem="oW6-xa-He8" secondAttribute="leading" id="821-id-0DW"/>
+                            <constraint firstAttribute="trailing" secondItem="zeq-aj-2Pi" secondAttribute="trailing" id="EDK-vy-237"/>
+                            <constraint firstItem="zeq-aj-2Pi" firstAttribute="top" secondItem="5iV-sw-VI7" secondAttribute="bottom" constant="-50" id="LVW-Db-RIe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="navBarView" destination="zeq-aj-2Pi" id="m0N-T8-ruI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ozb-3H-A5X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2125.5999999999999" y="643.62818590704649"/>
+        </scene>
+    </scenes>
+</document>

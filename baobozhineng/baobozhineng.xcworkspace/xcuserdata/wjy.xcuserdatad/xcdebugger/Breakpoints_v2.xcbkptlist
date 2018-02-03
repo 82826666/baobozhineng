@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5e38;&#x7528;&#x754c;&#x9762;/EquipmentSwitchSetViewController.m"
+            timestampString = "539356275.345492"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "-switchIconAction:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__53-[EquipmentSwitchSetViewController switchIconAction:]_block_invoke"
+                  moduleName = "baobozhineng"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wjy/Documents/Mnt/baoshizhineng/baobozhineng/baobozhineng/%E7%95%8C%E9%9D%A2/%E4%B8%BB%E7%95%8C%E9%9D%A2/%E5%B8%B8%E7%94%A8%E7%95%8C%E9%9D%A2/EquipmentSwitchSetViewController.m"
+                  timestampString = "538151466.576277"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "499">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.151"
+                  moduleName = "baobozhineng"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wjy/Documents/Mnt/baoshizhineng/baobozhineng/baobozhineng/%E7%95%8C%E9%9D%A2/%E4%B8%BB%E7%95%8C%E9%9D%A2/%E5%B8%B8%E7%94%A8%E7%95%8C%E9%9D%A2/EquipmentSwitchSetViewController.m"
+                  timestampString = "538151466.578782"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.152"
+                  moduleName = "baobozhineng"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wjy/Documents/Mnt/baoshizhineng/baobozhineng/baobozhineng/%E7%95%8C%E9%9D%A2/%E4%B8%BB%E7%95%8C%E9%9D%A2/%E5%B8%B8%E7%94%A8%E7%95%8C%E9%9D%A2/EquipmentSwitchSetViewController.m"
+                  timestampString = "538151466.581378"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "29">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5e38;&#x7528;&#x754c;&#x9762;/EquipmentSwitchSetViewController.m"
+            timestampString = "539356275.345574"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "-switchIconAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5e38;&#x7528;&#x754c;&#x9762;/EquipmentSwitchSetViewController.m"
+            timestampString = "539356275.3456351"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "-saveAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "baobozhineng/&#x754c;&#x9762;/&#x5f39;&#x51fa;&#x6846;/TextFieldAlertViewController.m"
+            timestampString = "539356275.345696"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "fieldPopview"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

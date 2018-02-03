@@ -1,0 +1,15 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '7.0'
+
+target 'baobozhineng' do
+    
+#网路请求
+pod 'AFNetworking', '~> 3.1.0'
+#键盘管理工具
+pod 'IQKeyboardManager', '~> 4.0.3'
+#提示工具
+pod 'SVProgressHUD', '~> 2.0.3'
+#数据解析
+pod 'MJExtension'
+pod 'JPush'
+end
