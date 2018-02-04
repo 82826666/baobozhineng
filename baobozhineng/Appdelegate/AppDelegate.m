@@ -50,7 +50,7 @@
     
     NSString *appKey = @"34b0abe5c41f071c1969d5c2";
     NSString *channel = @"app-store";
-    NSString *isProduction = @"0";
+    NSString *isProduction = @"1";
     // Required
     // init Push
     // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil

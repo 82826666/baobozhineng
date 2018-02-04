@@ -18,6 +18,7 @@ PODS:
   - JCore (1.1.7)
   - JPush (3.0.8):
     - JCore (~> 1.1.7)
+  - Masonry (1.1.0)
   - MJExtension (3.0.13)
   - SVProgressHUD (2.0.3)
 
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
   - IQKeyboardManager (~> 4.0.3)
   - JPush
+  - Masonry
   - MJExtension
   - SVProgressHUD (~> 2.0.3)
 
@@ -33,9 +35,10 @@ SPEC CHECKSUMS:
   IQKeyboardManager: be9695ffc5a52077deb4847608f338771022d6d1
   JCore: f7459c81c135281a874a6beafdd321666adcc834
   JPush: 9574d072cc37e93fa293ba69b43ce763c440943a
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
 
-PODFILE CHECKSUM: 5bf490e75c9d0bc2b4f51ae5c99bf2b0aadb71f9
+PODFILE CHECKSUM: 32fce766de46c246671318972bf2dd9b8e8a4f9e
 
 COCOAPODS: 1.4.0

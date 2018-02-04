@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		57AB46B72025D6FB009FA671 /* SceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AB46B52025D6FB009FA671 /* SceneTableViewCell.m */; };
 		57AB46B82025D6FB009FA671 /* SceneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AB46B62025D6FB009FA671 /* SceneTableViewCell.xib */; };
+		57AB46BE2026C757009FA671 /* RecodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AB46BD2026C757009FA671 /* RecodeViewController.m */; };
+		57AB46C12026CB69009FA671 /* AddSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AB46C02026CB69009FA671 /* AddSceneViewController.m */; };
+		57AB46C52026CBF2009FA671 /* RecodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AB46C32026CBF2009FA671 /* RecodeTableViewCell.m */; };
+		57AB46C62026CBF2009FA671 /* RecodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AB46C42026CBF2009FA671 /* RecodeTableViewCell.xib */; };
 		57B37FB9202338AB00AA3603 /* HouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B37FB8202338AB00AA3603 /* HouseViewController.m */; };
 		57B37FBD20233F7300AA3603 /* HouseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B37FBB20233F7300AA3603 /* HouseTableViewCell.m */; };
 		57B37FBE20233F7300AA3603 /* HouseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57B37FBC20233F7300AA3603 /* HouseTableViewCell.xib */; };
@@ -312,6 +316,13 @@
 		57AB46B42025D6FB009FA671 /* SceneTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneTableViewCell.h; sourceTree = "<group>"; };
 		57AB46B52025D6FB009FA671 /* SceneTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneTableViewCell.m; sourceTree = "<group>"; };
 		57AB46B62025D6FB009FA671 /* SceneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SceneTableViewCell.xib; sourceTree = "<group>"; };
+		57AB46BC2026C757009FA671 /* RecodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecodeViewController.h; sourceTree = "<group>"; };
+		57AB46BD2026C757009FA671 /* RecodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecodeViewController.m; sourceTree = "<group>"; };
+		57AB46BF2026CB69009FA671 /* AddSceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddSceneViewController.h; sourceTree = "<group>"; };
+		57AB46C02026CB69009FA671 /* AddSceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddSceneViewController.m; sourceTree = "<group>"; };
+		57AB46C22026CBF2009FA671 /* RecodeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecodeTableViewCell.h; sourceTree = "<group>"; };
+		57AB46C32026CBF2009FA671 /* RecodeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecodeTableViewCell.m; sourceTree = "<group>"; };
+		57AB46C42026CBF2009FA671 /* RecodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecodeTableViewCell.xib; sourceTree = "<group>"; };
 		57B37FB7202338AB00AA3603 /* HouseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseViewController.h; sourceTree = "<group>"; };
 		57B37FB8202338AB00AA3603 /* HouseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseViewController.m; sourceTree = "<group>"; };
 		57B37FBA20233F7300AA3603 /* HouseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseTableViewCell.h; sourceTree = "<group>"; };
@@ -672,6 +683,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57AB46B92026C5EA009FA671 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				57AB46B42025D6FB009FA671 /* SceneTableViewCell.h */,
+				57AB46B52025D6FB009FA671 /* SceneTableViewCell.m */,
+				57AB46B62025D6FB009FA671 /* SceneTableViewCell.xib */,
+				57AB46C22026CBF2009FA671 /* RecodeTableViewCell.h */,
+				57AB46C32026CBF2009FA671 /* RecodeTableViewCell.m */,
+				57AB46C42026CBF2009FA671 /* RecodeTableViewCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		57AB46BA2026C601009FA671 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				A2C6BB6E1FF2230D00D56C92 /* DetailViewController.h */,
+				A2C6BB6F1FF2230D00D56C92 /* DetailViewController.m */,
+				57AB46BC2026C757009FA671 /* RecodeViewController.h */,
+				57AB46BD2026C757009FA671 /* RecodeViewController.m */,
+				57AB46BF2026CB69009FA671 /* AddSceneViewController.h */,
+				57AB46C02026CB69009FA671 /* AddSceneViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		57AB46BB2026C619009FA671 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		604E470A4169938149B18C17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,11 +790,9 @@
 		A24D70341FF4717100B00878 /* 详情界面 */ = {
 			isa = PBXGroup;
 			children = (
-				A2C6BB6E1FF2230D00D56C92 /* DetailViewController.h */,
-				A2C6BB6F1FF2230D00D56C92 /* DetailViewController.m */,
-				57AB46B42025D6FB009FA671 /* SceneTableViewCell.h */,
-				57AB46B52025D6FB009FA671 /* SceneTableViewCell.m */,
-				57AB46B62025D6FB009FA671 /* SceneTableViewCell.xib */,
+				57AB46BB2026C619009FA671 /* model */,
+				57AB46BA2026C601009FA671 /* controller */,
+				57AB46B92026C5EA009FA671 /* view */,
 			);
 			path = "详情界面";
 			sourceTree = "<group>";
@@ -1405,7 +1447,7 @@
 				TargetAttributes = {
 					A2B9349F1FEFC225003F2C52 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1498,6 +1540,7 @@
 				A2B935F41FEFFB86003F2C52 /* in_equipment_telecontrol_iptv.png in Resources */,
 				A2B9368D1FEFFB86003F2C52 /* in_camera_control_nightvision.png in Resources */,
 				A2B9364A1FEFFB86003F2C52 /* in_scene_default.png in Resources */,
+				57AB46C62026CBF2009FA671 /* RecodeTableViewCell.xib in Resources */,
 				A2B936BE1FEFFB86003F2C52 /* in_control_lamp_backlight.png in Resources */,
 				A2B936B91FEFFB86003F2C52 /* in_equipment_lamp_ceilinglamp.png in Resources */,
 				A2B936B51FEFFB86003F2C52 /* in_control_lamp_downlight.png in Resources */,
@@ -1779,6 +1822,7 @@
 				A2B934E81FEFC858003F2C52 /* CustomErImgView.m in Sources */,
 				57AB46B72025D6FB009FA671 /* SceneTableViewCell.m in Sources */,
 				A2B934EA1FEFC858003F2C52 /* CommonCode.m in Sources */,
+				57AB46C52026CBF2009FA671 /* RecodeTableViewCell.m in Sources */,
 				A24D703B1FF4849900B00878 /* WifiConfigViewController.m in Sources */,
 				A2B934A51FEFC225003F2C52 /* AppDelegate.m in Sources */,
 				A2C6BB641FF1F72C00D56C92 /* ParentTabbarController.m in Sources */,
@@ -1798,6 +1842,7 @@
 				A2B934DD1FEFC300003F2C52 /* APIManager.m in Sources */,
 				A2C6BB6A1FF200F100D56C92 /* UsualViewcontroller.m in Sources */,
 				A2C350331FF5EE3000D3566B /* RadioView.m in Sources */,
+				57AB46BE2026C757009FA671 /* RecodeViewController.m in Sources */,
 				A2C3502A1FF4E1AB00D3566B /* SelectHomeWIFIViewController.m in Sources */,
 				A2C6BB6D1FF222FF00D56C92 /* HomeViewController.m in Sources */,
 				57BC4843201F623A00B3A6F3 /* LearningAlertViewController.m in Sources */,
@@ -1808,6 +1853,7 @@
 				A2C3508B1FFC68E900D3566B /* MainHostSetViewController.m in Sources */,
 				A2C353361FFD1C7600D3566B /* UIView+MydefineView.m in Sources */,
 				A2B936CC1FF009D4003F2C52 /* RadioButton.m in Sources */,
+				57AB46C12026CB69009FA671 /* AddSceneViewController.m in Sources */,
 				A2C353411FFE10FD00D3566B /* HomeCellView.m in Sources */,
 				A2B934EB1FEFC858003F2C52 /* UIImage+Rotate.m in Sources */,
 				A2890E391FF07FA100FCBFD6 /* AutoKeyboardField.m in Sources */,
@@ -1974,17 +2020,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = baobozhineng/baobozhineng.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: yang yongyu (4A6RMPCXH3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4A6RMPCXH3;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/baobozhineng/其他/baoboPrefixHeader.pch";
 				INFOPLIST_FILE = baobozhineng/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.baobo.baobozhineng;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baobo.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "afa94da6-3932-4142-b5e6-c561893d4a56";
+				PROVISIONING_PROFILE_SPECIFIER = com.bao.test_ads;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1996,8 +2042,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = baobozhineng/baobozhineng.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: yang yongyu (4A6RMPCXH3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4A6RMPCXH3;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/baobozhineng/其他/baoboPrefixHeader.pch";
 				INFOPLIST_FILE = baobozhineng/Info.plist;
@@ -2005,10 +2051,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.baobo.baobozhineng;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baobo.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "afa94da6-3932-4142-b5e6-c561893d4a56";
+				PROVISIONING_PROFILE_SPECIFIER = com.bao.test_ads;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

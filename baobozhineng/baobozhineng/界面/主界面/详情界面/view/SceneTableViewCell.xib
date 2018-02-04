@@ -21,10 +21,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="in_scene_closesafety.png" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yyQ-6y-78E">
-                        <rect key="frame" x="26" y="21" width="42" height="42"/>
+                        <rect key="frame" x="26" y="24" width="36" height="36"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="42" id="XFe-Wj-cJX"/>
-                            <constraint firstAttribute="height" constant="42" id="ytY-kq-gmV"/>
+                            <constraint firstAttribute="width" constant="36" id="IUH-Ai-alh"/>
+                            <constraint firstAttribute="height" constant="36" id="qUs-6M-5jR"/>
                         </constraints>
                     </imageView>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vFs-m4-02D">
@@ -41,7 +41,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmX-1Z-2Sh">
-                        <rect key="frame" x="78" y="12" width="162" height="60"/>
+                        <rect key="frame" x="72" y="12" width="168" height="60"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定时开" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rl6-LT-lZH">
                                 <rect key="frame" x="0.0" y="0.0" width="52" height="21"/>
@@ -93,7 +93,7 @@
             <connections>
                 <outlet property="conditonLabel" destination="Kqh-9r-Nrd" id="jYc-Ei-9zl"/>
                 <outlet property="execute" destination="PDI-63-piM" id="giw-1E-ThP"/>
-                <outlet property="imageVi" destination="e9L-PQ-QvH" id="vIK-MX-YFK"/>
+                <outlet property="imageVi" destination="yyQ-6y-78E" id="zJJ-aO-dPq"/>
                 <outlet property="switchBtn" destination="vFs-m4-02D" id="PKi-oj-cWi"/>
                 <outlet property="titleLabel" destination="rl6-LT-lZH" id="D4L-va-ncL"/>
             </connections>

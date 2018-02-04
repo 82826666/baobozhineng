@@ -36,13 +36,9 @@
         _dataArray = [NSMutableArray new];
     }
     [_dataArray addObject:data];
-    NSLog(@"image:%@",[data objectForKey:@"img"]);
-//    for (int i = 0; i < dataArray.count; i++) {
-//    [_imageVi setImage:[UIImage imageNamed:@"in_scene_default"]];
-//        _imageVi.image = [UIImage imageNamed:@"in_scene_default"];
-        _titleLabel.text = [data objectForKey:@"title"];
-        _conditonLabel.text = [data objectForKey:@"condition"];
-        _execute.text = [data objectForKey:@"execute"];
-//    }
+    _imageVi.image = [UIImage imageNamed:[data objectForKey:@"img"]];
+    _titleLabel.text = [data objectForKey:@"title"];
+    _conditonLabel.text = [data objectForKey:@"condition"];
+    _execute.text = [data objectForKey:@"execute"];
 }
 @end

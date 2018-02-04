@@ -29,8 +29,8 @@
 - (void) initNav{
     UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"管理" style:UIBarButtonItemStyleDone target:self action:nil];
     self.navigationItem.title = @"家居";
-    self.navigationController.navigationBar.barTintColor = [UIColor blueColor];//设置导航栏目颜色
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = BARTINTCOLOR;//设置导航栏目颜色
+    self.navigationController.navigationBar.tintColor = TINTCOLOR;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];//设置标题颜色及字体大小
     self.navigationItem.rightBarButtonItem = rightBtn;
 }

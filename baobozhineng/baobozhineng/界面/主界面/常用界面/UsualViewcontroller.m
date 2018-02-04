@@ -78,7 +78,7 @@ static NSInteger seq = 0;
     [_currentHostLabel addGestureRecognizer:hostLabGestuer];
     
 //    [self initUdpSocket];
-//    [self jpushTest];
+    [self jpushTest];
     [self getWeather];
 }
 
