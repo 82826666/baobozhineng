@@ -7,7 +7,7 @@
 //
 
 #import "AddSceneViewController.h"
-
+#import "TextfieldAlertViewController.h"
 @interface AddSceneViewController ()
 
 @end
@@ -18,7 +18,7 @@
     [super viewDidLoad];
     [self initNav];
     [self initDataSouce];
-    [self initTable];
+    [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
 }
 
@@ -47,12 +47,15 @@
         _dataSouce = [[NSMutableArray alloc]initWithObjects:one,two,three,nil];
     }
 }
-- (void) initTable{
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
-    _tableView.delegate = self;;
-    _tableView.dataSource = self;
-    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [self.view addSubview:_tableView];
+//懒加载
+- (UITableView*) tableView{
+    if(!_tableView){
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+        _tableView.delegate = self;;
+        _tableView.dataSource = self;
+        [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    }
+    return _tableView;
 }
 #pragma tableview datasouce
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -86,6 +89,7 @@
     
     
     UIButton *supperButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [supperButton addTarget:self action:@selector(nameClick:) forControlEvents:UIControlEventTouchUpInside];
     UIImageView *leftImageView = [UIImageView new];
     leftImageView.image = [UIImage imageNamed:@"in_scene_default.png"];
     [supperButton addSubview:leftImageView];
@@ -101,8 +105,9 @@
     [supperView addSubview:supperButton];
     
     UIView *lineView = [UIView new];
-    [supperView addSubview:lineView];
     lineView.backgroundColor = lineColor;
+    [supperView addSubview:lineView];
+    
     
     UIView* lastView = [UIView new];
     UIView *labelView = [UIView new];
@@ -113,15 +118,19 @@
     [lastView addSubview:labelView];
     UIStackView *stackView = [UIStackView new];
     stackView.axis = MASAxisTypeHorizontal;
+
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn addTarget:self action:@selector(addClick:) forControlEvents:UIControlEventTouchUpInside];
     [addBtn setImage:[UIImage imageNamed:@"in_common_menu_add"] forState:UIControlStateNormal];
     [stackView addSubview:addBtn];
+
     UIButton *reduceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [reduceBtn addTarget:self action:@selector(reduceClick:) forControlEvents:UIControlEventTouchUpInside];
     [reduceBtn setImage:[UIImage imageNamed:@"in_common_menu_reduce"] forState:UIControlStateNormal];
     [stackView addSubview:reduceBtn];
     [lastView addSubview:stackView];
     [supperView addSubview:lastView];
-    
+
     UIView *lineView2 = [UIView new];
     lineView2.backgroundColor = lineColor;
     [supperView addSubview:lineView2];
@@ -194,6 +203,27 @@
         make.top.mas_equalTo(stackView.mas_bottom).offset(45);
     }];
     return supperView;
+}
+//修改名称
+- (void)nameClick:(UIButton*)sender{
+    TextFieldAlertViewController *textalert = VIEW_SHAREINSRANCE(ALERTVIEWSTORYBOARD, TEXTFIELDALERTVIEWCONTROLLER);
+    [textalert setTitle:@"添加情景名称" EnterBlock:^(NSString *text) {
+        _buttonLable.text = text;
+        //返回的主机名称
+        NSLog(@"%@",text);
+    } Cancle:^(NSString *text) {
+        
+    }];
+    [textalert showWithParentViewController:nil];
+    [textalert showPopupview];
+}
+//添加
+- (void)addClick:(UIButton*)sender{
+    NSLog(@"addClick");
+}
+//减少
+- (void)reduceClick:(UIButton*)sender{
+    NSLog(@"reduceClick");
 }
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];

@@ -59,7 +59,7 @@
 //设置主颜色
 #define MAIN_COLOR RGBA(231, 241, 246, 1.0)
 #define TABLECELL_LINE_COLOR RGBA(235,235,241)
-#define BARTINTCOLOR RGBA(9, 141, 190, 1.0)
+#define BARTINTCOLOR RGBA(44, 122, 224, 1.0)
 #define TINTCOLOR RGBA(255, 255, 255, 1.0)
 /*
     *NSNotificationCenter广播键值设置
