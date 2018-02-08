@@ -2,8 +2,8 @@
 //  EquipmentSwitchSetViewController.h
 //  baobozhineng
 //
-//  Created by 魏俊阳 on 2017/12/29.
-//  Copyright © 2017年 魏俊阳. All rights reserved.
+//  Created by 吴建阳 on 2017/12/29.
+//  Copyright © 2017年 吴建阳. All rights reserved.
 //开关设置界面
 
 typedef NS_ENUM(NSUInteger, EquipmentSwitchSetNum) {
