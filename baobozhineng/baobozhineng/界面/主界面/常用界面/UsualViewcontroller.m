@@ -195,6 +195,7 @@ static NSInteger seq = 0;
     UIButton *btn = (UIButton *)sender;
     //获取按钮相对于self.view的相对位置
     CGRect btnRectInwindow = [btn.superview convertRect:btn.frame toView:self.view];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [JMDropMenu showDropMenuFrame:CGRectMake(self.view.frame.size.width - 128, btnRectInwindow.origin.y+btnRectInwindow.size.height, 120, 128) ArrowOffset:90.f TitleArr:_moreEquipmentTitleArray ImageArr:_moreEquipmentImgArray Type:JMDropMenuTypeQQ LayoutType:JMDropMenuLayoutTypeNormal RowHeight:40.f Delegate:self];
 }

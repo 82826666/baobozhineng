@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57293060203FDD2400E68079 /* ConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5729305F203FDD2400E68079 /* ConditionViewController.m */; };
+		57293064203FF41D00E68079 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293063203FF41D00E68079 /* DateHelper.m */; };
+		57293067203FF46900E68079 /* NSDate+CalculateDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293066203FF46900E68079 /* NSDate+CalculateDay.m */; };
+		5729306A203FF49100E68079 /* KMDatePickerDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293069203FF49100E68079 /* KMDatePickerDateModel.m */; };
+		5729306D203FF4B900E68079 /* KMDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5729306C203FF4B900E68079 /* KMDatePicker.m */; };
+		5795230A202F391F00FB2508 /* CommonAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 57952309202F391F00FB2508 /* CommonAdd.m */; };
+		57A928A02040F7340053660A /* UIButton+CenterImageAndTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A9289F2040F7340053660A /* UIButton+CenterImageAndTitle.m */; };
+		57A928A32040F7C10053660A /* AddConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A928A22040F7C10053660A /* AddConditionViewController.m */; };
+		57A928A72040FFC70053660A /* 复选框-未选中.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A928A52040FFC60053660A /* 复选框-未选中.png */; };
+		57A928A82040FFC70053660A /* 复选框.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A928A62040FFC70053660A /* 复选框.png */; };
 		57AB46B72025D6FB009FA671 /* SceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AB46B52025D6FB009FA671 /* SceneTableViewCell.m */; };
 		57AB46B82025D6FB009FA671 /* SceneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AB46B62025D6FB009FA671 /* SceneTableViewCell.xib */; };
 		57AB46BE2026C757009FA671 /* RecodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AB46BD2026C757009FA671 /* RecodeViewController.m */; };
@@ -312,7 +322,25 @@
 
 /* Begin PBXFileReference section */
 		4F735D7FAD7C284894512977 /* Pods-baobozhineng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baobozhineng.release.xcconfig"; path = "Pods/Target Support Files/Pods-baobozhineng/Pods-baobozhineng.release.xcconfig"; sourceTree = "<group>"; };
+		5729305E203FDD2400E68079 /* ConditionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConditionViewController.h; sourceTree = "<group>"; };
+		5729305F203FDD2400E68079 /* ConditionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConditionViewController.m; sourceTree = "<group>"; };
+		57293062203FF41D00E68079 /* DateHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
+		57293063203FF41D00E68079 /* DateHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
+		57293065203FF46900E68079 /* NSDate+CalculateDay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+CalculateDay.h"; sourceTree = "<group>"; };
+		57293066203FF46900E68079 /* NSDate+CalculateDay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CalculateDay.m"; sourceTree = "<group>"; };
+		57293068203FF49100E68079 /* KMDatePickerDateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KMDatePickerDateModel.h; sourceTree = "<group>"; };
+		57293069203FF49100E68079 /* KMDatePickerDateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KMDatePickerDateModel.m; sourceTree = "<group>"; };
+		5729306B203FF4B900E68079 /* KMDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KMDatePicker.h; sourceTree = "<group>"; };
+		5729306C203FF4B900E68079 /* KMDatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KMDatePicker.m; sourceTree = "<group>"; };
 		577A9B4D20136B330054BF53 /* baobozhineng.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = baobozhineng.entitlements; sourceTree = "<group>"; };
+		57952308202F391F00FB2508 /* CommonAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonAdd.h; sourceTree = "<group>"; };
+		57952309202F391F00FB2508 /* CommonAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonAdd.m; sourceTree = "<group>"; };
+		57A9289E2040F7340053660A /* UIButton+CenterImageAndTitle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+CenterImageAndTitle.h"; sourceTree = "<group>"; };
+		57A9289F2040F7340053660A /* UIButton+CenterImageAndTitle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CenterImageAndTitle.m"; sourceTree = "<group>"; };
+		57A928A12040F7C10053660A /* AddConditionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddConditionViewController.h; sourceTree = "<group>"; };
+		57A928A22040F7C10053660A /* AddConditionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddConditionViewController.m; sourceTree = "<group>"; };
+		57A928A52040FFC60053660A /* 复选框-未选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "复选框-未选中.png"; path = "../../../../../Downloads/复选框-未选中.png"; sourceTree = "<group>"; };
+		57A928A62040FFC70053660A /* 复选框.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "复选框.png"; path = "../../../../../Downloads/复选框.png"; sourceTree = "<group>"; };
 		57AB46B42025D6FB009FA671 /* SceneTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneTableViewCell.h; sourceTree = "<group>"; };
 		57AB46B52025D6FB009FA671 /* SceneTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneTableViewCell.m; sourceTree = "<group>"; };
 		57AB46B62025D6FB009FA671 /* SceneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SceneTableViewCell.xib; sourceTree = "<group>"; };
@@ -683,6 +711,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57293061203FF3B800E68079 /* KMDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				57293062203FF41D00E68079 /* DateHelper.h */,
+				57293063203FF41D00E68079 /* DateHelper.m */,
+				57293065203FF46900E68079 /* NSDate+CalculateDay.h */,
+				57293066203FF46900E68079 /* NSDate+CalculateDay.m */,
+				57293068203FF49100E68079 /* KMDatePickerDateModel.h */,
+				57293069203FF49100E68079 /* KMDatePickerDateModel.m */,
+				5729306B203FF4B900E68079 /* KMDatePicker.h */,
+				5729306C203FF4B900E68079 /* KMDatePicker.m */,
+			);
+			path = KMDatePicker;
+			sourceTree = "<group>";
+		};
 		57AB46B92026C5EA009FA671 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -705,6 +748,10 @@
 				57AB46BD2026C757009FA671 /* RecodeViewController.m */,
 				57AB46BF2026CB69009FA671 /* AddSceneViewController.h */,
 				57AB46C02026CB69009FA671 /* AddSceneViewController.m */,
+				5729305E203FDD2400E68079 /* ConditionViewController.h */,
+				5729305F203FDD2400E68079 /* ConditionViewController.m */,
+				57A928A12040F7C10053660A /* AddConditionViewController.h */,
+				57A928A22040F7C10053660A /* AddConditionViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -738,6 +785,7 @@
 		A24D702A1FF33F8800B00878 /* 第三方框架 */ = {
 			isa = PBXGroup;
 			children = (
+				57293061203FF3B800E68079 /* KMDatePicker */,
 				65D356B31FFD097D00447213 /* GCDAsyncUdpSocket */,
 				A2C350851FFAA58B00D3566B /* svprogress+mydefine */,
 				A24D702B1FF33F9900B00878 /* JMDropMenu */,
@@ -971,6 +1019,8 @@
 		A2B9350B1FEFFB85003F2C52 /* 图标 */ = {
 			isa = PBXGroup;
 			children = (
+				57A928A52040FFC60053660A /* 复选框-未选中.png */,
+				57A928A62040FFC70053660A /* 复选框.png */,
 				A2B9350C1FEFFB85003F2C52 /* 遥控器图标 */,
 				A2B935251FEFFB85003F2C52 /* 我的 */,
 				A2B935321FEFFB85003F2C52 /* 调光图标 */,
@@ -1351,6 +1401,10 @@
 				A2C353401FFE10FD00D3566B /* HomeCellView.m */,
 				A21AD1D11FFF21F50031C186 /* VerticalCenterTextLabel.h */,
 				A21AD1D21FFF21F50031C186 /* VerticalCenterTextLabel.m */,
+				57952308202F391F00FB2508 /* CommonAdd.h */,
+				57952309202F391F00FB2508 /* CommonAdd.m */,
+				57A9289E2040F7340053660A /* UIButton+CenterImageAndTitle.h */,
+				57A9289F2040F7340053660A /* UIButton+CenterImageAndTitle.m */,
 			);
 			path = "其他组件";
 			sourceTree = "<group>";
@@ -1574,9 +1628,11 @@
 				A2B9362D1FEFFB86003F2C52 /* in_sensor_control_default.png in Resources */,
 				A2B936361FEFFB86003F2C52 /* in_sensor_control_immersion.png in Resources */,
 				A2B936C71FEFFB86003F2C52 /* in_control_lamp_mirrorlamp.png in Resources */,
+				57A928A82040FFC70053660A /* 复选框.png in Resources */,
 				A2B936B31FEFFB86003F2C52 /* in_control_lamp_walllamp.png in Resources */,
 				A2B936081FEFFB86003F2C52 /* in_telecontro_list_projector.png in Resources */,
 				A2B9360E1FEFFB86003F2C52 /* in_setup_help.png in Resources */,
+				57A928A72040FFC70053660A /* 复选框-未选中.png in Resources */,
 				A2B936601FEFFB86003F2C52 /* in_select_curtain_blind.png in Resources */,
 				A2B9362B1FEFFB86003F2C52 /* in_equipment_sensor_pushwindow.png in Resources */,
 				A2B935FB1FEFFB86003F2C52 /* in_telecontro_list_airconditioner.png in Resources */,
@@ -1803,6 +1859,7 @@
 			files = (
 				65D356C11FFD0D9A00447213 /* GCDAsyncUdpSocket.m in Sources */,
 				65D356C01FFD0D9500447213 /* GCDAsyncUdpSocket.h in Sources */,
+				57293060203FDD2400E68079 /* ConditionViewController.m in Sources */,
 				A21AD1D31FFF21F50031C186 /* VerticalCenterTextLabel.m in Sources */,
 				65D356BF1FFD0D9000447213 /* GCDAsyncSocket.m in Sources */,
 				65D356BE1FFD0D8A00447213 /* GCDAsyncSocket.h in Sources */,
@@ -1831,12 +1888,14 @@
 				A2C3507E1FF72D5E00D3566B /* ParentPopupView.m in Sources */,
 				6547407F1FFC99CA007F1173 /* AlertManager.m in Sources */,
 				A2C350841FF8038C00D3566B /* TablePopViewController.m in Sources */,
+				57A928A02040F7340053660A /* UIButton+CenterImageAndTitle.m in Sources */,
 				A2C3502D1FF5167500D3566B /* SelectEquipmentViewController.m in Sources */,
 				A2C6BB791FF22D6D00D56C92 /* TabbarBottomBtn.m in Sources */,
 				57B37FBD20233F7300AA3603 /* HouseTableViewCell.m in Sources */,
 				57B37FB9202338AB00AA3603 /* HouseViewController.m in Sources */,
 				A2890E441FF0966A00FCBFD6 /* PopAnimation.m in Sources */,
 				A2B936D01FF01289003F2C52 /* ParentViewController.m in Sources */,
+				57A928A32040F7C10053660A /* AddConditionViewController.m in Sources */,
 				A2C6BB611FF1F67E00D56C92 /* TabNavViewcontroller.m in Sources */,
 				A2B935051FEFFA3C003F2C52 /* LoginViewController.m in Sources */,
 				A2B934DD1FEFC300003F2C52 /* APIManager.m in Sources */,
@@ -1848,14 +1907,19 @@
 				57BC4843201F623A00B3A6F3 /* LearningAlertViewController.m in Sources */,
 				A24D702E1FF33F9900B00878 /* JMDropMenu.m in Sources */,
 				A2C350301FF5CBC800D3566B /* EquipmentSwitchSetViewController.m in Sources */,
+				5729306A203FF49100E68079 /* KMDatePickerDateModel.m in Sources */,
+				57293064203FF41D00E68079 /* DateHelper.m in Sources */,
 				A2C6BB7C1FF247BA00D56C92 /* MainParentViewController.m in Sources */,
 				A2B934E91FEFC858003F2C52 /* CustomerSearchBarView.m in Sources */,
 				A2C3508B1FFC68E900D3566B /* MainHostSetViewController.m in Sources */,
+				5729306D203FF4B900E68079 /* KMDatePicker.m in Sources */,
 				A2C353361FFD1C7600D3566B /* UIView+MydefineView.m in Sources */,
+				5795230A202F391F00FB2508 /* CommonAdd.m in Sources */,
 				A2B936CC1FF009D4003F2C52 /* RadioButton.m in Sources */,
 				57AB46C12026CB69009FA671 /* AddSceneViewController.m in Sources */,
 				A2C353411FFE10FD00D3566B /* HomeCellView.m in Sources */,
 				A2B934EB1FEFC858003F2C52 /* UIImage+Rotate.m in Sources */,
+				57293067203FF46900E68079 /* NSDate+CalculateDay.m in Sources */,
 				A2890E391FF07FA100FCBFD6 /* AutoKeyboardField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

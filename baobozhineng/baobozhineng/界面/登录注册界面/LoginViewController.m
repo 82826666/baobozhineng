@@ -10,6 +10,7 @@
 #import "RegisterViewController.h"
 #import "ParentTabbarController.h"
 #import "AlertManager.h"
+#import <CommonCrypto/CommonDigest.h>
 @interface LoginViewController ()
 //电话输入框
 @property (weak, nonatomic) IBOutlet AutoKeyboardField *phoneField;
@@ -22,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"test:%@",[self md5:@"fanwe"]);
     //设置输入框的键盘隐藏
     [_phoneField setFieldDismissActionBymaskInView:self.view fieldBlock:^{
         
@@ -44,24 +46,10 @@
     }
 
 }
+
 -(void)login{
-//    NSString* url = @"http://47.94.6.236:81/user/index/login";//http://47.94.6.236:81这个放在API_HOST头文件上/user/index/login放在登录姐楼上
-//    NSString* phoneStr = _phoneField.text;
-//    NSString* password = _passwordField.text;
-//    NSString* clientType = @"2";
-//
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    NSDictionary *parameters = @{@"mobile": phoneStr, @"password": password, @"clientType":clientType};
-//    [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
-//        NSLog(@"Success: %@", uploadProgress);
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"msg=%@",[responseObject objectForKey:@"msg"]);
-//        NSLog(@"Success: %@", responseObject);
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"Error: %@", error);
-//    }];
     NSString* phoneStr = _phoneField.text;
-    NSString* password = _passwordField.text;
+    NSString* password = [self md5:_passwordField.text];
     NSString* clientType = @"2";
     //等待网络请求
     [SVProgressHUD mydefineShowWithStatus:nil];
@@ -76,13 +64,20 @@
         else{
              //请求登录成功
             [[AlertManager alertManager] showSuccess:3.0 string:[datadic objectForKey:@"msg"]];
-            NSDictionary* master = [[datadic objectForKey:@"data"] objectForKey:@"master"][0];
+            NSArray *mas = [[datadic objectForKey:@"data"] objectForKey:@"master"];
+            NSString* master_id = @"";
+            NSDictionary* master = [NSDictionary new];
+            if (mas.count > 0) {
+                master = [[datadic objectForKey:@"data"] objectForKey:@"master"][0];
+                master_id = [master objectForKey:@"master_id"];
+            }
+            
             NSDictionary* user_info = [[datadic objectForKey:@"data"] objectForKey:@"user"];
             //本地存储用户名以及相关数据
             NSString* user_id = [user_info objectForKey:@"userid"];
             NSString* user_token = [user_info objectForKey:@"token"];
             NSString* user_name = [user_info objectForKey:@"username"];
-            NSString* master_id = [master objectForKey:@"master_id"];
+            
             SET_USERDEFAULT(USER_ID, user_id);
             SET_USERDEFAULT(USER_TOKEN, user_token);
             SET_USERDEFAULT(LOGIN_USERNAME, user_name);
@@ -102,6 +97,30 @@
             //请求数据失败，网络错误
             [[AlertManager alertManager] showError:3.0 string:@"请求失败"];
     }];
+}
+//md5加密
+- (NSString *) md5:(NSString *) input {
+    
+    const char *cStr = [input UTF8String];
+    
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    
+    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    
+    
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    
+    
+    
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        
+        [output appendFormat:@"%02x", digest[i]];
+    
+    
+    
+    return  output;
+    
 }
 //注册
 - (IBAction)registerAction:(id)sender {

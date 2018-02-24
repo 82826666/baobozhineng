@@ -3,7 +3,7 @@
 //  baobozhineng
 //
 //  Created by wjy on 2018/2/1.
-//  Copyright © 2018年 魏俊阳. All rights reserved.
+//  Copyright © 2018年 吴建阳. All rights reserved.
 //
 
 #import "HouseTableViewCell.h"
@@ -30,8 +30,8 @@ static NSString* cellIndent = @"HouseTableViewCell";
 #pragma mark - 设置轮播数据
 - (void)setDataArray:(NSMutableArray *)dataArray {
     if(dataArray != nil && ![dataArray isKindOfClass:[NSNull class]] && dataArray.count != 0){
-        _btn2Image.hidden = YES;
-        _btn2Label.hidden = YES;
+//        _btn2Image.hidden = YES;
+//        _btn2Label.hidden = YES;
         _btn1Image.image = [UIImage imageNamed:@"ico_list"];
         //button长按事件
         

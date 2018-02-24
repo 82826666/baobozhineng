@@ -41,12 +41,33 @@
 
 - (void)initDataSource
 {
-    sectionArray  = [NSMutableArray arrayWithObjects:@"关于直销银行",
-                     @"关于理财产品",
-                     @"关于我的投资",
-                     @"安全中心",nil];
+    sectionArray  = [NSMutableArray arrayWithObjects:@"客厅",
+                     @"餐厅",
+                     @"主卧",
+                     @"次卧",nil];
     
-    NSArray *one = @[@"关于直销银行1",@"关于直销银行2",@"关于直销银行3"];
+    NSArray *one = @[
+                     @{
+                         @"img":@"in_select_lamp_chandelier",
+                         @"title":@"吊灯"
+                         },
+                     @{
+                         @"img":@"in_equipment_switch_four",
+                         @"title":@"四开"
+                         },
+                     @{
+                         @"img":@"in_equipment_switch_three",
+                         @"title":@"热水器"
+                         },
+                     @{
+                         @"img":@"in_equipment_switch_three",
+                         @"title":@"热水器"
+                         },
+                     @{
+                         @"img":@"in_equipment_switch_three",
+                         @"title":@"热水器"
+                         },
+                     ];
     NSArray *two = @[@"如何购买？",@"如何赎回？",@"业务办理时间？"];
     NSArray *three = @[@"关于我的投资1",@"关于我的投资2",@"关于我的投资3"];
     NSArray *four = @[@"安全中心1",@"安全中心2",@"安全中心3",@"安全中心4"];
@@ -79,7 +100,14 @@
     if ([stateArray[section] isEqualToString:@"1"]){
         //如果是展开状态
         NSArray *array = [dataSource objectAtIndex:section];
-        return array.count;
+        if (array.count < 1) {
+            return 0;
+        }
+        NSInteger row = ceil(array.count / 4);
+        if((array.count % 4) > 0){
+            row = row + 1;
+        }
+        return row;
     }else{
         //如果是闭合，返回0
         return 0;
@@ -88,16 +116,17 @@
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HouseTableViewCell *cell = [HouseTableViewCell cellWithTableView:tableView];
-    NSMutableArray *dataArray = [[NSMutableArray alloc]initWithObjects:@"1", nil];
-    [cell setDataArray:dataArray];
-//        static NSString *ID = @"cell";
-//    // 根据标识去缓存池找cell
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-//    // 不写这句直接崩掉，找不到循环引用的cell
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    NSArray *array = [dataSource objectAtIndex:indexPath.section];
+//    NSInteger row = ceil(array.count / 4);
+//    NSArray *dataArray;
+//    if (((array.count % 4) > 1) && (indexPath.row >= row)) {
+//        dataArray = [array subarrayWithRange:NSMakeRange(indexPath.row * 4, array.count - row * 4)];
+//    }else{
+//        dataArray = [array subarrayWithRange:NSMakeRange(indexPath.row * 4, 4)];
 //    }
-//    cell.textLabel.text = dataSource[indexPath.section][indexPath.row];
+    NSMutableArray *dataArray = [[NSMutableArray alloc]initWithObjects:@"1", nil];
+    NSLog(@"data:%@",dataArray);
+    [cell setDataArray:(NSMutableArray*)dataArray];
     return cell;
 }
 //头部

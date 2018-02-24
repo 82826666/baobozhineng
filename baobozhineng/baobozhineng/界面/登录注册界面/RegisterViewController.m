@@ -10,7 +10,7 @@
 #import "LoginViewController.h"
 #import "AlertManager.h"
 #import <AFNetworking.h>
-
+#import <CommonCrypto/CommonDigest.h>
 @interface RegisterViewController ()
 {
     NSString *verifyTimeStr;
@@ -89,6 +89,9 @@ static int vertifyTime=60;
 -(BOOL)sendCode{
     NSString* phoneStr = _phoneFiled.text;
     NSString* type = @"1";
+    if(_viewstyle==ForgetPasswordCtr){
+        type = @"2";
+    }
     NSDictionary *parameters = @{@"mobile": phoneStr, @"type": type};
     
     //判断注册的手机号是否为正确的手机号
@@ -151,14 +154,14 @@ static int vertifyTime=60;
 }
 -(void)regAndFog{
     NSString* phoneStr = _phoneFiled.text;
-    NSString* password = _passwordField.text;
+    NSString* password = [self md5:_passwordField.text];
     NSString* code = _verifyField.text;
-    NSString* repassword = _repasswordField.text;
+    NSString* repassword = [self md5:_repasswordField.text];
     NSDictionary *parameters = @{@"mobile": phoneStr, @"password": password, @"code":code, @"repassword":repassword};
     if(_viewstyle==ForgetPasswordCtr){//忘记密码
         //等待网络请求
         [SVProgressHUD mydefineShowWithStatus:nil];
-        [[APIManager sharedManager] registerWithParameters:parameters success:^(id data) {
+        [[APIManager sharedManager] forgetpwdWithParameters:parameters success:^(id data) {
             //请求数据成功
             NSDictionary *datadic = data;
             if ([[datadic objectForKey:@"code"] intValue] != 200) {
@@ -221,7 +224,30 @@ static int vertifyTime=60;
 - (IBAction)backAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+//md5加密
+- (NSString *) md5:(NSString *) input {
+    
+    const char *cStr = [input UTF8String];
+    
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    
+    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    
+    
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    
+    
+    
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        
+        [output appendFormat:@"%02x", digest[i]];
+    
+    
+    
+    return  output;
+    
+}
 
 
 @end

@@ -9,8 +9,5 @@
 #import "ParentViewController.h"
 #import "RecodeViewController.h"
 #import <Masonry.h>
-@interface AddSceneViewController : ParentViewController<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic, strong) NSMutableArray* dataSouce;
-@property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) UILabel *buttonLable;
+@interface AddSceneViewController : ParentViewController
 @end

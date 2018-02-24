@@ -3,13 +3,23 @@
 //  baobozhineng
 //
 //  Created by wjy on 2018/2/4.
-//  Copyright © 2018年 魏俊阳. All rights reserved.
+//  Copyright © 2018年 吴建阳. All rights reserved.
 //
 
 #import "AddSceneViewController.h"
 #import "TextfieldAlertViewController.h"
-@interface AddSceneViewController ()
-
+#import "CommonAdd.h"
+#import "SwitchIconSelectViewController.h"
+#import "ConditionViewController.h"
+@interface AddSceneViewController ()<UITableViewDataSource,UITableViewDelegate,CommonAddDelegate>{
+    
+}
+@property(nonatomic, strong) NSMutableArray* dataSouce;
+@property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) UILabel *buttonLable;
+@property(nonatomic, strong) UIColor *backColor;
+@property(nonatomic, strong) RecodeTableViewCell *cell;
+@property(nonatomic, strong) UIImageView *leftImageView;
 @end
 
 @implementation AddSceneViewController
@@ -47,29 +57,46 @@
         _dataSouce = [[NSMutableArray alloc]initWithObjects:one,two,three,nil];
     }
 }
-//懒加载
-- (UITableView*) tableView{
-    if(!_tableView){
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
-        _tableView.delegate = self;;
-        _tableView.dataSource = self;
-        [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    }
-    return _tableView;
-}
+
 #pragma tableview datasouce
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataSouce.count;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 3;
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    RecodeTableViewCell *cell  = [RecodeTableViewCell cellWithTableView:tableView];
-    [cell setData:_dataSouce[indexPath.row]];
-    return cell;
+//    _cell = [RecodeTableViewCell cellWithTableView:tableView];
+//    _cell.backgroundColor = self.backColor;
+//    [_cell setData:_dataSouce[indexPath.row]];
+    //1.根据reuseIdentifier，先到对象池中去找重用的单元格对象
+        static NSString *reuseIdentifier = @"contactCell";
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+         //2.如果没有找到，自己创建单元格对象
+         if(cell == nil){
+                    cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+                    cell.backgroundColor = self.backColor;
+                 }
+    
+        //3.设置单元格对象的内容
+
+        //设置图像
+        [cell.imageView setImage:[UIImage imageNamed:@"in_scene_default.png"]];
+        //设置主标题
+       cell.textLabel.text = @"butt";
+        //设置副标题
+         cell.detailTextLabel.text = @"sub";
+
+
+        //设置字体颜色
+        cell.textLabel.textColor = [UIColor orangeColor];
+        cell.detailTextLabel.textColor = [UIColor blueColor];
+    
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
+    [cell setSeparatorInset:UIEdgeInsetsZero];
+         return cell;
 }
 //每行高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -77,156 +104,137 @@
 }
 //头部高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 120;
-    return UITableViewAutomaticDimension;
+    if (section == 0) {
+        return 100;
+    }else if (section == 1){
+        return 50;
+    }
+    return 30;
 }
 //头部内容
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIColor *lineColor = RGBA(213, 218, 222, 1.0);
-    UIView *supperView = [[UIView alloc] initWithFrame:CGRectZero];
-    supperView.backgroundColor = [UIColor whiteColor];//RGBA(235, 240, 244, 1.0);
+    CGFloat height = 50;
+    if (section == 2) {
+        height = 30;
+    }
+    CGFloat centerHeight = height / 2;
+    if (section == 0) {
+        UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height*2)];
+        supper.backgroundColor = self.backColor;
+        UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [leftBtn addTarget:self action:@selector(leftBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        leftBtn.frame = CGRectMake(0, 0, 57, height);
+        _leftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, centerHeight - 18, 37, 37)];
+        _leftImageView.image = [UIImage imageNamed:@"in_scene_default.png"];
+        [leftBtn addSubview:_leftImageView];
+        [supper addSubview:leftBtn];
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(leftBtn.frame.size.width, 0, SCREEN_WIDTH - leftBtn.frame.size.width, height);
+        [btn addTarget:self action:@selector(nameClick:) forControlEvents:UIControlEventTouchUpInside];
+        _buttonLable = [[UILabel alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - leftBtn.frame.size.width)/2 - 20 / 2, centerHeight - 10, SCREEN_WIDTH - 50 - 40, 20)];
+        _buttonLable.text = @"test";
+        UIImageView *rightImageView = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 27 - leftBtn.frame.size.width, centerHeight - 8, 9, 17)];
+        rightImageView.image = [UIImage imageNamed:@"in_arrow_right"];
+        [btn addSubview:_buttonLable];
+        [btn addSubview:rightImageView];
+        [supper addSubview:btn];
+        
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 50 - 0.5, SCREEN_WIDTH, 0.5)];
+        lineView.backgroundColor = [UIColor lightGrayColor];
+        [supper addSubview:lineView];
+        
+        UIButton *addBtn = [UIButton new];
+        addBtn.tag = 1000;
+        [addBtn setImage:[UIImage imageNamed:@"in_common_menu_add"] forState:UIControlStateNormal];
+        UIButton *reduceBtn = [UIButton new];
+        [reduceBtn setImage:[UIImage imageNamed:@"in_common_menu_reduce"] forState:UIControlStateNormal];
+        CommonAdd *addView = [[CommonAdd alloc]initWithFrame:CGRectMake(0, height, SCREEN_WIDTH, height) title:@"以下所有条件满足时" addBtn:addBtn reduceBtn:reduceBtn image:nil];
+        addView.backColor = self.backColor;
+        addView.delegate = self;
+        [supper addSubview:addView];
+        return supper;
+    }else if (section == 1){
+        UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+        UIButton *addBtn = [UIButton new];
+        [addBtn setImage:[UIImage imageNamed:@"in_common_menu_add"] forState:UIControlStateNormal];
+        UIButton *reduceBtn = [UIButton new];
+        [reduceBtn setImage:[UIImage imageNamed:@"in_common_menu_reduce"] forState:UIControlStateNormal];
+        CommonAdd *addView = [[CommonAdd alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) title:@"test" addBtn:addBtn reduceBtn:reduceBtn image:nil];
+        addView.backColor = self.backColor;
+        addView.delegate = self;
+        [supper addSubview:addView];
+        return supper;
+    }
+    UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
+    UILabel *msg1Label = [[UILabel alloc]initWithFrame:CGRectMake(40, centerHeight - 10, 80, 20)];
+    msg1Label.text = @"通知消息";
+    UILabel *msg2Label = [[UILabel alloc]initWithFrame:CGRectMake(120, centerHeight - 10, SCREEN_WIDTH -120, 20)];
+    msg2Label.text = @"情景自动触发时";
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 30 - 0.5, SCREEN_WIDTH, 0.5)];
+    lineView.backgroundColor = [UIColor lightGrayColor];
+    [supper addSubview:msg1Label];
+    [supper addSubview:msg2Label];
+    msg2Label.textColor = [UIColor colorWithRed:148/255.0 green:165/255.0 blue:177/255.0 alpha:1];
+    [supper addSubview:lineView];
+    return supper;
     
-    
-    
-    UIButton *supperButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [supperButton addTarget:self action:@selector(nameClick:) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView *leftImageView = [UIImageView new];
-    leftImageView.image = [UIImage imageNamed:@"in_scene_default.png"];
-    [supperButton addSubview:leftImageView];
-    UIView *centerView = [UIView new];
-    _buttonLable = [UILabel new];
-    _buttonLable.text = @"情景名称";//in_common_menu_add in_common_menu_reduce
-
-    [centerView addSubview:_buttonLable];
-    [supperButton addSubview:centerView];
-    UIImageView *rightImageView = [UIImageView new];
-    rightImageView.image = [UIImage imageNamed:@"in_arrow_right"];
-    [supperButton addSubview:rightImageView];
-    [supperView addSubview:supperButton];
-    
-    UIView *lineView = [UIView new];
-    lineView.backgroundColor = lineColor;
-    [supperView addSubview:lineView];
-    
-    
-    UIView* lastView = [UIView new];
-    UIView *labelView = [UIView new];
-    [lastView addSubview:labelView];
-    UILabel *conditionLabel = [UILabel new];
-    conditionLabel.text = @"以下所有条件满足时候";
-    [labelView addSubview:conditionLabel];
-    [lastView addSubview:labelView];
-    UIStackView *stackView = [UIStackView new];
-    stackView.axis = MASAxisTypeHorizontal;
-
-    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn addTarget:self action:@selector(addClick:) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setImage:[UIImage imageNamed:@"in_common_menu_add"] forState:UIControlStateNormal];
-    [stackView addSubview:addBtn];
-
-    UIButton *reduceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [reduceBtn addTarget:self action:@selector(reduceClick:) forControlEvents:UIControlEventTouchUpInside];
-    [reduceBtn setImage:[UIImage imageNamed:@"in_common_menu_reduce"] forState:UIControlStateNormal];
-    [stackView addSubview:reduceBtn];
-    [lastView addSubview:stackView];
-    [supperView addSubview:lastView];
-
-    UIView *lineView2 = [UIView new];
-    lineView2.backgroundColor = lineColor;
-    [supperView addSubview:lineView2];
-    
-    
-    int top = 5;
-    [supperButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(supperView.mas_top).offset(top);
-        make.left.equalTo(supperView.mas_left).offset(20);
-        make.right.equalTo(supperView.mas_right).offset(-20);
-    }];
-    [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(supperButton.mas_top).offset(top);
-        make.left.equalTo(supperButton.mas_left).offset(0);
-        make.size.mas_equalTo(CGSizeMake(42, 42));
-    }];
-    [centerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(leftImageView.mas_right).offset(52);
-        make.right.equalTo(rightImageView.mas_left).offset(30);
-    }];
-    [_buttonLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(supperView.mas_left).offset(68);
-        make.top.equalTo(supperButton.mas_top).offset(top + 10);
-//        make.center.equalTo(centerView);
-    }];
-    [rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(supperButton.mas_top).offset(top + 10);
-        make.width.mas_equalTo(20);
-        make.height.mas_equalTo(20);
-        make.right.equalTo(supperButton.mas_right).offset(0);
-//        make.centerX.equalTo(supperButton.mas_centerX).offset(0);
-    }];
-    
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(1);
-        make.top.mas_equalTo(supperButton.mas_bottom).offset(20);
-    }];
-    
-    [lastView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lineView.mas_bottom).offset(15);
-        make.left.equalTo(supperView.mas_left).offset(0);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-    }];
-    [labelView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lastView.mas_bottom).offset(5);
-        make.left.equalTo(supperView.mas_left).offset(20);
-    }];
-    [conditionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(labelView.mas_top).offset(0);
-        make.left.equalTo(labelView.mas_left).offset(10);
-    }];
-    [stackView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lastView.mas_top).offset(0);
-        make.right.equalTo(supperView.mas_right).offset(-20);
-    }];
-    [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(stackView.mas_top).offset(0);
-        make.right.equalTo(reduceBtn.mas_left).offset(-20);
-        make.size.mas_equalTo(CGSizeMake(30, 30));
-    }];
-    [reduceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(stackView.mas_top).offset(0);
-        make.right.equalTo(lastView.mas_right).offset(-20);
-        make.size.mas_equalTo(CGSizeMake(30, 30));
-    }];
-    [lineView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(1);
-        make.top.mas_equalTo(stackView.mas_bottom).offset(45);
-    }];
-    return supperView;
 }
-//修改名称
+#pragma mark 添加和减少按钮点击
+-(void)didClickBtn:(UIButton *)button currentView:(UIView *)currentView titleLabel:(UILabel *)titleLabel{
+    if(button.tag == 1000){
+        ConditionViewController *condition = [[ConditionViewController alloc] init];
+        [self.navigationController pushViewController:condition animated:YES];
+    }
+    NSLog(@"test:%@",titleLabel.text);
+}
+#pragma mark 返回
+- (void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+#pragma mark 情景图标修改
+-(void)leftBtnClick:(UIButton*)sender{
+    SwitchIconSelectViewController *switchIcon = [SwitchIconSelectViewController sharePopupView:ALERTVIEWSTORYBOARD andPopupViewName:SWITCHICONSELECTVIEWCONTROLLER];
+    [switchIcon setImgArray:@[@"in_equipment_lamp_default",@"in_equipment_lamp_walllamp",@"in_equipment_lamp_ceilinglamp",@"in_equipment_lamp_efficient",@"in_equipment_lamp_spotlight",@"in_equipment_lamp_backlight",@"in_equipment_lamp_mirrorlamp",@"in_equipment_lamp_downlight",@"in_equipment_lamp_chandelier",@"in_equipment_aiming_default"] titleArray:@[@"灯",@"床头灯",@"吸顶灯",@"节能灯",@"射灯",@"LED灯",@"壁灯",@"浴灯",@"吊灯",@"白织灯"] LabelTitle:@"灯具图标设置" ClickBlock:^(int index,NSString *imagestr,NSString *title) {
+        //按钮的返回事件
+        _leftImageView.image = [UIImage imageNamed:imagestr];
+        [_leftImageView.image setAccessibilityIdentifier:imagestr];
+    }] ;
+    [switchIcon showWithParentViewController:nil];
+    [switchIcon showPopupview];
+}
+
+#pragma mark 修改名称
 - (void)nameClick:(UIButton*)sender{
     TextFieldAlertViewController *textalert = VIEW_SHAREINSRANCE(ALERTVIEWSTORYBOARD, TEXTFIELDALERTVIEWCONTROLLER);
     [textalert setTitle:@"添加情景名称" EnterBlock:^(NSString *text) {
-        _buttonLable.text = text;
-        //返回的主机名称
-        NSLog(@"%@",text);
+        if (text) {
+            _buttonLable.text = text;
+        }
     } Cancle:^(NSString *text) {
         
     }];
     [textalert showWithParentViewController:nil];
     [textalert showPopupview];
 }
-//添加
-- (void)addClick:(UIButton*)sender{
-    NSLog(@"addClick");
+
+
+#pragma mark 懒加载
+- (UITableView*) tableView{
+    if(!_tableView){
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 60) style:UITableViewStyleGrouped];
+        _tableView.delegate = self;;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = self.backColor;
+        //        [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    }
+    return _tableView;
 }
-//减少
-- (void)reduceClick:(UIButton*)sender{
-    NSLog(@"reduceClick");
-}
-- (void)goBack{
-    [self.navigationController popViewControllerAnimated:YES];
+- (UIColor*)backColor{
+    if(!_backColor){
+        _backColor = [UIColor colorWithRed:233/255.0 green:241/255.0 blue:245/255.0 alpha:1];
+    }
+    return _backColor;
 }
 /*
 #pragma mark - Navigation
@@ -237,5 +245,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

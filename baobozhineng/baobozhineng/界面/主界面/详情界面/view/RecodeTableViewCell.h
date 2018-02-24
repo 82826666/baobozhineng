@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statuLabel;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 + (RecodeTableViewCell *)cellWithTableView:(UITableView *)tableView;
 - (void) setData:(NSDictionary*)data;

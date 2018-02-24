@@ -38,5 +38,6 @@
     _titleLabel.text = [data objectForKey:@"title"];
     _timeLabel.text = [data objectForKey:@"condition"];
     _statuLabel.text = [data objectForKey:@"execute"];
+    _lineView.backgroundColor = [UIColor lightGrayColor];
 }
 @end

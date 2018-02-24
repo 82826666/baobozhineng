@@ -13,35 +13,35 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="-50" id="q9Z-Kn-Hau" customClass="RecodeTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="366" height="58"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="-45" id="q9Z-Kn-Hau" customClass="RecodeTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="366" height="63"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q9Z-Kn-Hau" id="7Se-Iw-Oaj">
-                <rect key="frame" x="0.0" y="0.0" width="366" height="57.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="366" height="62.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="in_scene_closesafety.png" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ig9-gO-C78">
-                        <rect key="frame" x="26" y="11" width="36" height="36"/>
+                        <rect key="frame" x="26" y="13.5" width="36" height="36"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="36" id="TEJ-0Z-VQO"/>
                             <constraint firstAttribute="width" constant="36" id="ttp-Ov-ZLc"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ith-ae-Fa0">
-                        <rect key="frame" x="0.0" y="56.5" width="366" height="1"/>
+                        <rect key="frame" x="0.0" y="61.5" width="366" height="1"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="GIv-Nk-P9C"/>
+                            <constraint firstAttribute="height" constant="0.5" id="GIv-Nk-P9C"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自动触发" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyH-Ve-pZo">
-                        <rect key="frame" x="286.5" y="18.5" width="69.5" height="20.5"/>
+                        <rect key="frame" x="286.5" y="21" width="69.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="6ah-dg-qKO">
-                        <rect key="frame" x="72" y="10.5" width="107" height="36.5"/>
+                        <rect key="frame" x="72" y="13" width="107" height="36.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定时启动" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxp-Ew-MN4">
                                 <rect key="frame" x="0.0" y="0.0" width="69.5" height="20.5"/>
@@ -73,11 +73,12 @@
             <viewLayoutGuide key="safeArea" id="vHj-pb-hNz"/>
             <connections>
                 <outlet property="imageVi" destination="Ig9-gO-C78" id="ace-2R-zqt"/>
+                <outlet property="lineView" destination="Ith-ae-Fa0" id="Vsz-Lz-gps"/>
                 <outlet property="statuLabel" destination="qyH-Ve-pZo" id="S2t-0y-cbo"/>
                 <outlet property="timeLabel" destination="btl-KI-guv" id="cVc-ZF-OBN"/>
                 <outlet property="titleLabel" destination="cxp-Ew-MN4" id="4uh-6q-ACU"/>
             </connections>
-            <point key="canvasLocation" x="57" y="91"/>
+            <point key="canvasLocation" x="57" y="93.5"/>
         </tableViewCell>
     </objects>
     <resources>
