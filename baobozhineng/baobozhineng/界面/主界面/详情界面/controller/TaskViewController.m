@@ -7,7 +7,9 @@
 //
 
 #import "TaskViewController.h"
-
+#import "AddDelayedViewController.h"
+#import "SelectTaskDeviceViewController.h"
+#import "SelectSceneViewController.h"
 @interface TaskViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
 }
@@ -68,14 +70,14 @@
 #pragma mark tableView dalegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
-//        AddConditionViewController *controller = [[AddConditionViewController alloc]init];
-//        [self.navigationController pushViewController:controller animated:YES];
+        AddDelayedViewController *controller = [[AddDelayedViewController alloc]init];
+        [self.navigationController pushViewController:controller animated:YES];
     }else if (indexPath.row == 1){
-//        SelectSensorViewController *controller = [[SelectSensorViewController alloc]init];
-//        [self.navigationController pushViewController:controller animated:YES];
+        SelectTaskDeviceViewController *controller = [[SelectTaskDeviceViewController alloc]init];
+        [self.navigationController pushViewController:controller animated:YES];
     }else if (indexPath.row == 2){
-//        SelectDeviceViewController *controller = [[SelectDeviceViewController alloc]init];
-//        [self.navigationController pushViewController:controller animated:YES];
+        SelectSceneViewController *controller = [[SelectSceneViewController alloc]init];
+        [self.navigationController pushViewController:controller animated:YES];
     }
 }
 

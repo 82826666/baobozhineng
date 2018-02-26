@@ -8,6 +8,6 @@
 
 #import "ParentViewController.h"
 #import "RecodeViewController.h"
-#import <Masonry.h>
+//#import <Masonry.h>
 @interface AddSceneViewController : ParentViewController
 @end

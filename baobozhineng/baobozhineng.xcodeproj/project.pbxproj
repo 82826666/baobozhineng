@@ -10,6 +10,8 @@
 		5718A75520443DFE00D462A0 /* SelectDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A75420443DFE00D462A0 /* SelectDeviceViewController.m */; };
 		5718A75820443F8E00D462A0 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A75720443F8E00D462A0 /* TaskViewController.m */; };
 		5718A75B2044412700D462A0 /* AddDelayedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A75A2044412700D462A0 /* AddDelayedViewController.m */; };
+		5718A75E2044497800D462A0 /* SelectTaskDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A75D2044497800D462A0 /* SelectTaskDeviceViewController.m */; };
+		5718A76120444A4700D462A0 /* SelectSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A76020444A4700D462A0 /* SelectSceneViewController.m */; };
 		57293060203FDD2400E68079 /* ConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5729305F203FDD2400E68079 /* ConditionViewController.m */; };
 		57293064203FF41D00E68079 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293063203FF41D00E68079 /* DateHelper.m */; };
 		57293067203FF46900E68079 /* NSDate+CalculateDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293066203FF46900E68079 /* NSDate+CalculateDay.m */; };
@@ -325,13 +327,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4F735D7FAD7C284894512977 /* Pods-baobozhineng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baobozhineng.release.xcconfig"; path = "Pods/Target Support Files/Pods-baobozhineng/Pods-baobozhineng.release.xcconfig"; sourceTree = "<group>"; };
 		5718A75320443DFE00D462A0 /* SelectDeviceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectDeviceViewController.h; sourceTree = "<group>"; };
 		5718A75420443DFE00D462A0 /* SelectDeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectDeviceViewController.m; sourceTree = "<group>"; };
 		5718A75620443F8E00D462A0 /* TaskViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
 		5718A75720443F8E00D462A0 /* TaskViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
 		5718A7592044412700D462A0 /* AddDelayedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDelayedViewController.h; sourceTree = "<group>"; };
 		5718A75A2044412700D462A0 /* AddDelayedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDelayedViewController.m; sourceTree = "<group>"; };
+		5718A75C2044497800D462A0 /* SelectTaskDeviceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTaskDeviceViewController.h; sourceTree = "<group>"; };
+		5718A75D2044497800D462A0 /* SelectTaskDeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectTaskDeviceViewController.m; sourceTree = "<group>"; };
+		5718A75F20444A4700D462A0 /* SelectSceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectSceneViewController.h; sourceTree = "<group>"; };
+		5718A76020444A4700D462A0 /* SelectSceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectSceneViewController.m; sourceTree = "<group>"; };
 		5729305E203FDD2400E68079 /* ConditionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConditionViewController.h; sourceTree = "<group>"; };
 		5729305F203FDD2400E68079 /* ConditionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConditionViewController.m; sourceTree = "<group>"; };
 		57293062203FF41D00E68079 /* DateHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
@@ -694,7 +699,8 @@
 		A2C6BB7A1FF247BA00D56C92 /* MainParentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainParentViewController.h; sourceTree = "<group>"; };
 		A2C6BB7B1FF247BA00D56C92 /* MainParentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainParentViewController.m; sourceTree = "<group>"; };
 		A2C6BB801FF2945100D56C92 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		BDF5859D088D8B9BA4715892 /* Pods-baobozhineng.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baobozhineng.debug.xcconfig"; path = "Pods/Target Support Files/Pods-baobozhineng/Pods-baobozhineng.debug.xcconfig"; sourceTree = "<group>"; };
+		B26E736E355601DC577243DC /* Pods-baobozhineng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baobozhineng.release.xcconfig"; path = "Pods/Target Support Files/Pods-baobozhineng/Pods-baobozhineng.release.xcconfig"; sourceTree = "<group>"; };
+		FBF095A21C276626654E2B5D /* Pods-baobozhineng.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baobozhineng.debug.xcconfig"; path = "Pods/Target Support Files/Pods-baobozhineng/Pods-baobozhineng.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -772,6 +778,10 @@
 				5718A75720443F8E00D462A0 /* TaskViewController.m */,
 				5718A7592044412700D462A0 /* AddDelayedViewController.h */,
 				5718A75A2044412700D462A0 /* AddDelayedViewController.m */,
+				5718A75C2044497800D462A0 /* SelectTaskDeviceViewController.h */,
+				5718A75D2044497800D462A0 /* SelectTaskDeviceViewController.m */,
+				5718A75F20444A4700D462A0 /* SelectSceneViewController.h */,
+				5718A76020444A4700D462A0 /* SelectSceneViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -920,8 +930,8 @@
 				A2B934A21FEFC225003F2C52 /* baobozhineng */,
 				A2B9350B1FEFFB85003F2C52 /* 图标 */,
 				A2B934A11FEFC225003F2C52 /* Products */,
-				A6A7058BFC935A1C30F78BF1 /* Pods */,
 				604E470A4169938149B18C17 /* Frameworks */,
+				FF0C137CFF1B152C71FF4A96 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1442,11 +1452,11 @@
 			path = "主界面";
 			sourceTree = "<group>";
 		};
-		A6A7058BFC935A1C30F78BF1 /* Pods */ = {
+		FF0C137CFF1B152C71FF4A96 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BDF5859D088D8B9BA4715892 /* Pods-baobozhineng.debug.xcconfig */,
-				4F735D7FAD7C284894512977 /* Pods-baobozhineng.release.xcconfig */,
+				FBF095A21C276626654E2B5D /* Pods-baobozhineng.debug.xcconfig */,
+				B26E736E355601DC577243DC /* Pods-baobozhineng.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1902,9 +1912,11 @@
 				A2B934EA1FEFC858003F2C52 /* CommonCode.m in Sources */,
 				57AB46C52026CBF2009FA671 /* RecodeTableViewCell.m in Sources */,
 				A24D703B1FF4849900B00878 /* WifiConfigViewController.m in Sources */,
+				5718A76120444A4700D462A0 /* SelectSceneViewController.m in Sources */,
 				5718A75520443DFE00D462A0 /* SelectDeviceViewController.m in Sources */,
 				A2B934A51FEFC225003F2C52 /* AppDelegate.m in Sources */,
 				A2C6BB641FF1F72C00D56C92 /* ParentTabbarController.m in Sources */,
+				5718A75E2044497800D462A0 /* SelectTaskDeviceViewController.m in Sources */,
 				A2B934DA1FEFC2EC003F2C52 /* AFNHttpTool.m in Sources */,
 				A2C350971FFCA7D200D3566B /* TextFieldAlertViewController.m in Sources */,
 				A2C3507E1FF72D5E00D3566B /* ParentPopupView.m in Sources */,
@@ -2103,7 +2115,7 @@
 		};
 		A2B934CD1FEFC226003F2C52 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF5859D088D8B9BA4715892 /* Pods-baobozhineng.debug.xcconfig */;
+			baseConfigurationReference = FBF095A21C276626654E2B5D /* Pods-baobozhineng.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = baobozhineng/baobozhineng.entitlements;
@@ -2125,7 +2137,7 @@
 		};
 		A2B934CE1FEFC226003F2C52 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F735D7FAD7C284894512977 /* Pods-baobozhineng.release.xcconfig */;
+			baseConfigurationReference = B26E736E355601DC577243DC /* Pods-baobozhineng.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = baobozhineng/baobozhineng.entitlements;

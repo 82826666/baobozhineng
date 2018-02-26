@@ -13,6 +13,5 @@ pod 'SVProgressHUD', '~> 2.0.3'
 pod 'MJExtension'
 #极光推送
 pod 'JPush'
-#自动适应
-pod 'Masonry'
+
 end
