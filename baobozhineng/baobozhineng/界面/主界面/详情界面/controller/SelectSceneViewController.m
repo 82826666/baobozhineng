@@ -28,7 +28,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return 2;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -40,7 +40,25 @@
     if(cell == nil){
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
-    cell.textLabel.text = @"sfda";
+    [cell setSeparatorInset:UIEdgeInsetsZero];
+    if(indexPath.row == 0){
+        cell.imageView.image = [UIImage imageNamed:@"in_equipment_switch_three"];
+        cell.textLabel.text = @"本情景";
+    }else{
+        cell.imageView.image = [UIImage imageNamed:@"in_equipment_switch_three"];
+        UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(60 + 15, 5, SCREEN_WIDTH - 60 - 15, 11)];
+        title.font =  [UIFont systemFontOfSize:11];
+        title.text = @"情景名称";
+        UILabel *sub = [[UILabel alloc]initWithFrame:CGRectMake(60 + 15, 21, SCREEN_WIDTH - 60 - 15, 8)];
+        sub.text = @"条件：温度高于";
+        sub.font = [UIFont systemFontOfSize:8];
+        UILabel *des = [[UILabel alloc]initWithFrame:CGRectMake(60 + 15, 34, SCREEN_WIDTH - 60 - 15, 8)];
+        des.text = @"执行：本情景禁用";
+        des.font = [UIFont systemFontOfSize:8];
+        [cell.contentView addSubview:title];
+        [cell.contentView addSubview:sub];
+        [cell.contentView addSubview:des];
+    }
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -59,10 +77,10 @@
 }
 -(UITableView*)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+//        [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     }
     return _tableView;
 }
