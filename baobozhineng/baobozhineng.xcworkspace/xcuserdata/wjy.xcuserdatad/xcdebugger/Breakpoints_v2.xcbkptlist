@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5e38;&#x7528;&#x754c;&#x9762;/EquipmentSwitchSetViewController.m"
-            timestampString = "541055864.6427259"
+            timestampString = "541150988.122876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "180"
@@ -73,7 +73,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5e38;&#x7528;&#x754c;&#x9762;/EquipmentSwitchSetViewController.m"
-            timestampString = "541055864.642795"
+            timestampString = "541150988.1231821"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
@@ -89,7 +89,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5e38;&#x7528;&#x754c;&#x9762;/EquipmentSwitchSetViewController.m"
-            timestampString = "541055864.642845"
+            timestampString = "541150988.123239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "222"
@@ -131,11 +131,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5bb6;&#x5c45;&#x754c;&#x9762;/HouseViewController.m"
-            timestampString = "541143515.8732001"
+            timestampString = "541151470.135059"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5bb6;&#x5c45;&#x754c;&#x9762;/HouseViewController.m"
+            timestampString = "541151470.135599"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>

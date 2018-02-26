@@ -116,6 +116,8 @@
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HouseTableViewCell *cell = [HouseTableViewCell cellWithTableView:tableView];
+    NSInteger sec = indexPath.section;
+    NSLog(@"sec:%ld",sec);
     NSArray *array = [dataSource objectAtIndex:indexPath.section];
 //    NSInteger row = ceil(array.count / 4);
 //    NSArray *dataArray;

@@ -11,6 +11,7 @@
 #import "CommonAdd.h"
 #import "SwitchIconSelectViewController.h"
 #import "ConditionViewController.h"
+#import "TaskViewController.h"
 @interface AddSceneViewController ()<UITableViewDataSource,UITableViewDelegate,CommonAddDelegate>{
     
 }
@@ -20,6 +21,7 @@
 @property(nonatomic, strong) UIColor *backColor;
 @property(nonatomic, strong) RecodeTableViewCell *cell;
 @property(nonatomic, strong) UIImageView *leftImageView;
+@property(nonatomic, strong) UISwitch *swt;
 @end
 
 @implementation AddSceneViewController
@@ -60,6 +62,9 @@
 
 #pragma tableview datasouce
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (section == 2) {
+        return 1;
+    }
     return _dataSouce.count;
 }
 
@@ -72,51 +77,61 @@
 //    _cell.backgroundColor = self.backColor;
 //    [_cell setData:_dataSouce[indexPath.row]];
     //1.根据reuseIdentifier，先到对象池中去找重用的单元格对象
-        static NSString *reuseIdentifier = @"contactCell";
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-         //2.如果没有找到，自己创建单元格对象
-         if(cell == nil){
-                    cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
-                    cell.backgroundColor = self.backColor;
-                 }
+    static NSString *reuseIdentifier = @"contactCell";
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    //2.如果没有找到，自己创建单元格对象
+    if(cell == nil){
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+        cell.backgroundColor = self.backColor;
+    }
     
-        //3.设置单元格对象的内容
-
-        //设置图像
-        [cell.imageView setImage:[UIImage imageNamed:@"in_scene_default.png"]];
+    //3.设置单元格对象的内容
+    
+    //设置图像
+    [cell.imageView setImage:[UIImage imageNamed:@"in_scene_default.png"]];
+    
+    //设置字体颜色
+    cell.textLabel.textColor = [UIColor orangeColor];
+    cell.detailTextLabel.textColor = [UIColor blueColor];
+    if (indexPath.section == 2) {
         //设置主标题
-       cell.textLabel.text = @"butt";
+        cell.textLabel.text = @"向手机发送通知消息";
         //设置副标题
-         cell.detailTextLabel.text = @"sub";
-
-
-        //设置字体颜色
-        cell.textLabel.textColor = [UIColor orangeColor];
-        cell.detailTextLabel.textColor = [UIColor blueColor];
-    
+        cell.detailTextLabel.text = @"消息：情景名称 情景 已自动触发";
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        _swt = [[UISwitch alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 71, 10, 51, 31)];
+        [cell.contentView addSubview:_swt];
+    }else{
+        //设置主标题
+        cell.textLabel.text = @"butt";
+        //设置副标题
+        cell.detailTextLabel.text = @"sub";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
+    }
     [cell setSeparatorInset:UIEdgeInsetsZero];
-         return cell;
+    return cell;
 }
 //每行高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewAutomaticDimension;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.0001f;
+}
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc]initWithFrame:CGRectZero];
+    return v;
+}
 //头部高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
         return 100;
-    }else if (section == 1){
-        return 50;
     }
-    return 30;
+    return 50;
 }
 //头部内容
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     CGFloat height = 50;
-    if (section == 2) {
-        height = 30;
-    }
     CGFloat centerHeight = height / 2;
     if (section == 0) {
         UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height*2)];
@@ -148,6 +163,7 @@
         addBtn.tag = 1000;
         [addBtn setImage:[UIImage imageNamed:@"in_common_menu_add"] forState:UIControlStateNormal];
         UIButton *reduceBtn = [UIButton new];
+        reduceBtn.tag = 1001;
         [reduceBtn setImage:[UIImage imageNamed:@"in_common_menu_reduce"] forState:UIControlStateNormal];
         CommonAdd *addView = [[CommonAdd alloc]initWithFrame:CGRectMake(0, height, SCREEN_WIDTH, height) title:@"以下所有条件满足时" addBtn:addBtn reduceBtn:reduceBtn image:nil];
         addView.backColor = self.backColor;
@@ -157,21 +173,23 @@
     }else if (section == 1){
         UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
         UIButton *addBtn = [UIButton new];
+        addBtn.tag = 1002;
         [addBtn setImage:[UIImage imageNamed:@"in_common_menu_add"] forState:UIControlStateNormal];
         UIButton *reduceBtn = [UIButton new];
+        reduceBtn.tag = 1003;
         [reduceBtn setImage:[UIImage imageNamed:@"in_common_menu_reduce"] forState:UIControlStateNormal];
-        CommonAdd *addView = [[CommonAdd alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) title:@"test" addBtn:addBtn reduceBtn:reduceBtn image:nil];
+        CommonAdd *addView = [[CommonAdd alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) title:@"按步骤执行以下任务" addBtn:addBtn reduceBtn:reduceBtn image:nil];
         addView.backColor = self.backColor;
         addView.delegate = self;
         [supper addSubview:addView];
         return supper;
     }
-    UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
+    UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
     UILabel *msg1Label = [[UILabel alloc]initWithFrame:CGRectMake(40, centerHeight - 10, 80, 20)];
     msg1Label.text = @"通知消息";
     UILabel *msg2Label = [[UILabel alloc]initWithFrame:CGRectMake(120, centerHeight - 10, SCREEN_WIDTH -120, 20)];
     msg2Label.text = @"情景自动触发时";
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 30 - 0.5, SCREEN_WIDTH, 0.5)];
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, height, SCREEN_WIDTH, 0.5)];
     lineView.backgroundColor = [UIColor lightGrayColor];
     [supper addSubview:msg1Label];
     [supper addSubview:msg2Label];
@@ -184,6 +202,9 @@
 -(void)didClickBtn:(UIButton *)button currentView:(UIView *)currentView titleLabel:(UILabel *)titleLabel{
     if(button.tag == 1000){
         ConditionViewController *condition = [[ConditionViewController alloc] init];
+        [self.navigationController pushViewController:condition animated:YES];
+    }else if (button.tag == 1002){
+        TaskViewController *condition = [[TaskViewController alloc] init];
         [self.navigationController pushViewController:condition animated:YES];
     }
     NSLog(@"test:%@",titleLabel.text);

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5718A75520443DFE00D462A0 /* SelectDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A75420443DFE00D462A0 /* SelectDeviceViewController.m */; };
+		5718A75820443F8E00D462A0 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A75720443F8E00D462A0 /* TaskViewController.m */; };
+		5718A75B2044412700D462A0 /* AddDelayedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A75A2044412700D462A0 /* AddDelayedViewController.m */; };
 		57293060203FDD2400E68079 /* ConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5729305F203FDD2400E68079 /* ConditionViewController.m */; };
 		57293064203FF41D00E68079 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293063203FF41D00E68079 /* DateHelper.m */; };
 		57293067203FF46900E68079 /* NSDate+CalculateDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293066203FF46900E68079 /* NSDate+CalculateDay.m */; };
@@ -17,6 +20,7 @@
 		57A928A32040F7C10053660A /* AddConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A928A22040F7C10053660A /* AddConditionViewController.m */; };
 		57A928A72040FFC70053660A /* 复选框-未选中.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A928A52040FFC60053660A /* 复选框-未选中.png */; };
 		57A928A82040FFC70053660A /* 复选框.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A928A62040FFC70053660A /* 复选框.png */; };
+		57A928AD20413BE10053660A /* SelectSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A928AC20413BE10053660A /* SelectSensorViewController.m */; };
 		57AB46B72025D6FB009FA671 /* SceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AB46B52025D6FB009FA671 /* SceneTableViewCell.m */; };
 		57AB46B82025D6FB009FA671 /* SceneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AB46B62025D6FB009FA671 /* SceneTableViewCell.xib */; };
 		57AB46BE2026C757009FA671 /* RecodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AB46BD2026C757009FA671 /* RecodeViewController.m */; };
@@ -322,6 +326,12 @@
 
 /* Begin PBXFileReference section */
 		4F735D7FAD7C284894512977 /* Pods-baobozhineng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baobozhineng.release.xcconfig"; path = "Pods/Target Support Files/Pods-baobozhineng/Pods-baobozhineng.release.xcconfig"; sourceTree = "<group>"; };
+		5718A75320443DFE00D462A0 /* SelectDeviceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectDeviceViewController.h; sourceTree = "<group>"; };
+		5718A75420443DFE00D462A0 /* SelectDeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectDeviceViewController.m; sourceTree = "<group>"; };
+		5718A75620443F8E00D462A0 /* TaskViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
+		5718A75720443F8E00D462A0 /* TaskViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		5718A7592044412700D462A0 /* AddDelayedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDelayedViewController.h; sourceTree = "<group>"; };
+		5718A75A2044412700D462A0 /* AddDelayedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDelayedViewController.m; sourceTree = "<group>"; };
 		5729305E203FDD2400E68079 /* ConditionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConditionViewController.h; sourceTree = "<group>"; };
 		5729305F203FDD2400E68079 /* ConditionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConditionViewController.m; sourceTree = "<group>"; };
 		57293062203FF41D00E68079 /* DateHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
@@ -341,6 +351,8 @@
 		57A928A22040F7C10053660A /* AddConditionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddConditionViewController.m; sourceTree = "<group>"; };
 		57A928A52040FFC60053660A /* 复选框-未选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "复选框-未选中.png"; path = "../../../../../Downloads/复选框-未选中.png"; sourceTree = "<group>"; };
 		57A928A62040FFC70053660A /* 复选框.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "复选框.png"; path = "../../../../../Downloads/复选框.png"; sourceTree = "<group>"; };
+		57A928AB20413BE10053660A /* SelectSensorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectSensorViewController.h; sourceTree = "<group>"; };
+		57A928AC20413BE10053660A /* SelectSensorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectSensorViewController.m; sourceTree = "<group>"; };
 		57AB46B42025D6FB009FA671 /* SceneTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneTableViewCell.h; sourceTree = "<group>"; };
 		57AB46B52025D6FB009FA671 /* SceneTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneTableViewCell.m; sourceTree = "<group>"; };
 		57AB46B62025D6FB009FA671 /* SceneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SceneTableViewCell.xib; sourceTree = "<group>"; };
@@ -752,6 +764,14 @@
 				5729305F203FDD2400E68079 /* ConditionViewController.m */,
 				57A928A12040F7C10053660A /* AddConditionViewController.h */,
 				57A928A22040F7C10053660A /* AddConditionViewController.m */,
+				57A928AB20413BE10053660A /* SelectSensorViewController.h */,
+				57A928AC20413BE10053660A /* SelectSensorViewController.m */,
+				5718A75320443DFE00D462A0 /* SelectDeviceViewController.h */,
+				5718A75420443DFE00D462A0 /* SelectDeviceViewController.m */,
+				5718A75620443F8E00D462A0 /* TaskViewController.h */,
+				5718A75720443F8E00D462A0 /* TaskViewController.m */,
+				5718A7592044412700D462A0 /* AddDelayedViewController.h */,
+				5718A75A2044412700D462A0 /* AddDelayedViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1873,6 +1893,7 @@
 				A2B934A81FEFC225003F2C52 /* ViewController.m in Sources */,
 				A2B935081FEFFA47003F2C52 /* RegisterViewController.m in Sources */,
 				A2C6BB761FF22A5800D56C92 /* PersonalViewController.m in Sources */,
+				5718A75820443F8E00D462A0 /* TaskViewController.m in Sources */,
 				A2B934B31FEFC225003F2C52 /* main.m in Sources */,
 				A24D70311FF45CF100B00878 /* SelectAlert.m in Sources */,
 				A2C350811FF72DA900D3566B /* SwitchIconSelectViewController.m in Sources */,
@@ -1881,6 +1902,7 @@
 				A2B934EA1FEFC858003F2C52 /* CommonCode.m in Sources */,
 				57AB46C52026CBF2009FA671 /* RecodeTableViewCell.m in Sources */,
 				A24D703B1FF4849900B00878 /* WifiConfigViewController.m in Sources */,
+				5718A75520443DFE00D462A0 /* SelectDeviceViewController.m in Sources */,
 				A2B934A51FEFC225003F2C52 /* AppDelegate.m in Sources */,
 				A2C6BB641FF1F72C00D56C92 /* ParentTabbarController.m in Sources */,
 				A2B934DA1FEFC2EC003F2C52 /* AFNHttpTool.m in Sources */,
@@ -1888,6 +1910,7 @@
 				A2C3507E1FF72D5E00D3566B /* ParentPopupView.m in Sources */,
 				6547407F1FFC99CA007F1173 /* AlertManager.m in Sources */,
 				A2C350841FF8038C00D3566B /* TablePopViewController.m in Sources */,
+				5718A75B2044412700D462A0 /* AddDelayedViewController.m in Sources */,
 				57A928A02040F7340053660A /* UIButton+CenterImageAndTitle.m in Sources */,
 				A2C3502D1FF5167500D3566B /* SelectEquipmentViewController.m in Sources */,
 				A2C6BB791FF22D6D00D56C92 /* TabbarBottomBtn.m in Sources */,
@@ -1913,6 +1936,7 @@
 				A2B934E91FEFC858003F2C52 /* CustomerSearchBarView.m in Sources */,
 				A2C3508B1FFC68E900D3566B /* MainHostSetViewController.m in Sources */,
 				5729306D203FF4B900E68079 /* KMDatePicker.m in Sources */,
+				57A928AD20413BE10053660A /* SelectSensorViewController.m in Sources */,
 				A2C353361FFD1C7600D3566B /* UIView+MydefineView.m in Sources */,
 				5795230A202F391F00FB2508 /* CommonAdd.m in Sources */,
 				A2B936CC1FF009D4003F2C52 /* RadioButton.m in Sources */,

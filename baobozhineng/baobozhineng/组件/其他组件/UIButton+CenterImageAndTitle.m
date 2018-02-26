@@ -1,9 +1,9 @@
 //
-//  UIButton+UIButtonSetEdgeInsets.m
-//  UIButtonSetEdgeInsets
+//  UIButton+CenterImageAndTitle.m
+//  baobozhineng
 //
-//  Created by Qi Wang on 11/14/14.
-//  Copyright (c) 2014 qiwang. All rights reserved.
+//  Created by wjy on 2018/2/24.
+//  Copyright © 2018年 吴建阳. All rights reserved.
 //
 
 #import "UIButton+CenterImageAndTitle.h"
@@ -115,7 +115,4 @@
     [self horizontalCenterTitleAndImageRight:DEFAULT_SPACING];
 }
 
-
 @end
-
-

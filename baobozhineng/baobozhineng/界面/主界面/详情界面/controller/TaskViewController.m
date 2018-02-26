@@ -1,25 +1,23 @@
 //
-//  ConditionViewController.m
+//  TaskViewController.m
 //  baobozhineng
 //
-//  Created by wjy on 2018/2/23.
+//  Created by wjy on 2018/2/26.
 //  Copyright © 2018年 吴建阳. All rights reserved.
 //
 
-#import "ConditionViewController.h"
-#import "AddConditionViewController.h"
-#import "SelectSensorViewController.h"
-#import "SelectDeviceViewController.h"
+#import "TaskViewController.h"
 
-@interface ConditionViewController ()<UITableViewDelegate,UITableViewDataSource>{
+@interface TaskViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
 }
 @property(nonatomic, strong) NSMutableArray* dataSouce;
 @property(nonatomic, strong) UIColor *backColor;
 @property(nonatomic, strong) UITableView *tableView;
+
 @end
 
-@implementation ConditionViewController
+@implementation TaskViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,14 +68,14 @@
 #pragma mark tableView dalegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
-        AddConditionViewController *controller = [[AddConditionViewController alloc]init];
-        [self.navigationController pushViewController:controller animated:YES];
+//        AddConditionViewController *controller = [[AddConditionViewController alloc]init];
+//        [self.navigationController pushViewController:controller animated:YES];
     }else if (indexPath.row == 1){
-        SelectSensorViewController *controller = [[SelectSensorViewController alloc]init];
-        [self.navigationController pushViewController:controller animated:YES];
+//        SelectSensorViewController *controller = [[SelectSensorViewController alloc]init];
+//        [self.navigationController pushViewController:controller animated:YES];
     }else if (indexPath.row == 2){
-        SelectDeviceViewController *controller = [[SelectDeviceViewController alloc]init];
-        [self.navigationController pushViewController:controller animated:YES];
+//        SelectDeviceViewController *controller = [[SelectDeviceViewController alloc]init];
+//        [self.navigationController pushViewController:controller animated:YES];
     }
 }
 
@@ -103,12 +101,13 @@
 #pragma mark 数据源
 - (void)initDataSouce{
     if(_dataSouce == nil){
-        NSDictionary *one = @{@"img":@"in_scene_condition_delayed",@"title":@"时间条件"};
-        NSDictionary *two = @{@"img":@"in_scene_condition_sensor",@"title":@"触发型传感器"};
-        NSDictionary *three = @{@"img":@"in_scene_condition_telecontrol",@"title":@"可操作设备状态"};
+        NSDictionary *one = @{@"img":@"in_scene_condition_delayed",@"title":@"时间延时"};
+        NSDictionary *two = @{@"img":@"in_scene_condition_sensor",@"title":@"执行设备"};
+        NSDictionary *three = @{@"img":@"in_scene_condition_telecontrol",@"title":@"情景启用、禁用"};
         _dataSouce = [[NSMutableArray alloc]initWithObjects:one,two,three,nil];
     }
 }
+
 /*
 #pragma mark - Navigation
 
