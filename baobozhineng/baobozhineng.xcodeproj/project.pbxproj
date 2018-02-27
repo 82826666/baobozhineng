@@ -12,6 +12,7 @@
 		5718A75B2044412700D462A0 /* AddDelayedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A75A2044412700D462A0 /* AddDelayedViewController.m */; };
 		5718A75E2044497800D462A0 /* SelectTaskDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A75D2044497800D462A0 /* SelectTaskDeviceViewController.m */; };
 		5718A76120444A4700D462A0 /* SelectSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A76020444A4700D462A0 /* SelectSceneViewController.m */; };
+		5718A78520458C8800D462A0 /* 引导页.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5718A78420458C8800D462A0 /* 引导页.jpg */; };
 		57293060203FDD2400E68079 /* ConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5729305F203FDD2400E68079 /* ConditionViewController.m */; };
 		57293064203FF41D00E68079 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293063203FF41D00E68079 /* DateHelper.m */; };
 		57293067203FF46900E68079 /* NSDate+CalculateDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293066203FF46900E68079 /* NSDate+CalculateDay.m */; };
@@ -337,6 +338,7 @@
 		5718A75D2044497800D462A0 /* SelectTaskDeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectTaskDeviceViewController.m; sourceTree = "<group>"; };
 		5718A75F20444A4700D462A0 /* SelectSceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectSceneViewController.h; sourceTree = "<group>"; };
 		5718A76020444A4700D462A0 /* SelectSceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectSceneViewController.m; sourceTree = "<group>"; };
+		5718A78420458C8800D462A0 /* 引导页.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "引导页.jpg"; path = "../../../../../Downloads/引导页.jpg"; sourceTree = "<group>"; };
 		5729305E203FDD2400E68079 /* ConditionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConditionViewController.h; sourceTree = "<group>"; };
 		5729305F203FDD2400E68079 /* ConditionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConditionViewController.m; sourceTree = "<group>"; };
 		57293062203FF41D00E68079 /* DateHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
@@ -1049,6 +1051,7 @@
 		A2B9350B1FEFFB85003F2C52 /* 图标 */ = {
 			isa = PBXGroup;
 			children = (
+				5718A78420458C8800D462A0 /* 引导页.jpg */,
 				57A928A52040FFC60053660A /* 复选框-未选中.png */,
 				57A928A62040FFC70053660A /* 复选框.png */,
 				A2B9350C1FEFFB85003F2C52 /* 遥控器图标 */,
@@ -1698,6 +1701,7 @@
 				A2B936481FEFFB86003F2C52 /* in_scene_condition_sensor.png in Resources */,
 				A2B9365C1FEFFB86003F2C52 /* in_scene_condition_telecontrol.png in Resources */,
 				A2B936BB1FEFFB86003F2C52 /* in_equipment_lamp_walllamp.png in Resources */,
+				5718A78520458C8800D462A0 /* 引导页.jpg in Resources */,
 				A2B936881FEFFB86003F2C52 /* in_camera_select_nightvision.png in Resources */,
 				57AB46B82025D6FB009FA671 /* SceneTableViewCell.xib in Resources */,
 				A2B9364F1FEFFB86003F2C52 /* in_scene_gohome.png in Resources */,

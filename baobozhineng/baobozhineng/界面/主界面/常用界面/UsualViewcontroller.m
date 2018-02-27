@@ -68,6 +68,7 @@ static NSInteger seq = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"sdaf%@",GET_USERDEFAULT(MASTER_ID));
 //    NSLog(@"%@",GET_USERDEFAULT(USER_TOKEN));
     // Do any additional setup after loading the view.
 

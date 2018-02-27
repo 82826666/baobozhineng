@@ -208,7 +208,17 @@
     NSMutableDictionary *params = [NSMutableDictionary new];
     [params setObject:GET_USERDEFAULT(MASTER_ID) forKey:@"master_id"];
     [params setObject:_switchNameLabel.text forKey:@"name"];
-    [params setObject:@"1000" forKey:@"type"];
+    int type = 0;
+    if (_switchSetNum == 1) {
+        type = 10111;
+    }else if (_switchSetNum == 2){
+        type = 10121;
+    }else if (_switchSetNum == 3){
+        type = 10131;
+    }else if (_switchSetNum == 4){
+        type = 10141;
+    }
+    [params setObject:[NSString stringWithFormat:@"%d",type] forKey:@"type"];
     [params setObject:@"1" forKey:@"room_id"];
     [params setObject:@"1" forKey:@"icon"];
     [params setObject:@"23434" forKey:@"code"];
@@ -228,7 +238,24 @@
         [set setObject:[CommonCode subStr:lable.text str:@"-"] forKey:@"button-name"];
         
         NSMutableDictionary *open = [NSMutableDictionary new];
-        NSString *devid = [NSString stringWithFormat:@"%@-%@",GET_USERDEFAULT(MASTER_ID),[CommonCode getCurrentTimeRubbing]];
+        NSString *devid = @"";
+        [[APIManager sharedManager] deviceAddOnewayDeviceWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+            //        NSLog(@"%@",params);
+            //请求数据成功
+            NSDictionary *datadic = data;
+            if ([[datadic objectForKey:@"code"] intValue] != 200) {
+                //请求失败
+                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            }
+            else{
+                //请求成功
+                [[AlertManager alertManager] showSuccess:3.0 string:[datadic objectForKey:@"msg"]];
+            }
+            
+        } failure:^(NSError *error) {
+            [[AlertManager alertManager] showError:3.0 string:@"请求失败"];
+        }];
+//        [NSString stringWithFormat:@"%@-%@",GET_USERDEFAULT(MASTER_ID),[CommonCode getCurrentTimeRubbing]];
         [open setObject:[NSString stringWithFormat:@"%@-1",devid] forKey:@"devid"];
         [open setObject:@"1" forKey:@"flag"];
         
