@@ -13,6 +13,12 @@
 		5718A75E2044497800D462A0 /* SelectTaskDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A75D2044497800D462A0 /* SelectTaskDeviceViewController.m */; };
 		5718A76120444A4700D462A0 /* SelectSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5718A76020444A4700D462A0 /* SelectSceneViewController.m */; };
 		5718A78520458C8800D462A0 /* 引导页.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5718A78420458C8800D462A0 /* 引导页.jpg */; };
+		5718A78D2046DCA300D462A0 /* 20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 5718A7872046DCA300D462A0 /* 20x20.png */; };
+		5718A78E2046DCA300D462A0 /* 29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 5718A7882046DCA300D462A0 /* 29x29.png */; };
+		5718A78F2046DCA300D462A0 /* 60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 5718A7892046DCA300D462A0 /* 60x60.png */; };
+		5718A7902046DCA300D462A0 /* 40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 5718A78A2046DCA300D462A0 /* 40x40.png */; };
+		5718A7912046DCA300D462A0 /* 76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 5718A78B2046DCA300D462A0 /* 76x76.png */; };
+		5718A7922046DCA300D462A0 /* 84x84.png in Resources */ = {isa = PBXBuildFile; fileRef = 5718A78C2046DCA300D462A0 /* 84x84.png */; };
 		57293060203FDD2400E68079 /* ConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5729305F203FDD2400E68079 /* ConditionViewController.m */; };
 		57293064203FF41D00E68079 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293063203FF41D00E68079 /* DateHelper.m */; };
 		57293067203FF46900E68079 /* NSDate+CalculateDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293066203FF46900E68079 /* NSDate+CalculateDay.m */; };
@@ -339,6 +345,12 @@
 		5718A75F20444A4700D462A0 /* SelectSceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectSceneViewController.h; sourceTree = "<group>"; };
 		5718A76020444A4700D462A0 /* SelectSceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectSceneViewController.m; sourceTree = "<group>"; };
 		5718A78420458C8800D462A0 /* 引导页.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "引导页.jpg"; path = "../../../../../Downloads/引导页.jpg"; sourceTree = "<group>"; };
+		5718A7872046DCA300D462A0 /* 20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 20x20.png; path = "../../../../../../Downloads/应用图标/20x20.png"; sourceTree = "<group>"; };
+		5718A7882046DCA300D462A0 /* 29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 29x29.png; path = "../../../../../../Downloads/应用图标/29x29.png"; sourceTree = "<group>"; };
+		5718A7892046DCA300D462A0 /* 60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 60x60.png; path = "../../../../../../Downloads/应用图标/60x60.png"; sourceTree = "<group>"; };
+		5718A78A2046DCA300D462A0 /* 40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 40x40.png; path = "../../../../../../Downloads/应用图标/40x40.png"; sourceTree = "<group>"; };
+		5718A78B2046DCA300D462A0 /* 76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 76x76.png; path = "../../../../../../Downloads/应用图标/76x76.png"; sourceTree = "<group>"; };
+		5718A78C2046DCA300D462A0 /* 84x84.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 84x84.png; path = "../../../../../../Downloads/应用图标/84x84.png"; sourceTree = "<group>"; };
 		5729305E203FDD2400E68079 /* ConditionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConditionViewController.h; sourceTree = "<group>"; };
 		5729305F203FDD2400E68079 /* ConditionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConditionViewController.m; sourceTree = "<group>"; };
 		57293062203FF41D00E68079 /* DateHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
@@ -731,6 +743,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5718A7862046DC7F00D462A0 /* 应用图标 */ = {
+			isa = PBXGroup;
+			children = (
+				5718A7872046DCA300D462A0 /* 20x20.png */,
+				5718A7882046DCA300D462A0 /* 29x29.png */,
+				5718A78A2046DCA300D462A0 /* 40x40.png */,
+				5718A7892046DCA300D462A0 /* 60x60.png */,
+				5718A78B2046DCA300D462A0 /* 76x76.png */,
+				5718A78C2046DCA300D462A0 /* 84x84.png */,
+			);
+			path = "应用图标";
+			sourceTree = "<group>";
+		};
 		57293061203FF3B800E68079 /* KMDatePicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -1051,6 +1076,7 @@
 		A2B9350B1FEFFB85003F2C52 /* 图标 */ = {
 			isa = PBXGroup;
 			children = (
+				5718A7862046DC7F00D462A0 /* 应用图标 */,
 				5718A78420458C8800D462A0 /* 引导页.jpg */,
 				57A928A52040FFC60053660A /* 复选框-未选中.png */,
 				57A928A62040FFC70053660A /* 复选框.png */,
@@ -1597,6 +1623,7 @@
 				A2B9367A1FEFFB86003F2C52 /* in_select_socket_warmer.png in Resources */,
 				A2B9368A1FEFFB86003F2C52 /* in_camera_list_nightvision.png in Resources */,
 				A2B936A31FEFFB86003F2C52 /* in_device_list_camera.png in Resources */,
+				5718A78D2046DCA300D462A0 /* 20x20.png in Resources */,
 				A2B9369A1FEFFB86003F2C52 /* in_device_list_switch4.png in Resources */,
 				A2B936511FEFFB86003F2C52 /* in_scene_select_default.png in Resources */,
 				A2B936501FEFFB86003F2C52 /* in_scene_condition_enable.png in Resources */,
@@ -1651,6 +1678,7 @@
 				A2B934AD1FEFC225003F2C52 /* Assets.xcassets in Resources */,
 				A2B936B11FEFFB86003F2C52 /* in_control_lamp_chandelier.png in Resources */,
 				A2B9369E1FEFFB86003F2C52 /* in_device_list_switch2.png in Resources */,
+				5718A78F2046DCA300D462A0 /* 60x60.png in Resources */,
 				A2B9365A1FEFFB86003F2C52 /* in_scene_safety.png in Resources */,
 				A2B936A21FEFFB86003F2C52 /* in_arrow_right.png in Resources */,
 				A2B9367C1FEFFB86003F2C52 /* in_equipment_socket_kettle.png in Resources */,
@@ -1703,6 +1731,7 @@
 				A2B936BB1FEFFB86003F2C52 /* in_equipment_lamp_walllamp.png in Resources */,
 				5718A78520458C8800D462A0 /* 引导页.jpg in Resources */,
 				A2B936881FEFFB86003F2C52 /* in_camera_select_nightvision.png in Resources */,
+				5718A7922046DCA300D462A0 /* 84x84.png in Resources */,
 				57AB46B82025D6FB009FA671 /* SceneTableViewCell.xib in Resources */,
 				A2B9364F1FEFFB86003F2C52 /* in_scene_gohome.png in Resources */,
 				A2B9361F1FEFFB86003F2C52 /* in_select_sensor_temperature.png in Resources */,
@@ -1723,6 +1752,7 @@
 				A2B9360C1FEFFB86003F2C52 /* in_setup_personal.png in Resources */,
 				A2B9368B1FEFFB86003F2C52 /* in_camera_equipment_indoor.png in Resources */,
 				A2B936871FEFFB86003F2C52 /* in_camera_img.jpg in Resources */,
+				5718A7902046DCA300D462A0 /* 40x40.png in Resources */,
 				A2B936681FEFFB86003F2C52 /* in_curtain_control_drape.png in Resources */,
 				A2B936651FEFFB86003F2C52 /* in_curtain_control_screenwindow.png in Resources */,
 				A2B935F71FEFFB86003F2C52 /* in_telecontro_list_settopbox.png in Resources */,
@@ -1766,6 +1796,7 @@
 				A2B936071FEFFB86003F2C52 /* in_telecontrol_control_networkbox.png in Resources */,
 				A2B9363C1FEFFB86003F2C52 /* in_bottom_menu_star.png in Resources */,
 				A2B936AD1FEFFB86003F2C52 /* in_select_lamp_chandelier.png in Resources */,
+				5718A78E2046DCA300D462A0 /* 29x29.png in Resources */,
 				A2B9365F1FEFFB86003F2C52 /* in_equipment_curtain_default.png in Resources */,
 				A2B936A01FEFFB86003F2C52 /* in_device_list_switch3.png in Resources */,
 				A2B936271FEFFB86003F2C52 /* in_select_sensor_humidity.png in Resources */,
@@ -1791,6 +1822,7 @@
 				A2B935F51FEFFB86003F2C52 /* in_telecontro_list_networkbox.png in Resources */,
 				A2B936A41FEFFB86003F2C52 /* in_common_more_share.png in Resources */,
 				A2B936721FEFFB86003F2C52 /* in_select_socket_fan.png in Resources */,
+				5718A7912046DCA300D462A0 /* 76x76.png in Resources */,
 				A2B936451FEFFB86003F2C52 /* in_scene_closesafety.png in Resources */,
 				A2B935F91FEFFB86003F2C52 /* in_equipment_telecontrol_tv.png in Resources */,
 				A2B936821FEFFB86003F2C52 /* in_login_btn.png in Resources */,

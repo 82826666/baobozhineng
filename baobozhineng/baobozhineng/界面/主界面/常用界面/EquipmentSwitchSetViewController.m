@@ -238,24 +238,7 @@
         [set setObject:[CommonCode subStr:lable.text str:@"-"] forKey:@"button-name"];
         
         NSMutableDictionary *open = [NSMutableDictionary new];
-        NSString *devid = @"";
-        [[APIManager sharedManager] deviceAddOnewayDeviceWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
-            //        NSLog(@"%@",params);
-            //请求数据成功
-            NSDictionary *datadic = data;
-            if ([[datadic objectForKey:@"code"] intValue] != 200) {
-                //请求失败
-                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
-            }
-            else{
-                //请求成功
-                [[AlertManager alertManager] showSuccess:3.0 string:[datadic objectForKey:@"msg"]];
-            }
-            
-        } failure:^(NSError *error) {
-            [[AlertManager alertManager] showError:3.0 string:@"请求失败"];
-        }];
-//        [NSString stringWithFormat:@"%@-%@",GET_USERDEFAULT(MASTER_ID),[CommonCode getCurrentTimeRubbing]];
+        NSString *devid = [NSString stringWithFormat:@"%@-%@",GET_USERDEFAULT(MASTER_ID),[CommonCode getCurrentTimeRubbing]];
         [open setObject:[NSString stringWithFormat:@"%@-1",devid] forKey:@"devid"];
         [open setObject:@"1" forKey:@"flag"];
         

@@ -84,6 +84,7 @@
         
         button1.frame = CGRectMake(4*i + 28*i + 40, 20, 28, 45);
         button1.tag = i;
+        button1.accessibilityIdentifier = [NSString stringWithFormat:@"%@",[dic objectForKey:[NSString stringWithFormat:@"%d",i]]];
 //        button1.backgroundColor = [UIColor yellowColor];
         button1.titleLabel.font = [UIFont systemFontOfSize:15];
         [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -115,7 +116,7 @@
     KMDatePicker *datePicker = [[KMDatePicker alloc]
                                 initWithFrame:rect
                                 delegate:self
-                                datePickerStyle:KMDatePickerStyleHourMinute];
+                            datePickerStyle:KMDatePickerStyleHourMinute];
     _start_Time.inputView = datePicker;
     _start_Time.delegate = self;
     
