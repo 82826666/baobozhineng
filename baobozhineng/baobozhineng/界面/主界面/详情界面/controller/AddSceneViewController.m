@@ -7,6 +7,7 @@
 //
 
 #import "AddSceneViewController.h"
+#import "DetailViewController.h"
 #import "TextfieldAlertViewController.h"
 #import "CommonAdd.h"
 #import "SwitchIconSelectViewController.h"
@@ -15,6 +16,7 @@
 @interface AddSceneViewController ()<UITableViewDataSource,UITableViewDelegate,CommonAddDelegate>{
     
 }
+@property(nonatomic, strong) NSMutableArray* condition;
 @property(nonatomic, strong) NSMutableArray* dataSouce;
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UILabel *buttonLable;
@@ -29,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNav];
-    [self initDataSouce];
+//    [self initDataSouce];
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
 }
@@ -49,7 +51,36 @@
     self.navigationController.navigationBar.tintColor = TINTCOLOR;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];//设置标题颜色及字体大小
     self.navigationItem.leftBarButtonItem = leftBtn;
-    //    self.navigationItem.rightBarButtonItem = rightBtn;
+    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(save)];
+    self.navigationItem.rightBarButtonItem = rightBtn;
+}
+- (void) save{
+    NSDictionary *con = @{
+                             @"cmd":@"add",
+                             @"type":@"31011",
+                             @"devid":@"1",
+                             @"sta":@"1",
+                             @"if":_condition,
+                             @"then":_condition
+                             };
+    NSDictionary *params = @{
+                             @"master_id":@"6",
+                             @"name":@"test",
+                             @"icon":@"",
+                             @"condition":con,
+                             @"action":con,
+                             @"message":@"test",
+                             @"is_push":@"1",
+                             @"enable":@"1"
+                             };
+    NSLog(@"params:%@",params);
+    [[APIManager sharedManager]deviceAddSceneWithParameters:params success:^(id data) {
+        NSLog(@"ns:%@",data);
+        DetailViewController *controller = [[DetailViewController alloc]init];
+        [self.navigationController pushViewController:controller animated:YES];
+    } failure:^(NSError *error) {
+        NSLog(@"saf:%@",error);
+    }];
 }
 - (void)initDataSouce{
     NSDictionary *one = @{@"img":@"in_scene_default.png",@"title":@"定时开",@"condition":@"条件：定时",@"execute":@"执行大雨"};
@@ -64,8 +95,10 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 2) {
         return 1;
+    }else if (section == 1){
+        return _secene.count > 0 ? _secene.count : 0;
     }
-    return _dataSouce.count;
+    return _condition.count > 0 ? _condition.count : 0;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
@@ -85,15 +118,16 @@
         cell.backgroundColor = self.backColor;
     }
     
-    //3.设置单元格对象的内容
     
-    //设置图像
-    [cell.imageView setImage:[UIImage imageNamed:@"in_scene_default.png"]];
-    
-    //设置字体颜色
-    cell.textLabel.textColor = [UIColor orangeColor];
-    cell.detailTextLabel.textColor = [UIColor blueColor];
     if (indexPath.section == 2) {
+        //3.设置单元格对象的内容
+        
+        //设置图像
+        [cell.imageView setImage:[UIImage imageNamed:@"in_scene_default.png"]];
+        
+        //设置字体颜色
+        cell.textLabel.textColor = [UIColor orangeColor];
+        cell.detailTextLabel.textColor = [UIColor blueColor];
         //设置主标题
         cell.textLabel.text = @"向手机发送通知消息";
         //设置副标题
@@ -102,10 +136,27 @@
         _swt = [[UISwitch alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 71, 10, 51, 31)];
         [cell.contentView addSubview:_swt];
     }else{
-        //设置主标题
-        cell.textLabel.text = @"butt";
-        //设置副标题
-        cell.detailTextLabel.text = @"sub";
+        
+        
+        NSDictionary *dic = [_condition objectAtIndex:indexPath.row];
+        NSInteger type = [[dic objectForKey:@"type"] integerValue];
+        if (type == 33111) {
+            //3.设置单元格对象的内容
+            //设置图像
+            [cell.imageView setImage:[UIImage imageNamed:@"in_scene_default"]];
+            NSArray *arr = [dic objectForKey:@"value"];
+            NSDictionary *one = [arr objectAtIndex:0];
+            NSDictionary *two = [arr objectAtIndex:1];
+            //设置主标题
+            cell.textLabel.text = [NSString stringWithFormat:@"开始%@:%@ 结束%@:%@",[one objectForKey:@"h"],[one objectForKey:@"mi"],[two objectForKey:@"h"],[two objectForKey:@"mi"]];
+            //设置副标题
+            cell.detailTextLabel.text = @"星期";
+        }
+        
+        //设置字体颜色
+        cell.textLabel.textColor = [UIColor orangeColor];
+        cell.detailTextLabel.textColor = [UIColor blueColor];
+        
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
     }
     [cell setSeparatorInset:UIEdgeInsetsZero];
@@ -256,6 +307,13 @@
         _backColor = [UIColor colorWithRed:233/255.0 green:241/255.0 blue:245/255.0 alpha:1];
     }
     return _backColor;
+}
+-(void)setDic:(NSDictionary *)dic{
+    if (_condition == nil) {
+        _condition = [[NSMutableArray alloc]init];
+    }
+    [_condition addObject:dic];
+    [_tableView reloadData];
 }
 /*
 #pragma mark - Navigation

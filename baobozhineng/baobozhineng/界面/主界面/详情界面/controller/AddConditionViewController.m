@@ -7,6 +7,7 @@
 //
 
 #import "AddConditionViewController.h"
+#import "AddSceneViewController.h"
 #import "KMDatePicker.h"
 #import "DateHelper.h"
 #import "NSDate+CalculateDay.h"
@@ -26,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self layoutSubviews];
+    [self initNav];
     [self layoutUI];
     // Do any additional setup after loading the view.
 }
@@ -35,6 +37,33 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) initNav{
+    
+    //    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"消息" style:UIBarButtonItemStyleDone target: self action:@selector(message)];
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"in_arrow_white"] style:UIBarButtonItemStyleDone target:self action:@selector(goBack)];
+    //    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStyleDone target:self action:@selector(add)];
+    self.navigationItem.title = @"情景触发记录";
+    self.navigationController.navigationBar.barTintColor = BARTINTCOLOR;
+    self.navigationController.navigationBar.tintColor = TINTCOLOR;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];//设置标题颜色及字体大小
+    self.navigationItem.leftBarButtonItem = leftBtn;
+    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(save)];
+    self.navigationItem.rightBarButtonItem = rightBtn;
+}
+- (void) save{
+    AddSceneViewController *controller = [[AddSceneViewController alloc]init];
+    NSArray *startTime = [_start_Time.text componentsSeparatedByString:@":"];
+    NSArray *endTime = [_end_Time.text componentsSeparatedByString:@":"];
+    NSDictionary *dic = @{@"type":@"33111",@"value":@[
+                                  @{@"w":@"1",@"h":[startTime objectAtIndex:0],@"mi":[startTime objectAtIndex:1]},          @{@"w":@"0",@"h":[endTime objectAtIndex:0],@"mi":[startTime objectAtIndex:1]},
+                                  ]};
+    [controller setDic:dic];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+#pragma mark 返回
+- (void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)layoutSubviews{
     self.view.backgroundColor = [UIColor whiteColor];
     CGFloat width = SCREEN_WIDTH;

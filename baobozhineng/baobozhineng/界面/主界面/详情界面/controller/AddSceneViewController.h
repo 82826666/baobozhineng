@@ -8,6 +8,7 @@
 
 #import "ParentViewController.h"
 #import "RecodeViewController.h"
-//#import <Masonry.h>
 @interface AddSceneViewController : ParentViewController
+@property(nonatomic, strong) NSDictionary* dic;
+@property(nonatomic, strong) NSMutableArray* secene;
 @end

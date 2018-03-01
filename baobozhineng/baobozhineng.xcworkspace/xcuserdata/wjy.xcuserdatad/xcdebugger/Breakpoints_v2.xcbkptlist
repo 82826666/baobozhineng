@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5e38;&#x7528;&#x754c;&#x9762;/EquipmentSwitchSetViewController.m"
-            timestampString = "541515046.404379"
+            timestampString = "541522010.1849459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "180"
@@ -73,7 +73,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5e38;&#x7528;&#x754c;&#x9762;/EquipmentSwitchSetViewController.m"
-            timestampString = "541515046.404603"
+            timestampString = "541522010.185292"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
@@ -96,16 +96,6 @@
             endingLineNumber = "15"
             landmarkName = "fieldPopview"
             landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
