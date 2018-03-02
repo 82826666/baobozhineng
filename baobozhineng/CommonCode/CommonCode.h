@@ -411,11 +411,13 @@
 
 + (void)showAlertByTitle:(NSString *)title Message:(NSString*)message Block:(void (^)())block Controller:(UIViewController *)controller;
 /**
- *  @param str 要格式化的数据
+ *  @param datas 要格式化的数据
  *
  *  @return json字符串
  */
 +(NSString*)formatToJson:(id)datas;
+
++ (NSArray *)stringToJSON:(NSString *)jsonStr;
 /**
  *  @param tmpStr 要截取的字符串
  *  @param str 要截取到那个字符串

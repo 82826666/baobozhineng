@@ -7,6 +7,7 @@
 //
 
 #import "SelectTaskDeviceViewController.h"
+#import "AddSceneViewController.h"
 #import "UIButton+CenterImageAndTitle.h"
 #define kCell_Height 44
 #define BTN_WIDTH 50
@@ -17,6 +18,7 @@
     NSMutableArray      *stateArray;
 }
 @property (nonatomic, strong) UITableView         *tableView;
+@property (nonatomic, strong) NSMutableArray *cacheArr;
 
 @end
 
@@ -24,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initDataSource];
+//    [self initDataSource];
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
 }
@@ -154,15 +156,19 @@
     NSArray *imgArray = [dataSource objectAtIndex:indexPath.section];
     for ( int i = 0; i<imgArray.count; i++) {
         NSDictionary *dic = [imgArray objectAtIndex:i];
+        NSArray *setting = [CommonCode stringToJSON:[dic objectForKey:@"setting"]];
+        
+        NSDictionary *but = [setting objectAtIndex:0];
+        
         UIButton *btn ;
         //创建按钮
-        btn = [self createButton:CGRectMake((left_jiange+BTN_WIDTH)*(i%cellcount)+left_jiange, i/cellcount*(top_jiange+BTN_WIDTH+4)+top_jiange/2, BTN_WIDTH, BTN_WIDTH) Img:[UIImage imageNamed:[dic objectForKey:@"img"]]];
-        btn.tag = i+1;
+        btn = [self createButton:CGRectMake((left_jiange+BTN_WIDTH)*(i%cellcount)+left_jiange, i/cellcount*(top_jiange+BTN_WIDTH+4)+top_jiange/2, BTN_WIDTH, BTN_WIDTH) Img:[UIImage imageNamed:[but objectForKey:@"button-icon"]]];
+        btn.tag = [[dic objectForKey:@"id"] integerValue];
         //按钮的响应事件，通过tag来判断是那个按钮
         [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
-        UILabel *label = [self createLabel:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame), btn.frame.size.width, labelHeight) title:[dic objectForKey:@"title"]];
+        UILabel *label = [self createLabel:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame), btn.frame.size.width, labelHeight) title:[dic objectForKey:@"name"]];
         label.textColor = RGBA(88, 88, 88, 1.0);
         label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont systemFontOfSize:10];
@@ -261,13 +267,82 @@
 - (void)btnAction:(UIButton *)btn
 {
     int tag =(int)btn.tag;
+//    NSLog(@"cachearr:%@",_cacheArr);
+    for (int i = 0; i < _cacheArr.count; i++) {
+        NSDictionary *dic = [_cacheArr objectAtIndex:i];
+        NSInteger ids = [[dic objectForKey:@"id"] integerValue];
+//        NSLog(@"ids:%ld,cout:%ld",ids,_cacheArr.count);
+        if (ids == btn.tag) {
+            NSArray *setting = [CommonCode stringToJSON:[dic objectForKey:@"setting"]];
+            NSDictionary *but = [setting objectAtIndex:0];
+            NSDictionary *device = @{
+                                  @"type":[dic objectForKey:@"type"],
+                                  @"button-icon":[but objectForKey:@"button-icon"],
+                                  @"button-name":[but objectForKey:@"button-name"],
+                                  @"devid":[[but objectForKey:@"open"] objectForKey:@"devid"],
+                                  @"status":@"开"
+                                  };
+            NSLog(@"device:%@",device);
+            AddSceneViewController *controller = [[AddSceneViewController alloc]init];
+            [controller setThenDic:device];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
     NSLog(@"tag:%d",tag);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [self loadData];
+}
+-(void)loadData{
+    if (_cacheArr == nil) {
+        _cacheArr = [NSMutableArray new];
+    }
+    [[APIManager sharedManager]deviceGetDeviceInfoWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+        NSDictionary *dic = data;
+        if (!sectionArray) {
+            sectionArray  = [NSMutableArray arrayWithObjects:@"客厅",
+                             @"餐厅",
+                             @"主卧",
+                             @"次卧",nil];
+        }
+        
+        if([dic objectForKey:@"data"]){
+            NSArray *arr = [dic objectForKey:@"data"];
+            NSMutableArray *one = [NSMutableArray new];
+            for (int i = 0; i < arr.count; i++) {
+                NSDictionary *dic = [arr objectAtIndex:i];
+                NSInteger type = [[dic objectForKey:@"type"] integerValue];
+                NSInteger ids = [[dic objectForKey:@"id"] integerValue];
+                if (type == 10111 && ids > 23) {
+                    [one addObject:dic];
+                    [_cacheArr addObject:dic];
+                }
+            }
+            
+            if (!dataSource && one.count > 0) {
+                dataSource = [NSMutableArray arrayWithObjects:one, nil];
+                NSLog(@"one:%@",dataSource);
+            }
+            if (!stateArray) {
+                stateArray = [NSMutableArray array];
+                
+                for (int i = 0; i < dataSource.count; i++)
+                {
+                    //所有的分区都是闭合
+                    [stateArray addObject:@"0"];
+                }
+            }
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"error:%@",error);
+    }];
+}
 /*
 #pragma mark - Navigation
 

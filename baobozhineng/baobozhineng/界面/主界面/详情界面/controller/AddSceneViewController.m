@@ -16,7 +16,8 @@
 @interface AddSceneViewController ()<UITableViewDataSource,UITableViewDelegate,CommonAddDelegate>{
     
 }
-@property(nonatomic, strong) NSMutableArray* condition;
+@property(nonatomic, strong) NSMutableArray* ifArr;
+@property(nonatomic, strong) NSMutableArray *thenArr;
 @property(nonatomic, strong) NSMutableArray* dataSouce;
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UILabel *buttonLable;
@@ -55,20 +56,12 @@
     self.navigationItem.rightBarButtonItem = rightBtn;
 }
 - (void) save{
-    NSDictionary *con = @{
-                             @"cmd":@"add",
-                             @"type":@"31011",
-                             @"devid":@"1",
-                             @"sta":@"1",
-                             @"if":_condition,
-                             @"then":_condition
-                             };
     NSDictionary *params = @{
                              @"master_id":@"6",
                              @"name":@"test",
-                             @"icon":@"",
-                             @"condition":con,
-                             @"action":con,
+                             @"icon":@"in_scene_default.png",
+                             @"condition":[CommonCode formatToJson:_ifArr],
+                             @"action":[CommonCode formatToJson:_thenArr],
                              @"message":@"test",
                              @"is_push":@"1",
                              @"enable":@"1"
@@ -76,8 +69,14 @@
     NSLog(@"params:%@",params);
     [[APIManager sharedManager]deviceAddSceneWithParameters:params success:^(id data) {
         NSLog(@"ns:%@",data);
-        DetailViewController *controller = [[DetailViewController alloc]init];
-        [self.navigationController pushViewController:controller animated:YES];
+        NSDictionary *dic = data;
+        NSInteger code = [[dic objectForKey:@"code"] integerValue];
+        if (code == 0) {
+            NSLog(@"msg:%@",[data objectForKey:@"msg"]);
+        }else{
+            DetailViewController *controller = [[DetailViewController alloc]init];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
     } failure:^(NSError *error) {
         NSLog(@"saf:%@",error);
     }];
@@ -96,9 +95,9 @@
     if (section == 2) {
         return 1;
     }else if (section == 1){
-        return _secene.count > 0 ? _secene.count : 0;
+        return _thenArr.count > 0 ? _thenArr.count : 0;
     }
-    return _condition.count > 0 ? _condition.count : 0;
+    return _ifArr.count > 0 ? _ifArr.count : 0;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
@@ -138,7 +137,7 @@
     }else{
         
         
-        NSDictionary *dic = [_condition objectAtIndex:indexPath.row];
+        NSDictionary *dic = [_ifArr objectAtIndex:indexPath.row];
         NSInteger type = [[dic objectForKey:@"type"] integerValue];
         if (type == 33111) {
             //3.设置单元格对象的内容
@@ -309,10 +308,17 @@
     return _backColor;
 }
 -(void)setDic:(NSDictionary *)dic{
-    if (_condition == nil) {
-        _condition = [[NSMutableArray alloc]init];
+    if (_ifArr == nil) {
+        _ifArr = [[NSMutableArray alloc]init];
     }
-    [_condition addObject:dic];
+    [_ifArr addObject:dic];
+    [_tableView reloadData];
+}
+-(void)setThenDic:(NSDictionary *)thenDic{
+    if (_thenArr == nil) {
+        _thenArr = [[NSMutableArray alloc]init];
+    }
+    [_thenArr addObject:thenDic];
     [_tableView reloadData];
 }
 /*

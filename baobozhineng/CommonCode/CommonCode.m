@@ -773,14 +773,46 @@
 
 /**
  * 格式化数据为json数据
- *  @param str 要格式化的数据
+ *  @param datas 要格式化的数据
  *  @return json字符串
  */
 +(NSString*)formatToJson:(id)datas{
-    NSData *data=[NSJSONSerialization dataWithJSONObject:datas options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *jsonStr=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    return jsonStr;
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:datas options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *jsonTemp = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    //    NSString *jsonResult = [jsonTemp stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return jsonTemp;
+//    NSData *data=[NSJSONSerialization dataWithJSONObject:datas options:NSJSONWritingPrettyPrinted error:nil];
+//    NSString *jsonStr=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+//    return jsonStr;
 }
++ (NSArray *)stringToJSON:(NSString *)jsonStr {
+    if (jsonStr) {
+        id tmp = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments | NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:nil];
+        
+        if (tmp) {
+            if ([tmp isKindOfClass:[NSArray class]]) {
+                
+                return tmp;
+                
+            } else if([tmp isKindOfClass:[NSString class]]
+                      || [tmp isKindOfClass:[NSDictionary class]]) {
+                
+                return [NSArray arrayWithObject:tmp];
+                
+            } else {
+                return nil;
+            }
+        } else {
+            return nil;
+        }
+        
+    } else {
+        return nil;
+    }
+}
+
 /**
  * 截取字符串
  *  @param tmpStr 要截取的字符串
