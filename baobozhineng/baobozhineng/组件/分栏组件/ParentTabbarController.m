@@ -73,7 +73,8 @@ static ParentTabbarController* tabbarController;
     if (_bottomView) {
         [_bottomView removeFromSuperview];
     }
-    TabNavViewcontroller *usualNav = [[TabNavViewcontroller alloc] initWithRootViewController:[UsualViewcontroller shareInstance]];
+//    TabNavViewcontroller *usualNav = [[TabNavViewcontroller alloc] initWithRootViewController:[UsualViewcontroller shareInstance]];
+    TabNavViewcontroller *usualNav = (TabNavViewcontroller*)[[UINavigationController alloc] initWithRootViewController:[UsualViewcontroller shareInstance]];
 //    TabNavViewcontroller *homeNav = [[TabNavViewcontroller alloc] initWithRootViewController:[HomeViewController shareInstance]];
 //    TabNavViewcontroller *homeNav = [[TabNavViewcontroller alloc] initWithRootViewController:[[HouseViewController alloc]init]];
     TabNavViewcontroller *homeNav = (TabNavViewcontroller*)[[UINavigationController alloc] initWithRootViewController:[[HouseViewController alloc]init]];

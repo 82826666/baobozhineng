@@ -40,6 +40,9 @@
 		57B37FBD20233F7300AA3603 /* HouseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B37FBB20233F7300AA3603 /* HouseTableViewCell.m */; };
 		57B37FBE20233F7300AA3603 /* HouseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57B37FBC20233F7300AA3603 /* HouseTableViewCell.xib */; };
 		57BC4843201F623A00B3A6F3 /* LearningAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BC4842201F623A00B3A6F3 /* LearningAlertViewController.m */; };
+		57EEDC54205006A3006E3899 /* CKAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC53205006A3006E3899 /* CKAlertViewController.m */; };
+		57EEDC57205008A9006E3899 /* TwoWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC56205008A8006E3899 /* TwoWayViewController.m */; };
+		57EEDC5A205010CA006E3899 /* CommontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC59205010CA006E3899 /* CommontViewController.m */; };
 		6547407F1FFC99CA007F1173 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6547407E1FFC99CA007F1173 /* AlertManager.m */; };
 		65D356BE1FFD0D8A00447213 /* GCDAsyncSocket.h in Sources */ = {isa = PBXBuildFile; fileRef = 65D356B91FFD0D4E00447213 /* GCDAsyncSocket.h */; };
 		65D356BF1FFD0D9000447213 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D356B81FFD0D4E00447213 /* GCDAsyncSocket.m */; };
@@ -389,6 +392,12 @@
 		57B37FBC20233F7300AA3603 /* HouseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseTableViewCell.xib; sourceTree = "<group>"; };
 		57BC4841201F623A00B3A6F3 /* LearningAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LearningAlertViewController.h; sourceTree = "<group>"; };
 		57BC4842201F623A00B3A6F3 /* LearningAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LearningAlertViewController.m; sourceTree = "<group>"; };
+		57EEDC52205006A3006E3899 /* CKAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKAlertViewController.h; sourceTree = "<group>"; };
+		57EEDC53205006A3006E3899 /* CKAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKAlertViewController.m; sourceTree = "<group>"; };
+		57EEDC55205008A8006E3899 /* TwoWayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwoWayViewController.h; sourceTree = "<group>"; };
+		57EEDC56205008A8006E3899 /* TwoWayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwoWayViewController.m; sourceTree = "<group>"; };
+		57EEDC58205010CA006E3899 /* CommontViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommontViewController.h; sourceTree = "<group>"; };
+		57EEDC59205010CA006E3899 /* CommontViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommontViewController.m; sourceTree = "<group>"; };
 		6547407D1FFC99CA007F1173 /* AlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertManager.h; sourceTree = "<group>"; };
 		6547407E1FFC99CA007F1173 /* AlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertManager.m; sourceTree = "<group>"; };
 		65D356B81FFD0D4E00447213 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
@@ -874,6 +883,10 @@
 				A2C3502F1FF5CBC800D3566B /* EquipmentSwitchSetViewController.m */,
 				A2C353371FFDBFE000D3566B /* SensorViewController.h */,
 				A2C353381FFDBFE000D3566B /* SensorViewController.m */,
+				57EEDC55205008A8006E3899 /* TwoWayViewController.h */,
+				57EEDC56205008A8006E3899 /* TwoWayViewController.m */,
+				57EEDC58205010CA006E3899 /* CommontViewController.h */,
+				57EEDC59205010CA006E3899 /* CommontViewController.m */,
 			);
 			path = "常用界面";
 			sourceTree = "<group>";
@@ -1419,6 +1432,8 @@
 				A2C350961FFCA7D200D3566B /* TextFieldAlertViewController.m */,
 				57BC4841201F623A00B3A6F3 /* LearningAlertViewController.h */,
 				57BC4842201F623A00B3A6F3 /* LearningAlertViewController.m */,
+				57EEDC52205006A3006E3899 /* CKAlertViewController.h */,
+				57EEDC53205006A3006E3899 /* CKAlertViewController.m */,
 			);
 			path = "弹出框";
 			sourceTree = "<group>";
@@ -1942,6 +1957,7 @@
 				5718A75820443F8E00D462A0 /* TaskViewController.m in Sources */,
 				A2B934B31FEFC225003F2C52 /* main.m in Sources */,
 				A24D70311FF45CF100B00878 /* SelectAlert.m in Sources */,
+				57EEDC54205006A3006E3899 /* CKAlertViewController.m in Sources */,
 				A2C350811FF72DA900D3566B /* SwitchIconSelectViewController.m in Sources */,
 				A2B934E81FEFC858003F2C52 /* CustomErImgView.m in Sources */,
 				57AB46B72025D6FB009FA671 /* SceneTableViewCell.m in Sources */,
@@ -1965,12 +1981,14 @@
 				57B37FBD20233F7300AA3603 /* HouseTableViewCell.m in Sources */,
 				57B37FB9202338AB00AA3603 /* HouseViewController.m in Sources */,
 				A2890E441FF0966A00FCBFD6 /* PopAnimation.m in Sources */,
+				57EEDC57205008A9006E3899 /* TwoWayViewController.m in Sources */,
 				A2B936D01FF01289003F2C52 /* ParentViewController.m in Sources */,
 				57A928A32040F7C10053660A /* AddConditionViewController.m in Sources */,
 				A2C6BB611FF1F67E00D56C92 /* TabNavViewcontroller.m in Sources */,
 				A2B935051FEFFA3C003F2C52 /* LoginViewController.m in Sources */,
 				A2B934DD1FEFC300003F2C52 /* APIManager.m in Sources */,
 				A2C6BB6A1FF200F100D56C92 /* UsualViewcontroller.m in Sources */,
+				57EEDC5A205010CA006E3899 /* CommontViewController.m in Sources */,
 				A2C350331FF5EE3000D3566B /* RadioView.m in Sources */,
 				57AB46BE2026C757009FA671 /* RecodeViewController.m in Sources */,
 				A2C3502A1FF4E1AB00D3566B /* SelectHomeWIFIViewController.m in Sources */,

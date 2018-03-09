@@ -292,8 +292,8 @@
     if (self.selectValue) {
         self.selectValue(_titles[indexPath.row]);
     }
-    
-    [self closeAction];
+    [self removeFromSuperview];
+//    [self closeAction];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

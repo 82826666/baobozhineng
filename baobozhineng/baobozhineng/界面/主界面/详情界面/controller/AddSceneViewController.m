@@ -60,7 +60,7 @@
                              @"master_id":@"6",
                              @"name":@"test",
                              @"icon":@"in_scene_default.png",
-                             @"condition":[CommonCode formatToJson:_ifArr],
+                             @"condition":[CommonCode formatToJson:_thenArr],
                              @"action":[CommonCode formatToJson:_thenArr],
                              @"message":@"test",
                              @"is_push":@"1",
@@ -134,6 +134,18 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         _swt = [[UISwitch alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 71, 10, 51, 31)];
         [cell.contentView addSubview:_swt];
+    }else if(indexPath.section == 1){
+        NSDictionary *dic = [_thenArr objectAtIndex:indexPath.row];
+        NSInteger type = [[dic objectForKey:@"type"] integerValue];
+        if (type == 10111) {
+            //3.设置单元格对象的内容
+            //设置图像
+            [cell.imageView setImage:[UIImage imageNamed:[dic objectForKey:@"button-icon"]]];
+            //设置主标题
+            cell.textLabel.text = [dic objectForKey:@"button-name"];
+            //设置副标题
+            cell.detailTextLabel.text = [dic objectForKey:@"status"];
+        }
     }else{
         
         
@@ -319,6 +331,7 @@
         _thenArr = [[NSMutableArray alloc]init];
     }
     [_thenArr addObject:thenDic];
+    NSLog(@"thenarr:%@",_thenArr);
     [_tableView reloadData];
 }
 /*

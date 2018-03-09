@@ -14,6 +14,8 @@
 #import "TablePopViewController.h"
 #import "GCDAsyncUdpSocket.h"
 #import "MJExtension.h"
+#import "CKAlertViewController.h"
+#import "TwoWayViewController.h"
 // 引入JPush功能所需头文件 start
 #import "JPUSHService.h"
 // iOS10注册APNs所需头文件
@@ -68,14 +70,11 @@ static NSInteger seq = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"sdaf%@",GET_USERDEFAULT(MASTER_ID));
-    NSLog(@"sdaf%@",GET_USERDEFAULT(USER_TOKEN));
-//    NSLog(@"%@",GET_USERDEFAULT(USER_TOKEN));
+    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     // Do any additional setup after loading the view.
 
     _moreEquipmentTitleArray = [NSMutableArray arrayWithArray:@[@"分享",@"添加主机",@"添加设备"]];
     _moreEquipmentImgArray = [NSMutableArray arrayWithArray:@[@"in_common_more_share.png",@"in_common_more_add.png",@"in_common_more_equipment.png"]];
-    _hostsArray = [NSMutableArray arrayWithArray:@[@"主机909087",@"主机890987"]];
     UITapGestureRecognizer *hostLabGestuer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(currentHostAction:)];
     [_currentHostLabel addGestureRecognizer:hostLabGestuer];
     
@@ -182,6 +181,20 @@ static NSInteger seq = 0;
 - (IBAction)currentHostAction:(id)sender {
     
     [SelectAlert showWithTitle:@"切换当前主机" titles:_hostsArray TitleLabColor:RGBA(0,228,255,1.0) RightImg:[UIImage imageNamed:@"in_arrow_right"] BottomBtnTitle:@"添加新主机" CellHeight:50 selectIndex:^(NSInteger selectIndex) {
+        NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID)};
+        [[APIManager sharedManager]deviceSwapMasterWithParameters:params success:^(id data) {
+            NSDictionary *datadic = data;
+            if([[datadic objectForKey:@"code"] intValue] == 200){
+                NSArray *master = GET_USERDEFAULT(MASTER);
+                NSDictionary *dic = [master objectAtIndex:selectIndex];
+                SET_USERDEFAULT(MASTER_ID, [dic objectForKey:@"master_id"]);
+                _currentHostLabel.text = [dic objectForKey:@"master_name"];
+            }else{
+                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            }
+        } failure:^(NSError *error) {
+            [[AlertManager alertManager] showError:3.0 string:@"服务器错误"];
+        }];
         //切换主机
     } selectValue:^(NSString *selectValue) {
         //不做操作
@@ -197,8 +210,6 @@ static NSInteger seq = 0;
     UIButton *btn = (UIButton *)sender;
     //获取按钮相对于self.view的相对位置
     CGRect btnRectInwindow = [btn.superview convertRect:btn.frame toView:self.view];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    
     [JMDropMenu showDropMenuFrame:CGRectMake(self.view.frame.size.width - 128, btnRectInwindow.origin.y+btnRectInwindow.size.height, 120, 128) ArrowOffset:90.f TitleArr:_moreEquipmentTitleArray ImageArr:_moreEquipmentImgArray Type:JMDropMenuTypeQQ LayoutType:JMDropMenuLayoutTypeNormal RowHeight:40.f Delegate:self];
 }
 //设备下拉菜单选择代理
@@ -214,8 +225,52 @@ static NSInteger seq = 0;
         [self.navigationController pushViewController:wificonfig animated:YES];
     }
     else if(index ==2){
-         //添加设备
-        [self.navigationController pushViewController:[SelectEquipmentViewController shareInstance] animated:YES];
+        CKAlertViewController *alertVC = [CKAlertViewController alertControllerWithTitle:@"系统更新" message:@"" ];
+        
+        CKAlertAction *cancel = [CKAlertAction actionWithTitle:@"智能搜索" handler:^(CKAlertAction *action) {
+            [self.navigationController pushViewController:[[TwoWayViewController alloc]init] animated:YES];
+        }];
+        
+        CKAlertAction *updateNow = [CKAlertAction actionWithTitle:@"RF添加" handler:^(CKAlertAction *action) {
+            //添加设备
+            [self.navigationController pushViewController:[SelectEquipmentViewController shareInstance] animated:YES];
+//            NSLog(@"点击了 %@ 按钮",action.title);
+        }];
+        
+        CKAlertAction *updateLater = [CKAlertAction actionWithTitle:@"WIFI搜索" handler:^(CKAlertAction *action) {
+            [self.navigationController pushViewController:[WifiConfigViewController shareInstance] animated:YES];
+//            NSLog(@"点击了 %@ 按钮",action.title);
+        }];
+        
+        [alertVC addAction:cancel];
+        [alertVC addAction:updateNow];
+        [alertVC addAction:updateLater];
+        
+        [self presentViewController:alertVC animated:NO completion:nil];
+        
     }
+}
+-(void)viewWillAppear:(BOOL)animated{
+    NSMutableArray *master = GET_USERDEFAULT(MASTER);
+    if (master != nil) {
+        for (int i = 0; i < master.count; i++) {
+            NSDictionary *dic = master[i];
+            if ([[dic objectForKey:@"master_id"] integerValue] == [GET_USERDEFAULT(MASTER_ID) integerValue]) {
+                _currentHostLabel.text = [dic objectForKey:@"master_name"];
+            }
+            [self.hostsArray addObject:[dic objectForKey:@"master_name"]];
+//            _hostsArray = [NSMutableArray arrayWithArray:@[[dic objectForKey:@"master_name"]];
+        }
+    }
+    self.navigationController.navigationBar.hidden = YES;
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = NO;
+}
+-(NSMutableArray*)hostsArray{
+    if (_hostsArray == nil) {
+        _hostsArray = [NSMutableArray new];
+    }
+    return _hostsArray;
 }
 @end

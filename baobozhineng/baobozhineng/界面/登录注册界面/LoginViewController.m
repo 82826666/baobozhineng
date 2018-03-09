@@ -84,7 +84,7 @@
             SET_USERDEFAULT(LOGIN_PHONE, phoneStr);
             SET_USERDEFAULT(USER_INFO, user_info);
             SET_USERDEFAULT(MASTER_ID, master_id);
-            SET_USERDEFAULT(MASTER, master);
+            SET_USERDEFAULT(MASTER, mas);
             USERDEFAULT_SYN();
             //从哪里到哪里去
             [self.navigationController popViewControllerAnimated:YES];
