@@ -12,7 +12,35 @@
 #import <AVFoundation/AVFoundation.h>
 
 @implementation CommonCode
-
+//获取对应编号的图片名称
++ (NSString*)getImageName:(NSInteger)index{
+    switch (index) {
+        case 20111:
+            return @"in_equipment_switch_one";
+            break;
+        case 20121:
+            return @"in_equipment_switch_two";
+            break;
+        case 20131:
+            return @"in_equipment_switch_three";
+            break;
+        case 20141:
+            return @"in_equipment_switch_four";
+            break;
+        default:
+            break;
+    }
+    return @"";
+}
+//获取对应图片的编号
++ (NSString*)getImageType:(NSString*)imageName{
+    if ([imageName isEqualToString:@"in_equipment_switch_one"]) {
+        return @"20111";
+    }else if ([imageName isEqualToString:@"in_equipment_switch_two"]){
+        return @"20121";
+    }
+    return @"";
+}
 /**
  *  获取当前系统版本
  *  如果直接调用读取系统的方法， 可能出现一些问题

@@ -56,15 +56,23 @@
     self.navigationItem.rightBarButtonItem = rightBtn;
 }
 - (void) save{
+    NSMutableArray *condition = [NSMutableArray new];
+    NSMutableArray *devceid = [NSMutableArray new];
+    for (int i = 0; i < _thenArr.count; i++) {
+        NSDictionary *dic = _thenArr[i];
+        [condition addObject:@{@"type":[dic objectForKey:@"type"],@"devid":[dic objectForKey:@"devid"],@"sta":@"0"}];
+        [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"devid":[dic objectForKey:@"devid"]}];
+    }
     NSDictionary *params = @{
-                             @"master_id":@"6",
+                             @"master_id":GET_USERDEFAULT(MASTER_ID),
                              @"name":@"test",
-                             @"icon":@"in_scene_default.png",
-                             @"condition":[CommonCode formatToJson:_thenArr],
-                             @"action":[CommonCode formatToJson:_thenArr],
+                             @"icon":@"20111",
+                             @"condition":[CommonCode formatToJson:condition],
+                             @"action":[CommonCode formatToJson:condition],
                              @"message":@"test",
                              @"is_push":@"1",
-                             @"enable":@"1"
+                             @"enable":@"1",
+                             @"scene_devices":[CommonCode formatToJson:devceid]
                              };
     NSLog(@"params:%@",params);
     [[APIManager sharedManager]deviceAddSceneWithParameters:params success:^(id data) {
@@ -137,15 +145,11 @@
     }else if(indexPath.section == 1){
         NSDictionary *dic = [_thenArr objectAtIndex:indexPath.row];
         NSInteger type = [[dic objectForKey:@"type"] integerValue];
-        if (type == 10111) {
-            //3.设置单元格对象的内容
-            //设置图像
-            [cell.imageView setImage:[UIImage imageNamed:[dic objectForKey:@"button-icon"]]];
-            //设置主标题
-            cell.textLabel.text = [dic objectForKey:@"button-name"];
-            //设置副标题
-            cell.detailTextLabel.text = [dic objectForKey:@"status"];
-        }
+        [cell.imageView setImage:[UIImage imageNamed:[CommonCode getImageName:type]]];
+        //设置主标题
+        cell.textLabel.text = [dic objectForKey:@"name"];
+        //设置副标题
+        cell.detailTextLabel.text = [dic objectForKey:@"name"];
     }else{
         
         

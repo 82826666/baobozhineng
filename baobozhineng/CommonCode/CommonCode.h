@@ -223,6 +223,10 @@
 
 
 @interface CommonCode : NSObject
+//获取对应编号的图片名称
++ (NSString*)getImageName:(NSInteger)index;
+//获取对应图片的编号
++ (NSString*)getImageType:(NSString*)imageName;
 
 /**
  *  @brief 获取当前系统版本

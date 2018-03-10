@@ -179,22 +179,26 @@ static NSInteger seq = 0;
     return VIEW_SHAREINSRANCE(MAINSTORYBOARD, USUALVIEWCONTROLLER);
 }
 - (IBAction)currentHostAction:(id)sender {
-    
+
     [SelectAlert showWithTitle:@"切换当前主机" titles:_hostsArray TitleLabColor:RGBA(0,228,255,1.0) RightImg:[UIImage imageNamed:@"in_arrow_right"] BottomBtnTitle:@"添加新主机" CellHeight:50 selectIndex:^(NSInteger selectIndex) {
         NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID)};
-        [[APIManager sharedManager]deviceSwapMasterWithParameters:params success:^(id data) {
-            NSDictionary *datadic = data;
-            if([[datadic objectForKey:@"code"] intValue] == 200){
-                NSArray *master = GET_USERDEFAULT(MASTER);
-                NSDictionary *dic = [master objectAtIndex:selectIndex];
-                SET_USERDEFAULT(MASTER_ID, [dic objectForKey:@"master_id"]);
-                _currentHostLabel.text = [dic objectForKey:@"master_name"];
-            }else{
-                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
-            }
-        } failure:^(NSError *error) {
-            [[AlertManager alertManager] showError:3.0 string:@"服务器错误"];
-        }];
+//        [[APIManager sharedManager]deviceSwapMasterWithParameters:params success:^(id data) {
+//            NSDictionary *datadic = data;
+//            if([[datadic objectForKey:@"code"] intValue] == 200){
+//                NSArray *master = GET_USERDEFAULT(MASTER);
+//                NSDictionary *dic = [master objectAtIndex:selectIndex];
+//                SET_USERDEFAULT(MASTER_ID, [dic objectForKey:@"master_id"]);
+//                _currentHostLabel.text = [dic objectForKey:@"master_name"];
+//            }else{
+//                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+//            }
+//        } failure:^(NSError *error) {
+//            [[AlertManager alertManager] showError:3.0 string:@"服务器错误"];
+//        }];
+        NSArray *master = GET_USERDEFAULT(MASTER);
+        NSDictionary *dic = [master objectAtIndex:selectIndex];
+        SET_USERDEFAULT(MASTER_ID, [dic objectForKey:@"master_id"]);
+        _currentHostLabel.text = [dic objectForKey:@"master_name"];
         //切换主机
     } selectValue:^(NSString *selectValue) {
         //不做操作

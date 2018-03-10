@@ -118,6 +118,7 @@
 }
 #pragma mark 添加双向开关设备
 - (void)deviceAddTwowaySwitchWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
+    NSLog(@"params:%@",dic);
     NSString *path = [self getPathWithInterface:@"/device/device/add_twoway_switch"];
     [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
 }

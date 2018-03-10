@@ -219,7 +219,7 @@
                              @"type":@"20111",
                              @"room_id":@"1",
                              @"setting":[CommonCode formatToJson:setting],
-                             @"icon":@"in_equipment_switch_one",
+                             @"icon":[CommonCode getImageType:@"in_equipment_switch_one"],
                              @"mac":@"2343434"
                              };
     [[APIManager sharedManager]deviceAddTwowaySwitchWithParameters:params success:^(id data) {

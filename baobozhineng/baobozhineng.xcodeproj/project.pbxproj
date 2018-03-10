@@ -27,8 +27,6 @@
 		5795230A202F391F00FB2508 /* CommonAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 57952309202F391F00FB2508 /* CommonAdd.m */; };
 		57A928A02040F7340053660A /* UIButton+CenterImageAndTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A9289F2040F7340053660A /* UIButton+CenterImageAndTitle.m */; };
 		57A928A32040F7C10053660A /* AddConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A928A22040F7C10053660A /* AddConditionViewController.m */; };
-		57A928A72040FFC70053660A /* 复选框-未选中.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A928A52040FFC60053660A /* 复选框-未选中.png */; };
-		57A928A82040FFC70053660A /* 复选框.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A928A62040FFC70053660A /* 复选框.png */; };
 		57A928AD20413BE10053660A /* SelectSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A928AC20413BE10053660A /* SelectSensorViewController.m */; };
 		57AB46B72025D6FB009FA671 /* SceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AB46B52025D6FB009FA671 /* SceneTableViewCell.m */; };
 		57AB46B82025D6FB009FA671 /* SceneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57AB46B62025D6FB009FA671 /* SceneTableViewCell.xib */; };
@@ -371,8 +369,6 @@
 		57A9289F2040F7340053660A /* UIButton+CenterImageAndTitle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CenterImageAndTitle.m"; sourceTree = "<group>"; };
 		57A928A12040F7C10053660A /* AddConditionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddConditionViewController.h; sourceTree = "<group>"; };
 		57A928A22040F7C10053660A /* AddConditionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddConditionViewController.m; sourceTree = "<group>"; };
-		57A928A52040FFC60053660A /* 复选框-未选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "复选框-未选中.png"; path = "../../../../../Downloads/复选框-未选中.png"; sourceTree = "<group>"; };
-		57A928A62040FFC70053660A /* 复选框.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "复选框.png"; path = "../../../../../Downloads/复选框.png"; sourceTree = "<group>"; };
 		57A928AB20413BE10053660A /* SelectSensorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectSensorViewController.h; sourceTree = "<group>"; };
 		57A928AC20413BE10053660A /* SelectSensorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectSensorViewController.m; sourceTree = "<group>"; };
 		57AB46B42025D6FB009FA671 /* SceneTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneTableViewCell.h; sourceTree = "<group>"; };
@@ -1091,8 +1087,6 @@
 			children = (
 				5718A7862046DC7F00D462A0 /* 应用图标 */,
 				5718A78420458C8800D462A0 /* 引导页.jpg */,
-				57A928A52040FFC60053660A /* 复选框-未选中.png */,
-				57A928A62040FFC70053660A /* 复选框.png */,
 				A2B9350C1FEFFB85003F2C52 /* 遥控器图标 */,
 				A2B935251FEFFB85003F2C52 /* 我的 */,
 				A2B935321FEFFB85003F2C52 /* 调光图标 */,
@@ -1704,11 +1698,9 @@
 				A2B9362D1FEFFB86003F2C52 /* in_sensor_control_default.png in Resources */,
 				A2B936361FEFFB86003F2C52 /* in_sensor_control_immersion.png in Resources */,
 				A2B936C71FEFFB86003F2C52 /* in_control_lamp_mirrorlamp.png in Resources */,
-				57A928A82040FFC70053660A /* 复选框.png in Resources */,
 				A2B936B31FEFFB86003F2C52 /* in_control_lamp_walllamp.png in Resources */,
 				A2B936081FEFFB86003F2C52 /* in_telecontro_list_projector.png in Resources */,
 				A2B9360E1FEFFB86003F2C52 /* in_setup_help.png in Resources */,
-				57A928A72040FFC70053660A /* 复选框-未选中.png in Resources */,
 				A2B936601FEFFB86003F2C52 /* in_select_curtain_blind.png in Resources */,
 				A2B9362B1FEFFB86003F2C52 /* in_equipment_sensor_pushwindow.png in Resources */,
 				A2B935FB1FEFFB86003F2C52 /* in_telecontro_list_airconditioner.png in Resources */,
