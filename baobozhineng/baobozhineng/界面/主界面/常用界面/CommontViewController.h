@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef NS_ENUM(NSUInteger, setNum) {
+    setNumOne=1,
+    setNumTwo = 2,
+    setNumThree = 3,
+    setNumFour = 4
+};
 @interface CommontViewController : MainParentViewController
+
+@property (nonatomic) setNum setNum;
 
 @end

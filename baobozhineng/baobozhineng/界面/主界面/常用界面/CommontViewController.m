@@ -41,10 +41,7 @@
 }
 
 - (void) initNav{
-    
-    //    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"消息" style:UIBarButtonItemStyleDone target: self action:@selector(message)];
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"in_arrow_white"] style:UIBarButtonItemStyleDone target:self action:@selector(goBack)];
-    //    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStyleDone target:self action:@selector(add)];
     self.navigationItem.title = @"一键开关";
     self.navigationController.navigationBar.barTintColor = BARTINTCOLOR;
     self.navigationController.navigationBar.tintColor = TINTCOLOR;
@@ -57,7 +54,7 @@
 - (void)uiSet{
     self.view.backgroundColor = [UIColor whiteColor];
     UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(0, 120, SCREEN_WIDTH, 100)];
-    buttonView.backgroundColor = [UIColor redColor];
+//    buttonView.backgroundColor = [UIColor redColor];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.tag = 1000;
     [btn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];

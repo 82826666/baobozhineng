@@ -10,7 +10,5 @@
 #import "SceneTableViewCell.h"
 #import "RecodeViewController.h"
 #import "AddSceneViewController.h"
-@interface DetailViewController : MainParentViewController<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray *dataSouce;
+@interface DetailViewController : MainParentViewController
 @end

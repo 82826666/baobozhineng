@@ -72,7 +72,7 @@
 
 - (void)uiSet{
     self.view.backgroundColor = [UIColor whiteColor];
-    _content = [[UIView alloc]initWithFrame:CGRectMake(0, 80, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _content = [[UIView alloc]initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self.view addSubview:_content];
     //设置按钮下方标题的高度
     double labelHeight = 15;
@@ -103,7 +103,11 @@
 
 -(void)btnAction:(UIButton*)sender{
     if (sender.tag == 1) {
-        [self.navigationController pushViewController:[[CommontViewController alloc]init] animated:YES];
+        CommontViewController *controller = [[CommontViewController alloc]init];
+        controller.setNum = setNumOne;
+        [self.navigationController pushViewController:controller animated:YES];
+    }else if(sender.tag == 2){
+        
     }
 //    NSLog(@"tag:%ld",sender.tag);
 }

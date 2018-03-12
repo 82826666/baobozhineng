@@ -8,7 +8,9 @@
 
 #import "DetailViewController.h"
 
-@interface DetailViewController ()
+@interface DetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) NSMutableArray *dataSouce;
 
 @end
 
@@ -17,19 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNav];
-    [self initDataSouce];
     [self initTable];
     // Do any additional setup after loading the view.
 }
 
-- (void)initDataSouce{
-    NSDictionary *one = @{@"img":@"in_scene_default.png",@"title":@"定时开",@"condition":@"条件：定时",@"execute":@"执行大雨"};
-    NSDictionary *two = @{@"img":@"in_scene_select_leavehome.png",@"title":@"商家模式",@"condition":@"条件：定时",@"execute":@"执行大雨"};
-    NSDictionary *three = @{@"img":@"in_scene_select_getup.png",@"title":@"起床设置",@"condition":@"条件：定时",@"execute":@"执行大雨"};
-    if(_dataSouce == nil){
-        _dataSouce = [[NSMutableArray alloc]initWithObjects:one,two,three,nil];
-    }
-}
 - (void) initNav{
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"消息" style:UIBarButtonItemStyleDone target: self action:@selector(message)];
     UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStyleDone target:self action:@selector(add)];
@@ -69,8 +62,33 @@
     [self.navigationController pushViewController:[[RecodeViewController alloc]init] animated:YES];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self loadData];
+}
 - (void)add{
 //    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:];
     [self.navigationController pushViewController:[[AddSceneViewController alloc]init] animated:YES];
 }
+
+-(void)loadData{
+    [[APIManager sharedManager]deviceGetSceneListsWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+        NSDictionary *dic = data;
+        if ([dic objectForKey:@"data"] != nil) {
+            NSArray *arr = [dic objectForKey:@"data"];
+            for (int i = 0; i < arr.count; i++) {
+                [self.dataSouce addObject:[arr objectAtIndex:i]];
+            }
+            [_tableView reloadData];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+-(NSMutableArray*)dataSouce{
+    if (_dataSouce == nil) {
+        _dataSouce = [NSMutableArray new];
+    }
+    return _dataSouce;
+}
+
 @end

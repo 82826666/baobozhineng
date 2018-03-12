@@ -147,6 +147,11 @@
     NSString *path = [self getPathWithInterface:@"/device/index/add_sensor"];
     [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
 }
+#pragma mark 情景列表接口
+- (void)deviceGetSceneListsWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
+    NSString *path = [self getPathWithInterface:@"/device/scene/get_scene_lists"];
+    [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
+}
 #pragma mark 添加情景接口
 - (void)deviceAddSceneWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
     NSString *path = [self getPathWithInterface:@"/device/scene/add_scene"];

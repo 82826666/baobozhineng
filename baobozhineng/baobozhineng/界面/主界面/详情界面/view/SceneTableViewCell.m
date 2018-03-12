@@ -36,9 +36,9 @@
         _dataArray = [NSMutableArray new];
     }
     [_dataArray addObject:data];
-    _imageVi.image = [UIImage imageNamed:[data objectForKey:@"img"]];
-    _titleLabel.text = [data objectForKey:@"title"];
-    _conditonLabel.text = [data objectForKey:@"condition"];
-    _execute.text = [data objectForKey:@"execute"];
+    _imageVi.image = [UIImage imageNamed:[CommonCode getImageName: [[data objectForKey:@"icon"] integerValue]]];
+    _titleLabel.text = [data objectForKey:@"name"];
+    _conditonLabel.text = @"条件：温度高于20";
+    _execute.text = @"执行：本情景 禁用";
 }
 @end

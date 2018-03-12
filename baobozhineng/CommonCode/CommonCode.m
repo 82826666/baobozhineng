@@ -27,6 +27,8 @@
         case 20141:
             return @"in_equipment_switch_four";
             break;
+        case 3001:
+            return @"in_scene_select_hand";
         default:
             break;
     }
@@ -38,6 +40,8 @@
         return @"20111";
     }else if ([imageName isEqualToString:@"in_equipment_switch_two"]){
         return @"20121";
+    }else if([imageName isEqualToString:@"in_scene_select_hand"]){
+        return @"3001";
     }
     return @"";
 }
