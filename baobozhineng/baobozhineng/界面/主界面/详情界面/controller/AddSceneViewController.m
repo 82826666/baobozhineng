@@ -17,7 +17,7 @@
     
 }
 @property(nonatomic, strong) NSMutableArray* ifArr;
-@property(nonatomic, strong) NSMutableArray *thenArr;
+@property(nonatomic, copy) NSMutableArray *thenArr;
 @property(nonatomic, strong) NSMutableArray* dataSouce;
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UILabel *buttonLable;
@@ -32,8 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNav];
-//    [self initDataSouce];
     [self.view addSubview:self.tableView];
+    [self setNSNotificationCenter];
     // Do any additional setup after loading the view.
 }
 
@@ -58,17 +58,23 @@
 - (void) save{
     NSMutableArray *condition = [NSMutableArray new];
     NSMutableArray *devceid = [NSMutableArray new];
+    for (int i = 0; i < _ifArr.count; i++) {
+        NSDictionary *dic = _ifArr[i];
+        [condition addObject:@{@"type":[dic objectForKey:@"type"],@"devid":[dic objectForKey:@"devid"],@"sta":@"0"}];
+        [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
+    }
+    NSMutableArray *action = [NSMutableArray new];
     for (int i = 0; i < _thenArr.count; i++) {
         NSDictionary *dic = _thenArr[i];
-        [condition addObject:@{@"type":[dic objectForKey:@"type"],@"devid":[dic objectForKey:@"devid"],@"sta":@"0"}];
-        [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"devid":[dic objectForKey:@"devid"]}];
+        [action addObject:@{@"type":[dic objectForKey:@"type"],@"devid":[dic objectForKey:@"devid"],@"sta":@"0"}];
+        [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
     }
     NSDictionary *params = @{
                              @"master_id":GET_USERDEFAULT(MASTER_ID),
                              @"name":@"test",
-                             @"icon":@"20111",
+                             @"icon":@"3001",
                              @"condition":[CommonCode formatToJson:condition],
-                             @"action":[CommonCode formatToJson:condition],
+                             @"action":[CommonCode formatToJson:action],
                              @"message":@"test",
                              @"is_push":@"1",
                              @"enable":@"1",
@@ -89,21 +95,14 @@
         NSLog(@"saf:%@",error);
     }];
 }
-- (void)initDataSouce{
-    NSDictionary *one = @{@"img":@"in_scene_default.png",@"title":@"定时开",@"condition":@"条件：定时",@"execute":@"执行大雨"};
-    NSDictionary *two = @{@"img":@"in_scene_select_leavehome.png",@"title":@"商家模式",@"condition":@"条件：定时",@"execute":@"执行大雨"};
-    NSDictionary *three = @{@"img":@"in_scene_select_getup.png",@"title":@"起床设置",@"condition":@"条件：定时",@"execute":@"执行大雨"};
-    if(_dataSouce == nil){
-        _dataSouce = [[NSMutableArray alloc]initWithObjects:one,two,three,nil];
-    }
-}
 
 #pragma tableview datasouce
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 2) {
         return 1;
     }else if (section == 1){
-        return _thenArr.count > 0 ? _thenArr.count : 0;
+        NSLog(@"_thenarr1:%@",self.thenArr);
+        return self.thenArr.count > 0 ? self.thenArr.count : 0;
     }
     return _ifArr.count > 0 ? _ifArr.count : 0;
 }
@@ -113,10 +112,6 @@
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    _cell = [RecodeTableViewCell cellWithTableView:tableView];
-//    _cell.backgroundColor = self.backColor;
-//    [_cell setData:_dataSouce[indexPath.row]];
-    //1.根据reuseIdentifier，先到对象池中去找重用的单元格对象
     static NSString *reuseIdentifier = @"contactCell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     //2.如果没有找到，自己创建单元格对象
@@ -140,8 +135,8 @@
         //设置副标题
         cell.detailTextLabel.text = @"消息：情景名称 情景 已自动触发";
         cell.accessoryType = UITableViewCellAccessoryNone;
-        _swt = [[UISwitch alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 71, 10, 51, 31)];
-        [cell.contentView addSubview:_swt];
+//        _swt = [[UISwitch alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 71, 10, 51, 31)];
+//        [cell.contentView addSubview:_swt];
     }else if(indexPath.section == 1){
         NSDictionary *dic = [_thenArr objectAtIndex:indexPath.row];
         NSInteger type = [[dic objectForKey:@"type"] integerValue];
@@ -151,29 +146,19 @@
         //设置副标题
         cell.detailTextLabel.text = [dic objectForKey:@"name"];
     }else{
-        
-        
         NSDictionary *dic = [_ifArr objectAtIndex:indexPath.row];
         NSInteger type = [[dic objectForKey:@"type"] integerValue];
-        if (type == 33111) {
-            //3.设置单元格对象的内容
-            //设置图像
-            [cell.imageView setImage:[UIImage imageNamed:@"in_scene_default"]];
-            NSArray *arr = [dic objectForKey:@"value"];
-            NSDictionary *one = [arr objectAtIndex:0];
-            NSDictionary *two = [arr objectAtIndex:1];
-            //设置主标题
-            cell.textLabel.text = [NSString stringWithFormat:@"开始%@:%@ 结束%@:%@",[one objectForKey:@"h"],[one objectForKey:@"mi"],[two objectForKey:@"h"],[two objectForKey:@"mi"]];
-            //设置副标题
-            cell.detailTextLabel.text = @"星期";
+        [cell.imageView setImage:[UIImage imageNamed:[CommonCode getImageName:type]]];
+        //设置主标题
+        cell.textLabel.text = [dic objectForKey:@"name"];
+        //设置副标题
+        cell.detailTextLabel.text = [dic objectForKey:@"name"];
         }
-        
-        //设置字体颜色
-        cell.textLabel.textColor = [UIColor orangeColor];
-        cell.detailTextLabel.textColor = [UIColor blueColor];
-        
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
-    }
+    //设置字体颜色
+    cell.textLabel.textColor = [UIColor orangeColor];
+    cell.detailTextLabel.textColor = [UIColor blueColor];
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
     [cell setSeparatorInset:UIEdgeInsetsZero];
     return cell;
 }
@@ -305,6 +290,27 @@
     [textalert showPopupview];
 }
 
+- (UIColor*)backColor{
+    if(!_backColor){
+        _backColor = [UIColor colorWithRed:233/255.0 green:241/255.0 blue:245/255.0 alpha:1];
+    }
+    return _backColor;
+}
+
+-(void)setNSNotificationCenter{
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setThen:) name:@"setThenDic" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setIf:) name:@"setIf" object:nil];
+//    NSLog(@"－－－－－注册通知------");
+}
+-(void)setThen:(NSNotification *)data{
+    [self.thenArr addObject:data.userInfo];
+    [_tableView reloadData];
+}
+-(void)setIf:(NSNotification *)data{
+    [self.ifArr addObject:data.userInfo];
+    [_tableView reloadData];
+}
 
 #pragma mark 懒加载
 - (UITableView*) tableView{
@@ -317,26 +323,17 @@
     }
     return _tableView;
 }
-- (UIColor*)backColor{
-    if(!_backColor){
-        _backColor = [UIColor colorWithRed:233/255.0 green:241/255.0 blue:245/255.0 alpha:1];
-    }
-    return _backColor;
-}
--(void)setDic:(NSDictionary *)dic{
-    if (_ifArr == nil) {
-        _ifArr = [[NSMutableArray alloc]init];
-    }
-    [_ifArr addObject:dic];
-    [_tableView reloadData];
-}
--(void)setThenDic:(NSDictionary *)thenDic{
+-(NSMutableArray*)thenArr{
     if (_thenArr == nil) {
-        _thenArr = [[NSMutableArray alloc]init];
+        _thenArr = [NSMutableArray new];
     }
-    [_thenArr addObject:thenDic];
-    NSLog(@"thenarr:%@",_thenArr);
-    [_tableView reloadData];
+    return _thenArr;
+}
+-(NSMutableArray*)ifArr{
+    if (_ifArr == nil) {
+        _ifArr = [NSMutableArray new];
+    }
+    return _ifArr;
 }
 /*
 #pragma mark - Navigation

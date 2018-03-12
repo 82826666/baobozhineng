@@ -26,92 +26,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self initDataSource];
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
 }
 
-- (void)initDataSource
-{
-    if (!sectionArray) {
-        sectionArray  = [NSMutableArray arrayWithObjects:@"客厅",
-                         @"餐厅",
-                         @"主卧",
-                         @"次卧",nil];
-        NSArray *one = @[
-                         @{
-                             @"img":@"in_select_lamp_chandelier",
-                             @"title":@"吊灯"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_four",
-                             @"title":@"四开"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_three",
-                             @"title":@"热水器"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_three",
-                             @"title":@"热水器"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_three",
-                             @"title":@"热水器"
-                             },
-                         ];
-        NSArray *two = @[
-                         @{
-                             @"img":@"in_select_lamp_chandelier",
-                             @"title":@"吊灯"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_four",
-                             @"title":@"四开"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_three",
-                             @"title":@"热水器"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_three",
-                             @"title":@"热水器"
-                             },
-                         ];
-        NSArray *three = @[
-                           @{
-                               @"img":@"in_select_lamp_chandelier",
-                               @"title":@"吊灯"
-                               },
-                           @{
-                               @"img":@"in_equipment_switch_four",
-                               @"title":@"四开"
-                               },
-                           @{
-                               @"img":@"in_equipment_switch_three",
-                               @"title":@"热水器"
-                               },
-                           ];
-        NSArray *four = @[
-                          @{
-                              @"img":@"in_equipment_switch_three",
-                              @"title":@"吊灯"
-                              },
-                          ];
-        if (!dataSource) {
-            dataSource = [NSMutableArray arrayWithObjects:one,two,three,four, nil];
-        }
-    }
-    if (!stateArray) {
-        stateArray = [NSMutableArray array];
-        
-        for (int i = 0; i < dataSource.count; i++)
-        {
-            //所有的分区都是闭合
-            [stateArray addObject:@"0"];
-        }
-    }
-}
+
 -(UITableView*)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -263,22 +182,22 @@
 //按钮的响应事件
 - (void)btnAction:(UIButton *)btn
 {
-    int tag =(int)btn.tag;
-//    NSLog(@"cachearr:%@",_cacheArr);
     for (int i = 0; i < _cacheArr.count; i++) {
         NSDictionary *dic = [_cacheArr objectAtIndex:i];
         
         NSInteger ids = [[dic objectForKey:@"id"] integerValue];
-//        NSLog(@"ids:%ld,cout:%ld",ids,_cacheArr.count);
         if (ids == btn.tag) {
             NSDictionary *device = @{
                                   @"type":[dic objectForKey:@"type"],
                                   @"devid":[dic objectForKey:@"id"],
                                   @"name":[dic objectForKey:@"name"]
                                   };
-            AddSceneViewController *controller = [[AddSceneViewController alloc]init];
-            [controller setThenDic:device];
-            [self.navigationController pushViewController:controller animated:YES];
+            [self sendNSNotificationCenter:device];
+            for (UIViewController *controller in self.navigationController.viewControllers) {
+                if ([controller isKindOfClass:[AddSceneViewController class]]) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                }
+            }
         }
     }
 }
@@ -319,6 +238,12 @@
     } failure:^(NSError *error) {
         NSLog(@"error:%@",error);
     }];
+}
+-(void)sendNSNotificationCenter:(NSDictionary*)dic{
+    //创建通知
+    NSNotification *notification = [NSNotification notificationWithName:@"setThenDic" object:nil userInfo:dic];
+    //通过通知中心发送通知
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 /*
 #pragma mark - Navigation

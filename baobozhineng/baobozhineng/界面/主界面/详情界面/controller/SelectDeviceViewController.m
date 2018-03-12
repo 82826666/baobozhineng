@@ -8,6 +8,7 @@
 
 #import "SelectDeviceViewController.h"
 #import "UIButton+CenterImageAndTitle.h"
+#import "AddSceneViewController.h"
 #define kCell_Height 44
 #define BTN_WIDTH 50
 @interface SelectDeviceViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -17,98 +18,18 @@
     NSMutableArray      *stateArray;
 }
 @property (nonatomic, strong) UITableView         *tableView;
+@property (nonatomic, strong) NSMutableArray *cacheArr;
 @end
 
 @implementation SelectDeviceViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self initDataSource];
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
 }
 
-- (void)initDataSource
-{
-    if (!sectionArray) {
-        sectionArray  = [NSMutableArray arrayWithObjects:@"客厅",
-                         @"餐厅",
-                         @"主卧",
-                         @"次卧",nil];
-        NSArray *one = @[
-                         @{
-                             @"img":@"in_select_lamp_chandelier",
-                             @"title":@"吊灯"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_four",
-                             @"title":@"四开"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_three",
-                             @"title":@"热水器"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_three",
-                             @"title":@"热水器"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_three",
-                             @"title":@"热水器"
-                             },
-                         ];
-        NSArray *two = @[
-                         @{
-                             @"img":@"in_select_lamp_chandelier",
-                             @"title":@"吊灯"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_four",
-                             @"title":@"四开"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_three",
-                             @"title":@"热水器"
-                             },
-                         @{
-                             @"img":@"in_equipment_switch_three",
-                             @"title":@"热水器"
-                             },
-                         ];
-        NSArray *three = @[
-                           @{
-                               @"img":@"in_select_lamp_chandelier",
-                               @"title":@"吊灯"
-                               },
-                           @{
-                               @"img":@"in_equipment_switch_four",
-                               @"title":@"四开"
-                               },
-                           @{
-                               @"img":@"in_equipment_switch_three",
-                               @"title":@"热水器"
-                               },
-                           ];
-        NSArray *four = @[
-                          @{
-                              @"img":@"in_equipment_switch_three",
-                              @"title":@"吊灯"
-                              },
-                          ];
-        if (!dataSource) {
-            dataSource = [NSMutableArray arrayWithObjects:one,two,three,four, nil];
-        }
-    }
-    if (!stateArray) {
-        stateArray = [NSMutableArray array];
-        
-        for (int i = 0; i < dataSource.count; i++)
-        {
-            //所有的分区都是闭合
-            [stateArray addObject:@"0"];
-        }
-    }
-}
+
 -(UITableView*)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -153,14 +74,12 @@
     NSArray *imgArray = [dataSource objectAtIndex:indexPath.section];
     for ( int i = 0; i<imgArray.count; i++) {
         NSDictionary *dic = [imgArray objectAtIndex:i];
-        NSArray *setting = [CommonCode stringToJSON:[dic objectForKey:@"setting"]];
-        
-        NSDictionary *but = [setting objectAtIndex:0];
         
         UIButton *btn ;
+        NSString *imageName = [CommonCode getImageName:[[dic objectForKey:@"icon"] integerValue]];
         //创建按钮
-        btn = [self createButton:CGRectMake((left_jiange+BTN_WIDTH)*(i%cellcount)+left_jiange, i/cellcount*(top_jiange+BTN_WIDTH+4)+top_jiange/2, BTN_WIDTH, BTN_WIDTH) Img:[UIImage imageNamed:[but objectForKey:@"button-icon"]]];
-        btn.tag = i+1;
+        btn = [self createButton:CGRectMake((left_jiange+BTN_WIDTH)*(i%cellcount)+left_jiange, i/cellcount*(top_jiange+BTN_WIDTH+4)+top_jiange/2, BTN_WIDTH, BTN_WIDTH) Img:[UIImage imageNamed:imageName]];
+        btn.tag = [[dic objectForKey:@"id"] integerValue];
         //按钮的响应事件，通过tag来判断是那个按钮
         [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -234,7 +153,6 @@
     if((array.count % 4) > 0){
         row = row + 1;
     }
-    NSLog(@"height:%ld",row * (BTN_WIDTH + 15));
     return row * (BTN_WIDTH + 15) + 15;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -263,18 +181,37 @@
 //按钮的响应事件
 - (void)btnAction:(UIButton *)btn
 {
-    int tag =(int)btn.tag;
-    NSLog(@"tag:%d",tag);
+    for (int i = 0; i < _cacheArr.count; i++) {
+        NSDictionary *dic = [_cacheArr objectAtIndex:i];
+        
+        NSInteger ids = [[dic objectForKey:@"id"] integerValue];
+        if (ids == btn.tag) {
+            NSDictionary *device = @{
+                                     @"type":[dic objectForKey:@"type"],
+                                     @"devid":[dic objectForKey:@"id"],
+                                     @"name":[dic objectForKey:@"name"]
+                                     };
+            [self sendNSNotificationCenter:device];
+            for (UIViewController *controller in self.navigationController.viewControllers) {
+                if ([controller isKindOfClass:[AddSceneViewController class]]) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                }
+            }
+        }
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 -(void)viewWillAppear:(BOOL)animated{
     [self loadData];
 }
 -(void)loadData{
+    if (_cacheArr == nil) {
+        _cacheArr = [NSMutableArray new];
+    }
+    NSLog(@"master_id%@",GET_USERDEFAULT(MASTER_ID));
     [[APIManager sharedManager]deviceGetDeviceInfoWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSDictionary *dic = data;
         if (!sectionArray) {
@@ -283,38 +220,29 @@
                              @"主卧",
                              @"次卧",nil];
         }
-        
-        if([dic objectForKey:@"data"]){
-            NSArray *arr = [dic objectForKey:@"data"];
-            NSMutableArray *one = [NSMutableArray new];
-            for (int i = 0; i < arr.count; i++) {
-                NSDictionary *dic = [arr objectAtIndex:i];
-                NSInteger type = [[dic objectForKey:@"type"] integerValue];
-                NSInteger ids = [[dic objectForKey:@"id"] integerValue];
-                if (type == 10111 && ids > 23) {
-                    [one addObject:dic];
-                }
-            }
-            
-            if (!dataSource && one.count > 0) {
-                dataSource = [NSMutableArray arrayWithObjects:one, nil];
-                NSLog(@"one:%@",dataSource);
-            }
-            if (!stateArray) {
-                stateArray = [NSMutableArray array];
-                
-                for (int i = 0; i < dataSource.count; i++)
-                {
-                    //所有的分区都是闭合
-                    [stateArray addObject:@"0"];
-                }
-            }
-            [self.tableView reloadData];
+        _cacheArr = [dic objectForKey:@"data"];
+        NSArray *one = [dic objectForKey:@"data"];
+        if (!dataSource && one.count > 0) {
+            dataSource = [NSMutableArray arrayWithObjects:one, nil];
         }
-        
+        if (!stateArray) {
+            stateArray = [NSMutableArray array];
+            for (int i = 0; i < dataSource.count; i++)
+            {
+                //所有的分区都是闭合
+                [stateArray addObject:@"0"];
+            }
+        }
+        [self.tableView reloadData];
     } failure:^(NSError *error) {
         NSLog(@"error:%@",error);
     }];
+}
+-(void)sendNSNotificationCenter:(NSDictionary*)dic{
+    //创建通知
+    NSNotification *notification = [NSNotification notificationWithName:@"setIf" object:nil userInfo:dic];
+    //通过通知中心发送通知
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 /*
 #pragma mark - Navigation
