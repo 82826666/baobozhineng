@@ -258,12 +258,7 @@
  */
 + (NSString *)deviceModelString;
 
-/**
- *  获取当前时间字符串
- *
- *  @param date 获取当前时间字符串
- *
- */
+
 +(NSString *)getCurrentTime;
 
 /**

@@ -37,7 +37,9 @@
     UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(saveData)];
     self.navigationItem.rightBarButtonItem = rightBtn;
 }
-
+- (void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)initDataSource
 {
     dataSource = [NSMutableArray arrayWithObjects:@{
@@ -90,8 +92,6 @@
         btn.tag = i+1;
         //按钮的响应事件，通过tag来判断是那个按钮
         [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
         UILabel *label = [self createLabel:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame), btn.frame.size.width, labelHeight) title:[dic objectForKey:@"title"]];
         label.textColor = RGBA(88, 88, 88, 1.0);
         label.textAlignment = NSTextAlignmentCenter;
@@ -102,13 +102,17 @@
 }
 
 -(void)btnAction:(UIButton*)sender{
+    CommontViewController *controller = [[CommontViewController alloc]init];
     if (sender.tag == 1) {
-        CommontViewController *controller = [[CommontViewController alloc]init];
         controller.setNum = setNumOne;
-        [self.navigationController pushViewController:controller animated:YES];
     }else if(sender.tag == 2){
-        
+        controller.setNum = setNumTwo;
+    }else if (sender.tag == 3){
+        controller.setNum = setNumThree;
+    }else if (sender.tag == 4){
+        controller.setNum = setNumFour;
     }
+    [self.navigationController pushViewController:controller animated:YES];
 //    NSLog(@"tag:%ld",sender.tag);
 }
 //创建按钮
@@ -127,9 +131,10 @@
     lab.adjustsFontSizeToFitWidth= YES;
     return  lab;
 }
--(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.toolbarHidden = NO;
-}
+//-(void)viewWillAppear:(BOOL)animated{
+//    self.navigationController.toolbarHidden = NO;
+//}
+
 /*
 #pragma mark - Navigation
 

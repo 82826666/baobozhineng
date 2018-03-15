@@ -16,6 +16,8 @@
 #import "MJExtension.h"
 #import "CKAlertViewController.h"
 #import "TwoWayViewController.h"
+#import "CommonAdd.h"
+#import "getSensorViewController.h"
 // 引入JPush功能所需头文件 start
 #import "JPUSHService.h"
 // iOS10注册APNs所需头文件
@@ -25,7 +27,7 @@
 // 如果需要使用idfa功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
 // 引入JPush功能所需头文件 end
-@interface UsualViewcontroller ()<JMDropMenuDelegate,GCDAsyncUdpSocketDelegate>
+@interface UsualViewcontroller ()<JMDropMenuDelegate,GCDAsyncUdpSocketDelegate,CommonAddDelegate>
 //当前主机别称
 @property (weak, nonatomic) IBOutlet UILabel *currentHostLabel;
 //当前主机按钮
@@ -62,6 +64,7 @@
 @property (copy, nonatomic) NSString *status;
 @property (copy, nonatomic) NSString *msg;
 @property (assign, nonatomic) NSDictionary* result;
+@property(nonatomic, strong) UIView *supper1;
 @end
 
 @implementation UsualViewcontroller
@@ -70,6 +73,7 @@ static NSInteger seq = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadUi];
     NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     // Do any additional setup after loading the view.
 
@@ -81,6 +85,26 @@ static NSInteger seq = 0;
 //    [self initUdpSocket];
     [self jpushTest];
     [self getWeather];
+}
+-(void)loadUi{
+    UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_WIDTH, 50)];
+    [supper addSubview:[self getCommonAdd:@"情景快捷" tag1:1000 tag2:1001]];
+    [self.view addSubview:supper];
+    _supper1 = [[UIView alloc]initWithFrame:CGRectMake(0, 270, SCREEN_WIDTH, 50)];
+    [_supper1 addSubview:[self getCommonAdd:@"设备快捷" tag1:1002 tag2:1003]];
+    [self.view addSubview:_supper1];
+}
+
+-(CommonAdd*)getCommonAdd:(NSString*)title tag1:(NSInteger)tag1 tag2:(NSInteger)tag2{
+    UIButton *addBtn = [UIButton new];
+    addBtn.tag = tag1;
+    [addBtn setImage:[UIImage imageNamed:@"in_common_menu_add"] forState:UIControlStateNormal];
+    UIButton *reduceBtn = [UIButton new];
+    reduceBtn.tag = tag2;
+    [reduceBtn setImage:[UIImage imageNamed:@"in_common_menu_reduce"] forState:UIControlStateNormal];
+    CommonAdd *addView = [[CommonAdd alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50) title:title addBtn:addBtn reduceBtn:reduceBtn image:nil];
+    addView.delegate = self;
+    return addView;
 }
 
 -(void)jpushTest{
@@ -276,5 +300,16 @@ static NSInteger seq = 0;
         _hostsArray = [NSMutableArray new];
     }
     return _hostsArray;
+}
+#pragma mark 添加和减少按钮点击
+-(void)didClickBtn:(UIButton *)button currentView:(UIView *)currentView titleLabel:(UILabel *)titleLabel{
+    if(button.tag == 1000){
+        getSensorViewController *control = [[getSensorViewController alloc] init];
+        [self.navigationController pushViewController:control animated:YES];
+    }else if (button.tag == 1002){
+        getSensorViewController *control = [[getSensorViewController alloc] init];
+        [self.navigationController pushViewController:control animated:YES];
+    }
+    NSLog(@"test:%@",titleLabel.text);
 }
 @end

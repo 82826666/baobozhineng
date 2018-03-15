@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TwoWayViewController : MainParentViewController
+@interface TwoWayViewController : UIViewController
 
 @end
