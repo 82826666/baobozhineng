@@ -60,18 +60,6 @@
 
 - (void)uiSet{
     self.view.backgroundColor = [UIColor whiteColor];
-//    UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(0, 120, SCREEN_WIDTH, 100)];
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    btn.tag = 1000;
-//    [btn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
-//    _imageView =[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 25, 20, 50, 50)];
-//    _imageView.image = [UIImage imageNamed:@"in_equipment_lamp_default"];
-//    _cacheImageName = @"in_equipment_lamp_default";
-//    _label = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 20, 70, 100, 30)];
-//    _label.text = @"1键";
-//    [btn addSubview:_imageView];
-//    [btn addSubview:_label];
-//    [buttonView addSubview:btn];
     NSInteger one;
     NSInteger two;
     NSInteger three;
