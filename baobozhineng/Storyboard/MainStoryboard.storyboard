@@ -292,6 +292,7 @@
                         <outlet property="currentWeather" destination="YdQ-Ys-Hah" id="g4I-iE-qtM"/>
                         <outlet property="indoorTemperature" destination="6OQ-iA-uRC" id="VNP-mH-mT3"/>
                         <outlet property="relativeHumidity" destination="vUA-1g-9Zn" id="tlb-Yo-icK"/>
+                        <outlet property="scrollView" destination="8xk-Ls-vyA" id="Pdc-Hy-8RM"/>
                         <outlet property="windDirection" destination="HgR-RQ-NtR" id="8TP-vX-214"/>
                         <outlet property="windQuantity" destination="88G-aE-7UZ" id="YSF-87-MA4"/>
                     </connections>

@@ -26,8 +26,11 @@
 #endif
 // 如果需要使用idfa功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
+#define kCell_Height 44
+#define BTN_WIDTH 50
 // 引入JPush功能所需头文件 end
 @interface UsualViewcontroller ()<JMDropMenuDelegate,GCDAsyncUdpSocketDelegate,CommonAddDelegate>
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 //当前主机别称
 @property (weak, nonatomic) IBOutlet UILabel *currentHostLabel;
 //当前主机按钮
@@ -57,6 +60,10 @@
 @property (strong,nonatomic) NSMutableArray *moreEquipmentImgArray;
 //主机名称数据
 @property (strong,nonatomic) NSMutableArray *hostsArray;
+//情景快捷数据
+@property (strong,nonatomic) NSMutableArray *sensorArr;
+//设备快捷数据
+@property (strong,nonatomic) NSMutableArray *deviceArr;
 
 @property (strong, nonatomic) GCDAsyncUdpSocket *socket;
 @property (strong, nonatomic) dispatch_queue_t delegateQueue;
@@ -82,17 +89,15 @@ static NSInteger seq = 0;
     UITapGestureRecognizer *hostLabGestuer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(currentHostAction:)];
     [_currentHostLabel addGestureRecognizer:hostLabGestuer];
     
-//    [self initUdpSocket];
-    [self jpushTest];
-    [self getWeather];
+
 }
 -(void)loadUi{
     UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_WIDTH, 50)];
     [supper addSubview:[self getCommonAdd:@"情景快捷" tag1:1000 tag2:1001]];
-    [self.view addSubview:supper];
+    [_scrollView addSubview:supper];
     _supper1 = [[UIView alloc]initWithFrame:CGRectMake(0, 270, SCREEN_WIDTH, 50)];
     [_supper1 addSubview:[self getCommonAdd:@"设备快捷" tag1:1002 tag2:1003]];
-    [self.view addSubview:_supper1];
+    [_scrollView addSubview:_supper1];
 }
 
 -(CommonAdd*)getCommonAdd:(NSString*)title tag1:(NSInteger)tag1 tag2:(NSInteger)tag2{
@@ -279,6 +284,10 @@ static NSInteger seq = 0;
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
+    //    [self initUdpSocket];
+    [self jpushTest];
+    [self getWeather];
+    [self loadData];
     NSMutableArray *master = GET_USERDEFAULT(MASTER);
     if (master != nil) {
         for (int i = 0; i < master.count; i++) {
@@ -291,6 +300,7 @@ static NSInteger seq = 0;
         }
     }
     self.navigationController.navigationBar.hidden = YES;
+    
 }
 -(void)viewWillDisappear:(BOOL)animated{
     self.navigationController.navigationBar.hidden = NO;
@@ -311,5 +321,150 @@ static NSInteger seq = 0;
         [self.navigationController pushViewController:control animated:YES];
     }
     NSLog(@"test:%@",titleLabel.text);
+}
+-(void)loadData{
+    [[APIManager sharedManager]deviceGetSceneListsWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+        NSDictionary *dic = data;
+        if ([dic objectForKey:@"data"] == nil) {
+            
+        }else{
+            self.sensorArr = [dic objectForKey:@"data"];
+            //设置每行多少按钮
+            int cellcount = 4;
+            int totalCount = ceil(self.sensorArr.count % cellcount);
+            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 270, SCREEN_WIDTH, totalCount*50)];
+            //设置按钮下方标题的高度
+            double labelHeight = 15;
+            
+            //设置每个按钮的行间距
+            double left_jiange = (self.view.frame.size.width-BTN_WIDTH*cellcount)/5;
+            //设置每个按钮的列艰巨
+            double top_jiange =labelHeight;
+            
+            for ( int i = 0; i<self.sensorArr.count; i++) {
+                NSDictionary *dic = [_sensorArr objectAtIndex:i];
+                
+                UIButton *btn ;
+                NSString *imageName = [CommonCode getImageName:[[dic objectForKey:@"icon"] integerValue]];
+                //创建按钮
+                btn = [self createButton:CGRectMake((left_jiange+BTN_WIDTH)*(i%cellcount)+left_jiange, i/cellcount*(top_jiange+BTN_WIDTH+4)+top_jiange/2, BTN_WIDTH, BTN_WIDTH) Img:[UIImage imageNamed:imageName]];
+                btn.tag = i + 1000;
+                btn.accessibilityIdentifier = @"1";
+                //按钮的响应事件，通过tag来判断是那个按钮
+                [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+                UILabel *label = [self createLabel:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame), btn.frame.size.width, labelHeight) title:[dic objectForKey:@"name"]];
+                label.textColor = RGBA(88, 88, 88, 1.0);
+                label.textAlignment = NSTextAlignmentCenter;
+                label.font = [UIFont systemFontOfSize:10];
+                [view addSubview:btn];
+                [view addSubview:label];
+            }
+            [_scrollView addSubview:view];
+            _supper1.frame = CGRectMake(0, 220 + totalCount*80 + 50, SCREEN_WIDTH, 50);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    [[APIManager sharedManager]deviceGetDeviceInfoWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+        NSDictionary *dic = data;
+        if ([dic objectForKey:@"data"] == nil) {
+            
+        }else{
+            self.deviceArr = [dic objectForKey:@"data"];
+            //设置每行多少按钮
+            int cellcount = 4;
+            int sensorCount = ceil(self.sensorArr.count % cellcount);
+            int totalCount = ceil(self.deviceArr.count % cellcount);
+            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 220 + sensorCount*80 + 50*2, SCREEN_WIDTH, totalCount*50)];
+            //设置按钮下方标题的高度
+            double labelHeight = 15;
+            
+            //设置每个按钮的行间距
+            double left_jiange = (self.view.frame.size.width-BTN_WIDTH*cellcount)/5;
+            //设置每个按钮的列艰巨
+            double top_jiange =labelHeight;
+            
+            for ( int i = 0; i<totalCount; i++) {
+                NSDictionary *dic = [_deviceArr objectAtIndex:i];
+                
+                UIButton *btn ;
+                NSString *imageName = [CommonCode getImageName:[[dic objectForKey:@"icon"] integerValue]];
+                //创建按钮
+                btn = [self createButton:CGRectMake((left_jiange+BTN_WIDTH)*(i%cellcount)+left_jiange, i/cellcount*(top_jiange+BTN_WIDTH+4)+top_jiange/2, BTN_WIDTH, BTN_WIDTH) Img:[UIImage imageNamed:imageName]];
+                btn.tag = i + 2000;
+                btn.accessibilityIdentifier = @"2";
+                //按钮的响应事件，通过tag来判断是那个按钮
+                [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+                UILabel *label = [self createLabel:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame), btn.frame.size.width, labelHeight) title:[dic objectForKey:@"name"]];
+                label.textColor = RGBA(88, 88, 88, 1.0);
+                label.textAlignment = NSTextAlignmentCenter;
+                label.font = [UIFont systemFontOfSize:10];
+                [view addSubview:btn];
+                [view addSubview:label];
+            }
+            [_scrollView addSubview:view];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+-(UIButton*)getBtnOne:(UIImage*)image btnName:(NSString*)name{
+    UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button1.titleLabel.font = [UIFont systemFontOfSize:15];
+    [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button1 setImage:image forState:UIControlStateNormal];
+    [button1 setTitle:name forState:UIControlStateNormal];
+    return button1;
+}
+//创建按钮
+- (UIButton *)createButton:(CGRect)frame Img:(UIImage *)img
+{
+    UIButton *btn = [[UIButton alloc] initWithFrame:frame];
+    [btn setBackgroundImage:img forState:UIControlStateNormal];
+    return  btn;
+}
+//创建label
+- (UILabel*)createLabel:(CGRect)frame title:(NSString*)title
+{
+    UILabel *lab = [[UILabel alloc] initWithFrame:frame];
+    lab.text = title;
+    lab.adjustsFontSizeToFitWidth= YES;
+    return  lab;
+}
+//按钮的响应事件
+- (void)btnAction:(UIButton *)btn
+{
+    NSInteger type = [btn.accessibilityIdentifier integerValue];
+    NSDictionary *dic;
+    if (type == 1) {
+        dic = [self.sensorArr objectAtIndex:btn.tag - 1000];
+    }else{
+        dic = [self.sensorArr objectAtIndex:btn.tag - 2000];
+    }
+    NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"id"]};
+    [[APIManager sharedManager]deviceTriggerSceneWithParameters:params success:^(id data) {
+        NSDictionary *datadic = data;
+        NSLog(@"data:%@",data);
+        if([[datadic objectForKey:@"code"] intValue] == 200){
+            [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+        }else{
+            [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+//    NSLog(@"dic:%@",dic);
+}
+-(NSMutableArray*)sensorArr{
+    if (_sensorArr == nil) {
+        _sensorArr = [NSMutableArray new];
+    }
+    return _sensorArr;
+}
+-(NSMutableArray*)deviceArr{
+    if (_deviceArr == nil) {
+        _deviceArr = [NSMutableArray new];
+    }
+    return _deviceArr;
 }
 @end

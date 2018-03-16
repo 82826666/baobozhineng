@@ -8,11 +8,13 @@
 
 #import "getSensorViewController.h"
 #import "APIManager.h"
+#import "UsualViewcontroller.h"
 
 @interface getSensorViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
 }
 @property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) NSMutableArray *dataArr;
 @end
 
 @implementation getSensorViewController
@@ -38,7 +40,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.dataArr.count;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -52,23 +54,24 @@
     if(cell == nil){
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
-    [cell.contentView addSubview:[self getView]];
+    NSDictionary *dic = [_dataArr objectAtIndex:indexPath.row];
+    [cell.contentView addSubview:[self getView:[UIImage imageNamed:@"in_telecontro_list_satellitetv"] title:[dic objectForKey:@"name"] condition:@"test" action:@"test"]];
     return cell;
 }
 
--(UIView*)getView{
+-(UIView*)getView:(UIImage*)image title:(NSString*)tit condition:(NSString*)con action:(NSString*)act{
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 2, 40, 40)];
-    imageView.image = [UIImage imageNamed:@"in_telecontro_list_satellitetv"];
+    imageView.image = image;
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(60, 2, SCREEN_WIDTH - 60, 15)];
-    title.text = @"text";
+    title.text = tit;
     [title setFont:[UIFont systemFontOfSize:14]];
     UILabel *detail = [[UILabel alloc]initWithFrame:CGRectMake(60, 19, SCREEN_WIDTH - 60, 10)];
-    detail.text = @"detail";
+    detail.text = con;
     [detail setFont:[UIFont systemFontOfSize:10]];
     UILabel *detail2 = [[UILabel alloc]initWithFrame:CGRectMake(60, 31, SCREEN_WIDTH - 60, 10)];
     [detail2 setFont:[UIFont systemFontOfSize:10]];
-    detail2.text = @"detail2";
+    detail2.text = act;
     [view addSubview:imageView];
     [view addSubview:title];
     [view addSubview:detail];
@@ -77,7 +80,20 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    NSDictionary *dic = [self.dataArr objectAtIndex:indexPath.row];
+    NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"id"],@"order":@"0"};
+    NSLog(@" parms:%@",params);
+    [[APIManager sharedManager]deviceAddSceneShortcutWithParameters:params success:^(id data) {
+        NSDictionary *datadic = data;
+        NSLog(@"data:%@",data);
+        if([[datadic objectForKey:@"code"] intValue] == 200){
+            [self.navigationController pushViewController:[UsualViewcontroller shareInstance] animated:YES];
+        }else{
+            [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 -(void)loadData{
@@ -86,11 +102,23 @@
         if ([dic objectForKey:@"data"] == nil) {
             
         }else{
-            
+            self.dataArr = [dic objectForKey:@"data"];
+            [self.tableView reloadData];
         }
     } failure:^(NSError *error) {
         
     }];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self loadData];
+}
+
+-(NSMutableArray*)dataArr{
+    if (_dataArr == nil) {
+        _dataArr = [NSMutableArray new];
+    }
+    return _dataArr;
 }
 
 /*
