@@ -14,4 +14,6 @@ pod 'MJExtension'
 #极光推送
 pod 'JPush'
 
+pod 'YYKit'
+
 end

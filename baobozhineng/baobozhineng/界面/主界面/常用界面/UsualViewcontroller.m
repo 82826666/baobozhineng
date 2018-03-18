@@ -18,6 +18,8 @@
 #import "TwoWayViewController.h"
 #import "CommonAdd.h"
 #import "getSensorViewController.h"
+#import "GetDeviceViewController.h"
+#import "CustomButtonView.h"
 // 引入JPush功能所需头文件 start
 #import "JPUSHService.h"
 // iOS10注册APNs所需头文件
@@ -29,7 +31,7 @@
 #define kCell_Height 44
 #define BTN_WIDTH 50
 // 引入JPush功能所需头文件 end
-@interface UsualViewcontroller ()<JMDropMenuDelegate,GCDAsyncUdpSocketDelegate,CommonAddDelegate>
+@interface UsualViewcontroller ()<JMDropMenuDelegate,GCDAsyncUdpSocketDelegate,CommonAddDelegate,CustomButtonViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 //当前主机别称
 @property (weak, nonatomic) IBOutlet UILabel *currentHostLabel;
@@ -317,7 +319,7 @@ static NSInteger seq = 0;
         getSensorViewController *control = [[getSensorViewController alloc] init];
         [self.navigationController pushViewController:control animated:YES];
     }else if (button.tag == 1002){
-        getSensorViewController *control = [[getSensorViewController alloc] init];
+        GetDeviceViewController *control = [[GetDeviceViewController alloc] init];
         [self.navigationController pushViewController:control animated:YES];
     }
     NSLog(@"test:%@",titleLabel.text);
@@ -368,7 +370,19 @@ static NSInteger seq = 0;
     [[APIManager sharedManager]deviceGetDeviceInfoWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSDictionary *dic = data;
         if ([dic objectForKey:@"data"] == nil) {
-            
+//            self.deviceArr = [dic objectForKey:@"data"];
+//            //设置每行多少按钮
+//            int cellcount = 4;
+//            int sensorCount = ceil(self.sensorArr.count % cellcount);
+//            int totalCount = ceil(self.deviceArr.count % cellcount);
+//            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 220 + sensorCount*80 + 50*2, SCREEN_WIDTH, totalCount*50)];
+//            for (int i = 0; i < 4; i++) {
+//                CustomButtonView *view = [[CustomButtonView alloc]initWithFrame:CGRectMake(80*i, 20, 80, 80) image:[UIImage imageNamed:@"2.png"] sup:@"开" name:@"苏打粉"];
+//                view.delegate = self;
+//                view.btn.tag = i;
+//                [view addSubview:view];
+//            }
+//            [_scrollView addSubview:view];
         }else{
             self.deviceArr = [dic objectForKey:@"data"];
             //设置每行多少按钮
@@ -386,21 +400,26 @@ static NSInteger seq = 0;
             
             for ( int i = 0; i<totalCount; i++) {
                 NSDictionary *dic = [_deviceArr objectAtIndex:i];
-                
-                UIButton *btn ;
                 NSString *imageName = [CommonCode getImageName:[[dic objectForKey:@"icon"] integerValue]];
-                //创建按钮
-                btn = [self createButton:CGRectMake((left_jiange+BTN_WIDTH)*(i%cellcount)+left_jiange, i/cellcount*(top_jiange+BTN_WIDTH+4)+top_jiange/2, BTN_WIDTH, BTN_WIDTH) Img:[UIImage imageNamed:imageName]];
-                btn.tag = i + 2000;
-                btn.accessibilityIdentifier = @"2";
-                //按钮的响应事件，通过tag来判断是那个按钮
-                [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
-                UILabel *label = [self createLabel:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame), btn.frame.size.width, labelHeight) title:[dic objectForKey:@"name"]];
-                label.textColor = RGBA(88, 88, 88, 1.0);
-                label.textAlignment = NSTextAlignmentCenter;
-                label.font = [UIFont systemFontOfSize:10];
-                [view addSubview:btn];
-                [view addSubview:label];
+                CustomButtonView *buttonView = [[CustomButtonView alloc]initWithFrame:CGRectMake((left_jiange+BTN_WIDTH)*(i%cellcount)+left_jiange, i/cellcount*(top_jiange+BTN_WIDTH+4)+top_jiange/2, BTN_WIDTH, BTN_WIDTH) image:[UIImage imageNamed:imageName] sup:@"开" name:@"苏打粉"];
+                buttonView.delegate = self;
+                buttonView.btn.tag = i + 2000;
+                [view addSubview:buttonView];
+                
+//                UIButton *btn ;
+//                NSString *imageName = [CommonCode getImageName:[[dic objectForKey:@"icon"] integerValue]];
+//                //创建按钮
+//                btn = [self createButton:CGRectMake((left_jiange+BTN_WIDTH)*(i%cellcount)+left_jiange, i/cellcount*(top_jiange+BTN_WIDTH+4)+top_jiange/2, BTN_WIDTH, BTN_WIDTH) Img:[UIImage imageNamed:imageName]];
+//                btn.tag = i + 2000;
+//                btn.accessibilityIdentifier = @"2";
+//                //按钮的响应事件，通过tag来判断是那个按钮
+//                [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+//                UILabel *label = [self createLabel:CGRectMake(btn.frame.origin.x, CGRectGetMaxY(btn.frame), btn.frame.size.width, labelHeight) title:[dic objectForKey:@"name"]];
+//                label.textColor = RGBA(88, 88, 88, 1.0);
+//                label.textAlignment = NSTextAlignmentCenter;
+//                label.font = [UIFont systemFontOfSize:10];
+//                [view addSubview:btn];
+//                [view addSubview:label];
             }
             [_scrollView addSubview:view];
         }
@@ -438,21 +457,36 @@ static NSInteger seq = 0;
     NSDictionary *dic;
     if (type == 1) {
         dic = [self.sensorArr objectAtIndex:btn.tag - 1000];
+        NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"id"]};
+        [[APIManager sharedManager]deviceTriggerSceneWithParameters:params success:^(id data) {
+            NSDictionary *datadic = data;
+            NSLog(@"data:%@",data);
+            if([[datadic objectForKey:@"code"] intValue] == 200){
+                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            }else{
+                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
     }else{
-        dic = [self.sensorArr objectAtIndex:btn.tag - 2000];
+        dic = [self.deviceArr objectAtIndex:btn.tag - 2000];
+        NSDictionary *cmd = @{@"cmd":@"edit",@"type":[dic objectForKey:@"type"],@"devid":[dic objectForKey:@"type"],@"value":@"1",@"ch":@"1"};
+        NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"cmd":cmd,@"device_type":[dic objectForKey:@"type"]};
+        NSLog(@"params:%@",params);
+        [[APIManager sharedManager]deviceZigbeeCmdsWithParameters:params success:^(id data) {
+            NSDictionary *datadic = data;
+            NSLog(@"data:%@",data);
+            if([[datadic objectForKey:@"code"] intValue] == 200){
+                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            }else{
+                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
     }
-    NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"id"]};
-    [[APIManager sharedManager]deviceTriggerSceneWithParameters:params success:^(id data) {
-        NSDictionary *datadic = data;
-        NSLog(@"data:%@",data);
-        if([[datadic objectForKey:@"code"] intValue] == 200){
-            [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
-        }else{
-            [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
+    
 //    NSLog(@"dic:%@",dic);
 }
 -(NSMutableArray*)sensorArr{
@@ -466,5 +500,9 @@ static NSInteger seq = 0;
         _deviceArr = [NSMutableArray new];
     }
     return _deviceArr;
+}
+-(void)didClickBtn:(UIButton *)button{
+    [self btnAction:button];
+//    NSLog(@"tag:%ld",button.tag);
 }
 @end
