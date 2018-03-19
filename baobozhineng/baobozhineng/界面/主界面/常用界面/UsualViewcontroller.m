@@ -83,7 +83,7 @@ static NSInteger seq = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadUi];
-    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
+    //NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     // Do any additional setup after loading the view.
 
     _moreEquipmentTitleArray = [NSMutableArray arrayWithArray:@[@"分享",@"添加主机",@"添加设备"]];
@@ -287,18 +287,31 @@ static NSInteger seq = 0;
 }
 -(void)viewWillAppear:(BOOL)animated{
     //    [self initUdpSocket];
-    [self jpushTest];
-    [self getWeather];
-    [self loadData];
-    NSMutableArray *master = GET_USERDEFAULT(MASTER);
-    if (master != nil) {
-        for (int i = 0; i < master.count; i++) {
-            NSDictionary *dic = master[i];
-            if ([[dic objectForKey:@"master_id"] integerValue] == [GET_USERDEFAULT(MASTER_ID) integerValue]) {
-                _currentHostLabel.text = [dic objectForKey:@"master_name"];
+    if (GET_USERDEFAULT(MASTER_ID) > 0) {
+        [self jpushTest];
+        [self getWeather];
+        [self loadData];
+        
+        if (GET_USERDEFAULT(MASTER) != nil) {
+            if([GET_USERDEFAULT(MASTER) isKindOfClass:[NSArray class]])
+            {
+                NSMutableArray *master = GET_USERDEFAULT(MASTER);
+                for (int i = 0; i < master.count; i++) {
+                    NSDictionary *dic = master[i];
+                    if ([[dic objectForKey:@"master_id"] integerValue] == [GET_USERDEFAULT(MASTER_ID) integerValue]) {
+                        _currentHostLabel.text = [dic objectForKey:@"master_name"];
+                    }
+                    [self.hostsArray addObject:[dic objectForKey:@"master_name"]];
+                    //            _hostsArray = [NSMutableArray arrayWithArray:@[[dic objectForKey:@"master_name"]];
+                }
+            }else{
+                NSDictionary *dic = GET_USERDEFAULT(MASTER);
+                if ([[dic objectForKey:@"master_id"] integerValue] == [GET_USERDEFAULT(MASTER_ID) integerValue]) {
+                    _currentHostLabel.text = [dic objectForKey:@"master_name"];
+                }
+                [self.hostsArray addObject:[dic objectForKey:@"master_name"]];
+                
             }
-            [self.hostsArray addObject:[dic objectForKey:@"master_name"]];
-//            _hostsArray = [NSMutableArray arrayWithArray:@[[dic objectForKey:@"master_name"]];
         }
     }
     self.navigationController.navigationBar.hidden = YES;
@@ -327,7 +340,7 @@ static NSInteger seq = 0;
 -(void)loadData{
     [[APIManager sharedManager]deviceGetSceneListsWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSDictionary *dic = data;
-        if ([dic objectForKey:@"data"] == nil) {
+        if ([[dic objectForKey:@"data"] isKindOfClass:[NSString class]]) {
             
         }else{
             self.sensorArr = [dic objectForKey:@"data"];
@@ -369,20 +382,8 @@ static NSInteger seq = 0;
     }];
     [[APIManager sharedManager]deviceGetDeviceInfoWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSDictionary *dic = data;
-        if ([dic objectForKey:@"data"] == nil) {
-//            self.deviceArr = [dic objectForKey:@"data"];
-//            //设置每行多少按钮
-//            int cellcount = 4;
-//            int sensorCount = ceil(self.sensorArr.count % cellcount);
-//            int totalCount = ceil(self.deviceArr.count % cellcount);
-//            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 220 + sensorCount*80 + 50*2, SCREEN_WIDTH, totalCount*50)];
-//            for (int i = 0; i < 4; i++) {
-//                CustomButtonView *view = [[CustomButtonView alloc]initWithFrame:CGRectMake(80*i, 20, 80, 80) image:[UIImage imageNamed:@"2.png"] sup:@"开" name:@"苏打粉"];
-//                view.delegate = self;
-//                view.btn.tag = i;
-//                [view addSubview:view];
-//            }
-//            [_scrollView addSubview:view];
+        if ([[dic objectForKey:@"data"] isKindOfClass:[NSString class]]) {
+            
         }else{
             self.deviceArr = [dic objectForKey:@"data"];
             //设置每行多少按钮
