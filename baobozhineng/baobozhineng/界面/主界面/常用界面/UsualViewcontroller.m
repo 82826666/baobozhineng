@@ -83,16 +83,14 @@ static NSInteger seq = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadUi];
-    //NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
+    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     // Do any additional setup after loading the view.
-
     _moreEquipmentTitleArray = [NSMutableArray arrayWithArray:@[@"分享",@"添加主机",@"添加设备"]];
     _moreEquipmentImgArray = [NSMutableArray arrayWithArray:@[@"in_common_more_share.png",@"in_common_more_add.png",@"in_common_more_equipment.png"]];
     UITapGestureRecognizer *hostLabGestuer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(currentHostAction:)];
     [_currentHostLabel addGestureRecognizer:hostLabGestuer];
-    
-
 }
+
 -(void)loadUi{
     UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_WIDTH, 50)];
     [supper addSubview:[self getCommonAdd:@"情景快捷" tag1:1000 tag2:1001]];

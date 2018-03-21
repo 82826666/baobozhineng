@@ -8,6 +8,7 @@
 
 #import "TwoWayViewController.h"
 #import "CommontViewController.h"
+#import "ComontSensorViewController.h"
 #define BTN_WIDTH 50
 @interface TwoWayViewController (){
     NSMutableArray      *dataSource;
@@ -59,9 +60,21 @@
                     @"title":@"四键开关"
                     },
                   @{
-                    @"img":@"in_equipment_switch_three",
-                    @"title":@"热水器"
-                    }, nil];
+                    @"img":@"in_sensor_control_induction",
+                    @"title":@"门磁"
+                    },
+                  @{
+                    @"img":@"in_equipment_sensor_infrared",
+                    @"title":@"红外感应"
+                    },
+                  @{
+                    @"img":@"in_equipment_sensor_co",
+                    @"title":@"一氧化碳"
+                    },
+                  @{
+                    @"img":@"in_equipment_sensor_temperature",
+                    @"title":@"温湿度"
+                    },nil];
     
 }
 
@@ -105,14 +118,34 @@
     CommontViewController *controller = [[CommontViewController alloc]init];
     if (sender.tag == 1) {
         controller.setNum = setNumOne;
+        [self.navigationController pushViewController:controller animated:YES];
     }else if(sender.tag == 2){
         controller.setNum = setNumTwo;
+        [self.navigationController pushViewController:controller animated:YES];
     }else if (sender.tag == 3){
         controller.setNum = setNumThree;
+        [self.navigationController pushViewController:controller animated:YES];
     }else if (sender.tag == 4){
         controller.setNum = setNumFour;
+        [self.navigationController pushViewController:controller animated:YES];
+    }else if (sender.tag == 5){
+        ComontSensorViewController *con = [[ComontSensorViewController alloc]init];
+        con.type = @"25111";
+        [self.navigationController pushViewController:con animated:YES];
+    }else if (sender.tag == 6){
+        ComontSensorViewController *con = [[ComontSensorViewController alloc]init];
+        con.type = @"25211";
+        [self.navigationController pushViewController:con animated:YES];
+    }else if (sender.tag == 7){
+        ComontSensorViewController *con = [[ComontSensorViewController alloc]init];
+        con.type = @"25311";
+        [self.navigationController pushViewController:con animated:YES];
+    }else if (sender.tag == 8){
+        ComontSensorViewController *con = [[ComontSensorViewController alloc]init];
+        con.type = @"25711";
+        [self.navigationController pushViewController:con animated:YES];
     }
-    [self.navigationController pushViewController:controller animated:YES];
+    
 //    NSLog(@"tag:%ld",sender.tag);
 }
 //创建按钮

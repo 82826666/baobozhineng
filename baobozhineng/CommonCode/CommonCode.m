@@ -27,6 +27,9 @@
         case 20141:
             return @"in_equipment_switch_four";
             break;
+        case 10211:
+            return @"in_select_aiming_default";
+            break;
         case 3001:
             return @"in_scene_select_hand";
         default:
@@ -40,6 +43,12 @@
         return @"20111";
     }else if ([imageName isEqualToString:@"in_equipment_switch_two"]){
         return @"20121";
+    }else if([imageName isEqualToString:@"in_equipment_switch_three"]){
+        return @"20131";
+    }else if([imageName isEqualToString:@"in_equipment_switch_four"]){
+        return @"20141";
+    }else if([imageName isEqualToString:@"in_select_aiming_default"]){
+        return @"10211";
     }else if([imageName isEqualToString:@"in_scene_select_hand"]){
         return @"3001";
     }

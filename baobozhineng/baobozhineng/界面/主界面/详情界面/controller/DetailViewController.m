@@ -20,6 +20,7 @@
     [super viewDidLoad];
     [self initNav];
     [self initTable];
+    [self loadData];
     // Do any additional setup after loading the view.
 }
 
@@ -62,9 +63,6 @@
     [self.navigationController pushViewController:[[RecodeViewController alloc]init] animated:YES];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [self loadData];
-}
 - (void)add{
 //    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:];
     [self.navigationController pushViewController:[[AddSceneViewController alloc]init] animated:YES];

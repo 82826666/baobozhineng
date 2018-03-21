@@ -44,6 +44,7 @@
 		57EEDC57205008A9006E3899 /* TwoWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC56205008A8006E3899 /* TwoWayViewController.m */; };
 		57EEDC5A205010CA006E3899 /* CommontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC59205010CA006E3899 /* CommontViewController.m */; };
 		57FACBA3205D495100674A9D /* CustomButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FACBA2205D495100674A9D /* CustomButtonView.m */; };
+		57FACBCB2061424F00674A9D /* ComontSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FACBCA2061424F00674A9D /* ComontSensorViewController.m */; };
 		6547407F1FFC99CA007F1173 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6547407E1FFC99CA007F1173 /* AlertManager.m */; };
 		65D356BE1FFD0D8A00447213 /* GCDAsyncSocket.h in Sources */ = {isa = PBXBuildFile; fileRef = 65D356B91FFD0D4E00447213 /* GCDAsyncSocket.h */; };
 		65D356BF1FFD0D9000447213 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D356B81FFD0D4E00447213 /* GCDAsyncSocket.m */; };
@@ -403,6 +404,8 @@
 		57EEDC59205010CA006E3899 /* CommontViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommontViewController.m; sourceTree = "<group>"; };
 		57FACBA1205D495100674A9D /* CustomButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomButtonView.h; sourceTree = "<group>"; };
 		57FACBA2205D495100674A9D /* CustomButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomButtonView.m; sourceTree = "<group>"; };
+		57FACBC92061424F00674A9D /* ComontSensorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComontSensorViewController.h; sourceTree = "<group>"; };
+		57FACBCA2061424F00674A9D /* ComontSensorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComontSensorViewController.m; sourceTree = "<group>"; };
 		6547407D1FFC99CA007F1173 /* AlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertManager.h; sourceTree = "<group>"; };
 		6547407E1FFC99CA007F1173 /* AlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertManager.m; sourceTree = "<group>"; };
 		65D356B81FFD0D4E00447213 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
@@ -896,6 +899,8 @@
 				577089D8205AAC580022E7F0 /* getSensorViewController.m */,
 				579A6421205CAED4002A1CD3 /* GetDeviceViewController.h */,
 				579A6422205CAED4002A1CD3 /* GetDeviceViewController.m */,
+				57FACBC92061424F00674A9D /* ComontSensorViewController.h */,
+				57FACBCA2061424F00674A9D /* ComontSensorViewController.m */,
 			);
 			path = "常用界面";
 			sourceTree = "<group>";
@@ -2008,6 +2013,7 @@
 				A2C350301FF5CBC800D3566B /* EquipmentSwitchSetViewController.m in Sources */,
 				5729306A203FF49100E68079 /* KMDatePickerDateModel.m in Sources */,
 				57293064203FF41D00E68079 /* DateHelper.m in Sources */,
+				57FACBCB2061424F00674A9D /* ComontSensorViewController.m in Sources */,
 				A2C6BB7C1FF247BA00D56C92 /* MainParentViewController.m in Sources */,
 				A2B934E91FEFC858003F2C52 /* CustomerSearchBarView.m in Sources */,
 				A2C3508B1FFC68E900D3566B /* MainHostSetViewController.m in Sources */,
