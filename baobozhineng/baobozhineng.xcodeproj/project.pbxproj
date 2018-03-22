@@ -24,6 +24,7 @@
 		57293067203FF46900E68079 /* NSDate+CalculateDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293066203FF46900E68079 /* NSDate+CalculateDay.m */; };
 		5729306A203FF49100E68079 /* KMDatePickerDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293069203FF49100E68079 /* KMDatePickerDateModel.m */; };
 		5729306D203FF4B900E68079 /* KMDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5729306C203FF4B900E68079 /* KMDatePicker.m */; };
+		5735B4952063DA4C0001DE8C /* Usual2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5735B4942063DA4C0001DE8C /* Usual2ViewController.m */; };
 		577089D9205AAC580022E7F0 /* getSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577089D8205AAC580022E7F0 /* getSensorViewController.m */; };
 		5795230A202F391F00FB2508 /* CommonAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 57952309202F391F00FB2508 /* CommonAdd.m */; };
 		579A6423205CAED4002A1CD3 /* GetDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579A6422205CAED4002A1CD3 /* GetDeviceViewController.m */; };
@@ -366,6 +367,8 @@
 		57293069203FF49100E68079 /* KMDatePickerDateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KMDatePickerDateModel.m; sourceTree = "<group>"; };
 		5729306B203FF4B900E68079 /* KMDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KMDatePicker.h; sourceTree = "<group>"; };
 		5729306C203FF4B900E68079 /* KMDatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KMDatePicker.m; sourceTree = "<group>"; };
+		5735B4932063DA4C0001DE8C /* Usual2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Usual2ViewController.h; sourceTree = "<group>"; };
+		5735B4942063DA4C0001DE8C /* Usual2ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Usual2ViewController.m; sourceTree = "<group>"; };
 		577089D7205AAC580022E7F0 /* getSensorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = getSensorViewController.h; sourceTree = "<group>"; };
 		577089D8205AAC580022E7F0 /* getSensorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = getSensorViewController.m; sourceTree = "<group>"; };
 		577A9B4D20136B330054BF53 /* baobozhineng.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = baobozhineng.entitlements; sourceTree = "<group>"; };
@@ -901,6 +904,8 @@
 				579A6422205CAED4002A1CD3 /* GetDeviceViewController.m */,
 				57FACBC92061424F00674A9D /* ComontSensorViewController.h */,
 				57FACBCA2061424F00674A9D /* ComontSensorViewController.m */,
+				5735B4932063DA4C0001DE8C /* Usual2ViewController.h */,
+				5735B4942063DA4C0001DE8C /* Usual2ViewController.m */,
 			);
 			path = "常用界面";
 			sourceTree = "<group>";
@@ -2002,6 +2007,7 @@
 				A2C6BB611FF1F67E00D56C92 /* TabNavViewcontroller.m in Sources */,
 				A2B935051FEFFA3C003F2C52 /* LoginViewController.m in Sources */,
 				A2B934DD1FEFC300003F2C52 /* APIManager.m in Sources */,
+				5735B4952063DA4C0001DE8C /* Usual2ViewController.m in Sources */,
 				A2C6BB6A1FF200F100D56C92 /* UsualViewcontroller.m in Sources */,
 				57EEDC5A205010CA006E3899 /* CommontViewController.m in Sources */,
 				A2C350331FF5EE3000D3566B /* RadioView.m in Sources */,

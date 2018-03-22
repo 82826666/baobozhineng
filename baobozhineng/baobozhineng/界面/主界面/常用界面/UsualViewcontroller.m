@@ -92,7 +92,7 @@ static NSInteger seq = 0;
 }
 
 -(void)loadUi{
-    UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 220, SCREEN_WIDTH, 50)];
+    UIView *supper = [[UIView alloc]initWithFrame:CGRectMake(0, 240, SCREEN_WIDTH, 50)];
     [supper addSubview:[self getCommonAdd:@"情景快捷" tag1:1000 tag2:1001]];
     [_scrollView addSubview:supper];
     _supper1 = [[UIView alloc]initWithFrame:CGRectMake(0, 270, SCREEN_WIDTH, 50)];
@@ -345,7 +345,7 @@ static NSInteger seq = 0;
             //设置每行多少按钮
             int cellcount = 4;
             int totalCount = ceil(self.sensorArr.count % cellcount);
-            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 270, SCREEN_WIDTH, totalCount*50)];
+            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, totalCount*50)];
             //设置按钮下方标题的高度
             double labelHeight = 15;
             
@@ -388,7 +388,7 @@ static NSInteger seq = 0;
             int cellcount = 4;
             int sensorCount = ceil(self.sensorArr.count % cellcount);
             int totalCount = ceil(self.deviceArr.count % cellcount);
-            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 220 + sensorCount*80 + 50*2, SCREEN_WIDTH, totalCount*50)];
+            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 24 + sensorCount*80 + 50*2, SCREEN_WIDTH, totalCount*50)];
             //设置按钮下方标题的高度
             double labelHeight = 15;
             

@@ -16,6 +16,7 @@
 #import "LoginRisterNavgation.h"
 #import "LoginViewController.h"
 #import "HouseViewController.h"
+#import "Usual2ViewController.h"
 @interface ParentTabbarController ()
 //分栏底部视图
 @property(nonatomic,strong)UIView *bottomView;
@@ -74,7 +75,7 @@ static ParentTabbarController* tabbarController;
         [_bottomView removeFromSuperview];
     }
 //    TabNavViewcontroller *usualNav = [[TabNavViewcontroller alloc] initWithRootViewController:[UsualViewcontroller shareInstance]];
-    TabNavViewcontroller *usualNav = (TabNavViewcontroller*)[[UINavigationController alloc] initWithRootViewController:[UsualViewcontroller shareInstance]];
+    TabNavViewcontroller *usualNav = (TabNavViewcontroller*)[[UINavigationController alloc] initWithRootViewController:[Usual2ViewController new]];
 //    TabNavViewcontroller *homeNav = [[TabNavViewcontroller alloc] initWithRootViewController:[HomeViewController shareInstance]];
 //    TabNavViewcontroller *homeNav = [[TabNavViewcontroller alloc] initWithRootViewController:[[HouseViewController alloc]init]];
     TabNavViewcontroller *homeNav = (TabNavViewcontroller*)[[UINavigationController alloc] initWithRootViewController:[[HouseViewController alloc]init]];
