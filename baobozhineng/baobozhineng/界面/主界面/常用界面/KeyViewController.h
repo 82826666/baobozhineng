@@ -1,8 +1,8 @@
 //
-//  CommontViewController.h
+//  KeyViewController.h
 //  baobozhineng
 //
-//  Created by wjy on 2018/3/7.
+//  Created by wjy on 2018/3/24.
 //  Copyright © 2018年 吴建阳. All rights reserved.
 //
 
@@ -13,9 +13,9 @@ typedef NS_ENUM(NSUInteger, setNum) {
     setNumThree = 3,
     setNumFour = 4
 };
-@interface CommontViewController : MainParentViewController
+@interface KeyViewController : UIViewController
 
 @property (nonatomic) setNum setNum;
-@property (nonatomic) NSDictionary *data;
+@property (nonatomic,strong) NSDictionary *dataDic;
 
 @end

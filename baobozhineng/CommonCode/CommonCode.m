@@ -35,7 +35,7 @@
         default:
             break;
     }
-    return @"";
+    return @"in_select_aiming_default";
 }
 //获取对应图片的编号
 + (NSString*)getImageType:(NSString*)imageName{
@@ -51,6 +51,19 @@
         return @"10211";
     }else if([imageName isEqualToString:@"in_scene_select_hand"]){
         return @"3001";
+    }
+    return @"";
+}
+
+//获取主机mac地址
++(NSString *)getMac{
+    NSInteger master_id = [GET_USERDEFAULT(MASTER_ID) integerValue];
+    NSArray *master = GET_USERDEFAULT(MASTER);
+    for (int i = 0; i < master.count; i ++) {
+        NSDictionary *dic = [master objectAtIndex:i];
+        if ([[dic objectForKey:@"master_id"] integerValue] == master_id) {
+            return [dic objectForKey:@"mac"];
+        }
     }
     return @"";
 }

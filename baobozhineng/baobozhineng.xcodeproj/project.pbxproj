@@ -25,6 +25,9 @@
 		5729306A203FF49100E68079 /* KMDatePickerDateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57293069203FF49100E68079 /* KMDatePickerDateModel.m */; };
 		5729306D203FF4B900E68079 /* KMDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5729306C203FF4B900E68079 /* KMDatePicker.m */; };
 		5735B4952063DA4C0001DE8C /* Usual2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5735B4942063DA4C0001DE8C /* Usual2ViewController.m */; };
+		57530B12206612CA00F76006 /* KeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57530B11206612CA00F76006 /* KeyViewController.m */; };
+		57530B2F2069199800F76006 /* AFNHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 57530B2E2069199800F76006 /* AFNHttpTool.m */; };
+		57530B3220691A4B00F76006 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 57530B3120691A4B00F76006 /* APIManager.m */; };
 		577089D9205AAC580022E7F0 /* getSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577089D8205AAC580022E7F0 /* getSensorViewController.m */; };
 		5795230A202F391F00FB2508 /* CommonAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 57952309202F391F00FB2508 /* CommonAdd.m */; };
 		579A6423205CAED4002A1CD3 /* GetDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579A6422205CAED4002A1CD3 /* GetDeviceViewController.m */; };
@@ -67,8 +70,6 @@
 		A2B934AD1FEFC225003F2C52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2B934AC1FEFC225003F2C52 /* Assets.xcassets */; };
 		A2B934B01FEFC225003F2C52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B934AE1FEFC225003F2C52 /* LaunchScreen.storyboard */; };
 		A2B934B31FEFC225003F2C52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B934B21FEFC225003F2C52 /* main.m */; };
-		A2B934DA1FEFC2EC003F2C52 /* AFNHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B934D91FEFC2EC003F2C52 /* AFNHttpTool.m */; };
-		A2B934DD1FEFC300003F2C52 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B934DC1FEFC300003F2C52 /* APIManager.m */; };
 		A2B934E81FEFC858003F2C52 /* CustomErImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B934E01FEFC857003F2C52 /* CustomErImgView.m */; };
 		A2B934E91FEFC858003F2C52 /* CustomerSearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B934E21FEFC857003F2C52 /* CustomerSearchBarView.m */; };
 		A2B934EA1FEFC858003F2C52 /* CommonCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B934E31FEFC857003F2C52 /* CommonCode.m */; };
@@ -369,6 +370,12 @@
 		5729306C203FF4B900E68079 /* KMDatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KMDatePicker.m; sourceTree = "<group>"; };
 		5735B4932063DA4C0001DE8C /* Usual2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Usual2ViewController.h; sourceTree = "<group>"; };
 		5735B4942063DA4C0001DE8C /* Usual2ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Usual2ViewController.m; sourceTree = "<group>"; };
+		57530B10206612CA00F76006 /* KeyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyViewController.h; sourceTree = "<group>"; };
+		57530B11206612CA00F76006 /* KeyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyViewController.m; sourceTree = "<group>"; };
+		57530B2D2069199800F76006 /* AFNHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNHttpTool.h; sourceTree = "<group>"; };
+		57530B2E2069199800F76006 /* AFNHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNHttpTool.m; sourceTree = "<group>"; };
+		57530B3020691A4B00F76006 /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		57530B3120691A4B00F76006 /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		577089D7205AAC580022E7F0 /* getSensorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = getSensorViewController.h; sourceTree = "<group>"; };
 		577089D8205AAC580022E7F0 /* getSensorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = getSensorViewController.m; sourceTree = "<group>"; };
 		577A9B4D20136B330054BF53 /* baobozhineng.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = baobozhineng.entitlements; sourceTree = "<group>"; };
@@ -446,10 +453,6 @@
 		A2B934B21FEFC225003F2C52 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A2B934B81FEFC226003F2C52 /* baobozhinengTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baobozhinengTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2B934C31FEFC226003F2C52 /* baobozhinengUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baobozhinengUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2B934D81FEFC2EC003F2C52 /* AFNHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNHttpTool.h; sourceTree = "<group>"; };
-		A2B934D91FEFC2EC003F2C52 /* AFNHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNHttpTool.m; sourceTree = "<group>"; };
-		A2B934DB1FEFC300003F2C52 /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
-		A2B934DC1FEFC300003F2C52 /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		A2B934DF1FEFC857003F2C52 /* CommonCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCode.h; sourceTree = "<group>"; };
 		A2B934E01FEFC857003F2C52 /* CustomErImgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomErImgView.m; sourceTree = "<group>"; };
 		A2B934E11FEFC857003F2C52 /* UtilsMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
@@ -906,6 +909,8 @@
 				57FACBCA2061424F00674A9D /* ComontSensorViewController.m */,
 				5735B4932063DA4C0001DE8C /* Usual2ViewController.h */,
 				5735B4942063DA4C0001DE8C /* Usual2ViewController.m */,
+				57530B10206612CA00F76006 /* KeyViewController.h */,
+				57530B11206612CA00F76006 /* KeyViewController.m */,
 			);
 			path = "常用界面";
 			sourceTree = "<group>";
@@ -1029,12 +1034,12 @@
 		A2B934D61FEFC294003F2C52 /* NewWorkManager */ = {
 			isa = PBXGroup;
 			children = (
-				A2B934D81FEFC2EC003F2C52 /* AFNHttpTool.h */,
-				A2B934D91FEFC2EC003F2C52 /* AFNHttpTool.m */,
-				A2B934DB1FEFC300003F2C52 /* APIManager.h */,
-				A2B934DC1FEFC300003F2C52 /* APIManager.m */,
 				6547407D1FFC99CA007F1173 /* AlertManager.h */,
 				6547407E1FFC99CA007F1173 /* AlertManager.m */,
+				57530B2D2069199800F76006 /* AFNHttpTool.h */,
+				57530B2E2069199800F76006 /* AFNHttpTool.m */,
+				57530B3020691A4B00F76006 /* APIManager.h */,
+				57530B3120691A4B00F76006 /* APIManager.m */,
 			);
 			path = NewWorkManager;
 			sourceTree = "<group>";
@@ -1958,6 +1963,7 @@
 				65D356C11FFD0D9A00447213 /* GCDAsyncUdpSocket.m in Sources */,
 				65D356C01FFD0D9500447213 /* GCDAsyncUdpSocket.h in Sources */,
 				57293060203FDD2400E68079 /* ConditionViewController.m in Sources */,
+				57530B3220691A4B00F76006 /* APIManager.m in Sources */,
 				A21AD1D31FFF21F50031C186 /* VerticalCenterTextLabel.m in Sources */,
 				65D356BF1FFD0D9000447213 /* GCDAsyncSocket.m in Sources */,
 				65D356BE1FFD0D8A00447213 /* GCDAsyncSocket.h in Sources */,
@@ -1989,7 +1995,6 @@
 				577089D9205AAC580022E7F0 /* getSensorViewController.m in Sources */,
 				A2C6BB641FF1F72C00D56C92 /* ParentTabbarController.m in Sources */,
 				5718A75E2044497800D462A0 /* SelectTaskDeviceViewController.m in Sources */,
-				A2B934DA1FEFC2EC003F2C52 /* AFNHttpTool.m in Sources */,
 				A2C350971FFCA7D200D3566B /* TextFieldAlertViewController.m in Sources */,
 				A2C3507E1FF72D5E00D3566B /* ParentPopupView.m in Sources */,
 				6547407F1FFC99CA007F1173 /* AlertManager.m in Sources */,
@@ -1997,6 +2002,7 @@
 				5718A75B2044412700D462A0 /* AddDelayedViewController.m in Sources */,
 				57A928A02040F7340053660A /* UIButton+CenterImageAndTitle.m in Sources */,
 				A2C3502D1FF5167500D3566B /* SelectEquipmentViewController.m in Sources */,
+				57530B2F2069199800F76006 /* AFNHttpTool.m in Sources */,
 				A2C6BB791FF22D6D00D56C92 /* TabbarBottomBtn.m in Sources */,
 				57B37FBD20233F7300AA3603 /* HouseTableViewCell.m in Sources */,
 				57B37FB9202338AB00AA3603 /* HouseViewController.m in Sources */,
@@ -2005,8 +2011,8 @@
 				A2B936D01FF01289003F2C52 /* ParentViewController.m in Sources */,
 				57A928A32040F7C10053660A /* AddConditionViewController.m in Sources */,
 				A2C6BB611FF1F67E00D56C92 /* TabNavViewcontroller.m in Sources */,
+				57530B12206612CA00F76006 /* KeyViewController.m in Sources */,
 				A2B935051FEFFA3C003F2C52 /* LoginViewController.m in Sources */,
-				A2B934DD1FEFC300003F2C52 /* APIManager.m in Sources */,
 				5735B4952063DA4C0001DE8C /* Usual2ViewController.m in Sources */,
 				A2C6BB6A1FF200F100D56C92 /* UsualViewcontroller.m in Sources */,
 				57EEDC5A205010CA006E3899 /* CommontViewController.m in Sources */,

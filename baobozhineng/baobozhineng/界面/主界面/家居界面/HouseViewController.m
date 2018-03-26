@@ -7,6 +7,8 @@
 //
 
 #import "HouseViewController.h"
+#import "CKAlertViewController.h"
+#import "KeyViewController.h"
 #import <YYKit.h>
 static NSString *identifier = @"cellID";
 static NSString *headerReuseIdentifier = @"hearderID";
@@ -42,6 +44,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
     
     [self.view addSubview:self.collectionView];
     
+    [self createLongPressGesture];
     [self loadData];
     // Do any additional setup after loading the view.
 }
@@ -49,16 +52,26 @@ static NSString *headerReuseIdentifier = @"hearderID";
 #pragma mark ————— datasouce代理方法 —————
 //有几组（默认是1）
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 2;
+    return self.dataSource.count;
 }
 //一个分区item的数量
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 2;
+    if ([self.stateArray[section] isEqualToString:@"1"]){
+        //如果是展开状态
+        NSArray *array = [self.dataSource objectAtIndex:section];
+        return array.count;
+    }else{
+        //如果是闭合，返回0
+        return 0;
+    }
 }
 //每个item的内容
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+    NSArray *arr = [self.dataSource objectAtIndex:indexPath.section];
+    NSDictionary *dic = [arr objectAtIndex:indexPath.row];
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    [cell.contentView removeAllSubviews];
     
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView setImage:[UIImage imageNamed:@"in_select_aiming_default"]];
@@ -70,7 +83,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
     
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom, SCREEN_WIDTH/4, 30)];
     name.textAlignment = NSTextAlignmentCenter;
-    name.text = @"testsadf";
+    name.text = [dic objectForKey:@"name"];
     
     [cell.contentView addSubview:imageView];
     [cell.contentView addSubview:sup];
@@ -85,11 +98,15 @@ static NSString *headerReuseIdentifier = @"hearderID";
     if (kind == UICollectionElementKindSectionHeader) {
         UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier forIndexPath:indexPath];
         
+        [headerView removeAllSubviews];
+        
         UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT, 0.5)];
         line1.backgroundColor = [UIColor lightGrayColor];
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, line1.bottom + 10, SCREEN_HEIGHT, 30)];
-        label.text = @"sdf";
+        label.text = [self.sectionArray objectAtIndex:indexPath.section];
+//        NSLog(@"sec:%ld",indexPath.section);
+//        NSLog(@"text:%@",[self.sectionArray objectAtIndex:indexPath.section]);
         
         UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, label.bottom + 10, SCREEN_HEIGHT, 0.5)];
         line2.backgroundColor = [UIColor lightGrayColor];
@@ -97,6 +114,14 @@ static NSString *headerReuseIdentifier = @"hearderID";
         [headerView addSubview:line1];
         [headerView addSubview:label];
         [headerView addSubview:line2];
+        //创建长按手势监听
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
+                                                   initWithTarget:self
+                                                   action:@selector(sectionHeaderLongPressed:)];
+        longPress.minimumPressDuration = 0.001;
+        longPress.accessibilityValue = [NSString stringWithFormat:@"%ld",indexPath.section];
+        //将长按手势添加到需要实现长按操作的视图里
+        [headerView addGestureRecognizer:longPress];
         return headerView;
     }
     return nil;
@@ -106,10 +131,13 @@ static NSString *headerReuseIdentifier = @"hearderID";
 //代理的优先级比属性高
 //点击时间监听
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld-%ld",indexPath.section,indexPath.row);
+//    NSLog(@"%ld-%ld",indexPath.section,indexPath.row);
 }
 //设置cell的内边距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    if ([[self.stateArray objectAtIndex:section] integerValue] == 0) {
+        return UIEdgeInsetsMake(0, 0, 0, 0);
+    }
     return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 //设置cell的大小
@@ -132,72 +160,6 @@ static NSString *headerReuseIdentifier = @"hearderID";
         _collectionView.backgroundColor = [UIColor whiteColor];
     }
     return _collectionView;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)loadData{
-    [[APIManager sharedManager]deviceGetMasterRoomWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
-        
-        NSDictionary *dic = data;
-        if ([[dic objectForKey:@"code"]integerValue] == 200) {
-            NSArray *room = [dic objectForKey:@"data"];
-            for (int i = 0; i < room.count; i ++) {
-                NSDictionary *roomOne = [room objectAtIndex:i];
-                [self.room setValue:[roomOne objectForKey:@"name"] forKey:[NSString stringWithFormat:@"%@",[roomOne objectForKey:@"id"]]];
-            }
-            [[APIManager sharedManager]deviceGetDeviceInfoWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
-                NSDictionary *dic = data;
-                if ([[dic objectForKey:@"code"]integerValue] == 200) {
-                    NSArray *testArray = [dic objectForKey:@"data"];
-                    // 获取array中所有index值
-                    NSArray *indexArray = [testArray valueForKey:@"room_id"];
-                    // 将array装换成NSSet类型
-                    NSSet *indexSet = [NSSet setWithArray:indexArray];
-                    // 新建array，用来存放分组后的array
-                    NSMutableArray *resultArray = [NSMutableArray array];
-                    // NSSet去重并遍历
-                    [[indexSet allObjects] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        // 根据NSPredicate获取array
-                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"room_id == %@",obj];
-                        NSArray *indexArray = [testArray filteredArrayUsingPredicate:predicate];
-                        
-                        // 将查询结果加入到resultArray中
-                        [resultArray addObject:indexArray];
-                    }];
-                    NSLog(@"room:%@",self.room);
-                    for (int k=0; k < resultArray.count; k++) {
-                        NSArray *deviceOne = [resultArray objectAtIndex:k];
-                        NSDictionary *dic = deviceOne[0];
-
-                        NSLog(@"sec:%@",[dic objectForKey:@"room_id"]);
-                        [self.sectionArray addObject:[self.room objectForKey:[NSString stringWithFormat:@"%@",[dic objectForKey:@"room_id"]]]];
-                        [self.dataSource addObject:deviceOne];
-                    }
-                    for (int i = 0; i < self.dataSource.count; i++)
-                    {
-                        //所有的分区都是闭合
-                        [self.stateArray addObject:@"1"];
-                    }
-                    NSLog(@"sec%@",self.sectionArray);
-                    NSLog(@"sec%@",self.dataSource);
-                    NSLog(@"sec%@",self.stateArray);
-                }else{
-                    
-                }
-            } failure:^(NSError *error) {
-                
-            }];
-        }else{
-            
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-    
 }
 
 -(NSMutableDictionary *)room{
@@ -227,6 +189,145 @@ static NSString *headerReuseIdentifier = @"hearderID";
     }
     return _stateArray;
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 创建长按手势
+- (void)createLongPressGesture{
+    //创建长按手势监听
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
+                                               initWithTarget:self
+                                               action:@selector(cellLongPressed:)];
+    longPress.minimumPressDuration = 1.0;
+    //将长按手势添加到需要实现长按操作的视图里
+    [self.collectionView addGestureRecognizer:longPress];
+}
+#pragma mark - cell的长按处理事件
+- (void) cellLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
+    CGPoint pointTouch = [gestureRecognizer locationInView:self.collectionView];
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:pointTouch];
+//        NSLog(@"sec:%ld,row:%ld",indexPath.section,indexPath.row);
+        if (indexPath == nil) {
+            NSLog(@"空");
+        }else{
+            NSArray *arr = [self.dataSource objectAtIndex:indexPath.section];
+            NSDictionary *rowDic = [arr objectAtIndex:indexPath.row];
+            CKAlertViewController *alertVC = [CKAlertViewController alertControllerWithTitle:@"操作" message:@"" ];
+            
+            CKAlertAction *edit = [CKAlertAction actionWithTitle:@"修改设备" handler:^(CKAlertAction *action) {
+                KeyViewController *con = [KeyViewController new];
+                if ([[rowDic objectForKey:@"type"] integerValue] == 20131) {
+                    con.setNum = setNumThree;
+                    con.dataDic = rowDic;
+                }
+                [self.navigationController pushViewController:con animated:YES];
+            }];
+            
+            CKAlertAction *delete = [CKAlertAction actionWithTitle:@"删除设备" handler:^(CKAlertAction *action) {
+                [[APIManager sharedManager]deviceDeleteTwowaySwitchWithParameters:@{@"device_id":[rowDic objectForKey:@"id"]} success:^(id data) {
+                    NSDictionary *dic = data;
+                    [[AlertManager alertManager] showError:3.0 string:[dic objectForKey:@"msg"]];
+                    if ([[dic objectForKey:@"code"] integerValue] == 200) {
+                        [self loadData];
+                    }
+                } failure:^(NSError *error) {
+                    [[AlertManager alertManager] showError:3.0 string:@"服务器异常"];
+                }];
+            }];
+            
+            CKAlertAction *updateLater = [CKAlertAction actionWithTitle:@"" handler:^(CKAlertAction *action) {
+                
+            }];
+            
+            [alertVC addAction:edit];
+            [alertVC addAction:delete];
+            [alertVC addAction:updateLater];
+            [self presentViewController:alertVC animated:NO completion:nil];
+        }
+    }
+    if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"长按手势改变，发生长按拖拽动作执行该方法");
+    }
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"长按手势结束");
+    }
+}
+#pragma mark - sectionHeader的长按处理事件
+- (void) sectionHeaderLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        //所有的分区都是闭合
+        NSInteger section = [gestureRecognizer.accessibilityValue integerValue];
+        if ([[self.stateArray objectAtIndex:section] integerValue] == 1) {
+            [self.stateArray replaceObjectAtIndex:section withObject:@"0"];
+        }else{
+            [self.stateArray replaceObjectAtIndex:section withObject:@"1"];
+        }
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:section]];
+    }
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    }
+}
+#pragma mark - 数据加载
+-(void)loadData{
+    [[APIManager sharedManager]deviceGetMasterRoomWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+        
+        NSDictionary *dic = data;
+        if ([[dic objectForKey:@"code"]integerValue] == 200) {
+            NSArray *room = [dic objectForKey:@"data"];
+            for (int i = 0; i < room.count; i ++) {
+                NSDictionary *roomOne = [room objectAtIndex:i];
+                [self.room setValue:[roomOne objectForKey:@"name"] forKey:[NSString stringWithFormat:@"%@",[roomOne objectForKey:@"id"]]];
+            }
+            [[APIManager sharedManager]deviceGetDeviceInfoWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+                NSDictionary *dic = data;
+                if ([[dic objectForKey:@"code"]integerValue] == 200) {
+                    NSArray *testArray = [dic objectForKey:@"data"];
+                    // 获取array中所有index值
+                    NSArray *indexArray = [testArray valueForKey:@"room_id"];
+                    // 将array装换成NSSet类型
+                    NSSet *indexSet = [NSSet setWithArray:indexArray];
+                    // 新建array，用来存放分组后的array
+                    NSMutableArray *resultArray = [NSMutableArray array];
+                    // NSSet去重并遍历
+                    [[indexSet allObjects] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        // 根据NSPredicate获取array
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"room_id == %@",obj];
+                        NSArray *indexArray = [testArray filteredArrayUsingPredicate:predicate];
+                        
+                        // 将查询结果加入到resultArray中
+                        [resultArray addObject:indexArray];
+                    }];
+                    for (int k=0; k < resultArray.count; k++) {
+                        NSArray *deviceOne = [resultArray objectAtIndex:k];
+                        NSDictionary *dic = deviceOne[0];
+                        [self.sectionArray addObject:[self.room objectForKey:[NSString stringWithFormat:@"%@",[dic objectForKey:@"room_id"]]]];
+                        [self.dataSource addObject:deviceOne];
+                    }
+                    for (int i = 0; i < self.dataSource.count; i++)
+                    {
+                        //所有的分区都是闭合
+                        [self.stateArray addObject:@"1"];
+                    }
+                    [self.collectionView reloadData];
+                }else{
+                    
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+        }else{
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+
 //- (void)initDataSource
 //{
 //    sectionArray  = [NSMutableArray arrayWithObjects:@"客厅",

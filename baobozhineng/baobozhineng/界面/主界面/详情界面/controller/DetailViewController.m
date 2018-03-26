@@ -71,7 +71,9 @@
 -(void)loadData{
     [[APIManager sharedManager]deviceGetSceneListsWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSDictionary *dic = data;
-        if ([dic objectForKey:@"data"] != nil) {
+        if ([[dic objectForKey:@"data"] isEqualToString:@""]) {
+            
+        }else{
             NSArray *arr = [dic objectForKey:@"data"];
             for (int i = 0; i < arr.count; i++) {
                 [self.dataSouce addObject:[arr objectAtIndex:i]];

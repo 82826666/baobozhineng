@@ -227,7 +227,8 @@
 + (NSString*)getImageName:(NSInteger)index;
 //获取对应图片的编号
 + (NSString*)getImageType:(NSString*)imageName;
-
+//获取主机mac地址
++(NSString *)getMac;
 /**
  *  @brief 获取当前系统版本
  *

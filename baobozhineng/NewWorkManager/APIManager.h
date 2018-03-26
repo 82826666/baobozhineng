@@ -104,3 +104,4 @@
 #pragma mark 删除传感器
 - (void)deviceDeleteSensorWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure;
 @end
+

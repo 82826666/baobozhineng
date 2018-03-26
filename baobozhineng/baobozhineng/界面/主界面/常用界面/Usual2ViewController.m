@@ -43,7 +43,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
+    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     //创建布局，苹果给我们提供的流布局
     UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc]init];
     
@@ -167,7 +167,8 @@ static NSString *headerReuseIdentifier = @"hearderID";
         [cell.contentView addSubview:_bar33Btn];
         [cell.contentView addSubview:_bar22Btn];
         [cell.contentView addSubview:_bar11Btn];
-        cell.contentView.backgroundColor = [UIColor redColor];
+//        cell.contentView.backgroundColor = [UIColor redColor];
+        cell.contentView.backgroundColor = [UIColor colorWithRed:47.0f/255.0f green:190.0f/255.0f blue:221.0f/255.0f alpha:1];
         return cell;
     }
     
@@ -193,7 +194,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
 //设置collection头部/尾部
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     NSString *image;
-    int tag;
+    int tag = 0;
     if (indexPath.section == 1) {
         image = @"in_common_menu_common";
         tag = 1000;
@@ -428,6 +429,8 @@ static NSString *headerReuseIdentifier = @"hearderID";
         [self.navigationController pushViewController:[WifiConfigViewController shareInstance] animated:YES];
     } showCloseButton:YES];
 }
+
+
 /*
 #pragma mark - Navigation
 
