@@ -191,7 +191,6 @@ NS_ENUM(NSInteger,cellState){
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView setImage:[UIImage imageNamed:@"in_select_aiming_default"]];
     imageView.frame = CGRectMake(0, 15, 50, 50);
-    imageView.centerX = cell.contentView.centerX;
     
     UIButton *delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     delBtn.tag = 500500;
@@ -226,12 +225,15 @@ NS_ENUM(NSInteger,cellState){
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     NSString *image;
     int tag = 0;
+    NSString *text;
     if (indexPath.section == 1) {
         image = @"in_common_menu_common";
         tag = 1000;
+        text = @"情景快捷";
     }else if (indexPath.section == 2){
         image = @"in_common_menu_equipment";
         tag = 1002;
+        text = @"设备快捷";
     }
     if (kind == UICollectionElementKindSectionHeader) {
         UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier forIndexPath:indexPath];
@@ -243,7 +245,7 @@ NS_ENUM(NSInteger,cellState){
         [imageView setImage:[UIImage imageNamed:image]];
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 10, line1.bottom + 10, 200, 30)];
-        label.text = @"sdf";
+        label.text = text;
         
         UIButton *reduceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [reduceBtn setImage:[UIImage imageNamed:@"in_common_menu_reduce"] forState:UIControlStateNormal];
@@ -261,6 +263,7 @@ NS_ENUM(NSInteger,cellState){
         line2.backgroundColor = [UIColor lightGrayColor];
         
         [headerView addSubview:line1];
+        [headerView addSubview:imageView];
         [headerView addSubview:label];
         [headerView addSubview:addBtn];
         [headerView addSubview:reduceBtn];
