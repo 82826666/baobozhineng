@@ -19,8 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationBarHidden = YES;
+//    self.navigationBarHidden = YES;
     self.delegate =self;
 }
 
@@ -29,16 +28,17 @@
     if(self.viewControllers.count!=0){
         myOperationType = UINavigationControllerOperationPush;
         [[NSNotificationCenter defaultCenter] postNotificationName:HIDEBOTTOMBAR object:nil userInfo:@{@"a":@"1"}];
+        viewController.hidesBottomBarWhenPushed = YES;
     }
     [super pushViewController:viewController animated:animated];
 }
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
     if(self.viewControllers.count!=0){
-        
         myOperationType = UINavigationControllerOperationPop;
     }
     UIViewController *viewcontroller =  [super popViewControllerAnimated:animated];
+
     return viewcontroller;
 }
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated

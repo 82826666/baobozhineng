@@ -64,14 +64,17 @@
         else{
              //请求登录成功
             [[AlertManager alertManager] showSuccess:3.0 string:[datadic objectForKey:@"msg"]];
+            NSLog(@"ms:%@",[datadic objectForKey:@"data"]);
             NSArray *mas = [[datadic objectForKey:@"data"] objectForKey:@"master"];
             NSString* master_id = @"";
             NSDictionary* master = [NSDictionary new];
             if (mas.count > 0) {
                 master = [[datadic objectForKey:@"data"] objectForKey:@"master"][0];
                 master_id = [master objectForKey:@"master_id"];
+                NSLog(@"master_id:%@",master_id);
+            }else{
+                master_id = @"11";
             }
-            
             NSDictionary* user_info = [[datadic objectForKey:@"data"] objectForKey:@"user"];
             //本地存储用户名以及相关数据
             NSString* user_id = [user_info objectForKey:@"userid"];
@@ -90,7 +93,7 @@
             [self.navigationController popViewControllerAnimated:YES];
             //如果第一次登陆，跳转到首页
             [self.navigationController dismissViewControllerAnimated:YES completion:^{
-
+                
             }];
         }
         } failure:^(NSError *error) {
@@ -107,11 +110,7 @@
     
     CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
     
-    
-    
     NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    
-    
     
     for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
         

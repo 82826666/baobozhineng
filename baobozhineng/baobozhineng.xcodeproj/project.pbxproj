@@ -49,6 +49,7 @@
 		57EEDC5A205010CA006E3899 /* CommontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC59205010CA006E3899 /* CommontViewController.m */; };
 		57FACBA3205D495100674A9D /* CustomButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FACBA2205D495100674A9D /* CustomButtonView.m */; };
 		57FACBCB2061424F00674A9D /* ComontSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FACBCA2061424F00674A9D /* ComontSensorViewController.m */; };
+		57FC5A85206949EA006119CA /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57FC5A84206949EA006119CA /* close@2x.png */; };
 		6547407F1FFC99CA007F1173 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6547407E1FFC99CA007F1173 /* AlertManager.m */; };
 		65D356BE1FFD0D8A00447213 /* GCDAsyncSocket.h in Sources */ = {isa = PBXBuildFile; fileRef = 65D356B91FFD0D4E00447213 /* GCDAsyncSocket.h */; };
 		65D356BF1FFD0D9000447213 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D356B81FFD0D4E00447213 /* GCDAsyncSocket.m */; };
@@ -416,6 +417,7 @@
 		57FACBA2205D495100674A9D /* CustomButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomButtonView.m; sourceTree = "<group>"; };
 		57FACBC92061424F00674A9D /* ComontSensorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComontSensorViewController.h; sourceTree = "<group>"; };
 		57FACBCA2061424F00674A9D /* ComontSensorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComontSensorViewController.m; sourceTree = "<group>"; };
+		57FC5A84206949EA006119CA /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "close@2x.png"; path = "../../../../../Desktop/CollectionView-master/动态增加cell和section实现/CollectionView-nib/Assets.xcassets/close.imageset/close@2x.png"; sourceTree = "<group>"; };
 		6547407D1FFC99CA007F1173 /* AlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertManager.h; sourceTree = "<group>"; };
 		6547407E1FFC99CA007F1173 /* AlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertManager.m; sourceTree = "<group>"; };
 		65D356B81FFD0D4E00447213 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
@@ -1113,6 +1115,7 @@
 		A2B9350B1FEFFB85003F2C52 /* 图标 */ = {
 			isa = PBXGroup;
 			children = (
+				57FC5A84206949EA006119CA /* close@2x.png */,
 				5718A7862046DC7F00D462A0 /* 应用图标 */,
 				5718A78420458C8800D462A0 /* 引导页.jpg */,
 				A2B9350C1FEFFB85003F2C52 /* 遥控器图标 */,
@@ -1821,6 +1824,7 @@
 				A2B936281FEFFB86003F2C52 /* in_equipment_sensor_immersion.png in Resources */,
 				A2B935F31FEFFB86003F2C52 /* in_telecontrol_control_tv.png in Resources */,
 				A2B936B61FEFFB86003F2C52 /* in_control_lamp_efficient.png in Resources */,
+				57FC5A85206949EA006119CA /* close@2x.png in Resources */,
 				A2B936041FEFFB86003F2C52 /* in_telecontro_list_dvd.png in Resources */,
 				A2B936171FEFFB86003F2C52 /* in_select_aiming_led.png in Resources */,
 				A2B9369C1FEFFB86003F2C52 /* in_common_menu_reduce.png in Resources */,

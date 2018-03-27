@@ -30,12 +30,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.backgroundColor = MAIN_COLOR;
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = YES;
+}
+
 -(void)alertMsg:(NSString*)msg cancelAction:(void (^)(UIAlertAction * _Nonnull action))cancel successAction:(void (^)(UIAlertAction * _Nonnull action))success{
     //UIAlertController风格：UIAlertControllerStyleAlert
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""
@@ -117,6 +120,7 @@
     }
     return CGFLOAT_MIN;
 }
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];

@@ -15,8 +15,19 @@
 #import "CKAlertViewController.h"
 #import "TwoWayViewController.h"
 #import "SelectEquipmentViewController.h"
+#import "GetDeviceViewController.h"
+#import "getSensorViewController.h"
 static NSString *identifier = @"cellID";
 static NSString *headerReuseIdentifier = @"hearderID";
+NS_ENUM(NSInteger,cellState){
+    
+    //右上角编辑按钮的两种状态；
+    //正常的状态，按钮显示“编辑”;
+    NormalState,
+    //正在删除时候的状态，按钮显示“完成”；
+    DeleteState
+    
+};
 @interface Usual2ViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,JMDropMenuDelegate>{
     
 }
@@ -31,6 +42,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
 @property (nonatomic, strong) YYLabel *bar11Btn;
 @property (nonatomic, strong) YYLabel *bar1Btn;
 @property (nonatomic, strong) YYLabel *currentHostLabel;
+@property(nonatomic,assign) enum cellState;
 //添加更多设备标题数组
 @property (strong,nonatomic) NSMutableArray *moreEquipmentTitleArray;
 //添加更多设备图片数组
@@ -43,10 +55,11 @@ static NSString *headerReuseIdentifier = @"hearderID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
+    //一开始是正常状态；
+    cellState = NormalState;
+    
     //创建布局，苹果给我们提供的流布局
     UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc]init];
-    
     //创建网格对象
     self.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 55);
     self.collectionView.collectionViewLayout = flow;
@@ -71,7 +84,12 @@ static NSString *headerReuseIdentifier = @"hearderID";
 //每个item的内容
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    [cell.contentView removeAllSubviews];
     if (indexPath.section == 0) {
+        UIColor *color = [UIColor colorWithRed:47.0f/255.0f green:190.0f/255.0f blue:221.0f/255.0f alpha:1];
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, 20)];
+        view.backgroundColor = color;
+        [cell.contentView addSubview:view];
         CGFloat fontSize = 12;
         UIColor *textColor = [UIColor whiteColor];
         
@@ -167,15 +185,28 @@ static NSString *headerReuseIdentifier = @"hearderID";
         [cell.contentView addSubview:_bar33Btn];
         [cell.contentView addSubview:_bar22Btn];
         [cell.contentView addSubview:_bar11Btn];
-//        cell.contentView.backgroundColor = [UIColor redColor];
-        cell.contentView.backgroundColor = [UIColor colorWithRed:47.0f/255.0f green:190.0f/255.0f blue:221.0f/255.0f alpha:1];
+        cell.contentView.backgroundColor = color;
         return cell;
     }
-    
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView setImage:[UIImage imageNamed:@"in_select_aiming_default"]];
     imageView.frame = CGRectMake(0, 15, 50, 50);
     imageView.centerX = cell.contentView.centerX;
+    
+    UIButton *delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    delBtn.tag = 500500;
+    delBtn.frame = CGRectMake(imageView.left -5, 2, 20, 20);
+    [delBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    delBtn.accessibilityIdentifier = [NSString stringWithFormat:@"%ld",indexPath.section];
+    delBtn.accessibilityLabel = [NSString stringWithFormat:@"%ld",indexPath.row];
+    [delBtn addTarget:self action:@selector(delBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.contentView addSubview:delBtn];
+    UIButton *btn = (UIButton*)[cell.contentView subviewsWithTag:500500];
+    if (cellState == NormalState) {
+        btn.hidden = YES;
+    }else{
+        btn.hidden = NO;
+    }
     
     UILabel *sup = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right - 15, -5, 40, 30)];
     sup.text = @"kai";
@@ -204,7 +235,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
     }
     if (kind == UICollectionElementKindSectionHeader) {
         UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier forIndexPath:indexPath];
-        
+        [headerView removeAllSubviews];
         UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT, 0.5)];
         line1.backgroundColor = [UIColor lightGrayColor];
         
@@ -348,6 +379,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark ————— 系统方法 —————
 -(void)viewWillAppear:(BOOL)animated{
     if (GET_USERDEFAULT(MASTER_ID) > 0) {
         [self getWeather];
@@ -380,6 +412,8 @@ static NSString *headerReuseIdentifier = @"hearderID";
     self.navigationController.navigationBar.hidden = NO;
 }
 
+#pragma mark ————— 方法 —————
+
 -(void)click:(UIButton*)sender{
     if (sender.tag == 999) {
         self.moreEquipmentTitleArray = [NSMutableArray arrayWithArray:@[@"分享",@"添加主机",@"添加设备"]];
@@ -387,8 +421,32 @@ static NSString *headerReuseIdentifier = @"hearderID";
         //获取按钮相对于self.view的相对位置
         CGRect btnRectInwindow = [sender.superview convertRect:sender.frame toView:self.view];
         [JMDropMenu showDropMenuFrame:CGRectMake(self.view.frame.size.width - 128, btnRectInwindow.origin.y+btnRectInwindow.size.height, 120, 128) ArrowOffset:90.f TitleArr:_moreEquipmentTitleArray ImageArr:_moreEquipmentImgArray Type:JMDropMenuTypeQQ LayoutType:JMDropMenuLayoutTypeNormal RowHeight:40.f Delegate:self];
+    }else if(sender.tag == 1000){
+        getSensorViewController *control = [[getSensorViewController alloc] init];
+        [self.navigationController pushViewController:control animated:YES];
+    }else if (sender.tag == 1001){
+        if (cellState == DeleteState) {
+            cellState = NormalState;
+        }else{
+            cellState = DeleteState;
+        }
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+    }else if(sender.tag == 1002){
+        GetDeviceViewController *control = [[GetDeviceViewController alloc] init];
+        [self.navigationController pushViewController:control animated:YES];
+    }else if (sender.tag == 1003){
+        if (cellState == DeleteState) {
+            cellState = NormalState;
+        }else{
+            cellState = DeleteState;
+        }
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
     }
-    NSLog(@"tag:%ld",sender.tag);
+}
+
+-(void)delBtnClick:(UIButton*)sender{
+    NSLog(@"%@",sender.accessibilityIdentifier);
+    NSLog(@"%@",sender.accessibilityLabel);
 }
 
 //获取天气

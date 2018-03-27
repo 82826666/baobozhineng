@@ -41,7 +41,7 @@ static ParentTabbarController* tabbarController;
 //显示底部视图
 - (void)showBottomBar:(NSNotification*)notification
 {
-   
+    tabbarController.tabBar.hidden = YES;
     tabbarController.bottomView.frame = SET_ORIGN_Y(tabbarController.bottomView,SCREEN_HEIGHT-TAB_BOTTOMVIEW_HEIGTH );
 }
 //隐藏底部视图
@@ -75,14 +75,10 @@ static ParentTabbarController* tabbarController;
         [_bottomView removeFromSuperview];
     }
 //    TabNavViewcontroller *usualNav = [[TabNavViewcontroller alloc] initWithRootViewController:[UsualViewcontroller shareInstance]];
-    TabNavViewcontroller *usualNav = (TabNavViewcontroller*)[[UINavigationController alloc] initWithRootViewController:[Usual2ViewController new]];
-//    TabNavViewcontroller *homeNav = [[TabNavViewcontroller alloc] initWithRootViewController:[HomeViewController shareInstance]];
-//    TabNavViewcontroller *homeNav = [[TabNavViewcontroller alloc] initWithRootViewController:[[HouseViewController alloc]init]];
-    TabNavViewcontroller *homeNav = (TabNavViewcontroller*)[[UINavigationController alloc] initWithRootViewController:[[HouseViewController alloc]init]];
-//    TabNavViewcontroller *detailNav = [[TabNavViewcontroller alloc] initWithRootViewController:[DetailViewController shareInstance]];
-    TabNavViewcontroller *detailNav = (TabNavViewcontroller*)[[UINavigationController alloc] initWithRootViewController:[[DetailViewController alloc] init]];
+    TabNavViewcontroller *usualNav = [[TabNavViewcontroller alloc] initWithRootViewController:[[Usual2ViewController alloc]init]];
+    TabNavViewcontroller *homeNav = [[TabNavViewcontroller alloc] initWithRootViewController:[[HouseViewController alloc]init]];
+    TabNavViewcontroller *detailNav = [[TabNavViewcontroller alloc] initWithRootViewController:[[DetailViewController alloc]init]];
     TabNavViewcontroller *personalNav = [[TabNavViewcontroller alloc] initWithRootViewController:[PersonalViewController shareInstance]];
-
     self.viewControllers = @[usualNav,homeNav,detailNav,personalNav];
     
     self.titleArray = @[@"常用",@"家居",@"情景",@"个人中心"];
