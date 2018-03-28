@@ -43,6 +43,8 @@ NS_ENUM(NSInteger,cellState){
 @property (nonatomic, strong) YYLabel *bar1Btn;
 @property (nonatomic, strong) YYLabel *currentHostLabel;
 @property(nonatomic,assign) enum cellState;
+@property(nonatomic, strong) NSMutableArray *sensorArr;//情景
+@property(nonatomic, strong) NSMutableArray *deviceArr;//设备
 //添加更多设备标题数组
 @property (strong,nonatomic) NSMutableArray *moreEquipmentTitleArray;
 //添加更多设备图片数组
@@ -60,9 +62,12 @@ NS_ENUM(NSInteger,cellState){
     
     //创建布局，苹果给我们提供的流布局
     UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc]init];
+    //最小item间距（默认是10）
+    flow.minimumInteritemSpacing = 0;
     //创建网格对象
     self.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 55);
     self.collectionView.collectionViewLayout = flow;
+    
     //注册cell
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:identifier];
     //注册header
@@ -79,6 +84,11 @@ NS_ENUM(NSInteger,cellState){
 }
 //一个分区item的数量
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if (section == 1) {
+        return self.sensorArr.count > 0 ? self.sensorArr.count : 0;
+    }else if (section == 2){
+        return self.deviceArr.count > 0 ? self.deviceArr.count : 0;
+    }
     return 1;
 }
 //每个item的内容
@@ -188,9 +198,23 @@ NS_ENUM(NSInteger,cellState){
         cell.contentView.backgroundColor = color;
         return cell;
     }
+    NSString *imageName = @"";
+    NSString *supText = @"";
+    NSString *nameText = @"";
+    if (indexPath.section == 1) {
+        NSDictionary *dic = [self.sensorArr objectAtIndex:indexPath.row];
+        imageName = [dic objectForKey:@"icon"];
+        nameText = [dic objectForKey:@"name"];
+    }else if (indexPath.section == 2){
+        NSDictionary *dic = [self.deviceArr objectAtIndex:indexPath.row];
+        imageName = [dic objectForKey:@"icon"];
+        nameText = [dic objectForKey:@"name"];
+        supText = [[dic objectForKey:@"status"] integerValue] == 0 ? @"关" : @"开";
+    }
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView setImage:[UIImage imageNamed:@"in_select_aiming_default"]];
+    [imageView setImage:[UIImage imageNamed:imageName]];
     imageView.frame = CGRectMake(0, 15, 50, 50);
+    imageView.centerX = cell.contentView.centerX;
     
     UIButton *delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     delBtn.tag = 500500;
@@ -208,11 +232,12 @@ NS_ENUM(NSInteger,cellState){
     }
     
     UILabel *sup = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right - 15, -5, 40, 30)];
-    sup.text = @"kai";
+    sup.text = supText;
     
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom, SCREEN_WIDTH/4, 30)];
     name.textAlignment = NSTextAlignmentCenter;
-    name.text = @"testsadf";
+    name.text = nameText;
+    name.centerX = cell.contentView.centerX;
     
     [cell.contentView addSubview:imageView];
     [cell.contentView addSubview:sup];
@@ -277,7 +302,39 @@ NS_ENUM(NSInteger,cellState){
 //代理的优先级比属性高
 //点击时间监听
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld-%ld",indexPath.section,indexPath.row);
+    NSInteger section  = indexPath.section;
+    NSInteger row = indexPath.row;
+    NSDictionary *dic;
+    if (section == 1) {
+        dic = [self.sensorArr objectAtIndex:row];
+        NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"id"]};
+        [[APIManager sharedManager]deviceTriggerSceneWithParameters:params success:^(id data) {
+            NSDictionary *datadic = data;
+            NSLog(@"data:%@",data);
+            if([[datadic objectForKey:@"code"] intValue] == 200){
+                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            }else{
+                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }else if (section == 2){
+        dic = [self.deviceArr objectAtIndex:row];
+        NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"shortcut_id"]};
+        [[APIManager sharedManager]deviceTriggerSceneWithParameters:params success:^(id data) {
+            NSDictionary *datadic = data;
+            NSLog(@"data:%@",data);
+            if([[datadic objectForKey:@"code"] intValue] == 200){
+                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            }else{
+                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+    
 }
 //设置cell的内边距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
@@ -377,6 +434,20 @@ NS_ENUM(NSInteger,cellState){
     return _moreEquipmentImgArray;
 }
 
+-(NSMutableArray *)sensorArr{
+    if (_sensorArr == nil) {
+        _sensorArr = [[NSMutableArray new]mutableCopy];
+    }
+    return _sensorArr;
+}
+
+-(NSMutableArray *)deviceArr{
+    if (_deviceArr == nil) {
+        _deviceArr = [NSMutableArray new];
+    }
+    return _deviceArr;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -384,30 +455,7 @@ NS_ENUM(NSInteger,cellState){
 
 #pragma mark ————— 系统方法 —————
 -(void)viewWillAppear:(BOOL)animated{
-    if (GET_USERDEFAULT(MASTER_ID) > 0) {
-        [self getWeather];
-        if (GET_USERDEFAULT(MASTER) != nil) {
-            if([GET_USERDEFAULT(MASTER) isKindOfClass:[NSArray class]])
-            {
-                NSMutableArray *master = GET_USERDEFAULT(MASTER);
-                for (int i = 0; i < master.count; i++) {
-                    NSDictionary *dic = master[i];
-                    if ([[dic objectForKey:@"master_id"] integerValue] == [GET_USERDEFAULT(MASTER_ID) integerValue]) {
-                        _currentHostLabel.text = [dic objectForKey:@"master_name"];
-                    }
-                    [self.hostsArray addObject:[dic objectForKey:@"master_name"]];
-                    //            _hostsArray = [NSMutableArray arrayWithArray:@[[dic objectForKey:@"master_name"]];
-                }
-            }else{
-                NSDictionary *dic = GET_USERDEFAULT(MASTER);
-                if ([[dic objectForKey:@"master_id"] integerValue] == [GET_USERDEFAULT(MASTER_ID) integerValue]) {
-                    _currentHostLabel.text = [dic objectForKey:@"master_name"];
-                }
-                [self.hostsArray addObject:[dic objectForKey:@"master_name"]];
-                
-            }
-        }
-    }
+    [self loadData];
     self.navigationController.navigationBar.hidden = YES;
 }
 
@@ -448,8 +496,73 @@ NS_ENUM(NSInteger,cellState){
 }
 
 -(void)delBtnClick:(UIButton*)sender{
-    NSLog(@"%@",sender.accessibilityIdentifier);
-    NSLog(@"%@",sender.accessibilityLabel);
+    NSInteger section = [sender.accessibilityIdentifier integerValue];
+    NSInteger row = [sender.accessibilityLabel integerValue];
+    NSString *shortcut_id;
+    NSDictionary *dic;
+    if (section == 1) {
+        dic = [self.sensorArr objectAtIndex:row];
+    }else if (section == 2){
+        dic = [self.deviceArr objectAtIndex:row];
+    }
+    shortcut_id = [dic objectForKey:@"shortcut_id"];
+    NSDictionary *params = @{
+                             @"shortcut_id":shortcut_id
+                             };
+    if (section == 1) {
+        [[APIManager sharedManager]deviceDeleteSceneShortcutWithParameters:params success:^(id data) {
+            //请求数据成功
+            NSDictionary *datadic = data;
+            [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            if ([[datadic objectForKey:@"code"] intValue] == 200) {
+                [self loadData];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }else if (section == 2){
+        [[APIManager sharedManager]deviceDeleteDeviceShortcutWithParameters:params success:^(id data) {
+            //请求数据成功
+            NSDictionary *datadic = data;
+            [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            if ([[datadic objectForKey:@"code"] intValue] == 200) {
+                [self loadData];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+//    NSLog(@"%@",sender.accessibilityIdentifier);
+//    NSLog(@"%@",sender.accessibilityLabel);
+}
+
+-(void)loadData{
+    if (GET_USERDEFAULT(MASTER_ID) > 0) {
+        [self getWeather];
+        [self getSensor];
+        [self getDevice];
+        if (GET_USERDEFAULT(MASTER) != nil) {
+            if([GET_USERDEFAULT(MASTER) isKindOfClass:[NSArray class]])
+            {
+                NSMutableArray *master = GET_USERDEFAULT(MASTER);
+                for (int i = 0; i < master.count; i++) {
+                    NSDictionary *dic = master[i];
+                    if ([[dic objectForKey:@"master_id"] integerValue] == [GET_USERDEFAULT(MASTER_ID) integerValue]) {
+                        _currentHostLabel.text = [dic objectForKey:@"master_name"];
+                    }
+                    [self.hostsArray addObject:[dic objectForKey:@"master_name"]];
+                    //            _hostsArray = [NSMutableArray arrayWithArray:@[[dic objectForKey:@"master_name"]];
+                }
+            }else{
+                NSDictionary *dic = GET_USERDEFAULT(MASTER);
+                if ([[dic objectForKey:@"master_id"] integerValue] == [GET_USERDEFAULT(MASTER_ID) integerValue]) {
+                    _currentHostLabel.text = [dic objectForKey:@"master_name"];
+                }
+                [self.hostsArray addObject:[dic objectForKey:@"master_name"]];
+                
+            }
+        }
+    }
 }
 
 //获取天气
@@ -474,6 +587,35 @@ NS_ENUM(NSInteger,cellState){
             [[AlertManager alertManager] showError:3.0 string:@"请求失败"];
         }];
     }
+}
+
+-(void)getSensor{
+    [[APIManager sharedManager]deviceGetSceneListsWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+        NSMutableArray *arr = [data objectForKey:@"data"];
+        if (arr.count > 0) {
+            self.sensorArr = arr;
+        }else{
+            self.sensorArr = [[NSMutableArray alloc]init];
+        }
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
+-(void)getDevice{
+    [[APIManager sharedManager]deviceGetDeviceShortcutWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+        NSMutableArray *arr = [data objectForKey:@"data"];
+        if (arr.count > 0) {
+            self.deviceArr = arr;
+        }else{
+            self.deviceArr = [[NSMutableArray alloc]init];
+        }
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 -(void)changeHost{

@@ -71,6 +71,7 @@
 		57FC5A9F206A8BB5006119CA /* in_arrow_white.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B935A51FEFFB85003F2C52 /* in_arrow_white.png */; };
 		57FC5AA0206A8BB5006119CA /* in_login_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B935A61FEFFB85003F2C52 /* in_login_btn.png */; };
 		57FC5AA1206A8BB5006119CA /* in_login_lock.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B935A71FEFFB85003F2C52 /* in_login_lock.png */; };
+		57FC5AA2206BD1E0006119CA /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57FC5A84206949EA006119CA /* close@2x.png */; };
 		6547407F1FFC99CA007F1173 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6547407E1FFC99CA007F1173 /* AlertManager.m */; };
 		65D356BE1FFD0D8A00447213 /* GCDAsyncSocket.h in Sources */ = {isa = PBXBuildFile; fileRef = 65D356B91FFD0D4E00447213 /* GCDAsyncSocket.h */; };
 		65D356BF1FFD0D9000447213 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D356B81FFD0D4E00447213 /* GCDAsyncSocket.m */; };
@@ -1436,6 +1437,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57FC5AA2206BD1E0006119CA /* close@2x.png in Resources */,
 				57FC5A9D206A8BB5006119CA /* in_login_newlogo.png in Resources */,
 				57FC5A9E206A8BB5006119CA /* in_login_people.png in Resources */,
 				57FC5A9F206A8BB5006119CA /* in_arrow_white.png in Resources */,
