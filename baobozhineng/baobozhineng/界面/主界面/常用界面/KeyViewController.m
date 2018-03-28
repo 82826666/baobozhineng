@@ -20,6 +20,7 @@ static NSString *identifier = @"cellID";
 @property(nonatomic, strong) UIView *currentView;
 @property(nonatomic, strong) UIButton *currentButton;
 @property(nonatomic, strong) UICollectionViewFlowLayout *flow;
+@property(nonatomic, strong) NSArray *imgArr;
 @property(nonatomic, strong) NSArray *titleArr;
 @property(nonatomic, strong) NSArray *nameArr;
 @property(nonatomic, strong) YYLabel *swichNameLabel;
@@ -68,12 +69,13 @@ static NSString *identifier = @"cellID";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     if (indexPath.section == 0) {
-        NSString *imageName = @"sfad";
-        NSString *nameStr = @"按键";
+        CGFloat row = indexPath.row + 1;
+        NSString *imageName = [self.imgArr objectAtIndex:row];
+        NSString *nameStr = [self.nameArr objectAtIndex:row];
         if (_dataDic != nil) {
             NSArray *arr = [CommonCode stringToJSON:[_dataDic objectForKey:@"setting"]];
             NSDictionary *dic = [arr objectAtIndex:indexPath.row];
-            imageName = [CommonCode getImageName: [[dic objectForKey:@"icon"] integerValue]];
+            imageName = [dic objectForKey:@"icon"];
             nameStr = [dic objectForKey:@"name"];
         }
         UIImageView *imageView = [[UIImageView alloc] init];
@@ -87,6 +89,7 @@ static NSString *identifier = @"cellID";
         UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom, SCREEN_WIDTH/4, 30)];
         name.textAlignment = NSTextAlignmentCenter;
         name.text = nameStr;
+        name.centerX = cell.contentView.centerX;
         name.tag = 1002;
         
         [cell.contentView addSubview:imageView];
@@ -215,6 +218,13 @@ static NSString *identifier = @"cellID";
     return _titleArr;
 }
 
+-(NSArray *)imgArr{
+    if (_imgArr == nil) {
+        _imgArr = [[NSArray alloc]initWithObjects:@"",@"20111",@"20121",@"20131",@"20141", nil];
+    }
+    return _imgArr;
+}
+
 -(NSArray *)nameArr{
     if (_nameArr == nil) {
         _nameArr = [[NSArray alloc]initWithObjects:@"",@"一键名称",@"二键名称",@"三键名称",@"四键名称", nil];
@@ -259,7 +269,7 @@ static NSString *identifier = @"cellID";
             [SVProgressHUD mydefineErrorShowDismissTime:2.0 ErrorTitle:@"请选择按键"];
         }else{
             SwitchIconSelectViewController *switchIcon = [SwitchIconSelectViewController sharePopupView:ALERTVIEWSTORYBOARD andPopupViewName:SWITCHICONSELECTVIEWCONTROLLER];
-            [switchIcon setImgArray:@[@"in_equipment_lamp_default",@"in_equipment_lamp_walllamp",@"in_equipment_lamp_ceilinglamp",@"in_equipment_lamp_efficient",@"in_equipment_lamp_spotlight",@"in_equipment_lamp_backlight",@"in_equipment_lamp_mirrorlamp",@"in_equipment_lamp_downlight",@"in_equipment_lamp_chandelier",@"in_equipment_aiming_default"] titleArray:@[@"灯",@"床头灯",@"吸顶灯",@"节能灯",@"射灯",@"LED灯",@"壁灯",@"浴灯",@"吊灯",@"白织灯"] LabelTitle:@"灯具图标设置" ClickBlock:^(int index,NSString *imagestr,NSString *title) {
+            [switchIcon setImgArray:@[@"20111",@"20121",@"20131",@"20141"] titleArray:@[@"一键",@"二建",@"三键",@"四键"] LabelTitle:@"灯具图标设置" ClickBlock:^(int index,NSString *imagestr,NSString *title) {
                 //按钮的返回事件
                 UIImageView *imageView = (UIImageView*)[_currentView subviewsWithTag:1001];
                 [imageView setImage:[UIImage imageNamed:imagestr]];
@@ -326,7 +336,7 @@ static NSString *identifier = @"cellID";
                 UIImageView *imageView = (UIImageView *)[con subviewsWithTag:1001];
                 UILabel *label = (UILabel *)[con subviewsWithTag:1002];
                 NSDictionary *dic = @{
-                                      @"icon":[CommonCode getImageType:imageView.image.accessibilityIdentifier],
+                                      @"icon":imageView.image.accessibilityIdentifier,
                                       @"name":label.text,
                                       @"ch":[NSString stringWithFormat:@"%d",i],
                                       @"status":@"0",
@@ -415,6 +425,11 @@ static NSString *identifier = @"cellID";
         
     }];
     
+}
+
+#pragma mark - 返回
+- (void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated{
