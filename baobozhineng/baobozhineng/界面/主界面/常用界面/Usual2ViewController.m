@@ -270,6 +270,7 @@ NS_ENUM(NSInteger,cellState){
         [imageView setImage:[UIImage imageNamed:image]];
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 10, line1.bottom + 10, 200, 30)];
+        label.tag = 3003303;
         label.text = text;
         
         UIButton *reduceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -321,17 +322,35 @@ NS_ENUM(NSInteger,cellState){
         }];
     }else if (section == 2){
         dic = [self.deviceArr objectAtIndex:row];
-        NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"shortcut_id"]};
-        [[APIManager sharedManager]deviceTriggerSceneWithParameters:params success:^(id data) {
+        UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        UILabel *label = (UILabel*)[cell.contentView subviewsWithTag:3003303];
+        NSString *status = [label.text isEqualToString:@"开"] ? @"0" : @"1";
+        NSDictionary *cmd = @{
+                              @"cmd":@"edit",
+                              @"type":[dic objectForKey:@"type"],
+                              @"devid":[dic objectForKey:@"devid"],
+                              @"value":status,
+                              @"ch":@"1"
+                              };
+        NSDictionary *params = @{
+                                 @"master_id":GET_USERDEFAULT(MASTER_ID),
+                                 @"device_type":[dic objectForKey:@"type"],
+                                 @"cmd":[cmd jsonStringEncoded]
+                                 };
+        NSLog(@"params:%@",params);
+        [[APIManager sharedManager]deviceZigbeeCmdsWithParameters:params success:^(id data) {
             NSDictionary *datadic = data;
-            NSLog(@"data:%@",data);
-            if([[datadic objectForKey:@"code"] intValue] == 200){
-                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+            NSLog(@"data:%@",datadic);
+            //&& [datadic objectForKey:@"data"] objectForKey:@"stauts"
+            if([[datadic objectForKey:@"code"] intValue] == 200 ){
+                if ([[[datadic objectForKey:@"data"] objectForKey:@"status"] integerValue] >= 0) {
+                    [[AlertManager alertManager] showError:3.0 string:@"发送cmd命令成功"];
+                }
             }else{
-                [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+                [[AlertManager alertManager] showError:3.0 string:@"发送cmd命令失败"];
             }
         } failure:^(NSError *error) {
-            
+            [[AlertManager alertManager] showError:3.0 string:@"系统发生错误"];
         }];
     }
     
