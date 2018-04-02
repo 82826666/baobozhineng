@@ -7,7 +7,7 @@
 //
 
 #import "DetailViewController.h"
-
+#import "AddScene2ViewController.h"
 @interface DetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSouce;
@@ -65,7 +65,7 @@
 
 - (void)add{
 //    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:];
-    [self.navigationController pushViewController:[[AddSceneViewController alloc]init] animated:YES];
+    [self.navigationController pushViewController:[[AddScene2ViewController alloc]init] animated:YES];
 }
 
 -(void)loadData{

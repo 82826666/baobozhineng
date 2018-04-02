@@ -22,6 +22,8 @@
 		57530B12206612CA00F76006 /* KeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57530B11206612CA00F76006 /* KeyViewController.m */; };
 		57530B2F2069199800F76006 /* AFNHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 57530B2E2069199800F76006 /* AFNHttpTool.m */; };
 		57530B3220691A4B00F76006 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 57530B3120691A4B00F76006 /* APIManager.m */; };
+		576C2604207258D400949AF8 /* 箭头.png in Resources */ = {isa = PBXBuildFile; fileRef = 576C2603207258D400949AF8 /* 箭头.png */; };
+		576C260520726F6600949AF8 /* 33111.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B9356B1FEFFB85003F2C52 /* 33111.png */; };
 		577089D9205AAC580022E7F0 /* getSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577089D8205AAC580022E7F0 /* getSensorViewController.m */; };
 		5795230A202F391F00FB2508 /* CommonAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 57952309202F391F00FB2508 /* CommonAdd.m */; };
 		579A6423205CAED4002A1CD3 /* GetDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579A6422205CAED4002A1CD3 /* GetDeviceViewController.m */; };
@@ -37,6 +39,9 @@
 		57B37FB9202338AB00AA3603 /* HouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B37FB8202338AB00AA3603 /* HouseViewController.m */; };
 		57B37FBD20233F7300AA3603 /* HouseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B37FBB20233F7300AA3603 /* HouseTableViewCell.m */; };
 		57B37FBE20233F7300AA3603 /* HouseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57B37FBC20233F7300AA3603 /* HouseTableViewCell.xib */; };
+		57BABCD920709A6F006BC403 /* 未选中.png in Resources */ = {isa = PBXBuildFile; fileRef = 57BABCD720709A6F006BC403 /* 未选中.png */; };
+		57BABCDA20709A6F006BC403 /* 未选中勾.png in Resources */ = {isa = PBXBuildFile; fileRef = 57BABCD820709A6F006BC403 /* 未选中勾.png */; };
+		57BABCDD2070BE82006BC403 /* AddScene2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BABCDC2070BE82006BC403 /* AddScene2ViewController.m */; };
 		57BC4843201F623A00B3A6F3 /* LearningAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BC4842201F623A00B3A6F3 /* LearningAlertViewController.m */; };
 		57EEDC54205006A3006E3899 /* CKAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC53205006A3006E3899 /* CKAlertViewController.m */; };
 		57EEDC57205008A9006E3899 /* TwoWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC56205008A8006E3899 /* TwoWayViewController.m */; };
@@ -100,11 +105,8 @@
 		A2B935051FEFFA3C003F2C52 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B935041FEFFA3C003F2C52 /* LoginViewController.m */; };
 		A2B935081FEFFA47003F2C52 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B935071FEFFA47003F2C52 /* RegisterViewController.m */; };
 		A2B9350A1FEFFB08003F2C52 /* LoginRegisterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B935091FEFFB08003F2C52 /* LoginRegisterStoryboard.storyboard */; };
-		A2B9366E1FEFFB86003F2C52 /* 图标.zip in Resources */ = {isa = PBXBuildFile; fileRef = A2B935901FEFFB85003F2C52 /* 图标.zip */; };
 		A2B936871FEFFB86003F2C52 /* in_camera_img.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A2B935AC1FEFFB85003F2C52 /* in_camera_img.jpg */; };
 		A2B936941FEFFB86003F2C52 /* in_common_bg_headbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A2B935BA1FEFFB85003F2C52 /* in_common_bg_headbg.jpg */; };
-		A2B936C81FEFFB86003F2C52 /* 未标题-5.tif in Resources */ = {isa = PBXBuildFile; fileRef = A2B935EF1FEFFB85003F2C52 /* 未标题-5.tif */; };
-		A2B936C91FEFFB86003F2C52 /* 未标题-4.tif in Resources */ = {isa = PBXBuildFile; fileRef = A2B935F01FEFFB85003F2C52 /* 未标题-4.tif */; };
 		A2B936CC1FF009D4003F2C52 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B936CB1FF009D4003F2C52 /* RadioButton.m */; };
 		A2B936D01FF01289003F2C52 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B936CF1FF01289003F2C52 /* ParentViewController.m */; };
 		A2C3502A1FF4E1AB00D3566B /* SelectHomeWIFIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C350291FF4E1AB00D3566B /* SelectHomeWIFIViewController.m */; };
@@ -187,6 +189,7 @@
 		57530B2E2069199800F76006 /* AFNHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNHttpTool.m; sourceTree = "<group>"; };
 		57530B3020691A4B00F76006 /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		57530B3120691A4B00F76006 /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		576C2603207258D400949AF8 /* 箭头.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "箭头.png"; path = "../../../../../../Desktop/箭头.png"; sourceTree = "<group>"; };
 		577089D7205AAC580022E7F0 /* getSensorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = getSensorViewController.h; sourceTree = "<group>"; };
 		577089D8205AAC580022E7F0 /* getSensorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = getSensorViewController.m; sourceTree = "<group>"; };
 		577A9B4D20136B330054BF53 /* baobozhineng.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = baobozhineng.entitlements; sourceTree = "<group>"; };
@@ -215,6 +218,10 @@
 		57B37FBA20233F7300AA3603 /* HouseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HouseTableViewCell.h; sourceTree = "<group>"; };
 		57B37FBB20233F7300AA3603 /* HouseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HouseTableViewCell.m; sourceTree = "<group>"; };
 		57B37FBC20233F7300AA3603 /* HouseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseTableViewCell.xib; sourceTree = "<group>"; };
+		57BABCD720709A6F006BC403 /* 未选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "未选中.png"; path = "../../../../../../../../Desktop/未选中.png"; sourceTree = "<group>"; };
+		57BABCD820709A6F006BC403 /* 未选中勾.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "未选中勾.png"; path = "../../../../../../../../Desktop/未选中勾.png"; sourceTree = "<group>"; };
+		57BABCDB2070BE82006BC403 /* AddScene2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddScene2ViewController.h; sourceTree = "<group>"; };
+		57BABCDC2070BE82006BC403 /* AddScene2ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddScene2ViewController.m; sourceTree = "<group>"; };
 		57BC4841201F623A00B3A6F3 /* LearningAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LearningAlertViewController.h; sourceTree = "<group>"; };
 		57BC4842201F623A00B3A6F3 /* LearningAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LearningAlertViewController.m; sourceTree = "<group>"; };
 		57EEDC52205006A3006E3899 /* CKAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKAlertViewController.h; sourceTree = "<group>"; };
@@ -367,7 +374,7 @@
 		A2B935681FEFFB85003F2C52 /* in_scene_select_gohome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_select_gohome.png; sourceTree = "<group>"; };
 		A2B935691FEFFB85003F2C52 /* in_scene_condition_sensor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_condition_sensor.png; sourceTree = "<group>"; };
 		A2B9356A1FEFFB85003F2C52 /* in_scene_select_orther.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_select_orther.png; sourceTree = "<group>"; };
-		A2B9356B1FEFFB85003F2C52 /* in_scene_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_default.png; sourceTree = "<group>"; };
+		A2B9356B1FEFFB85003F2C52 /* 33111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 33111.png; sourceTree = "<group>"; };
 		A2B9356C1FEFFB85003F2C52 /* in_scene_getup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_getup.png; sourceTree = "<group>"; };
 		A2B9356D1FEFFB85003F2C52 /* in_scene_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_message.png; sourceTree = "<group>"; };
 		A2B9356E1FEFFB85003F2C52 /* in_scene_orther.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_orther.png; sourceTree = "<group>"; };
@@ -403,7 +410,6 @@
 		A2B9358D1FEFFB85003F2C52 /* in_curtain_control_sunshade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_curtain_control_sunshade.png; sourceTree = "<group>"; };
 		A2B9358E1FEFFB85003F2C52 /* in_equipment_curtain_sunshade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_equipment_curtain_sunshade.png; sourceTree = "<group>"; };
 		A2B9358F1FEFFB85003F2C52 /* in_curtain_control_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_curtain_control_default.png; sourceTree = "<group>"; };
-		A2B935901FEFFB85003F2C52 /* 图标.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "图标.zip"; sourceTree = "<group>"; };
 		A2B935921FEFFB85003F2C52 /* in_select_socket_kettle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_select_socket_kettle.png; sourceTree = "<group>"; };
 		A2B935931FEFFB85003F2C52 /* in_control_socket_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_control_socket_default.png; sourceTree = "<group>"; };
 		A2B935941FEFFB85003F2C52 /* in_control_socket_kettle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_control_socket_kettle.png; sourceTree = "<group>"; };
@@ -483,8 +489,6 @@
 		A2B935EC1FEFFB85003F2C52 /* in_select_lamp_downlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_select_lamp_downlight.png; sourceTree = "<group>"; };
 		A2B935ED1FEFFB85003F2C52 /* in_select_lamp_efficient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_select_lamp_efficient.png; sourceTree = "<group>"; };
 		A2B935EE1FEFFB85003F2C52 /* in_control_lamp_mirrorlamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_control_lamp_mirrorlamp.png; sourceTree = "<group>"; };
-		A2B935EF1FEFFB85003F2C52 /* 未标题-5.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "未标题-5.tif"; sourceTree = "<group>"; };
-		A2B935F01FEFFB85003F2C52 /* 未标题-4.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "未标题-4.tif"; sourceTree = "<group>"; };
 		A2B936CA1FF009D4003F2C52 /* RadioButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
 		A2B936CB1FF009D4003F2C52 /* RadioButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
 		A2B936CE1FF01289003F2C52 /* ParentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParentViewController.h; sourceTree = "<group>"; };
@@ -633,6 +637,8 @@
 				5718A75D2044497800D462A0 /* SelectTaskDeviceViewController.m */,
 				5718A75F20444A4700D462A0 /* SelectSceneViewController.h */,
 				5718A76020444A4700D462A0 /* SelectSceneViewController.m */,
+				57BABCDB2070BE82006BC403 /* AddScene2ViewController.h */,
+				57BABCDC2070BE82006BC403 /* AddScene2ViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -642,6 +648,13 @@
 			children = (
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		57BABCD620709A48006BC403 /* resouces */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = resouces;
 			sourceTree = "<group>";
 		};
 		604E470A4169938149B18C17 /* Frameworks */ = {
@@ -733,6 +746,9 @@
 		A24D70341FF4717100B00878 /* 详情界面 */ = {
 			isa = PBXGroup;
 			children = (
+				57BABCD720709A6F006BC403 /* 未选中.png */,
+				57BABCD820709A6F006BC403 /* 未选中勾.png */,
+				57BABCD620709A48006BC403 /* resouces */,
 				57AB46BB2026C619009FA671 /* model */,
 				57AB46BA2026C601009FA671 /* controller */,
 				57AB46B92026C5EA009FA671 /* view */,
@@ -924,14 +940,11 @@
 				A2B9355B1FEFFB85003F2C52 /* 底部菜单 */,
 				A2B935641FEFFB85003F2C52 /* 情景 */,
 				A2B935801FEFFB85003F2C52 /* 窗帘图标 */,
-				A2B935901FEFFB85003F2C52 /* 图标.zip */,
 				A2B935911FEFFB85003F2C52 /* 插座图标 */,
 				A2B935A11FEFFB85003F2C52 /* 登录页 */,
 				A2B935A81FEFFB85003F2C52 /* 摄像头图标 */,
 				A2B935B61FEFFB85003F2C52 /* 常用页面 */,
 				A2B935CC1FEFFB85003F2C52 /* 开关图标 */,
-				A2B935EF1FEFFB85003F2C52 /* 未标题-5.tif */,
-				A2B935F01FEFFB85003F2C52 /* 未标题-4.tif */,
 			);
 			path = "图标";
 			sourceTree = "<group>";
@@ -1062,7 +1075,7 @@
 				A2B935681FEFFB85003F2C52 /* in_scene_select_gohome.png */,
 				A2B935691FEFFB85003F2C52 /* in_scene_condition_sensor.png */,
 				A2B9356A1FEFFB85003F2C52 /* in_scene_select_orther.png */,
-				A2B9356B1FEFFB85003F2C52 /* in_scene_default.png */,
+				A2B9356B1FEFFB85003F2C52 /* 33111.png */,
 				A2B9356C1FEFFB85003F2C52 /* in_scene_getup.png */,
 				A2B9356D1FEFFB85003F2C52 /* in_scene_message.png */,
 				A2B9356E1FEFFB85003F2C52 /* in_scene_orther.png */,
@@ -1166,6 +1179,7 @@
 		A2B935B61FEFFB85003F2C52 /* 常用页面 */ = {
 			isa = PBXGroup;
 			children = (
+				576C2603207258D400949AF8 /* 箭头.png */,
 				A2B935B71FEFFB85003F2C52 /* in_common_menu_equipment.png */,
 				A2B935B91FEFFB85003F2C52 /* in_common_menu_common.png */,
 				A2B935BA1FEFFB85003F2C52 /* in_common_bg_headbg.jpg */,
@@ -1437,14 +1451,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				576C260520726F6600949AF8 /* 33111.png in Resources */,
+				57BABCD920709A6F006BC403 /* 未选中.png in Resources */,
 				57FC5AA2206BD1E0006119CA /* close@2x.png in Resources */,
 				57FC5A9D206A8BB5006119CA /* in_login_newlogo.png in Resources */,
 				57FC5A9E206A8BB5006119CA /* in_login_people.png in Resources */,
 				57FC5A9F206A8BB5006119CA /* in_arrow_white.png in Resources */,
+				576C2604207258D400949AF8 /* 箭头.png in Resources */,
 				57FC5AA0206A8BB5006119CA /* in_login_btn.png in Resources */,
 				57FC5AA1206A8BB5006119CA /* in_login_lock.png in Resources */,
 				57FC5A99206A849A006119CA /* 25311.png in Resources */,
 				57FC5A9A206A849A006119CA /* 25211.png in Resources */,
+				57BABCDA20709A6F006BC403 /* 未选中勾.png in Resources */,
 				57FC5A9B206A849A006119CA /* 25111.png in Resources */,
 				57FC5A9C206A849A006119CA /* 25711.png in Resources */,
 				57FC5A8E206A8423006119CA /* in_common_menu_equipment.png in Resources */,
@@ -1466,8 +1484,6 @@
 				57FC5A8B206A8293006119CA /* in_bottom_menu_myact.png in Resources */,
 				57FC5A8C206A8293006119CA /* in_bottom_menu_sceneact.png in Resources */,
 				57FC5A8D206A8293006119CA /* in_bottom_menu_scene.png in Resources */,
-				A2B9366E1FEFFB86003F2C52 /* 图标.zip in Resources */,
-				A2B936C91FEFFB86003F2C52 /* 未标题-4.tif in Resources */,
 				A2B9350A1FEFFB08003F2C52 /* LoginRegisterStoryboard.storyboard in Resources */,
 				A2B936941FEFFB86003F2C52 /* in_common_bg_headbg.jpg in Resources */,
 				A2C350791FF63E5600D3566B /* AlertViewStoryboard.storyboard in Resources */,
@@ -1481,7 +1497,6 @@
 				A2C3533E1FFDFDF600D3566B /* HomeStoryboard.storyboard in Resources */,
 				A2B936871FEFFB86003F2C52 /* in_camera_img.jpg in Resources */,
 				57B37FBE20233F7300AA3603 /* HouseTableViewCell.xib in Resources */,
-				A2B936C81FEFFB86003F2C52 /* 未标题-5.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1622,6 +1637,7 @@
 				57AB46BE2026C757009FA671 /* RecodeViewController.m in Sources */,
 				A2C3502A1FF4E1AB00D3566B /* SelectHomeWIFIViewController.m in Sources */,
 				A2C6BB6D1FF222FF00D56C92 /* HomeViewController.m in Sources */,
+				57BABCDD2070BE82006BC403 /* AddScene2ViewController.m in Sources */,
 				57BC4843201F623A00B3A6F3 /* LearningAlertViewController.m in Sources */,
 				A24D702E1FF33F9900B00878 /* JMDropMenu.m in Sources */,
 				A2C350301FF5CBC800D3566B /* EquipmentSwitchSetViewController.m in Sources */,

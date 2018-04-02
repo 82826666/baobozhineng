@@ -9,7 +9,6 @@
 #import "ParentViewController.h"
 #import "RecodeViewController.h"
 @interface AddSceneViewController : ParentViewController
-@property(nonatomic, strong) NSDictionary* dic;
+@property(nonatomic, strong) NSDictionary* ifDic;
 @property(nonatomic, strong) NSDictionary* thenDic;
-@property(nonatomic, strong) NSMutableArray* secene;
 @end

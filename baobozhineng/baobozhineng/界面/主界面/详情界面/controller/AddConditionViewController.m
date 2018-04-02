@@ -7,11 +7,12 @@
 //
 
 #import "AddConditionViewController.h"
-#import "AddSceneViewController.h"
+#import "AddScene2ViewController.h"
 #import "KMDatePicker.h"
 #import "DateHelper.h"
 #import "NSDate+CalculateDay.h"
 #import "UIButton+CenterImageAndTitle.h"
+#import <YYKit.h>
 @interface AddConditionViewController ()<UITextFieldDelegate,KMDatePickerDelegate>{
     
 }
@@ -20,6 +21,7 @@
 @property(nonatomic, strong)UITextField *end_Time;
 @property(nonatomic, strong)UISwitch *swt;
 @property(nonatomic, strong)NSMutableDictionary *dic;
+@property(nonatomic, strong) UIView *v3;
 @end
 
 @implementation AddConditionViewController
@@ -42,7 +44,7 @@
     //    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"消息" style:UIBarButtonItemStyleDone target: self action:@selector(message)];
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"in_arrow_white"] style:UIBarButtonItemStyleDone target:self action:@selector(goBack)];
     //    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStyleDone target:self action:@selector(add)];
-    self.navigationItem.title = @"情景触发记录";
+    self.navigationItem.title = @"触发时间";
     self.navigationController.navigationBar.barTintColor = BARTINTCOLOR;
     self.navigationController.navigationBar.tintColor = TINTCOLOR;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];//设置标题颜色及字体大小
@@ -51,14 +53,41 @@
     self.navigationItem.rightBarButtonItem = rightBtn;
 }
 - (void) save{
-    AddSceneViewController *controller = [[AddSceneViewController alloc]init];
+    NSString *str = @"";
+    for (UIView *view in _v3.subviews) {
+        if (view.tag == 8888) {
+            UIImageView *imageView = (UIImageView*)[view subviewsWithTag:9999];
+            if ([imageView.accessibilityIdentifier isEqualToString:@"未选中勾"]) {
+                str = [NSString stringWithFormat:@"%@%@",str,imageView.accessibilityValue];
+            }
+        }
+    }
+    if ([str isEqualToString:@""]) {
+        [[AlertManager alertManager] showError:3.0 string:@"请选择重复时间"];
+        return ;
+    }
+    if ([_start_Time.text isEqualToString:@""]) {
+        [[AlertManager alertManager] showError:3.0 string:@"请输入开始时间"];
+        return ;
+    }
+    if ([_end_Time.text isEqualToString:@""]) {
+        [[AlertManager alertManager] showError:3.0 string:@"请输入结束时间"];
+        return ;
+    }
+    AddScene2ViewController *controller = [[AddScene2ViewController alloc]init];
     NSArray *startTime = [_start_Time.text componentsSeparatedByString:@":"];
     NSArray *endTime = [_end_Time.text componentsSeparatedByString:@":"];
     NSDictionary *dic = @{@"type":@"33111",@"value":@[
-                                  @{@"w":@"1",@"h":[startTime objectAtIndex:0],@"mi":[startTime objectAtIndex:1]},          @{@"w":@"0",@"h":[endTime objectAtIndex:0],@"mi":[startTime objectAtIndex:1]},
+                                  @{@"w":str,@"h":[startTime objectAtIndex:0],@"mi":[startTime objectAtIndex:1]},          @{@"w":str,@"h":[endTime objectAtIndex:0],@"mi":[startTime objectAtIndex:1]},
                                   ]};
-    [controller setDic:dic];
-    [self.navigationController pushViewController:controller animated:YES];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[AddScene2ViewController class]]) {
+            AddScene2ViewController *con = (AddScene2ViewController*)controller;
+            [con setIfDic:dic];
+            [self.navigationController popToViewController:con animated:YES];
+        }
+    }
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 #pragma mark 返回
 - (void)goBack{
@@ -74,7 +103,7 @@
     v1Label.text = @"开始时间";
     
     _start_Time = [[UITextField alloc]initWithFrame:CGRectMake(width / 2 - 20, height / 2 - 10, width - v1Label.bounds.size.width, 20)];
-    _start_Time.placeholder = @"sdfa";
+    _start_Time.placeholder = @"开始时间";
     
     UIView *v1LineView = [[UIView alloc]initWithFrame:CGRectMake(0, 50 - 0.5, width - 2*30, 0.5)];
     v1LineView.backgroundColor = [UIColor lightGrayColor];
@@ -89,7 +118,7 @@
     v2Label.text = @"结束时间";
     
     _end_Time = [[UITextField alloc]initWithFrame:CGRectMake(width / 2 - 20, height / 2 - 10, width - v2Label.bounds.size.width - 51, 20)];
-    _end_Time.placeholder = @"sdfa";
+    _end_Time.placeholder = @"结束时间";
     
     _swt = [[UISwitch alloc]initWithFrame:CGRectMake(width - 51 - 30*2, height / 2 - 15, 51, 31)];//默认就是51*31
     
@@ -101,42 +130,47 @@
     [v2 addSubview:v2LineView];
     [self.view addSubview:v2];
     
-    UIView *v3 = [[UIView alloc]initWithFrame:CGRectMake(30, 10 + 50 + 50 + 50, width - 2*30, height)];
+    _v3 = [[UIView alloc]initWithFrame:CGRectMake(30, 10 + 50 + 50 + 50, width - 2*30, height)];
     UILabel *v3Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 80)];
     v3Label.numberOfLines = 0;
     v3Label.text = @"重复时间";
-    [v3 addSubview:v3Label];
+    [_v3 addSubview:v3Label];
     NSDictionary *dic = self.dic;
     for (int i = 0; i< 7; i++)
     {
         UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        
         button1.frame = CGRectMake(4*i + 28*i + 40, 20, 28, 45);
-        button1.tag = i;
-        button1.accessibilityIdentifier = [NSString stringWithFormat:@"%@",[dic objectForKey:[NSString stringWithFormat:@"%d",i]]];
-//        button1.backgroundColor = [UIColor yellowColor];
-        button1.titleLabel.font = [UIFont systemFontOfSize:15];
-        [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        NSString *imgName = @"复选框-未选中";
-        [button1 setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
-        button1.accessibilityIdentifier = imgName;
-        [button1 setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:[NSString stringWithFormat:@"%d",i]]] forState:UIControlStateNormal];
+        button1.tag = 8888;
+        NSString *imgName = @"未选中";
+        
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+        imageView.image = [UIImage imageNamed:imgName];
+        imageView.accessibilityIdentifier = imgName;
+        imageView.accessibilityValue = i == 6 ? @"0" : [NSString stringWithFormat:@"%d",i+1];
+        imageView.tag = 9999;
+        
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom + 2, button1.width, 20)];
+        label.text = [NSString stringWithFormat:@"%@",[dic objectForKey:[NSString stringWithFormat:@"%d",i]]];
+        
         [button1 addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [button1 verticalCenterImageAndTitle:0.0f];
-        [v3 addSubview:button1];
+        [button1 addSubview:imageView];
+        [button1 addSubview:label];
+        [_v3 addSubview:button1];
     }
     UIView *v3LineView = [[UIView alloc]initWithFrame:CGRectMake(0, 80 - 0.5, width - 2*30, 0.5)];
     v3LineView.backgroundColor = [UIColor lightGrayColor];
-    [v3 addSubview:v3LineView];
-    [self.view addSubview:v3];
+    [_v3 addSubview:v3LineView];
+    [self.view addSubview:_v3];
 }
 -(void)btnClick:(UIButton*)sender{
-    NSString *imgName = @"复选框";
-    if ([sender.accessibilityIdentifier  isEqual: @"复选框"]) {
-        imgName = @"复选框-未选中";
+    UIImageView *imageView = (UIImageView*)[sender subviewsWithTag:9999];
+    NSString *imgName = @"未选中";
+    if ([imageView.accessibilityIdentifier  isEqual: @"未选中"]) {
+        imgName = @"未选中勾";
     }
     sender.accessibilityIdentifier = imgName;
-    [sender setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+    imageView.accessibilityIdentifier = imgName;
+    imageView.image = [UIImage imageNamed:imgName];
 }
 - (void)layoutUI {
     CGRect rect = [[UIScreen mainScreen] bounds];

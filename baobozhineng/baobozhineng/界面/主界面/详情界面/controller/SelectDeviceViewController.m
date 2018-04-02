@@ -191,10 +191,12 @@
                                      @"devid":[dic objectForKey:@"id"],
                                      @"name":[dic objectForKey:@"name"]
                                      };
-            [self sendNSNotificationCenter:device];
+//            [self sendNSNotificationCenter:device];
             for (UIViewController *controller in self.navigationController.viewControllers) {
                 if ([controller isKindOfClass:[AddSceneViewController class]]) {
-                    [self.navigationController popToViewController:controller animated:YES];
+                    AddSceneViewController *con = (AddSceneViewController*)controller;
+                    [con setIfDic:device];
+                    [self.navigationController popToViewController:con animated:YES];
                 }
             }
         }
@@ -238,12 +240,12 @@
         NSLog(@"error:%@",error);
     }];
 }
--(void)sendNSNotificationCenter:(NSDictionary*)dic{
-    //创建通知
-    NSNotification *notification = [NSNotification notificationWithName:@"setIf" object:nil userInfo:dic];
-    //通过通知中心发送通知
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
-}
+//-(void)sendNSNotificationCenter:(NSDictionary*)dic{
+//    //创建通知
+//    NSNotification *notification = [NSNotification notificationWithName:@"setIf" object:nil userInfo:dic];
+//    //通过通知中心发送通知
+//    [[NSNotificationCenter defaultCenter] postNotification:notification];
+//}
 /*
 #pragma mark - Navigation
 
