@@ -7,6 +7,7 @@
 //
 
 #import "AddScene2ViewController.h"
+#import "ConditionViewController.h"
 #import "AddConditionViewController.h"
 #import <YYKit.h>
 static NSString *identifier = @"cellID";
@@ -75,8 +76,10 @@ NS_ENUM(NSInteger,ifState){
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     [cell.contentView removeAllSubviews];
+    NSString *identifier = [NSString stringWithFormat:@"%ld:%ld",(long)indexPath.section,(long)indexPath.row];
+    cell.accessibilityIdentifier = identifier;
     NSDictionary *dic = [self.ifArr objectAtIndex:indexPath.row];
-    NSLog(@"dic:%@",dic);
+//    NSLog(@"dic:%@",dic);
     NSString *titleText = @"";
     NSString *detailText = @"";
     if ([[dic objectForKey:@"type"] integerValue] == 33111) {
@@ -85,13 +88,14 @@ NS_ENUM(NSInteger,ifState){
         NSDictionary *endTime = [value objectAtIndex:1];
         titleText = [NSString stringWithFormat:@"开始:%@:%@ 结束:%@:%@",[startTime objectForKey:@"h"],[startTime objectForKey:@"mi"],[endTime objectForKey:@"h"],[endTime objectForKey:@"mi"]];
         NSString *weekStr = [startTime objectForKey:@"w"];
-        for (int i = 1; i <= 7; i ++) {
-            if (i == 7) {
-                i = 0;
-            }
+        for (int i = 0; i < 7; i ++) {
+//            if (i == 7) {
+//                i = 0;
+//            }
+            
             NSString *num = [NSString stringWithFormat:@"%d",i];
             if ([weekStr rangeOfString:num].location == NSNotFound) {
-                NSLog(@"string 不存在 %@",num);
+//                NSLog(@"string 不存在 %@",num);
             } else {
                 detailText = [NSString stringWithFormat:@"%@ %@",detailText,[self.week objectForKey:num]];
             }
@@ -110,6 +114,7 @@ NS_ENUM(NSInteger,ifState){
     detail.text = detailText;
     
     UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 20 - 20, 15, 20, 20)];
+    rightBtn.accessibilityIdentifier = identifier;
     if (ifState == NormalState) {
         [rightBtn setImage:[UIImage imageNamed:@"箭头"] forState:UIControlStateNormal];
     }else{
@@ -227,7 +232,17 @@ NS_ENUM(NSInteger,ifState){
 //代理的优先级比属性高
 //点击时间监听
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld-%ld",indexPath.section,indexPath.row);
+    CGFloat sec = indexPath.section;
+    CGFloat row = indexPath.row;
+    if (sec == 1) {
+        NSDictionary *dic = [self.ifArr objectAtIndex:row];
+        AddConditionViewController *con = [AddConditionViewController new];
+        con.tempDic = dic;
+        con.row = row;
+        [self.navigationController pushViewController:con animated:YES];
+    }else if (sec == 2){
+        
+    }
 }
 //设置cell的内边距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
@@ -245,8 +260,13 @@ NS_ENUM(NSInteger,ifState){
     return CGSizeMake(0, 50);
 }
 #pragma mark ————— 方法 —————
--(void)setIfDic:(NSDictionary *)ifDic{
-    [self.ifArr addObject:ifDic];
+-(void)setIfDic:(NSDictionary *)ifDic row:(CGFloat)row{
+    if (row < 0) {
+        [self.ifArr addObject:ifDic];
+    }else{
+        [self.ifArr replaceObjectAtIndex:row withObject:ifDic];
+    }
+    
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
 }
 
@@ -264,13 +284,26 @@ NS_ENUM(NSInteger,ifState){
             ifState = DeleteState;
         }
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+        return ;
     }else if (tag == 1332){
-        AddConditionViewController *con = [AddConditionViewController new];
+        ConditionViewController *con = [ConditionViewController new];
         [self.navigationController pushViewController:con animated:YES];
+        return ;
     }else if (tag == 1333){
-        
+        return ;
     }else if (tag == 1334){
-        
+        return ;
+    }else{
+        NSArray *secRow = [sender.accessibilityIdentifier componentsSeparatedByString:@":"];
+        CGFloat sec = [[secRow objectAtIndex:0] integerValue];
+        CGFloat row = [[secRow objectAtIndex:1] integerValue];
+        if (sec == 1) {
+            [self.ifArr removeObjectAtIndex:row];
+            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+        }else if (sec == 2){
+            [self.thenArr removeObjectAtIndex:row];
+            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
+        }
     }
 }
 

@@ -11,4 +11,5 @@
 @interface AddScene2ViewController : ParentViewController
 @property(nonatomic, strong) NSDictionary *ifDic;
 @property(nonatomic, strong) NSDictionary *thenDic;
+-(void)setIfDic:(NSDictionary *)ifDic row:(CGFloat)row;
 @end

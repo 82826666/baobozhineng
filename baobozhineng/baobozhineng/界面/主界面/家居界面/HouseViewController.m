@@ -77,16 +77,16 @@ static NSString *headerReuseIdentifier = @"hearderID";
     [cell.contentView removeAllSubviews];
     
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView setImage:[UIImage imageNamed:[dic objectForKey:@"icon"]]];
+    [imageView setImage:[UIImage imageNamed:[dic objectForKey:@"icon1"]]];
     imageView.frame = CGRectMake(0, 15, 50, 50);
     imageView.centerX = cell.contentView.centerX;
     
     UILabel *sup = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right - 15, -5, 40, 30)];
-    sup.text = [dic objectForKey:@"status"] == NULL ? @"关" : @"开";
+    sup.text = [[dic objectForKey:@"status1"]integerValue] == 0 ? @"关" : @"开";
     
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom, SCREEN_WIDTH/4, 30)];
     name.textAlignment = NSTextAlignmentCenter;
-    name.text = [dic objectForKey:@"name"];
+    name.text = [dic objectForKey:@"name1"];
     
     [cell.contentView addSubview:imageView];
     [cell.contentView addSubview:sup];
@@ -134,6 +134,44 @@ static NSString *headerReuseIdentifier = @"hearderID";
 //代理的优先级比属性高
 //点击时间监听
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat sec = indexPath.section;
+    CGFloat row = indexPath.row;
+    NSArray *arr = [self.dataSource objectAtIndex:sec];
+    NSDictionary *dic = [arr objectAtIndex:row];
+    CGFloat type = [[dic objectForKey:@"type"]integerValue];
+    NSString *status;
+    NSString *ch;
+    if (type == 20111 || type == 20121 || type == 20131 || type == 20141) {
+        status = [dic objectForKey:@"status1"];
+        ch = [dic objectForKey:@"ch1"];
+    }
+    NSDictionary *cmd = @{
+                          @"cmd":@"edit",
+                          @"type":[dic objectForKey:@"type"],
+                          @"devid":[dic objectForKey:@"devid"],
+                          @"value":status,
+                          @"ch":@"1"
+                          };
+    NSDictionary *params = @{
+                             @"master_id":GET_USERDEFAULT(MASTER_ID),
+                             @"device_type":[dic objectForKey:@"type"],
+                             @"cmd":[cmd jsonStringEncoded]
+                             };
+    NSLog(@"params:%@",params);
+    [[APIManager sharedManager]deviceZigbeeCmdsWithParameters:params success:^(id data) {
+        NSDictionary *datadic = data;
+        NSLog(@"data:%@",datadic);
+        //&& [datadic objectForKey:@"data"] objectForKey:@"stauts"
+        if([[datadic objectForKey:@"code"] intValue] == 200 ){
+            if ([[[datadic objectForKey:@"data"] objectForKey:@"status"] integerValue] >= 0) {
+                [[AlertManager alertManager] showError:3.0 string:@"发送cmd命令成功"];
+            }
+        }else{
+            [[AlertManager alertManager] showError:3.0 string:@"发送cmd命令失败"];
+        }
+    } failure:^(NSError *error) {
+        [[AlertManager alertManager] showError:3.0 string:@"系统发生错误"];
+    }];
 //    NSLog(@"%ld-%ld",indexPath.section,indexPath.row);
 }
 //设置cell的内边距

@@ -39,8 +39,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    if (_tempDic != nil) {
+        NSArray *value = [_tempDic objectForKey:@"value"];
+        NSDictionary *one = [value objectAtIndex:0];
+        NSDictionary *two = [value objectAtIndex:1];
+        NSString *startTime = [NSString stringWithFormat:@"%@:%@",[one objectForKey:@"h"],[one objectForKey:@"mi"]];
+        NSString *endTime = [NSString stringWithFormat:@"%@:%@",[two objectForKey:@"h"],[two objectForKey:@"mi"]];
+        _start_Time.text = startTime;
+        _end_Time.text = endTime;
+    }
+}
+
 - (void) initNav{
-    
     //    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"消息" style:UIBarButtonItemStyleDone target: self action:@selector(message)];
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"in_arrow_white"] style:UIBarButtonItemStyleDone target:self action:@selector(goBack)];
     //    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStyleDone target:self action:@selector(add)];
@@ -74,7 +85,6 @@
         [[AlertManager alertManager] showError:3.0 string:@"请输入结束时间"];
         return ;
     }
-    AddScene2ViewController *controller = [[AddScene2ViewController alloc]init];
     NSArray *startTime = [_start_Time.text componentsSeparatedByString:@":"];
     NSArray *endTime = [_end_Time.text componentsSeparatedByString:@":"];
     NSDictionary *dic = @{@"type":@"33111",@"value":@[
@@ -83,17 +93,24 @@
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[AddScene2ViewController class]]) {
             AddScene2ViewController *con = (AddScene2ViewController*)controller;
-            [con setIfDic:dic];
+            if (_tempDic == nil) {
+                _row = -1;
+            }
+            [con setIfDic:dic row:_row];
             [self.navigationController popToViewController:con animated:YES];
         }
     }
-//    [self.navigationController pushViewController:controller animated:YES];
 }
 #pragma mark 返回
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)layoutSubviews{
+    NSString *w = @"";
+    if (_tempDic != nil) {
+        NSArray *value = [_tempDic objectForKey:@"value"];
+        w = [[value objectAtIndex:0] objectForKey:@"w"];
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     CGFloat width = SCREEN_WIDTH;
     CGFloat height = 50;
@@ -141,8 +158,13 @@
         UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
         button1.frame = CGRectMake(4*i + 28*i + 40, 20, 28, 45);
         button1.tag = 8888;
-        NSString *imgName = @"未选中";
-        
+        NSString *num = [NSString stringWithFormat:@"%d",i];
+        NSString *imgName = @"";
+        if ([w rangeOfString:num].location == NSNotFound) {
+            imgName = @"未选中";
+        } else {
+            imgName = @"未选中勾";
+        }
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
         imageView.image = [UIImage imageNamed:imgName];
         imageView.accessibilityIdentifier = imgName;
@@ -198,7 +220,6 @@
 
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    NSLog(@"test:");
     _txtFCurrent = textField;
 }
 
