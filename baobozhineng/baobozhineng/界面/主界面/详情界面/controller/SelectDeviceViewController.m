@@ -9,6 +9,7 @@
 #import "SelectDeviceViewController.h"
 #import "CKAlertViewController.h"
 #import "KeyViewController.h"
+#import "AddScene2ViewController.h"
 #import <YYKit.h>
 static NSString *identifier = @"cellID";
 static NSString *headerReuseIdentifier = @"hearderID";
@@ -134,6 +135,18 @@ static NSString *headerReuseIdentifier = @"hearderID";
 //代理的优先级比属性高
 //点击时间监听
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *arr = [self.dataSource objectAtIndex:indexPath.section];
+    NSDictionary *dic = [arr objectAtIndex:indexPath.row];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[AddScene2ViewController class]]) {
+            AddScene2ViewController *con = (AddScene2ViewController*)controller;
+            if (_tempDic == nil) {
+                _row = -1;
+            }
+            [con setIfDic:dic row:_row];
+            [self.navigationController popToViewController:con animated:YES];
+        }
+    }
     //    NSLog(@"%ld-%ld",indexPath.section,indexPath.row);
 }
 //设置cell的内边距

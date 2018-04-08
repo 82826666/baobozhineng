@@ -39,6 +39,7 @@
 		57B37FB9202338AB00AA3603 /* HouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B37FB8202338AB00AA3603 /* HouseViewController.m */; };
 		57B37FBD20233F7300AA3603 /* HouseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B37FBB20233F7300AA3603 /* HouseTableViewCell.m */; };
 		57B37FBE20233F7300AA3603 /* HouseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57B37FBC20233F7300AA3603 /* HouseTableViewCell.xib */; };
+		57B58ED4207A64FA00383584 /* in_scene_message.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B9356D1FEFFB85003F2C52 /* in_scene_message.png */; };
 		57BABCD920709A6F006BC403 /* 未选中.png in Resources */ = {isa = PBXBuildFile; fileRef = 57BABCD720709A6F006BC403 /* 未选中.png */; };
 		57BABCDA20709A6F006BC403 /* 未选中勾.png in Resources */ = {isa = PBXBuildFile; fileRef = 57BABCD820709A6F006BC403 /* 未选中勾.png */; };
 		57BABCDD2070BE82006BC403 /* AddScene2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BABCDC2070BE82006BC403 /* AddScene2ViewController.m */; };
@@ -1451,6 +1452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57B58ED4207A64FA00383584 /* in_scene_message.png in Resources */,
 				576C260520726F6600949AF8 /* 33111.png in Resources */,
 				57BABCD920709A6F006BC403 /* 未选中.png in Resources */,
 				57FC5AA2206BD1E0006119CA /* close@2x.png in Resources */,

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SelectDeviceViewController : UIViewController
-
+@property(nonatomic, strong) NSDictionary *tempDic;
+@property(nonatomic, assign) CGFloat row;
 @end

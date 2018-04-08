@@ -34,6 +34,7 @@ NS_ENUM(NSInteger,ifState){
 @implementation AddScene2ViewController
 
 - (void)viewDidLoad {
+    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     [super viewDidLoad];
     ifState = NormalState;
     //创建布局，苹果给我们提供的流布局
@@ -82,7 +83,9 @@ NS_ENUM(NSInteger,ifState){
 //    NSLog(@"dic:%@",dic);
     NSString *titleText = @"";
     NSString *detailText = @"";
-    if ([[dic objectForKey:@"type"] integerValue] == 33111) {
+    CGFloat type = [[dic objectForKey:@"type"] integerValue];
+    NSString *imageStr = @"20111";
+    if (type == 33111) {
         NSArray *value = [dic objectForKey:@"value"];
         NSDictionary *startTime = [value objectAtIndex:0];
         NSDictionary *endTime = [value objectAtIndex:1];
@@ -101,9 +104,15 @@ NS_ENUM(NSInteger,ifState){
             }
         }
         detailText = [NSString stringWithFormat:@"重复星期:%@",detailText];
+        imageStr = [dic objectForKey:@"type"];
+    }else if (type == 20111 || type == 20121 || type == 20131 || type == 20141){
+        imageStr = [dic objectForKey:@"icon1"];
+        titleText = [dic objectForKey:@"name1"];
+        detailText = [[dic objectForKey:@"status1"] integerValue] == 0 ? @"关" : @"开";
     }
+    NSLog(@"log:%@",dic);
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 40, 40)];
-    imageView.image = [UIImage imageNamed:[dic objectForKey:@"type"]];
+    imageView.image = [UIImage imageNamed:imageStr];
     
     YYLabel *title = [[YYLabel alloc]initWithFrame:CGRectMake(imageView.right + 5, 5, SCREEN_WIDTH - imageView.right - 5 - 40, 20)];
     title.font = [UIFont systemFontOfSize:12];
@@ -141,10 +150,11 @@ NS_ENUM(NSInteger,ifState){
         [headerView removeAllSubviews];
         headerView.backgroundColor = [UIColor whiteColor];
         if (sec == 0) {
+            text = @"情景名称";
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(0, 0, 50, headerView.height);
             UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 40, 40)];
-            imageView.image = [UIImage imageNamed:@"20111"];
+            imageView.image = [UIImage imageNamed:@"33111"];
             [btn addSubview:imageView];
             [headerView addSubview:btn];
             
@@ -159,21 +169,25 @@ NS_ENUM(NSInteger,ifState){
             UIImageView *rightView = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 20 - 20, 15, 20, 20)];
             rightView.image = [UIImage imageNamed:@"箭头"];
             [headerView addSubview:rightView];
-            headerView.backgroundColor = [UIColor redColor];
+            headerView.backgroundColor = [UIColor whiteColor];
             return headerView;
         }else if (sec == 1 || sec == 2){
+            CGFloat tag;
+            if (sec == 1) {
+                tag = 1331;
+                text = @"以下所有条件满足时";
+            }else if (sec == 2){
+                tag = 1333;
+                text = @"按步骤执行以下任务";
+            }
             UIView *headerLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
             headerLine.backgroundColor = [UIColor lightGrayColor];
             YYLabel *label = [[YYLabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headerView.height)];
             label.text = text;
+            label.font = [UIFont systemFontOfSize:13];
             label.textAlignment = NSTextAlignmentCenter;
             
-            CGFloat tag;
-            if (sec == 1) {
-                tag = 1331;
-            }else if (sec == 2){
-                tag = 1333;
-            }
+            
             UIButton *reduceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [reduceBtn setImage:[UIImage imageNamed:@"in_common_menu_reduce"] forState:UIControlStateNormal];
             reduceBtn.frame = CGRectMake(SCREEN_WIDTH - 50, 10, 30, 30);
@@ -198,9 +212,10 @@ NS_ENUM(NSInteger,ifState){
             UIView *headerLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
             headerLine.backgroundColor = [UIColor lightGrayColor];
             YYLabel *label = [[YYLabel alloc]initWithFrame:CGRectMake(40, 0, 80, 50)];
-            label.text = text;
+            label.text = @"通知消息  ";
             YYLabel *label2 = [[YYLabel alloc]initWithFrame:CGRectMake(label.right, 0, 180, 50)];
-            label2.text = text;
+            label2.text = @"情景自动触发时";
+            label2.font = [UIFont systemFontOfSize:14];
             UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, label.bottom, SCREEN_WIDTH, 0.5)];
             line.backgroundColor = [UIColor lightGrayColor];
             [headerView addSubview:headerLine];
@@ -209,11 +224,13 @@ NS_ENUM(NSInteger,ifState){
             [headerView addSubview:line];
             
             UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, line.bottom + 5, 40, 40)];
-            imageView.image = [UIImage imageNamed:@"20111"];
+            imageView.image = [UIImage imageNamed:@"in_scene_message"];
             UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 10, line.bottom + 5, 200, 20)];
-            title.text = text;
+            title.text = @"向手机发送通知消息";
+            title.font = [UIFont systemFontOfSize:14];
             UILabel *detail = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 10, title.bottom, 200, 20)];
-            detail.text = text;
+            detail.text = @"消息:情景名称情景已自动触发";
+            detail.font = [UIFont systemFontOfSize:14];
             UISwitch *swt = [[UISwitch alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 51 - 10, line.bottom + 9.5, 51, 31)];
             UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, detail.bottom + 10, SCREEN_WIDTH, 0.5)];
             line2.backgroundColor = [UIColor lightGrayColor];
@@ -234,12 +251,16 @@ NS_ENUM(NSInteger,ifState){
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat sec = indexPath.section;
     CGFloat row = indexPath.row;
+    NSDictionary *dic;
     if (sec == 1) {
-        NSDictionary *dic = [self.ifArr objectAtIndex:row];
-        AddConditionViewController *con = [AddConditionViewController new];
-        con.tempDic = dic;
-        con.row = row;
-        [self.navigationController pushViewController:con animated:YES];
+        dic = [self.ifArr objectAtIndex:row];
+        CGFloat type = [[dic objectForKey:@"type"] integerValue];
+        if (type == 33111) {
+            AddConditionViewController *con = [AddConditionViewController new];
+            con.tempDic = dic;
+            con.row = row;
+            [self.navigationController pushViewController:con animated:YES];
+        }
     }else if (sec == 2){
         
     }

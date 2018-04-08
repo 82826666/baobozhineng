@@ -65,7 +65,7 @@
              //请求登录成功
             [[AlertManager alertManager] showSuccess:3.0 string:[datadic objectForKey:@"msg"]];
             NSLog(@"ms:%@",[datadic objectForKey:@"data"]);
-            NSArray *mas = [[datadic objectForKey:@"data"] objectForKey:@"master"];
+            NSMutableArray *mas = [[datadic objectForKey:@"data"] objectForKey:@"master"];
             NSString* master_id = @"";
             NSDictionary* master = [NSDictionary new];
             if (mas.count > 0) {

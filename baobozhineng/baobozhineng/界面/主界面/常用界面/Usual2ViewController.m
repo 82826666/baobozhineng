@@ -611,7 +611,7 @@ NS_ENUM(NSInteger,cellState){
 -(void)getSensor{
     [[APIManager sharedManager]deviceGetSceneListsWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSMutableArray *arr = [data objectForKey:@"data"];
-        if (arr.count > 0) {
+        if ([arr isKindOfClass:[NSArray class]]) {
             self.sensorArr = arr;
         }else{
             self.sensorArr = [[NSMutableArray alloc]init];
@@ -626,7 +626,7 @@ NS_ENUM(NSInteger,cellState){
 -(void)getDevice{
     [[APIManager sharedManager]deviceGetDeviceShortcutWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSMutableArray *arr = [data objectForKey:@"data"];
-        if (arr.count > 0) {
+        if ([arr isKindOfClass:[NSArray class]]) {
             self.deviceArr = arr;
         }else{
             self.deviceArr = [[NSMutableArray alloc]init];
