@@ -8,8 +8,8 @@
 
 #import "ConditionViewController.h"
 #import "AddConditionViewController.h"
-#import "SelectSensorViewController.h"
 #import "SelectDeviceViewController.h"
+#import "SelectSensorViewController.h"
 
 @interface ConditionViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -25,7 +25,6 @@
     [super viewDidLoad];
     [self initDataSouce];
     [self.view addSubview:self.tableView];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,10 +72,10 @@
         AddConditionViewController *controller = [[AddConditionViewController alloc]init];
         [self.navigationController pushViewController:controller animated:YES];
     }else if (indexPath.row == 1){
-        SelectSensorViewController *controller = [[SelectSensorViewController alloc]init];
+        SelectDeviceViewController *controller = [[SelectDeviceViewController alloc]init];
         [self.navigationController pushViewController:controller animated:YES];
     }else if (indexPath.row == 2){
-        SelectDeviceViewController *controller = [[SelectDeviceViewController alloc]init];
+        SelectSensorViewController *controller = [[SelectSensorViewController alloc]init];
         [self.navigationController pushViewController:controller animated:YES];
     }
 }

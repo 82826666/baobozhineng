@@ -197,6 +197,13 @@
                          ];
             break;
         }
+        case KMDatePickerStyleHourSecond: {
+            arrIndex = @[
+                         [NSNumber numberWithInteger:_hourIndex],
+                         [NSNumber numberWithInteger:_minuteIndex]
+                         ];
+            break;
+        }
     }
     
     for (NSUInteger i=0, len=arrIndex.count; i<len; i++) {
@@ -432,6 +439,10 @@
             numberOfComponents = 2;
             break;
         }
+        case KMDatePickerStyleHourSecond: {
+            numberOfComponents = 2;
+            break;
+        }
     }
     return numberOfComponents;
 }
@@ -491,6 +502,17 @@
             break;
         }
         case KMDatePickerStyleHourMinute: {
+            switch (component) {
+                case 0:
+                    numberOfRows = kHourCountOfEveryDay;
+                    break;
+                case 1:
+                    numberOfRows = kMinuteCountOfEveryHour;
+                    break;
+            }
+            break;
+        }
+        case KMDatePickerStyleHourSecond: {
             switch (component) {
                 case 0:
                     numberOfRows = kHourCountOfEveryDay;
@@ -593,6 +615,20 @@
             }
             break;
         }
+        case KMDatePickerStyleHourSecond: {
+            widthOfAverage = (kWidthOfTotal - 10.0) / 2;
+            switch (component) {
+                case 0:
+                    width = widthOfAverage;
+                    [self addUnitLabel:@"分" withPointX:width/2 + 12.0];
+                    break;
+                case 1:
+                    width = widthOfAverage;
+                    [self addUnitLabel:@"秒" withPointX:widthOfAverage + width/2 + 18.0];
+                    break;
+            }
+            break;
+        }
     }
     return width;
 }
@@ -686,6 +722,19 @@
             }
             break;
         }
+        case KMDatePickerStyleHourSecond: {
+            switch (component) {
+                case 0:
+                    text = _mArrHour[row];
+                    textColor = [self hourRowTextColor:row];
+                    break;
+                case 1:
+                    text = _mArrMinute[row];
+                    textColor = [self minuteRowTextColor:row];
+                    break;
+            }
+            break;
+        }
     }
     lblCustom.text = text;
     lblCustom.textColor = textColor;
@@ -764,6 +813,17 @@
             break;
         }
         case KMDatePickerStyleHourMinute: {
+            switch (component) {
+                case 0:
+                    _hourIndex = row;
+                    break;
+                case 1:
+                    _minuteIndex = row;
+                    break;
+            }
+            break;
+        }
+        case KMDatePickerStyleHourSecond: {
             switch (component) {
                 case 0:
                     _hourIndex = row;

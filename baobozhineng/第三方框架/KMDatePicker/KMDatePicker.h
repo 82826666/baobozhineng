@@ -13,7 +13,8 @@ typedef NS_ENUM(NSUInteger, KMDatePickerStyle) {
     KMDatePickerStyleYearMonthDayHourMinute,
     KMDatePickerStyleYearMonthDay,
     KMDatePickerStyleMonthDayHourMinute,
-    KMDatePickerStyleHourMinute
+    KMDatePickerStyleHourMinute,
+    KMDatePickerStyleHourSecond
 };
 
 @protocol KMDatePickerDelegate;

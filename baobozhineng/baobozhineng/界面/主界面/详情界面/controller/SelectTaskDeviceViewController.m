@@ -143,7 +143,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
             if (_tempDic == nil) {
                 _row = -1;
             }
-            [con setIfDic:dic row:_row];
+            [con setThenDic:dic row:_row];
             [self.navigationController popToViewController:con animated:YES];
         }
     }

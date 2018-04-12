@@ -9,6 +9,10 @@
 #import "AddScene2ViewController.h"
 #import "ConditionViewController.h"
 #import "AddConditionViewController.h"
+#import "DetailViewController.h"
+#import "TaskViewController.h"
+#import "TextfieldAlertViewController.h"
+#import "SwitchIconSelectViewController.h"
 #import <YYKit.h>
 static NSString *identifier = @"cellID";
 static NSString *headerReuseIdentifier = @"hearderID";
@@ -21,6 +25,15 @@ NS_ENUM(NSInteger,ifState){
     DeleteState
     
 };
+NS_ENUM(NSInteger,thenState){
+    
+    //右上角编辑按钮的两种状态；
+    //正常的状态，按钮显示“编辑”;
+    NormaState,
+    //正在删除时候的状态，按钮显示“完成”；
+    DelState
+    
+};
 @interface AddScene2ViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>{
     
 }
@@ -29,6 +42,9 @@ NS_ENUM(NSInteger,ifState){
 @property(nonatomic, strong) NSMutableArray *thenArr;
 @property(nonatomic, strong) NSMutableDictionary *week;
 @property(nonatomic,assign) enum ifState;
+@property(nonatomic,assign) enum thenState;
+@property(nonatomic, strong) YYLabel *titleBtn;
+@property(nonatomic, strong) UIButton *btn;
 @end
 
 @implementation AddScene2ViewController
@@ -79,7 +95,14 @@ NS_ENUM(NSInteger,ifState){
     [cell.contentView removeAllSubviews];
     NSString *identifier = [NSString stringWithFormat:@"%ld:%ld",(long)indexPath.section,(long)indexPath.row];
     cell.accessibilityIdentifier = identifier;
-    NSDictionary *dic = [self.ifArr objectAtIndex:indexPath.row];
+    CGFloat sec = indexPath.section;
+    NSDictionary *dic;
+    if (sec == 1) {
+        dic = [self.ifArr objectAtIndex:indexPath.row];
+    }else if (sec == 2){
+        dic = [self.ifArr objectAtIndex:indexPath.row];
+    }
+    
 //    NSLog(@"dic:%@",dic);
     NSString *titleText = @"";
     NSString *detailText = @"";
@@ -109,6 +132,10 @@ NS_ENUM(NSInteger,ifState){
         imageStr = [dic objectForKey:@"icon1"];
         titleText = [dic objectForKey:@"name1"];
         detailText = [[dic objectForKey:@"status1"] integerValue] == 0 ? @"关" : @"开";
+    }else if (type == 33011){
+        imageStr = @"33011";
+        titleText = [NSString stringWithFormat:@"延时: %@秒",[dic objectForKey:@"value"]];
+        detailText = @"";
     }
     NSLog(@"log:%@",dic);
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 40, 40)];
@@ -124,12 +151,22 @@ NS_ENUM(NSInteger,ifState){
     
     UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 20 - 20, 15, 20, 20)];
     rightBtn.accessibilityIdentifier = identifier;
-    if (ifState == NormalState) {
-        [rightBtn setImage:[UIImage imageNamed:@"箭头"] forState:UIControlStateNormal];
-    }else{
-        [rightBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-        [rightBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+    if (sec == 1) {
+        if (ifState == NormalState) {
+            [rightBtn setImage:[UIImage imageNamed:@"箭头"] forState:UIControlStateNormal];
+        }else{
+            [rightBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+            [rightBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }else if (sec == 2){
+        if (thenState == NormaState) {
+            [rightBtn setImage:[UIImage imageNamed:@"箭头"] forState:UIControlStateNormal];
+        }else{
+            [rightBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+            [rightBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
+    
     
     UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, cell.contentView.bottom, SCREEN_WIDTH, 0.5)];
     line2.backgroundColor = [UIColor lightGrayColor];
@@ -151,20 +188,34 @@ NS_ENUM(NSInteger,ifState){
         headerView.backgroundColor = [UIColor whiteColor];
         if (sec == 0) {
             text = @"情景名称";
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(0, 0, 50, headerView.height);
+            _btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            _btn.frame = CGRectMake(0, 0, 50, headerView.height);
             UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 40, 40)];
-            imageView.image = [UIImage imageNamed:@"33111"];
-            [btn addSubview:imageView];
-            [headerView addSubview:btn];
+            NSString *imgName = @"33111";
+            imageView.image = [UIImage imageNamed:imgName];
+            imageView.tag = 331111;
+            _btn.tag = 33111;
+            _btn.accessibilityIdentifier = imgName;
+            [_btn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+            [_btn addSubview:imageView];
+            [headerView addSubview:_btn];
             
-            YYLabel *titleBtn = [[YYLabel alloc] initWithFrame:CGRectMake(btn.right, 0, SCREEN_WIDTH - btn.right, headerView.height)];
-            titleBtn.textAlignment = NSTextAlignmentCenter;
-            titleBtn.text = text;
-            titleBtn.textTapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-                NSLog(@"test");
+            _titleBtn = [[YYLabel alloc] initWithFrame:CGRectMake(_btn.right, 0, SCREEN_WIDTH - _btn.right, headerView.height)];
+            _titleBtn.textAlignment = NSTextAlignmentCenter;
+            _titleBtn.text = text;
+            _titleBtn.textTapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+                    TextFieldAlertViewController *textalert = VIEW_SHAREINSRANCE(ALERTVIEWSTORYBOARD, TEXTFIELDALERTVIEWCONTROLLER);
+                    [textalert setTitle:@"添加情景名称" EnterBlock:^(NSString *text) {
+                        if (text) {
+                            _titleBtn.text = text;
+                        }
+                    } Cancle:^(NSString *text) {
+                
+                    }];
+                    [textalert showWithParentViewController:nil];
+                    [textalert showPopupview];
             };
-            [headerView addSubview:titleBtn];
+            [headerView addSubview:_titleBtn];
             
             UIImageView *rightView = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 20 - 20, 15, 20, 20)];
             rightView.image = [UIImage imageNamed:@"箭头"];
@@ -290,9 +341,12 @@ NS_ENUM(NSInteger,ifState){
     
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
 }
-
--(void)setThenDic:(NSDictionary *)thenDic{
-    [self.thenArr addObject:thenDic];
+-(void)setThenDic:(NSDictionary *)thenDic row:(CGFloat)row{
+    if (row < 0) {
+        [self.thenArr addObject:thenDic];
+    }else{
+        [self.thenArr replaceObjectAtIndex:row withObject:thenDic];
+    }
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
 }
 
@@ -311,9 +365,28 @@ NS_ENUM(NSInteger,ifState){
         [self.navigationController pushViewController:con animated:YES];
         return ;
     }else if (tag == 1333){
+        if (thenState == DeleteState) {
+            thenState = NormaState;
+        }else{
+            thenState = DelState;
+        }
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
         return ;
     }else if (tag == 1334){
+        TaskViewController *con = [TaskViewController new];
+        [self.navigationController pushViewController:con animated:YES];
         return ;
+    }else if (tag == 33111){
+        SwitchIconSelectViewController *switchIcon = [SwitchIconSelectViewController sharePopupView:ALERTVIEWSTORYBOARD andPopupViewName:SWITCHICONSELECTVIEWCONTROLLER];
+            [switchIcon setImgArray:@[@"20111",@"20121"] titleArray:@[@"一键开关",@"二键开关"] LabelTitle:@"灯具图标设置" ClickBlock:^(int index,NSString *imagestr,NSString *title) {
+                //按钮的返回事件
+                UIImageView *imageView = (UIImageView*)[_btn subviewsWithTag:331111];
+                imageView.image = [UIImage imageNamed:imagestr];
+                _btn.accessibilityIdentifier = imagestr;
+
+            }] ;
+            [switchIcon showWithParentViewController:nil];
+            [switchIcon showPopupview];
     }else{
         NSArray *secRow = [sender.accessibilityIdentifier componentsSeparatedByString:@":"];
         CGFloat sec = [[secRow objectAtIndex:0] integerValue];
@@ -372,6 +445,70 @@ NS_ENUM(NSInteger,ifState){
     return _week;
 }
 
+- (void) initNav{
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"in_arrow_white"] style:UIBarButtonItemStyleDone target:self action:@selector(goBack)];
+    self.navigationItem.title = @"情景添加";
+    self.navigationController.navigationBar.barTintColor = BARTINTCOLOR;
+    self.navigationController.navigationBar.tintColor = TINTCOLOR;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];//设置标题颜色及字体大小
+    self.navigationItem.leftBarButtonItem = leftBtn;
+    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(save)];
+    self.navigationItem.rightBarButtonItem = rightBtn;
+}
+- (void) save{
+    if (self.ifArr == nil) {
+        [[AlertManager alertManager] showError:3.0 string:@"请添加条件"];
+        return ;
+    }
+    if (self.thenArr == nil) {
+        [[AlertManager alertManager] showError:3.0 string:@"请选择执行"];
+        return ;
+    }
+    NSString *devid = @"";
+    NSString *name = _titleBtn.text;
+    NSMutableArray *devceid = [NSMutableArray new];
+    for (int i = 0; i < _ifArr.count; i++) {
+        NSDictionary *dic = _ifArr[i];
+        [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
+    }
+    for (int i = 0; i < _thenArr.count; i++) {
+        NSDictionary *dic = _thenArr[i];
+        CGFloat type = [[dic objectForKey:@"type"] integerValue];
+        if (type != 33011) {
+            [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
+        }
+    }
+    NSDictionary *params = @{
+                             @"master_id":GET_USERDEFAULT(MASTER_ID),
+                             @"name":name,
+                             @"devid":devid,
+                             @"icon":@"3001",
+                             @"condition":[CommonCode formatToJson:self.ifArr],
+                             @"action":[CommonCode formatToJson:self.thenArr],
+                             @"message":@"情景已自动触发",
+                             @"is_push":@"1",
+                             @"enable":@"1",
+                             @"scene_devices":[CommonCode formatToJson:devceid]
+                             };
+    NSLog(@"params:%@",params);
+    [[APIManager sharedManager]deviceAddSceneWithParameters:params success:^(id data) {
+        NSLog(@"ns:%@",data);
+        NSDictionary *dic = data;
+        NSInteger code = [[dic objectForKey:@"code"] integerValue];
+        if (code == 0) {
+            NSLog(@"msg:%@",[data objectForKey:@"msg"]);
+        }else{
+            DetailViewController *controller = [[DetailViewController alloc]init];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"saf:%@",error);
+    }];
+}
+#pragma mark 返回
+- (void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 /*
 #pragma mark - Navigation
 

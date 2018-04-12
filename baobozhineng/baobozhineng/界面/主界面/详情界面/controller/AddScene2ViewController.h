@@ -12,4 +12,5 @@
 @property(nonatomic, strong) NSDictionary *ifDic;
 @property(nonatomic, strong) NSDictionary *thenDic;
 -(void)setIfDic:(NSDictionary *)ifDic row:(CGFloat)row;
+-(void)setThenDic:(NSDictionary *)thenDic row:(CGFloat)row;
 @end
