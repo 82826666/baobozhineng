@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5e38;&#x7528;&#x754c;&#x9762;/EquipmentSwitchSetViewController.m"
-            timestampString = "542811328.060009"
+            timestampString = "545494941.076198"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "180"
@@ -73,7 +73,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x5e38;&#x7528;&#x754c;&#x9762;/EquipmentSwitchSetViewController.m"
-            timestampString = "542811328.060078"
+            timestampString = "545494941.07627"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
@@ -366,6 +366,22 @@
             endingLineNumber = "230"
             landmarkName = "KMDatePicker"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "baobozhineng/&#x754c;&#x9762;/&#x4e3b;&#x754c;&#x9762;/&#x8be6;&#x60c5;&#x754c;&#x9762;/controller/AddScene2ViewController.m"
+            timestampString = "545496367.158805"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

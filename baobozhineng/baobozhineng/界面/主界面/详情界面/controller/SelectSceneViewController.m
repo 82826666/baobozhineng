@@ -51,30 +51,23 @@ static NSString *identifier = @"cellID";
 }
 //一个分区item的数量
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 1;
+    return self.dataSource.count;
 }
 //每个item的内容
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *arr = [self.dataSource objectAtIndex:indexPath.section];
-    NSDictionary *dic = [arr objectAtIndex:indexPath.row];
+    NSDictionary *dic = [self.dataSource objectAtIndex:indexPath.row];
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
     [cell.contentView removeAllSubviews];
     
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView setImage:[UIImage imageNamed:[dic objectForKey:@"icon"]]];
-    imageView.frame = CGRectMake(0, 15, 50, 50);
-    imageView.centerX = cell.contentView.centerX;
+    [imageView setImage:[UIImage imageNamed:[dic objectForKey:@"icon1"]]];
+    imageView.frame = CGRectMake(20, cell.top + 10, 30, 30);
     
-    UILabel *sup = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right - 15, -5, 40, 30)];
-    sup.text = [dic objectForKey:@"status"] == NULL ? @"关" : @"开";
     
-    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom, SCREEN_WIDTH/4, 30)];
-    name.textAlignment = NSTextAlignmentCenter;
-    name.text = [dic objectForKey:@"name"];
+    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 10, cell.top + 10, SCREEN_WIDTH - imageView.right - 10, 30)];
+    name.text = [dic objectForKey:@"name1"];
     
     [cell.contentView addSubview:imageView];
-    [cell.contentView addSubview:sup];
     [cell.contentView addSubview:name];
     
     return cell;
@@ -84,16 +77,12 @@ static NSString *identifier = @"cellID";
 //代理的优先级比属性高
 //点击时间监听
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *arr = [self.dataSource objectAtIndex:indexPath.section];
-    NSDictionary *dic = [arr objectAtIndex:indexPath.row];
+    NSDictionary *dic = [self.dataSource objectAtIndex:indexPath.row];
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[AddScene2ViewController class]]) {
-            AddScene2ViewController *con = (AddScene2ViewController*)controller;
-            if (_tempDic == nil) {
-                _row = -1;
-            }
-            [con setIfDic:dic row:_row];
-            [self.navigationController popToViewController:con animated:YES];
+            AddScene2ViewController *con1 = (AddScene2ViewController*)controller;
+            [self.navigationController popToViewController:con1 animated:YES];
+            [con1 setThenDic:dic];
         }
     }
     //    NSLog(@"%ld-%ld",indexPath.section,indexPath.row);
@@ -123,6 +112,13 @@ static NSString *identifier = @"cellID";
     return _collectionView;
 }
 
+-(NSMutableArray *)dataSource{
+    if (_dataSource == nil) {
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -130,17 +126,39 @@ static NSString *identifier = @"cellID";
 
 #pragma mark - 数据加载
 -(void)loadData{
-    [[APIManager sharedManager]deviceGetMasterRoomWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+    NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID)};
+    [[APIManager sharedManager]deviceGetDevidWithParameters:params success:^(id data) {
         NSDictionary *dic = data;
         if ([[dic objectForKey:@"code"]integerValue] == 200) {
-            
+            NSDictionary *one = @{
+                                  @"type":@"100000",
+                                  @"icon1":@"in_scene_select_hand",
+                                  @"name1":@"本情景",
+                                  @"status":@"0",
+                                  @"devid":[dic objectForKey:@"data"][0]
+                                  };
+            [self.dataSource addObject:one];
+            [[APIManager sharedManager]deviceGetSceneListsWithParameters:params success:^(id data) {
+                NSDictionary *dic = data;
+                if ([[dic objectForKey:@"code"]integerValue] == 200){
+                    NSArray *arr = [dic objectForKey:@"data"];
+                    for (int i = 0; i < arr.count; i ++) {
+                        NSDictionary *dicOne = [arr objectAtIndex:i];
+                        [self.dataSource addObject:dicOne];
+                    }
+                }else{
+                    
+                }
+                [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+            } failure:^(NSError *error) {
+                
+            }];
         }else{
             
         }
     } failure:^(NSError *error) {
         
     }];
-    
 }
 
 @end

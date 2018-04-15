@@ -25,6 +25,7 @@
 		576C2604207258D400949AF8 /* 箭头.png in Resources */ = {isa = PBXBuildFile; fileRef = 576C2603207258D400949AF8 /* 箭头.png */; };
 		576C260520726F6600949AF8 /* 33111.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B9356B1FEFFB85003F2C52 /* 33111.png */; };
 		577089D9205AAC580022E7F0 /* getSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577089D8205AAC580022E7F0 /* getSensorViewController.m */; };
+		5770D2E9207F9AC200408E98 /* in_scene_select_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B935771FEFFB85003F2C52 /* in_scene_select_hand.png */; };
 		5795230A202F391F00FB2508 /* CommonAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 57952309202F391F00FB2508 /* CommonAdd.m */; };
 		579A6423205CAED4002A1CD3 /* GetDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579A6422205CAED4002A1CD3 /* GetDeviceViewController.m */; };
 		57A928A02040F7340053660A /* UIButton+CenterImageAndTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A9289F2040F7340053660A /* UIButton+CenterImageAndTitle.m */; };
@@ -1452,6 +1453,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5770D2E9207F9AC200408E98 /* in_scene_select_hand.png in Resources */,
 				57B58ED4207A64FA00383584 /* in_scene_message.png in Resources */,
 				576C260520726F6600949AF8 /* 33111.png in Resources */,
 				57BABCD920709A6F006BC403 /* 未选中.png in Resources */,

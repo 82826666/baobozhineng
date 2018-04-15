@@ -8,7 +8,7 @@
 
 #import "ParentViewController.h"
 
-@interface AddScene2ViewController : ParentViewController
+@interface AddScene2ViewController : UIViewController
 @property(nonatomic, strong) NSDictionary *ifDic;
 @property(nonatomic, strong) NSDictionary *thenDic;
 -(void)setIfDic:(NSDictionary *)ifDic row:(CGFloat)row;

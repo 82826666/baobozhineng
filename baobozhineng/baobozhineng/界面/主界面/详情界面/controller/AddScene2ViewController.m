@@ -34,6 +34,12 @@ NS_ENUM(NSInteger,thenState){
     DelState
     
 };
+NS_ENUM(NSInteger, enableState){
+    //使能
+    enable,
+    //没有使能
+    noenable
+};
 @interface AddScene2ViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>{
     
 }
@@ -43,14 +49,15 @@ NS_ENUM(NSInteger,thenState){
 @property(nonatomic, strong) NSMutableDictionary *week;
 @property(nonatomic,assign) enum ifState;
 @property(nonatomic,assign) enum thenState;
+@property(nonatomic, assign) enum enableState;
 @property(nonatomic, strong) YYLabel *titleBtn;
 @property(nonatomic, strong) UIButton *btn;
+@property(nonatomic, strong) UISwitch *swt;
 @end
 
 @implementation AddScene2ViewController
 
 - (void)viewDidLoad {
-    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     [super viewDidLoad];
     ifState = NormalState;
     //创建布局，苹果给我们提供的流布局
@@ -100,7 +107,8 @@ NS_ENUM(NSInteger,thenState){
     if (sec == 1) {
         dic = [self.ifArr objectAtIndex:indexPath.row];
     }else if (sec == 2){
-        dic = [self.ifArr objectAtIndex:indexPath.row];
+        dic = [self.thenArr objectAtIndex:indexPath.row];
+//        dic = [selfobjectAtIndex:indexPath.row];
     }
     
 //    NSLog(@"dic:%@",dic);
@@ -136,8 +144,11 @@ NS_ENUM(NSInteger,thenState){
         imageStr = @"33011";
         titleText = [NSString stringWithFormat:@"延时: %@秒",[dic objectForKey:@"value"]];
         detailText = @"";
+    }else if (type == 100000){
+        imageStr = [dic objectForKey:@"icon1"];
+        titleText = [dic objectForKey:@"name1"];
+        detailText = @"开";
     }
-    NSLog(@"log:%@",dic);
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 40, 40)];
     imageView.image = [UIImage imageNamed:imageStr];
     
@@ -264,7 +275,7 @@ NS_ENUM(NSInteger,thenState){
             headerLine.backgroundColor = [UIColor lightGrayColor];
             YYLabel *label = [[YYLabel alloc]initWithFrame:CGRectMake(40, 0, 80, 50)];
             label.text = @"通知消息  ";
-            YYLabel *label2 = [[YYLabel alloc]initWithFrame:CGRectMake(label.right, 0, 180, 50)];
+            YYLabel *label2 = [[YYLabel alloc]initWithFrame:CGRectMake(label.right, 0, 140, 50)];
             label2.text = @"情景自动触发时";
             label2.font = [UIFont systemFontOfSize:14];
             UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, label.bottom, SCREEN_WIDTH, 0.5)];
@@ -276,19 +287,25 @@ NS_ENUM(NSInteger,thenState){
             
             UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, line.bottom + 5, 40, 40)];
             imageView.image = [UIImage imageNamed:@"in_scene_message"];
-            UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 10, line.bottom + 5, 200, 20)];
+            UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 10, line.bottom + 5, SCREEN_WIDTH - imageView.right, 20)];
             title.text = @"向手机发送通知消息";
             title.font = [UIFont systemFontOfSize:14];
-            UILabel *detail = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 10, title.bottom, 200, 20)];
+            UILabel *detail = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 10, title.bottom, SCREEN_WIDTH - imageView.right, 20)];
             detail.text = @"消息:情景名称情景已自动触发";
             detail.font = [UIFont systemFontOfSize:14];
-            UISwitch *swt = [[UISwitch alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 51 - 10, line.bottom + 9.5, 51, 31)];
+            UIButton *switchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            switchBtn.frame = CGRectMake(label2.right, 0, 51, 31);
+            _swt = [[UISwitch alloc]initWithFrame:CGRectMake(0, switchBtn.top + 9.5, 51, 31)];
+            [switchBtn addSubview:_swt];
+            [_swt setOn:YES];
+            enableState = enable;
+            [switchBtn addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventTouchUpInside];
             UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, detail.bottom + 10, SCREEN_WIDTH, 0.5)];
             line2.backgroundColor = [UIColor lightGrayColor];
             [headerView addSubview:imageView];
             [headerView addSubview:title];
             [headerView addSubview:detail];
-            [headerView addSubview:swt];
+            [headerView addSubview:switchBtn];
             [headerView addSubview:line2];
             return headerView;
         }
@@ -338,7 +355,6 @@ NS_ENUM(NSInteger,thenState){
     }else{
         [self.ifArr replaceObjectAtIndex:row withObject:ifDic];
     }
-    
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
 }
 -(void)setThenDic:(NSDictionary *)thenDic row:(CGFloat)row{
@@ -349,7 +365,12 @@ NS_ENUM(NSInteger,thenState){
     }
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
 }
-
+-(void)setThenDic:(NSDictionary *)thenDic{
+    if (thenDic != nil) {
+        [self.thenArr addObject:thenDic];
+    }
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
+}
 -(void)click:(UIButton*)sender{
     CGFloat tag = sender.tag;
     if (tag == 1331) {
@@ -400,7 +421,17 @@ NS_ENUM(NSInteger,thenState){
         }
     }
 }
-
+-(void)switchAction:(id)sender
+{
+    BOOL isButtonOn = [_swt isOn];
+    if (isButtonOn) {
+        [_swt setOn:NO];
+        enableState = noenable;
+    }else {
+        [_swt setOn:YES];
+        enableState = enable;
+    }
+}
 #pragma mark ————— 懒加载 —————
 -(UICollectionView*)collectionView{
     if (_collectionView == nil) {
