@@ -59,6 +59,7 @@ NS_ENUM(NSInteger, enableState){
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initNav];
     ifState = NormalState;
     //创建布局，苹果给我们提供的流布局
     UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc]init];
@@ -497,16 +498,24 @@ NS_ENUM(NSInteger, enableState){
     }
     NSString *devid = @"";
     NSString *name = _titleBtn.text;
+    NSString *is_push = enableState == noenable ? @"0" : @"1";
+    NSString *enable = @"0";
     NSMutableArray *devceid = [NSMutableArray new];
-    for (int i = 0; i < _ifArr.count; i++) {
-        NSDictionary *dic = _ifArr[i];
-        [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
-    }
-    for (int i = 0; i < _thenArr.count; i++) {
-        NSDictionary *dic = _thenArr[i];
+    for (int i = 0; i < self.ifArr.count; i++) {
+        NSDictionary *dic = [self.ifArr objectAtIndex:i];
         CGFloat type = [[dic objectForKey:@"type"] integerValue];
-        if (type != 33011) {
+        if (type != 33111) {
             [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
+        }
+    }
+//    NSLog(@"thenarr:%@",self.thenArr);
+    for (int i = 0; i < self.thenArr.count; i++) {
+        NSDictionary *dic = [self.thenArr objectAtIndex:i];
+        CGFloat type = [[dic objectForKey:@"type"] integerValue];
+        if (type != 100000 && type != 33011) {
+            [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
+        }else{
+            enable = @"1";
         }
     }
     NSDictionary *params = @{
@@ -516,21 +525,26 @@ NS_ENUM(NSInteger, enableState){
                              @"icon":@"3001",
                              @"condition":[CommonCode formatToJson:self.ifArr],
                              @"action":[CommonCode formatToJson:self.thenArr],
-                             @"message":@"情景已自动触发",
-                             @"is_push":@"1",
-                             @"enable":@"1",
+                             @"message":@"情景名称情景已自动触发",
+                             @"is_push":is_push,
+                             @"enable":enable,
                              @"scene_devices":[CommonCode formatToJson:devceid]
                              };
-    NSLog(@"params:%@",params);
+    
+//    NSLog(@"params:%@",params);
     [[APIManager sharedManager]deviceAddSceneWithParameters:params success:^(id data) {
-        NSLog(@"ns:%@",data);
         NSDictionary *dic = data;
         NSInteger code = [[dic objectForKey:@"code"] integerValue];
         if (code == 0) {
             NSLog(@"msg:%@",[data objectForKey:@"msg"]);
         }else{
-            DetailViewController *controller = [[DetailViewController alloc]init];
-            [self.navigationController pushViewController:controller animated:YES];
+            for (UIViewController *controller in self.navigationController.viewControllers) {
+                if ([controller isKindOfClass:[DetailViewController class]]) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                }
+            }
+//            DetailViewController *controller = [[DetailViewController alloc]init];
+//            [self.navigationController pushViewController:controller animated:YES];
         }
     } failure:^(NSError *error) {
         NSLog(@"saf:%@",error);

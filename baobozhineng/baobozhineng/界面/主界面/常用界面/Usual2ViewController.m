@@ -308,7 +308,8 @@ NS_ENUM(NSInteger,cellState){
     NSDictionary *dic;
     if (section == 1) {
         dic = [self.sensorArr objectAtIndex:row];
-        NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"id"]};
+        NSLog(@"dic:%@",dic);
+        NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"scene_id"]};
         [[APIManager sharedManager]deviceTriggerSceneWithParameters:params success:^(id data) {
             NSDictionary *datadic = data;
             NSLog(@"data:%@",data);
@@ -609,7 +610,7 @@ NS_ENUM(NSInteger,cellState){
 }
 
 -(void)getSensor{
-    [[APIManager sharedManager]deviceGetSceneListsWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+    [[APIManager sharedManager]deviceGetSceneShortcutWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSMutableArray *arr = [data objectForKey:@"data"];
         if ([arr isKindOfClass:[NSArray class]]) {
             self.sensorArr = arr;
@@ -620,6 +621,17 @@ NS_ENUM(NSInteger,cellState){
     } failure:^(NSError *error) {
         
     }];
+//    [[APIManager sharedManager]deviceGetSceneListsWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
+//        NSMutableArray *arr = [data objectForKey:@"data"];
+//        if ([arr isKindOfClass:[NSArray class]]) {
+//            self.sensorArr = arr;
+//        }else{
+//            self.sensorArr = [[NSMutableArray alloc]init];
+//        }
+//        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+//    } failure:^(NSError *error) {
+//
+//    }];
 }
 
 
