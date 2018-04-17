@@ -501,12 +501,38 @@ NS_ENUM(NSInteger, enableState){
     NSString *is_push = enableState == noenable ? @"0" : @"1";
     NSString *enable = @"0";
     NSMutableArray *devceid = [NSMutableArray new];
+    NSMutableArray *ifArr = [NSMutableArray new];
+    NSMutableArray *thenArr = [NSMutableArray new];
     for (int i = 0; i < self.ifArr.count; i++) {
         NSDictionary *dic = [self.ifArr objectAtIndex:i];
         CGFloat type = [[dic objectForKey:@"type"] integerValue];
         if (type != 33111) {
             [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
         }
+        NSDictionary *params;
+        if (type == 33111) {
+            params = @{
+                         @"type": [dic objectForKey:@"type"],
+                         @"value":[dic objectForKey:@"value"]
+                             };
+        }else if (type == 25711){
+            params = @{
+                       @"type":[dic objectForKey:@"type"],
+                       @"devid":[dic objectForKey:@"devid"],
+                       @"compare":@">",
+                       @"value":@"25",
+                       @"ch":@"1"
+                       };
+        }else{
+            params = @{
+                       @"type":[dic objectForKey:@"type"],
+                       @"devid":[dic objectForKey:@"devid"],
+                       @"compare":@"=",
+                       @"value":[dic objectForKey:@"status1"],
+                       @"ch":[dic objectForKey:@"ch1"]
+                       };
+        }
+        [ifArr addObject:params];
     }
 //    NSLog(@"thenarr:%@",self.thenArr);
     for (int i = 0; i < self.thenArr.count; i++) {
@@ -517,38 +543,57 @@ NS_ENUM(NSInteger, enableState){
         }else{
             enable = @"1";
         }
+        NSDictionary *params;
+        NSString *compare = @"=";
+        if (type == 33011) {
+            params = @{
+                       @"type":[dic objectForKey:@"type"],
+                       @"value":[dic objectForKey:@"value"]
+                       };
+        }else if (type == 25711){
+            
+        }else{
+            params = @{
+                       @"type":[dic objectForKey:@"type"],
+                       @"devid":[dic objectForKey:@"devid"],
+                       @"compare":compare,
+                       @"value":[dic objectForKey:@"status1"],
+                       @"ch":[dic objectForKey:@"ch1"]
+                       };
+        }
+        [thenArr addObject:params];
     }
     NSDictionary *params = @{
                              @"master_id":GET_USERDEFAULT(MASTER_ID),
                              @"name":name,
                              @"devid":devid,
                              @"icon":@"3001",
-                             @"condition":[CommonCode formatToJson:self.ifArr],
-                             @"action":[CommonCode formatToJson:self.thenArr],
+                             @"condition":[CommonCode formatToJson:ifArr],
+                             @"action":[CommonCode formatToJson:thenArr],
                              @"message":@"情景名称情景已自动触发",
                              @"is_push":is_push,
                              @"enable":enable,
                              @"scene_devices":[CommonCode formatToJson:devceid]
                              };
     
-//    NSLog(@"params:%@",params);
-    [[APIManager sharedManager]deviceAddSceneWithParameters:params success:^(id data) {
-        NSDictionary *dic = data;
-        NSInteger code = [[dic objectForKey:@"code"] integerValue];
-        if (code == 0) {
-            NSLog(@"msg:%@",[data objectForKey:@"msg"]);
-        }else{
-            for (UIViewController *controller in self.navigationController.viewControllers) {
-                if ([controller isKindOfClass:[DetailViewController class]]) {
-                    [self.navigationController popToViewController:controller animated:YES];
-                }
-            }
-//            DetailViewController *controller = [[DetailViewController alloc]init];
-//            [self.navigationController pushViewController:controller animated:YES];
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"saf:%@",error);
-    }];
+    NSLog(@"params:%@",params);
+//    [[APIManager sharedManager]deviceAddSceneWithParameters:params success:^(id data) {
+//        NSDictionary *dic = data;
+//        NSInteger code = [[dic objectForKey:@"code"] integerValue];
+//        if (code == 0) {
+//            NSLog(@"msg:%@",[data objectForKey:@"msg"]);
+//        }else{
+//            for (UIViewController *controller in self.navigationController.viewControllers) {
+//                if ([controller isKindOfClass:[DetailViewController class]]) {
+//                    [self.navigationController popToViewController:controller animated:YES];
+//                }
+//            }
+////            DetailViewController *controller = [[DetailViewController alloc]init];
+////            [self.navigationController pushViewController:controller animated:YES];
+//        }
+//    } failure:^(NSError *error) {
+//        NSLog(@"saf:%@",error);
+//    }];
 }
 #pragma mark 返回
 - (void)goBack{

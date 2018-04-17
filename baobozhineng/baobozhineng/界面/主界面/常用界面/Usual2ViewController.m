@@ -520,12 +520,15 @@ NS_ENUM(NSInteger,cellState){
     NSInteger row = [sender.accessibilityLabel integerValue];
     NSString *shortcut_id;
     NSDictionary *dic;
+    NSLog(@"section:%ld",section);
     if (section == 1) {
         dic = [self.sensorArr objectAtIndex:row];
     }else if (section == 2){
         dic = [self.deviceArr objectAtIndex:row];
     }
-    shortcut_id = [dic objectForKey:@"shortcut_id"];
+    NSLog(@"sensor:%@",self.sensorArr);
+    shortcut_id = [dic objectForKey:@"id"];
+    NSLog(@"dic:%@",dic);
     NSDictionary *params = @{
                              @"shortcut_id":shortcut_id
                              };

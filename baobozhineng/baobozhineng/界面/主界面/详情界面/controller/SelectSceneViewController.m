@@ -126,6 +126,7 @@ static NSString *identifier = @"cellID";
 
 #pragma mark - 数据加载
 -(void)loadData{
+    NSLog(@"test");
     NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID)};
     [[APIManager sharedManager]deviceGetDevidWithParameters:params success:^(id data) {
         NSDictionary *dic = data;
@@ -149,12 +150,13 @@ static NSString *identifier = @"cellID";
                 }else{
                     
                 }
+                NSLog(@"datasource:%@",self.dataSource);
                 [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
             } failure:^(NSError *error) {
                 
             }];
         }else{
-            
+            NSLog(@"msg:%@",[dic objectForKey:@"msg"]);
         }
     } failure:^(NSError *error) {
         
