@@ -132,7 +132,7 @@ static NSString *identifier = @"cellID";
         NSDictionary *dic = data;
         if ([[dic objectForKey:@"code"]integerValue] == 200) {
             NSDictionary *one = @{
-                                  @"type":@"100000",
+                                  @"type":@"310110",
                                   @"icon1":@"in_scene_select_hand",
                                   @"name1":@"本情景",
                                   @"status":@"0",
@@ -140,9 +140,9 @@ static NSString *identifier = @"cellID";
                                   };
             [self.dataSource addObject:one];
             [[APIManager sharedManager]deviceGetSceneListsWithParameters:params success:^(id data) {
-                NSDictionary *dic = data;
-                if ([[dic objectForKey:@"code"]integerValue] == 200){
-                    NSArray *arr = [dic objectForKey:@"data"];
+                NSDictionary *dicd = data;
+                if ([[dicd objectForKey:@"code"]integerValue] == 200){
+                    NSArray *arr = [dicd objectForKey:@"data"];
                     for (int i = 0; i < arr.count; i ++) {
                         NSDictionary *dicOne = [arr objectAtIndex:i];
                         [self.dataSource addObject:dicOne];

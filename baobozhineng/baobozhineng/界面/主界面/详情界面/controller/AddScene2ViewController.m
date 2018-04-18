@@ -145,7 +145,7 @@ NS_ENUM(NSInteger, enableState){
         imageStr = @"33011";
         titleText = [NSString stringWithFormat:@"延时: %@秒",[dic objectForKey:@"value"]];
         detailText = @"";
-    }else if (type == 100000){
+    }else if (type == 310110){
         imageStr = [dic objectForKey:@"icon1"];
         titleText = [dic objectForKey:@"name1"];
         detailText = @"开";
@@ -534,13 +534,14 @@ NS_ENUM(NSInteger, enableState){
         }
         [ifArr addObject:params];
     }
-//    NSLog(@"thenarr:%@",self.thenArr);
+    NSLog(@"thenarr:%@",self.thenArr);
     for (int i = 0; i < self.thenArr.count; i++) {
         NSDictionary *dic = [self.thenArr objectAtIndex:i];
         CGFloat type = [[dic objectForKey:@"type"] integerValue];
-        if (type != 100000 && type != 33011) {
+        if (type != 310110 && type != 33011) {
             [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
-        }else{
+        }else if (type == 310110){
+            [devceid addObject:@{@"type":@"33011",@"device_id":[dic objectForKey:@"devid"]}];
             enable = @"1";
         }
         NSDictionary *params;
@@ -552,6 +553,10 @@ NS_ENUM(NSInteger, enableState){
                        };
         }else if (type == 25711){
             
+        }else if(type == 31011 || type == 310110){
+            params = @{
+                @"type":@"31011",@"sta":[dic objectForKey:@"status"],@"devid":[dic objectForKey:@"devid"]
+                };
         }else{
             params = @{
                        @"type":[dic objectForKey:@"type"],
@@ -561,7 +566,9 @@ NS_ENUM(NSInteger, enableState){
                        @"ch":[dic objectForKey:@"ch1"]
                        };
         }
-        [thenArr addObject:params];
+        if (params != nil) {
+            [thenArr addObject:params];
+        }
     }
     NSDictionary *params = @{
                              @"master_id":GET_USERDEFAULT(MASTER_ID),
@@ -575,29 +582,36 @@ NS_ENUM(NSInteger, enableState){
                              @"enable":enable,
                              @"scene_devices":[CommonCode formatToJson:devceid]
                              };
-    
     NSLog(@"params:%@",params);
-//    [[APIManager sharedManager]deviceAddSceneWithParameters:params success:^(id data) {
-//        NSDictionary *dic = data;
-//        NSInteger code = [[dic objectForKey:@"code"] integerValue];
-//        if (code == 0) {
-//            NSLog(@"msg:%@",[data objectForKey:@"msg"]);
-//        }else{
-//            for (UIViewController *controller in self.navigationController.viewControllers) {
-//                if ([controller isKindOfClass:[DetailViewController class]]) {
-//                    [self.navigationController popToViewController:controller animated:YES];
-//                }
-//            }
-////            DetailViewController *controller = [[DetailViewController alloc]init];
-////            [self.navigationController pushViewController:controller animated:YES];
-//        }
-//    } failure:^(NSError *error) {
-//        NSLog(@"saf:%@",error);
-//    }];
+    [[APIManager sharedManager]deviceAddSceneWithParameters:params success:^(id data) {
+        NSDictionary *dic = data;
+        NSInteger code = [[dic objectForKey:@"code"] integerValue];
+        if (code == 0) {
+            NSLog(@"msg:%@",[data objectForKey:@"msg"]);
+        }else{
+            for (UIViewController *controller in self.navigationController.viewControllers) {
+                if ([controller isKindOfClass:[DetailViewController class]]) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                }
+            }
+//            DetailViewController *controller = [[DetailViewController alloc]init];
+//            [self.navigationController pushViewController:controller animated:YES];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"saf:%@",error);
+    }];
 }
 #pragma mark 返回
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController.toolbar setHidden:NO];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.navigationController.toolbar setHidden:NO];
 }
 /*
 #pragma mark - Navigation

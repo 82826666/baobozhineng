@@ -203,7 +203,7 @@ NS_ENUM(NSInteger,cellState){
     NSString *nameText = @"";
     if (indexPath.section == 1) {
         NSDictionary *dic = [self.sensorArr objectAtIndex:indexPath.row];
-        imageName = [dic objectForKey:@"icon"];
+        imageName = @"in_scene_select_hand";//[dic objectForKey:@"icon"]
         nameText = [dic objectForKey:@"name"];
     }else if (indexPath.section == 2){
         NSDictionary *dic = [self.deviceArr objectAtIndex:indexPath.row];
@@ -523,11 +523,13 @@ NS_ENUM(NSInteger,cellState){
     NSLog(@"section:%ld",section);
     if (section == 1) {
         dic = [self.sensorArr objectAtIndex:row];
+        shortcut_id = [dic objectForKey:@"id"];
     }else if (section == 2){
         dic = [self.deviceArr objectAtIndex:row];
+        NSLog(@"dic:%@",dic);
+        shortcut_id = [dic objectForKey:@"shortcut_id"];
     }
     NSLog(@"sensor:%@",self.sensorArr);
-    shortcut_id = [dic objectForKey:@"id"];
     NSLog(@"dic:%@",dic);
     NSDictionary *params = @{
                              @"shortcut_id":shortcut_id
