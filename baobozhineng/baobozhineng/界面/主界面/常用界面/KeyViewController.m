@@ -358,6 +358,7 @@ static NSString *identifier = @"cellID";
     }
     [self.room enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         if ([obj isEqualToString: _swichZoneLabel.text]) {
+            NSLog(@"_datadic:%@",_dataDic);
             if (_dataDic != nil) {
                 NSDictionary *params = @{
                                          @"device_id":[_dataDic objectForKey:@"id"],

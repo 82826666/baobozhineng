@@ -16,4 +16,6 @@ pod 'JPush'
 
 pod 'YYKit'
 
+pod 'SGQRCode', '~> 2.2.0'
+
 end

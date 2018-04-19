@@ -488,11 +488,11 @@ NS_ENUM(NSInteger, enableState){
     self.navigationItem.rightBarButtonItem = rightBtn;
 }
 - (void) save{
-    if (self.ifArr == nil) {
+    if (self.ifArr.count <= 0) {
         [[AlertManager alertManager] showError:3.0 string:@"请添加条件"];
         return ;
     }
-    if (self.thenArr == nil) {
+    if (self.thenArr.count <= 0) {
         [[AlertManager alertManager] showError:3.0 string:@"请选择执行"];
         return ;
     }
@@ -534,7 +534,7 @@ NS_ENUM(NSInteger, enableState){
         }
         [ifArr addObject:params];
     }
-    NSLog(@"thenarr:%@",self.thenArr);
+//    NSLog(@"thenarr:%@",self.thenArr);
     for (int i = 0; i < self.thenArr.count; i++) {
         NSDictionary *dic = [self.thenArr objectAtIndex:i];
         CGFloat type = [[dic objectForKey:@"type"] integerValue];
@@ -582,7 +582,7 @@ NS_ENUM(NSInteger, enableState){
                              @"enable":enable,
                              @"scene_devices":[CommonCode formatToJson:devceid]
                              };
-    NSLog(@"params:%@",params);
+//    NSLog(@"params:%@",params);
     [[APIManager sharedManager]deviceAddSceneWithParameters:params success:^(id data) {
         NSDictionary *dic = data;
         NSInteger code = [[dic objectForKey:@"code"] integerValue];

@@ -48,6 +48,8 @@
 		57EEDC54205006A3006E3899 /* CKAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC53205006A3006E3899 /* CKAlertViewController.m */; };
 		57EEDC57205008A9006E3899 /* TwoWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC56205008A8006E3899 /* TwoWayViewController.m */; };
 		57EEDC5A205010CA006E3899 /* CommontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC59205010CA006E3899 /* CommontViewController.m */; };
+		57F9505A2088D8560037B9C1 /* QRCodeGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F950592088D8560037B9C1 /* QRCodeGenerateVC.m */; };
+		57F9505D2088D89E0037B9C1 /* WCQRCodeScanningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F9505C2088D89E0037B9C1 /* WCQRCodeScanningVC.m */; };
 		57FACBA3205D495100674A9D /* CustomButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FACBA2205D495100674A9D /* CustomButtonView.m */; };
 		57FACBCB2061424F00674A9D /* ComontSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FACBCA2061424F00674A9D /* ComontSensorViewController.m */; };
 		57FC5A86206A8293006119CA /* in_bottom_menu_star.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B9355C1FEFFB85003F2C52 /* in_bottom_menu_star.png */; };
@@ -232,6 +234,10 @@
 		57EEDC56205008A8006E3899 /* TwoWayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwoWayViewController.m; sourceTree = "<group>"; };
 		57EEDC58205010CA006E3899 /* CommontViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommontViewController.h; sourceTree = "<group>"; };
 		57EEDC59205010CA006E3899 /* CommontViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommontViewController.m; sourceTree = "<group>"; };
+		57F950582088D8560037B9C1 /* QRCodeGenerateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerateVC.h; sourceTree = "<group>"; };
+		57F950592088D8560037B9C1 /* QRCodeGenerateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerateVC.m; sourceTree = "<group>"; };
+		57F9505B2088D89E0037B9C1 /* WCQRCodeScanningVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCQRCodeScanningVC.h; sourceTree = "<group>"; };
+		57F9505C2088D89E0037B9C1 /* WCQRCodeScanningVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeScanningVC.m; sourceTree = "<group>"; };
 		57FACBA1205D495100674A9D /* CustomButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomButtonView.h; sourceTree = "<group>"; };
 		57FACBA2205D495100674A9D /* CustomButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomButtonView.m; sourceTree = "<group>"; };
 		57FACBC92061424F00674A9D /* ComontSensorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComontSensorViewController.h; sourceTree = "<group>"; };
@@ -727,6 +733,10 @@
 				5735B4942063DA4C0001DE8C /* Usual2ViewController.m */,
 				57530B10206612CA00F76006 /* KeyViewController.h */,
 				57530B11206612CA00F76006 /* KeyViewController.m */,
+				57F950582088D8560037B9C1 /* QRCodeGenerateVC.h */,
+				57F950592088D8560037B9C1 /* QRCodeGenerateVC.m */,
+				57F9505B2088D89E0037B9C1 /* WCQRCodeScanningVC.h */,
+				57F9505C2088D89E0037B9C1 /* WCQRCodeScanningVC.m */,
 			);
 			path = "常用界面";
 			sourceTree = "<group>";
@@ -1562,11 +1572,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-baobozhineng/Pods-baobozhineng-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SGQRCode.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1622,7 +1634,9 @@
 				A2C350841FF8038C00D3566B /* TablePopViewController.m in Sources */,
 				5718A75B2044412700D462A0 /* AddDelayedViewController.m in Sources */,
 				57A928A02040F7340053660A /* UIButton+CenterImageAndTitle.m in Sources */,
+				57F9505A2088D8560037B9C1 /* QRCodeGenerateVC.m in Sources */,
 				A2C3502D1FF5167500D3566B /* SelectEquipmentViewController.m in Sources */,
+				57F9505D2088D89E0037B9C1 /* WCQRCodeScanningVC.m in Sources */,
 				57530B2F2069199800F76006 /* AFNHttpTool.m in Sources */,
 				A2C6BB791FF22D6D00D56C92 /* TabbarBottomBtn.m in Sources */,
 				57B37FBD20233F7300AA3603 /* HouseTableViewCell.m in Sources */,

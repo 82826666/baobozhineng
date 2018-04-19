@@ -17,6 +17,9 @@
 #import "SelectEquipmentViewController.h"
 #import "GetDeviceViewController.h"
 #import "getSensorViewController.h"
+#import "QRCodeGenerateVC.h"
+#import "WCQRCodeScanningVC.h"
+#import <AVFoundation/AVFoundation.h>
 static NSString *identifier = @"cellID";
 static NSString *headerReuseIdentifier = @"hearderID";
 NS_ENUM(NSInteger,cellState){
@@ -57,6 +60,7 @@ NS_ENUM(NSInteger,cellState){
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     //一开始是正常状态；
     cellState = NormalState;
     
@@ -384,12 +388,36 @@ NS_ENUM(NSInteger,cellState){
 {
     if (index==0) {
         //分享功能
-        
+        QRCodeGenerateVC *VC = [[QRCodeGenerateVC alloc] init];
+        [self.navigationController pushViewController:VC animated:YES];
     }
     else if(index ==1){
-        //添加主机
-        WifiConfigViewController *wificonfig =[WifiConfigViewController shareInstance];
-        [self.navigationController pushViewController:wificonfig animated:YES];
+        CKAlertViewController *alertVC = [CKAlertViewController alertControllerWithTitle:@"" message:@"" ];
+        
+        CKAlertAction *cancel = [CKAlertAction actionWithTitle:@"智能zigbee主机" handler:^(CKAlertAction *action) {
+            WCQRCodeScanningVC *WCVC = [[WCQRCodeScanningVC alloc] init];
+            [self QRCodeScanVC:WCVC];
+//            [self.navigationController pushViewController:[[TwoWayViewController alloc]init] animated:YES];
+        }];
+        
+        CKAlertAction *updateNow = [CKAlertAction actionWithTitle:@"智能RF主机" handler:^(CKAlertAction *action) {
+            //添加主机
+            WifiConfigViewController *wificonfig =[WifiConfigViewController shareInstance];
+            [self.navigationController pushViewController:wificonfig animated:YES];
+//            [self.navigationController pushViewController:[SelectEquipmentViewController shareInstance] animated:YES];
+            //            NSLog(@"点击了 %@ 按钮",action.title);
+        }];
+        
+        CKAlertAction *updateLater = [CKAlertAction actionWithTitle:@"" handler:^(CKAlertAction *action) {
+            
+        }];
+        
+        [alertVC addAction:cancel];
+        [alertVC addAction:updateNow];
+        [alertVC addAction:updateLater];
+        
+        [self presentViewController:alertVC animated:NO completion:nil];
+        
     }
     else if(index ==2){
         CKAlertViewController *alertVC = [CKAlertViewController alertControllerWithTitle:@"系统更新" message:@"" ];
@@ -669,7 +697,57 @@ NS_ENUM(NSInteger,cellState){
     } showCloseButton:YES];
 }
 
-
+- (void)QRCodeScanVC:(UIViewController *)scanVC {
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (device) {
+        AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        switch (status) {
+            case AVAuthorizationStatusNotDetermined: {
+                [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                    if (granted) {
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            [self.navigationController pushViewController:scanVC animated:YES];
+                        });
+                        NSLog(@"用户第一次同意了访问相机权限 - - %@", [NSThread currentThread]);
+                    } else {
+                        NSLog(@"用户第一次拒绝了访问相机权限 - - %@", [NSThread currentThread]);
+                    }
+                }];
+                break;
+            }
+            case AVAuthorizationStatusAuthorized: {
+                [self.navigationController pushViewController:scanVC animated:YES];
+                break;
+            }
+            case AVAuthorizationStatusDenied: {
+                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相机 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                
+                [alertC addAction:alertA];
+                [self presentViewController:alertC animated:YES completion:nil];
+                break;
+            }
+            case AVAuthorizationStatusRestricted: {
+                NSLog(@"因为系统原因, 无法访问相册");
+                break;
+            }
+                
+            default:
+                break;
+        }
+        return;
+    }
+    
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"未检测到您的摄像头" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertC addAction:alertA];
+    [self presentViewController:alertC animated:YES completion:nil];
+}
 /*
 #pragma mark - Navigation
 
