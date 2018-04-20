@@ -25,7 +25,7 @@
 		576C2604207258D400949AF8 /* 箭头.png in Resources */ = {isa = PBXBuildFile; fileRef = 576C2603207258D400949AF8 /* 箭头.png */; };
 		576C260520726F6600949AF8 /* 33111.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B9356B1FEFFB85003F2C52 /* 33111.png */; };
 		577089D9205AAC580022E7F0 /* getSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577089D8205AAC580022E7F0 /* getSensorViewController.m */; };
-		5770D2E9207F9AC200408E98 /* in_scene_select_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B935771FEFFB85003F2C52 /* in_scene_select_hand.png */; };
+		5770D2E9207F9AC200408E98 /* 3001.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B935771FEFFB85003F2C52 /* 3001.png */; };
 		5795230A202F391F00FB2508 /* CommonAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 57952309202F391F00FB2508 /* CommonAdd.m */; };
 		579A6423205CAED4002A1CD3 /* GetDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579A6422205CAED4002A1CD3 /* GetDeviceViewController.m */; };
 		57A928A02040F7340053660A /* UIButton+CenterImageAndTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A9289F2040F7340053660A /* UIButton+CenterImageAndTitle.m */; };
@@ -50,6 +50,7 @@
 		57EEDC5A205010CA006E3899 /* CommontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EEDC59205010CA006E3899 /* CommontViewController.m */; };
 		57F9505A2088D8560037B9C1 /* QRCodeGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F950592088D8560037B9C1 /* QRCodeGenerateVC.m */; };
 		57F9505D2088D89E0037B9C1 /* WCQRCodeScanningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F9505C2088D89E0037B9C1 /* WCQRCodeScanningVC.m */; };
+		57F95060208A35700037B9C1 /* Detail2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F9505F208A35700037B9C1 /* Detail2ViewController.m */; };
 		57FACBA3205D495100674A9D /* CustomButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FACBA2205D495100674A9D /* CustomButtonView.m */; };
 		57FACBCB2061424F00674A9D /* ComontSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FACBCA2061424F00674A9D /* ComontSensorViewController.m */; };
 		57FC5A86206A8293006119CA /* in_bottom_menu_star.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B9355C1FEFFB85003F2C52 /* in_bottom_menu_star.png */; };
@@ -238,6 +239,8 @@
 		57F950592088D8560037B9C1 /* QRCodeGenerateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerateVC.m; sourceTree = "<group>"; };
 		57F9505B2088D89E0037B9C1 /* WCQRCodeScanningVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCQRCodeScanningVC.h; sourceTree = "<group>"; };
 		57F9505C2088D89E0037B9C1 /* WCQRCodeScanningVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeScanningVC.m; sourceTree = "<group>"; };
+		57F9505E208A35700037B9C1 /* Detail2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Detail2ViewController.h; sourceTree = "<group>"; };
+		57F9505F208A35700037B9C1 /* Detail2ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Detail2ViewController.m; sourceTree = "<group>"; };
 		57FACBA1205D495100674A9D /* CustomButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomButtonView.h; sourceTree = "<group>"; };
 		57FACBA2205D495100674A9D /* CustomButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomButtonView.m; sourceTree = "<group>"; };
 		57FACBC92061424F00674A9D /* ComontSensorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComontSensorViewController.h; sourceTree = "<group>"; };
@@ -394,7 +397,7 @@
 		A2B935741FEFFB85003F2C52 /* in_scene_condition_execute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_condition_execute.png; sourceTree = "<group>"; };
 		A2B935751FEFFB85003F2C52 /* in_scene_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_hand.png; sourceTree = "<group>"; };
 		A2B935761FEFFB85003F2C52 /* in_scene_select_safety.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_select_safety.png; sourceTree = "<group>"; };
-		A2B935771FEFFB85003F2C52 /* in_scene_select_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_select_hand.png; sourceTree = "<group>"; };
+		A2B935771FEFFB85003F2C52 /* 3001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3001.png; sourceTree = "<group>"; };
 		A2B935781FEFFB85003F2C52 /* in_scene_select_leavehome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_select_leavehome.png; sourceTree = "<group>"; };
 		A2B935791FEFFB85003F2C52 /* in_scene_select_closesafety.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_select_closesafety.png; sourceTree = "<group>"; };
 		A2B9357A1FEFFB85003F2C52 /* in_scene_select_startsafety.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = in_scene_select_startsafety.png; sourceTree = "<group>"; };
@@ -647,6 +650,8 @@
 				5718A76020444A4700D462A0 /* SelectSceneViewController.m */,
 				57BABCDB2070BE82006BC403 /* AddScene2ViewController.h */,
 				57BABCDC2070BE82006BC403 /* AddScene2ViewController.m */,
+				57F9505E208A35700037B9C1 /* Detail2ViewController.h */,
+				57F9505F208A35700037B9C1 /* Detail2ViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1099,7 +1104,7 @@
 				A2B935741FEFFB85003F2C52 /* in_scene_condition_execute.png */,
 				A2B935751FEFFB85003F2C52 /* in_scene_hand.png */,
 				A2B935761FEFFB85003F2C52 /* in_scene_select_safety.png */,
-				A2B935771FEFFB85003F2C52 /* in_scene_select_hand.png */,
+				A2B935771FEFFB85003F2C52 /* 3001.png */,
 				A2B935781FEFFB85003F2C52 /* in_scene_select_leavehome.png */,
 				A2B935791FEFFB85003F2C52 /* in_scene_select_closesafety.png */,
 				A2B9357A1FEFFB85003F2C52 /* in_scene_select_startsafety.png */,
@@ -1463,7 +1468,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5770D2E9207F9AC200408E98 /* in_scene_select_hand.png in Resources */,
+				5770D2E9207F9AC200408E98 /* 3001.png in Resources */,
 				57B58ED4207A64FA00383584 /* in_scene_message.png in Resources */,
 				576C260520726F6600949AF8 /* 33111.png in Resources */,
 				57BABCD920709A6F006BC403 /* 未选中.png in Resources */,
@@ -1619,6 +1624,7 @@
 				A2B934E81FEFC858003F2C52 /* CustomErImgView.m in Sources */,
 				57AB46B72025D6FB009FA671 /* SceneTableViewCell.m in Sources */,
 				A2B934EA1FEFC858003F2C52 /* CommonCode.m in Sources */,
+				57F95060208A35700037B9C1 /* Detail2ViewController.m in Sources */,
 				57AB46C52026CBF2009FA671 /* RecodeTableViewCell.m in Sources */,
 				A24D703B1FF4849900B00878 /* WifiConfigViewController.m in Sources */,
 				57FACBA3205D495100674A9D /* CustomButtonView.m in Sources */,

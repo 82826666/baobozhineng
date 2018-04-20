@@ -17,6 +17,7 @@
 #import "LoginViewController.h"
 #import "HouseViewController.h"
 #import "Usual2ViewController.h"
+#import "Detail2ViewController.h"
 @interface ParentTabbarController ()
 //分栏底部视图
 @property(nonatomic,strong)UIView *bottomView;
@@ -77,7 +78,7 @@ static ParentTabbarController* tabbarController;
 //    TabNavViewcontroller *usualNav = [[TabNavViewcontroller alloc] initWithRootViewController:[UsualViewcontroller shareInstance]];
     TabNavViewcontroller *usualNav = [[TabNavViewcontroller alloc] initWithRootViewController:[[Usual2ViewController alloc]init]];
     TabNavViewcontroller *homeNav = [[TabNavViewcontroller alloc] initWithRootViewController:[[HouseViewController alloc]init]];
-    TabNavViewcontroller *detailNav = [[TabNavViewcontroller alloc] initWithRootViewController:[[DetailViewController alloc]init]];
+    TabNavViewcontroller *detailNav = [[TabNavViewcontroller alloc] initWithRootViewController:[[Detail2ViewController alloc]init]];
     TabNavViewcontroller *personalNav = [[TabNavViewcontroller alloc] initWithRootViewController:[PersonalViewController shareInstance]];
     self.viewControllers = @[usualNav,homeNav,detailNav,personalNav];
     

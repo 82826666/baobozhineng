@@ -94,7 +94,29 @@
     [self.view addSubview:self.scanningView];
 }
 - (void)QRCodeAlbumManager:(SGQRCodeAlbumManager *)albumManager didFinishPickingMediaWithResult:(NSString *)result {
-    
+    [self go:result];
+//    if ([result hasPrefix:@"http"]) {
+//        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+//        jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
+//        jumpVC.jump_URL = result;
+//        [self.navigationController pushViewController:jumpVC animated:YES];
+//
+//    } else {
+//        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
+//        jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
+//        jumpVC.jump_bar_code = result;
+//        [self.navigationController pushViewController:jumpVC animated:YES];
+//    }
+}
+- (void)QRCodeAlbumManagerDidReadQRCodeFailure:(SGQRCodeAlbumManager *)albumManager {
+    [[AlertManager alertManager] showError:3.0 string:@"暂未识别出二维码"];
+    self.isSelectedFlashlightBtn = NO;
+    self.flashlightBtn.selected = NO;
+    [self.flashlightBtn removeFromSuperview];
+//    NSLog(@"暂未识别出二维码");
+}
+
+-(void)go:(NSString*)result{
     if ([result rangeOfString:@"mac"].location != NSNotFound) {
         NSArray *array = [result componentsSeparatedByString:@"="]; //从字符A中分隔成2个元素的数组
         NSString *qrcode = [array objectAtIndex:1];
@@ -143,21 +165,6 @@
         self.flashlightBtn.selected = NO;
         [self.flashlightBtn removeFromSuperview];
     }
-//    if ([result hasPrefix:@"http"]) {
-//        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-//        jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
-//        jumpVC.jump_URL = result;
-//        [self.navigationController pushViewController:jumpVC animated:YES];
-//
-//    } else {
-//        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-//        jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
-//        jumpVC.jump_bar_code = result;
-//        [self.navigationController pushViewController:jumpVC animated:YES];
-//    }
-}
-- (void)QRCodeAlbumManagerDidReadQRCodeFailure:(SGQRCodeAlbumManager *)albumManager {
-    NSLog(@"暂未识别出二维码");
 }
 
 #pragma mark - - - SGQRCodeScanManagerDelegate
@@ -169,7 +176,8 @@
         [scanManager videoPreviewLayerRemoveFromSuperlayer];
         
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
-        [[AlertManager alertManager] showError:3.0 string:[obj stringValue]];
+        [self go:[obj stringValue]];
+//        [[AlertManager alertManager] showError:3.0 string:[obj stringValue]];
 //        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
 //        jumpVC.comeFromVC = ScanSuccessJumpComeFromWC;
 //        jumpVC.jump_URL = [obj stringValue];
