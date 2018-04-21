@@ -45,6 +45,7 @@ static NSString *identifier = @"cellID";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [self createLongPressGesture];
     [self loadData];
 }
 #pragma mark ————— datasouce代理方法 —————
@@ -72,13 +73,20 @@ static NSString *identifier = @"cellID";
     
     UILabel *detail = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 5, title.bottom + 2, SCREEN_WIDTH - imageView.right - 71, 12)];
     detail.font = [UIFont systemFontOfSize:12];
-    detail.text = @"关";
+    detail.text = [self getStr:[CommonCode stringToJSON:[dic objectForKey:@"condition"]]];
     
     UILabel *text = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right + 5, detail.bottom + 2, SCREEN_WIDTH - imageView.right - 71, 12)];
     text.font = [UIFont systemFontOfSize:12];
     text.text = @"关";
     
-    UISwitch *swt = [[UISwitch alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 51 - 20, 15, 51, 30)];
+    UISwitch *swt = [[UISwitch alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 51 - 20, 10, 51, 30)];
+    if ([[dic objectForKey:@"enable"]integerValue] == 1) {
+        [swt setOn:YES animated:YES];
+    }else{
+        [swt setOn:NO animated:YES];
+    }
+    [swt addTarget:self action:@selector(swtClick:) forControlEvents:UIControlEventValueChanged];
+    
     
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 0.5)];
     line.backgroundColor = [UIColor lightGrayColor];
@@ -126,6 +134,13 @@ static NSString *identifier = @"cellID";
     }
     return _collectionView;
 }
+
+-(NSMutableArray*)dataSouce{
+    if (_dataSouce == nil) {
+        _dataSouce = [NSMutableArray new];
+    }
+    return _dataSouce;
+}
 #pragma mark ————— 方法 —————
 - (void) initNav{
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"消息" style:UIBarButtonItemStyleDone target: self action:@selector(message)];
@@ -167,6 +182,7 @@ static NSString *identifier = @"cellID";
 -(void)loadData{
     [[APIManager sharedManager]deviceGetSceneListsWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSDictionary *dic = data;
+        self.dataSouce = [NSMutableArray new];
         if ([[dic objectForKey:@"data"] count] > 0) {
             NSArray *arr = [dic objectForKey:@"data"];
             for (int i = 0; i < arr.count; i++) {
@@ -178,11 +194,72 @@ static NSString *identifier = @"cellID";
         
     }];
 }
--(NSMutableArray*)dataSouce{
-    if (_dataSouce == nil) {
-        _dataSouce = [NSMutableArray new];
+
+- (void) cellLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
+    CGPoint pointTouch = [gestureRecognizer locationInView:self.collectionView];
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:pointTouch];
+        NSDictionary *dic = [self.dataSouce objectAtIndex:indexPath.section];
+        [self alertMsg:@"确定要删除此情景吗？" cancelAction:^(UIAlertAction * _Nonnull action) {
+            
+        } successAction:^(UIAlertAction * _Nonnull action) {
+            [[APIManager sharedManager]deviceDeleteSceneWithParameters:@{@"scene_id":[dic objectForKey:@"id"]} success:^(id data) {
+                NSDictionary *dataDic = data;
+                if ([[dataDic objectForKey:@"code"] integerValue] == 200) {
+                    [[AlertManager alertManager] showError:3.0 string:[dataDic objectForKey:@"msg"]];
+                    [self loadData];
+                }else{
+                    
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+        }];
     }
-    return _dataSouce;
+    if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"长按手势改变，发生长按拖拽动作执行该方法");
+    }
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"长按手势结束");
+    }
+}
+
+- (void)createLongPressGesture{
+    //创建长按手势监听
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
+                                               initWithTarget:self
+                                               action:@selector(cellLongPressed:)];
+    longPress.minimumPressDuration = 1.0;
+    //将长按手势添加到需要实现长按操作的视图里
+    [self.collectionView addGestureRecognizer:longPress];
+}
+
+-(NSString*)getStr:(NSArray*)arr{
+    NSString *str = @"";
+    if (arr == nil) {
+        return str;
+    }
+    for (int i = 0; i < arr.count; i++) {
+        NSDictionary *dic = [arr objectAtIndex:i];
+        CGFloat type = [[dic objectForKey:@"type"] integerValue];
+        NSString *strTemp = @"";
+        if (type == 33111) {
+            NSArray *value = [dic objectForKey:@"value"];
+            NSDictionary *startTime = [value objectAtIndex:0];
+            NSDictionary *endTime = [value objectAtIndex:1];
+            strTemp = [NSString stringWithFormat:@"开始:%@:%@ 结束:%@:%@",[startTime objectForKey:@"h"],[startTime objectForKey:@"mi"],[endTime objectForKey:@"h"],[endTime objectForKey:@"mi"]];
+            str = [str stringByAppendingString:strTemp];
+        }
+    }
+    return str;
+}
+
+-(void)swtClick:(UISwitch*)swt{
+    if (swt.on == YES) {
+        [swt setOn:NO animated:YES];
+    }else{
+        [swt setOn:YES animated:YES];
+    }
 }
 /*
 #pragma mark - Navigation
