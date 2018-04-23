@@ -118,8 +118,14 @@
 }
 #pragma mark 添加双向开关设备
 - (void)deviceAddTwowaySwitchWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
-    NSLog(@"params:%@",dic);
+//    NSLog(@"params:%@",dic);
     NSString *path = [self getPathWithInterface:@"/device/device/add_twoway_switch"];
+    [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
+}
+#pragma mark 设备添加接口
+- (void)deviceDeviceAddWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
+    //    NSLog(@"params:%@",dic);
+    NSString *path = [self getPathWithInterface:@"/device/device/add"];
     [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
 }
 #pragma mark 添加zigbee设备
@@ -237,9 +243,19 @@
     NSString *path = [self getPathWithInterface:@"/device/device/edit_twoway_switch"];
     [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
 }
+#pragma mark 设备修改
+- (void)deviceDeviceEditWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
+    NSString *path = [self getPathWithInterface:@"/device/device/edit"];
+    [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
+}
 #pragma mark 删除双向开关
 - (void)deviceDeleteTwowaySwitchWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
     NSString *path = [self getPathWithInterface:@"/device/device/delete_twoway_switch"];
+    [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
+}
+#pragma mark 设备的删除
+- (void)deviceDeviceDeleteTwowaySwitchWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
+    NSString *path = [self getPathWithInterface:@"/device/device/delete"];
     [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
 }
 #pragma mark 修改传感器
@@ -250,6 +266,21 @@
 #pragma mark 删除传感器
 - (void)deviceDeleteSensorWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
     NSString *path = [self getPathWithInterface:@"/device/device/delete_sensor"];
+    [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
+}
+#pragma mark 添加/修改红外转发器的设备
+- (void)deviceDeviceEditRfDeviceWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
+    NSString *path = [self getPathWithInterface:@"/device/device/edit_rf_device"];
+    [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
+}
+#pragma mark 获取红外转发器的设备列表
+- (void)deviceDeviceGetRfDeviceWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
+    NSString *path = [self getPathWithInterface:@"/device/device/get_rf_device"];
+    [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
+}
+#pragma mark 获取红外转发器的设备列表
+- (void)deviceDeviceDeleteRfDeviceWithParameters:(NSDictionary *)dic success:(void(^)(id data))success failure:(void(^)(NSError *error))failure {
+    NSString *path = [self getPathWithInterface:@"/device/device/delete_rf_device"];
     [AFNHttpTool postRequestWithUrl:path params:dic success:success failure:failure];
 }
 @end

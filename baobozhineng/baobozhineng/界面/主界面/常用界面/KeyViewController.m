@@ -367,8 +367,7 @@ static NSString *identifier = @"cellID";
                                          @"setting":[CommonCode formatToJson:setting],
                                          @"icon":type,//[CommonCode getImageType:@"in_equipment_switch_one"]
                                          };
-                NSLog(@"parm:%@",params);
-                [[APIManager sharedManager]deviceEditTwowaySwitchWithParameters:params success:^(id data) {
+                [[APIManager sharedManager]deviceDeviceEditWithParameters:params success:^(id data) {
                     NSDictionary *datadic = data;
                     if([[datadic objectForKey:@"code"] intValue] == 200){
                         [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
@@ -388,7 +387,7 @@ static NSString *identifier = @"cellID";
                                          @"icon":type,//[CommonCode getImageType:@"in_equipment_switch_one"]
                                          @"mac":[CommonCode getMac]
                                          };
-                [[APIManager sharedManager]deviceAddTwowaySwitchWithParameters:params success:^(id data) {
+                [[APIManager sharedManager]deviceDeviceAddWithParameters:params success:^(id data) {
                     NSDictionary *datadic = data;
                     if([[datadic objectForKey:@"code"] intValue] == 200){
                         [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];

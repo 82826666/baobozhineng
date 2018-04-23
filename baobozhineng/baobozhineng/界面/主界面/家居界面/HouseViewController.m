@@ -278,7 +278,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
             }];
             
             CKAlertAction *delete = [CKAlertAction actionWithTitle:@"删除设备" handler:^(CKAlertAction *action) {
-                [[APIManager sharedManager]deviceDeleteTwowaySwitchWithParameters:@{@"device_id":[rowDic objectForKey:@"id"]} success:^(id data) {
+                [[APIManager sharedManager]deviceDeviceDeleteTwowaySwitchWithParameters:@{@"device_id":[rowDic objectForKey:@"id"]} success:^(id data) {
                     NSDictionary *dic = data;
                     [[AlertManager alertManager] showError:3.0 string:[dic objectForKey:@"msg"]];
                     if ([[dic objectForKey:@"code"] integerValue] == 200) {
