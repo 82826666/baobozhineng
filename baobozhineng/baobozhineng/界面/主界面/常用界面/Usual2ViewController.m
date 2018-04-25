@@ -316,7 +316,7 @@ NS_ENUM(NSInteger,cellState){
         NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"scene_id"]};
         [[APIManager sharedManager]deviceTriggerSceneWithParameters:params success:^(id data) {
             NSDictionary *datadic = data;
-            NSLog(@"data:%@",data);
+//            NSLog(@"data:%@",data);
             if([[datadic objectForKey:@"code"] intValue] == 200){
                 [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
             }else{
@@ -342,7 +342,7 @@ NS_ENUM(NSInteger,cellState){
                                  @"device_type":[dic objectForKey:@"type"],
                                  @"cmd":[cmd jsonStringEncoded]
                                  };
-        NSLog(@"params:%@",params);
+//        NSLog(@"params:%@",params);
         [[APIManager sharedManager]deviceZigbeeCmdsWithParameters:params success:^(id data) {
             NSDictionary *datadic = data;
             NSLog(@"data:%@",datadic);

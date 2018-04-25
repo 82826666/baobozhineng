@@ -10,6 +10,7 @@
 #import "TextfieldAlertViewController.h"
 #import "TablePopViewController.h"
 #import "SwitchIconSelectViewController.h"
+#import "Usual2ViewController.h"
 #import "CommonCode.h"
 #import <YYKit.h>
 static NSString *identifier = @"cellID";
@@ -385,18 +386,20 @@ static NSString *identifier = @"cellID";
                                          @"room_id":key,
                                          @"setting":[CommonCode formatToJson:setting],
                                          @"icon":type,//[CommonCode getImageType:@"in_equipment_switch_one"]
-                                         @"mac":[CommonCode getMac]
+                                         @"mac":_mac
                                          };
+//                NSLog(@"params:%@",params);
                 [[APIManager sharedManager]deviceDeviceAddWithParameters:params success:^(id data) {
                     NSDictionary *datadic = data;
+                    
                     if([[datadic objectForKey:@"code"] intValue] == 200){
                         [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
-//                        [self.navigationController pushViewController:[UsualViewcontroller shareInstance] animated:YES];
+//                        [self.navigationController pushViewController:[Usual2Viewcontroller shareInstance] animated:YES];
                     }else{
                         [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
                     }
                 } failure:^(NSError *error) {
-                    NSLog(@"123");
+                    NSLog(@"1234");
                 }];
             }
         }

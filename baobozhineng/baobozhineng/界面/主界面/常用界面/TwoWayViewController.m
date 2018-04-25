@@ -56,7 +56,7 @@ static NSString *identifier = @"cellID";
     
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom, SCREEN_WIDTH/4, 30)];
     name.textAlignment = NSTextAlignmentCenter;
-    name.text = [dic objectForKey:@"title"];
+//    name.text = [dic objectForKey:@"title"];
     
     [cell.contentView addSubview:imageView];
     [cell.contentView addSubview:name];
@@ -68,12 +68,20 @@ static NSString *identifier = @"cellID";
 //代理的优先级比属性高
 //点击时间监听
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat row = indexPath.row + 1 ;
-    if ( row > 0 && row <= 4) {
+    NSDictionary *dic = [self.dataSource objectAtIndex:indexPath.row];
+    CGFloat type = [[dic objectForKey:@"type"]integerValue];
+    if (type == 20141) {
         KeyViewController *controller = [[KeyViewController alloc]init];
-        controller.setNum = row;
+        controller.mac = [dic objectForKey:@"mac"];
+        controller.setNum = 4;
         [self.navigationController pushViewController:controller animated:YES];
     }
+//    CGFloat row = indexPath.row + 1 ;
+//    if ( row > 0 && row <= 4) {
+//        KeyViewController *controller = [[KeyViewController alloc]init];
+//        controller.setNum = row;
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
     //    NSLog(@"%ld-%ld",indexPath.section,indexPath.row);
 }
 //设置cell的内边距
@@ -109,39 +117,41 @@ static NSString *identifier = @"cellID";
 }
 
 -(NSMutableArray *)dataSource{
+    
     if (_dataSource == nil) {
-        _dataSource = [NSMutableArray arrayWithObjects:@{
-                                                         @"img":@"20111",
-                                                         @"title":@"一键开关"
-                                                         },
-                       @{
-                         @"img":@"20121",
-                         @"title":@"二键开关"
-                         },
-                       @{
-                         @"img":@"20131",
-                         @"title":@"三键开关"
-                         },
-                       @{
-                         @"img":@"20141",
-                         @"title":@"四键开关"
-                         },
-                       @{
-                         @"img":@"25111",
-                         @"title":@"门磁"
-                         },
-                       @{
-                         @"img":@"25211",
-                         @"title":@"红外感应"
-                         },
-                       @{
-                         @"img":@"25311",
-                         @"title":@"一氧化碳"
-                         },
-                       @{
-                         @"img":@"25711",
-                         @"title":@"温湿度"
-                         },nil];
+        _dataSource = [NSMutableArray new];
+//        [NSMutableArray arrayWithObjects:@{
+//                                                         @"img":@"20111",
+//                                                         @"title":@"一键开关"
+//                                                         },
+//                       @{
+//                         @"img":@"20121",
+//                         @"title":@"二键开关"
+//                         },
+//                       @{
+//                         @"img":@"20131",
+//                         @"title":@"三键开关"
+//                         },
+//                       @{
+//                         @"img":@"20141",
+//                         @"title":@"四键开关"
+//                         },
+//                       @{
+//                         @"img":@"25111",
+//                         @"title":@"门磁"
+//                         },
+//                       @{
+//                         @"img":@"25211",
+//                         @"title":@"红外感应"
+//                         },
+//                       @{
+//                         @"img":@"25311",
+//                         @"title":@"一氧化碳"
+//                         },
+//                       @{
+//                         @"img":@"25711",
+//                         @"title":@"温湿度"
+//                         },nil];
     }
     return _dataSource;
 }
@@ -153,6 +163,7 @@ static NSString *identifier = @"cellID";
 
 -(void)viewWillAppear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = YES;
+    [self loadData];
 }
 #pragma mark - 返回
 - (void)goBack{
@@ -171,5 +182,32 @@ static NSString *identifier = @"cellID";
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)loadData{
+    NSLog(@"master_id:%@",GET_USERDEFAULT(USER_ID));
+    [[APIManager sharedManager]deviceGetMasterDevicesWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID),@"type":@"0"} success:^(id data) {
+        NSDictionary *dic = data;
+        NSLog(@"data:%@",[dic objectForKey:@"data"]);
+        NSMutableArray *arr = [dic objectForKey:@"data"];
+        for (int i=0; i < arr.count; i++) {
+            NSMutableDictionary *one = [arr objectAtIndex:i];
+            CGFloat type = [[one objectForKey:@"type"] integerValue];
+            if(type < 65535){
+                NSDictionary *oneTemp = @{
+                                          @"img":@"20141",
+                                          @"title":@"sijian",
+                                          @"type":[one objectForKey:@"type"],
+                                          @"mac":[one objectForKey:@"mac"]
+                                          };
+                NSLog(@"pne%@",oneTemp);
+//                [one setObject:@"yi" forKey:@"title"];
+                [self.dataSource addObject:oneTemp];
+            }
+        }
+        [self.collectionView reloadData];
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 @end

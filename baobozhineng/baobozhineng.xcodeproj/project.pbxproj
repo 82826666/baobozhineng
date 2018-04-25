@@ -22,6 +22,7 @@
 		57530B12206612CA00F76006 /* KeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57530B11206612CA00F76006 /* KeyViewController.m */; };
 		57530B2F2069199800F76006 /* AFNHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 57530B2E2069199800F76006 /* AFNHttpTool.m */; };
 		57530B3220691A4B00F76006 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 57530B3120691A4B00F76006 /* APIManager.m */; };
+		576760242090DB9900E8B2E3 /* GetDeviceMessageForType.m in Sources */ = {isa = PBXBuildFile; fileRef = 576760232090DB9900E8B2E3 /* GetDeviceMessageForType.m */; };
 		576C2604207258D400949AF8 /* 箭头.png in Resources */ = {isa = PBXBuildFile; fileRef = 576C2603207258D400949AF8 /* 箭头.png */; };
 		576C260520726F6600949AF8 /* 33111.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B9356B1FEFFB85003F2C52 /* 33111.png */; };
 		577089D9205AAC580022E7F0 /* getSensorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577089D8205AAC580022E7F0 /* getSensorViewController.m */; };
@@ -194,6 +195,8 @@
 		57530B2E2069199800F76006 /* AFNHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNHttpTool.m; sourceTree = "<group>"; };
 		57530B3020691A4B00F76006 /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		57530B3120691A4B00F76006 /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		576760222090DB9900E8B2E3 /* GetDeviceMessageForType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetDeviceMessageForType.h; sourceTree = "<group>"; };
+		576760232090DB9900E8B2E3 /* GetDeviceMessageForType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetDeviceMessageForType.m; sourceTree = "<group>"; };
 		576C2603207258D400949AF8 /* 箭头.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "箭头.png"; path = "../../../../../../Desktop/箭头.png"; sourceTree = "<group>"; };
 		577089D7205AAC580022E7F0 /* getSensorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = getSensorViewController.h; sourceTree = "<group>"; };
 		577089D8205AAC580022E7F0 /* getSensorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = getSensorViewController.m; sourceTree = "<group>"; };
@@ -901,6 +904,8 @@
 				A2B934E71FEFC858003F2C52 /* UIImage+Rotate.h */,
 				A2B934E61FEFC858003F2C52 /* UIImage+Rotate.m */,
 				A2B934E11FEFC857003F2C52 /* UtilsMacro.h */,
+				576760222090DB9900E8B2E3 /* GetDeviceMessageForType.h */,
+				576760232090DB9900E8B2E3 /* GetDeviceMessageForType.m */,
 			);
 			path = CommonCode;
 			sourceTree = "<group>";
@@ -1600,6 +1605,7 @@
 			files = (
 				65D356C11FFD0D9A00447213 /* GCDAsyncUdpSocket.m in Sources */,
 				65D356C01FFD0D9500447213 /* GCDAsyncUdpSocket.h in Sources */,
+				576760242090DB9900E8B2E3 /* GetDeviceMessageForType.m in Sources */,
 				57293060203FDD2400E68079 /* ConditionViewController.m in Sources */,
 				57530B3220691A4B00F76006 /* APIManager.m in Sources */,
 				A21AD1D31FFF21F50031C186 /* VerticalCenterTextLabel.m in Sources */,

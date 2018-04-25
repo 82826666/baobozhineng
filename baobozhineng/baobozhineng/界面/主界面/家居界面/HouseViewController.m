@@ -73,7 +73,6 @@ static NSString *headerReuseIdentifier = @"hearderID";
     NSArray *arr = [self.dataSource objectAtIndex:indexPath.section];
     NSDictionary *dic = [arr objectAtIndex:indexPath.row];
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
     [cell.contentView removeAllSubviews];
     
     UIImageView *imageView = [[UIImageView alloc] init];
@@ -82,7 +81,11 @@ static NSString *headerReuseIdentifier = @"hearderID";
     imageView.centerX = cell.contentView.centerX;
     
     UILabel *sup = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right - 15, -5, 40, 30)];
-    sup.text = [[dic objectForKey:@"status1"]integerValue] == 0 ? @"关" : @"开";
+    sup.text = [[dic objectForKey:@"status1"]integerValue] > 0 ? @"开" : @"关";
+    sup.accessibilityIdentifier = [dic objectForKey:@"type"];
+    sup.accessibilityValue = @"0";
+    sup.tag = 2330;
+    
     
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom, SCREEN_WIDTH/4, 30)];
     name.textAlignment = NSTextAlignmentCenter;
@@ -134,23 +137,32 @@ static NSString *headerReuseIdentifier = @"hearderID";
 //代理的优先级比属性高
 //点击时间监听
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath]; //即为要得到的cell
+    UILabel *label = (UILabel*)[cell.contentView subviewsWithTag:2330];
+    
     CGFloat sec = indexPath.section;
     CGFloat row = indexPath.row;
     NSArray *arr = [self.dataSource objectAtIndex:sec];
     NSDictionary *dic = [arr objectAtIndex:row];
-    CGFloat type = [[dic objectForKey:@"type"]integerValue];
-    NSString *status;
-    NSString *ch;
-    if (type == 20111 || type == 20121 || type == 20131 || type == 20141) {
-        status = [dic objectForKey:@"status1"];
-        ch = [dic objectForKey:@"ch1"];
+    CGFloat type = [label.accessibilityIdentifier integerValue];
+    CGFloat ch;
+    if(type == 22111){
+        return;
     }
+    CGFloat value = [label.accessibilityValue integerValue];
+    if (value == 1) {
+        return ;
+    }else{
+        label.accessibilityValue = @"1";
+    }
+    
+    ch = [[dic objectForKey:@"ch1"] integerValue];
     NSDictionary *cmd = @{
                           @"cmd":@"edit",
                           @"type":[dic objectForKey:@"type"],
                           @"devid":[dic objectForKey:@"devid"],
-                          @"value":status,
-                          @"ch":@"1"
+                          @"value":[label.text isEqualToString:@"开"] ? @(0) : @(1),
+                          @"ch":@(ch)
                           };
     NSDictionary *params = @{
                              @"master_id":GET_USERDEFAULT(MASTER_ID),
@@ -159,11 +171,11 @@ static NSString *headerReuseIdentifier = @"hearderID";
                              };
     NSLog(@"params:%@",params);
     [[APIManager sharedManager]deviceZigbeeCmdsWithParameters:params success:^(id data) {
+        label.accessibilityValue = @"0";
         NSDictionary *datadic = data;
-        NSLog(@"data:%@",datadic);
-        //&& [datadic objectForKey:@"data"] objectForKey:@"stauts"
         if([[datadic objectForKey:@"code"] intValue] == 200 ){
             if ([[[datadic objectForKey:@"data"] objectForKey:@"status"] integerValue] >= 0) {
+                label.text = [label.text isEqualToString:@"开"] ?  @"关" : @"开";
                 [[AlertManager alertManager] showError:3.0 string:@"发送cmd命令成功"];
             }
         }else{
@@ -364,6 +376,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
                         //所有的分区都是闭合
                         [self.stateArray addObject:@"1"];
                     }
+                    NSLog(@"data:%@",self.dataSource);
                     [self.collectionView reloadData];
                 }else{
                     
