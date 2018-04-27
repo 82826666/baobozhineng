@@ -507,29 +507,37 @@ NS_ENUM(NSInteger, enableState){
         NSDictionary *dic = [self.ifArr objectAtIndex:i];
         CGFloat type = [[dic objectForKey:@"type"] integerValue];
         if (type != 33111) {
-            [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
+            CGFloat type = [[dic objectForKey:@"type"] integerValue];
+            CGFloat devid = [[dic objectForKey:@"devid"] integerValue];
+            [devceid addObject:@{@"type":@(type),@"device_id":@(devid)}];
         }
         NSDictionary *params;
         if (type == 33111) {
             params = @{
-                         @"type": [dic objectForKey:@"type"],
-                         @"value":[dic objectForKey:@"value"]
+                         @"type": @(type),
+                         @"value": [dic objectForKey:@"value"]
                              };
         }else if (type == 25711){
+            CGFloat ch = [[dic objectForKey:@"ch1"] integerValue];
+            CGFloat devid = [[dic objectForKey:@"devid"] integerValue];
+            CGFloat value = [[dic objectForKey:@"value"] integerValue];
             params = @{
-                       @"type":[dic objectForKey:@"type"],
-                       @"devid":[dic objectForKey:@"devid"],
+                       @"type":@(type),
+                       @"devid":@(devid),
                        @"compare":@">",
-                       @"value":@"25",
-                       @"ch":@"1"
+                       @"value":@(value),
+                       @"ch":@(ch)
                        };
         }else{
+            CGFloat status1 = [[dic objectForKey:@"status1"] integerValue];
+            CGFloat ch = [[dic objectForKey:@"ch1"] integerValue];
+            CGFloat devid = [[dic objectForKey:@"devid"] integerValue];
             params = @{
-                       @"type":[dic objectForKey:@"type"],
-                       @"devid":[dic objectForKey:@"devid"],
-                       @"compare":@"=",
-                       @"value":[dic objectForKey:@"status1"],
-                       @"ch":[dic objectForKey:@"ch1"]
+                       @"type":@(type),
+                       @"devid":@(devid),
+                       @"compare":@"==",
+                       @"value":@(status1),
+                       @"ch":@(ch)
                        };
         }
         [ifArr addObject:params];
@@ -539,31 +547,39 @@ NS_ENUM(NSInteger, enableState){
         NSDictionary *dic = [self.thenArr objectAtIndex:i];
         CGFloat type = [[dic objectForKey:@"type"] integerValue];
         if (type != 310110 && type != 33011) {
-            [devceid addObject:@{@"type":[dic objectForKey:@"type"],@"device_id":[dic objectForKey:@"devid"]}];
+            CGFloat devid = [[dic objectForKey:@"devid"] integerValue];
+            [devceid addObject:@{@"type":@(type),@"device_id":@(devid)}];
         }else if (type == 310110){
-            [devceid addObject:@{@"type":@"33011",@"device_id":[dic objectForKey:@"devid"]}];
+            CGFloat devid = [[dic objectForKey:@"devid"] integerValue];
+            [devceid addObject:@{@"type":@(33011),@"device_id":@(devid)}];
             enable = @"1";
         }
         NSDictionary *params;
-        NSString *compare = @"=";
+        NSString *compare = @"==";
         if (type == 33011) {
+            CGFloat value = [[dic objectForKey:@"value"] integerValue];
             params = @{
-                       @"type":[dic objectForKey:@"type"],
-                       @"value":[dic objectForKey:@"value"]
+                       @"type":@(type),
+                       @"value":@(value)
                        };
         }else if (type == 25711){
             
         }else if(type == 31011 || type == 310110){
+            CGFloat status = [[dic objectForKey:@"status"] integerValue];
+            CGFloat devid = [[dic objectForKey:@"devid"] integerValue];
             params = @{
-                @"type":@"31011",@"sta":[dic objectForKey:@"status"],@"devid":[dic objectForKey:@"devid"]
+                @"type":@(31011),@"sta":@(status),@"devid":@(devid)
                 };
         }else{
+            CGFloat devid = [[dic objectForKey:@"devid"] integerValue];
+            CGFloat status1 = [[dic objectForKey:@"status1"] integerValue];
+            CGFloat ch = [[dic objectForKey:@"ch1"] integerValue];
             params = @{
-                       @"type":[dic objectForKey:@"type"],
-                       @"devid":[dic objectForKey:@"devid"],
+                       @"type":@(type),
+                       @"devid":@(devid),
                        @"compare":compare,
-                       @"value":[dic objectForKey:@"status1"],
-                       @"ch":[dic objectForKey:@"ch1"]
+                       @"value":@(status1),
+                       @"ch": @(ch)
                        };
         }
         if (params != nil) {
@@ -594,8 +610,8 @@ NS_ENUM(NSInteger, enableState){
                     [self.navigationController popToViewController:controller animated:YES];
                 }
             }
-//            DetailViewController *controller = [[DetailViewController alloc]init];
-//            [self.navigationController pushViewController:controller animated:YES];
+            DetailViewController *controller = [[DetailViewController alloc]init];
+            [self.navigationController pushViewController:controller animated:YES];
         }
     } failure:^(NSError *error) {
         NSLog(@"saf:%@",error);

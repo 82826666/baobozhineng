@@ -76,16 +76,16 @@ static NSString *headerReuseIdentifier = @"hearderID";
     [cell.contentView removeAllSubviews];
     
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView setImage:[UIImage imageNamed:[dic objectForKey:@"icon"]]];
+    [imageView setImage:[UIImage imageNamed:[dic objectForKey:@"icon1"]]];
     imageView.frame = CGRectMake(0, 15, 50, 50);
     imageView.centerX = cell.contentView.centerX;
     
     UILabel *sup = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right - 15, -5, 40, 30)];
-    sup.text = [dic objectForKey:@"status"] == NULL ? @"关" : @"开";
+    sup.text = [[dic objectForKey:@"status1"]integerValue] == 0 ? @"关" : @"开";
     
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom, SCREEN_WIDTH/4, 30)];
     name.textAlignment = NSTextAlignmentCenter;
-    name.text = [dic objectForKey:@"name"];
+    name.text = [dic objectForKey:@"name1"];
     
     [cell.contentView addSubview:imageView];
     [cell.contentView addSubview:sup];
@@ -135,14 +135,18 @@ static NSString *headerReuseIdentifier = @"hearderID";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *arr = [self.dataSource objectAtIndex:indexPath.section];
     NSDictionary *dic = [arr objectAtIndex:indexPath.row];
+    CGFloat type = [[dic objectForKey:@"type"] integerValue];
+    CGFloat idd = [[dic objectForKey:@"id"] integerValue];
+    CGFloat ch = [[dic objectForKey:@"ch1"] integerValue];
     NSDictionary *params = @{
-                             @"master_id":GET_USERDEFAULT(MASTER_ID),
-                             @"device_id":[dic objectForKey:@"id"],
-                             @"ch":@"1",
-                             @"type":[dic objectForKey:@"type"],
-                             @"devid":[dic objectForKey:@"devid"],
-                             @"order":@"0"
+//                             @"master_id":GET_USERDEFAULT(MASTER_ID),
+                             @"device_id":@(idd),
+                             @"ch":@(ch),
+                             @"type":@(type),
+//                             @"devid":[dic objectForKey:@"devid"],
+                             @"order":@(0)
                              };
+    NSLog(@"parsm:%@",params);
     [[APIManager sharedManager]deviceAddDeviceShortcutWithParameters:params success:^(id data) {
         NSDictionary *dic = data;
         if ([[dic objectForKey:@"code"] integerValue] == 200) {
@@ -342,6 +346,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
 //                        }
                         [self.sectionArray addObject:[self.room objectForKey:[NSString stringWithFormat:@"%@",[dic objectForKey:@"room_id"]]]];
                         [self.dataSource addObject:deviceOne];
+                        NSLog(@"da:%@",self.dataSource);
                     }
                     for (int i = 0; i < self.dataSource.count; i++)
                     {

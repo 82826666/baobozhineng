@@ -71,12 +71,14 @@
 -(void)loadData{
     [[APIManager sharedManager]deviceGetSceneListsWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSDictionary *dic = data;
+        
         if ([[dic objectForKey:@"data"] count] > 0) {
             NSArray *arr = [dic objectForKey:@"data"];
             for (int i = 0; i < arr.count; i++) {
                 [self.dataSouce addObject:[arr objectAtIndex:i]];
             }
-            [_tableView reloadData];
+            NSLog(@"dataSouce:%@",self.dataSouce);
+//            [_tableView reloadData];
         }
     } failure:^(NSError *error) {
         

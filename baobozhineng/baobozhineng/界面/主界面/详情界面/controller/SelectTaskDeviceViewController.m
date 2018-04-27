@@ -78,16 +78,16 @@ static NSString *headerReuseIdentifier = @"hearderID";
     [cell.contentView removeAllSubviews];
     
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView setImage:[UIImage imageNamed:[dic objectForKey:@"icon"]]];
+    [imageView setImage:[UIImage imageNamed:[dic objectForKey:@"icon1"]]];
     imageView.frame = CGRectMake(0, 15, 50, 50);
     imageView.centerX = cell.contentView.centerX;
     
     UILabel *sup = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right - 15, -5, 40, 30)];
-    sup.text = [dic objectForKey:@"status"] == NULL ? @"关" : @"开";
+//    sup.text = [[dic objectForKey:@"status1"] integerValue] == 0 ? @"关" : @"开";
     
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom, SCREEN_WIDTH/4, 30)];
     name.textAlignment = NSTextAlignmentCenter;
-    name.text = [dic objectForKey:@"name"];
+    name.text = [dic objectForKey:@"name1"];
     
     [cell.contentView addSubview:imageView];
     [cell.contentView addSubview:sup];
@@ -136,17 +136,54 @@ static NSString *headerReuseIdentifier = @"hearderID";
 //点击时间监听
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *arr = [self.dataSource objectAtIndex:indexPath.section];
-    NSDictionary *dic = [arr objectAtIndex:indexPath.row];
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[AddScene2ViewController class]]) {
-            AddScene2ViewController *con = (AddScene2ViewController*)controller;
-            if (_tempDic == nil) {
-                _row = -1;
+    NSMutableDictionary*dic = [arr objectAtIndex:indexPath.row];
+    CKAlertViewController *alertVC = [CKAlertViewController alertControllerWithTitle:@"操作" message:@"" ];
+    
+    CKAlertAction *cancel = [CKAlertAction actionWithTitle:@"关" handler:^(CKAlertAction *action) {
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[AddScene2ViewController class]]) {
+                AddScene2ViewController *con = (AddScene2ViewController*)controller;
+                if (_tempDic == nil) {
+                    _row = -1;
+                }
+                NSMutableDictionary * a  = [NSMutableDictionary dictionaryWithDictionary:dic];
+                [a setObject:@"0" forKey:@"status1"];
+                [con setThenDic:a row:_row];
+                [self.navigationController popToViewController:con animated:YES];
             }
-            [con setThenDic:dic row:_row];
-            [self.navigationController popToViewController:con animated:YES];
         }
-    }
+//        [self.navigationController pushViewController:[[TwoWayViewController alloc]init] animated:YES];
+    }];
+    
+    CKAlertAction *updateNow = [CKAlertAction actionWithTitle:@"开" handler:^(CKAlertAction *action) {
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[AddScene2ViewController class]]) {
+                AddScene2ViewController *con = (AddScene2ViewController*)controller;
+                if (_tempDic == nil) {
+                    _row = -1;
+                }
+                NSMutableDictionary * a  = [NSMutableDictionary dictionaryWithDictionary:dic];
+                [a setObject:@"1" forKey:@"status1"];
+                [con setThenDic:a row:_row];
+                [self.navigationController popToViewController:con animated:YES];
+            }
+        }
+        //添加设备
+//        [self.navigationController pushViewController:[SelectEquipmentViewController shareInstance] animated:YES];
+        //            NSLog(@"点击了 %@ 按钮",action.title);
+    }];
+    
+    CKAlertAction *updateLater = [CKAlertAction actionWithTitle:@"" handler:^(CKAlertAction *action) {
+//        [self.navigationController pushViewController:[WifiConfigViewController shareInstance] animated:YES];
+        //            NSLog(@"点击了 %@ 按钮",action.title);
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:updateNow];
+    [alertVC addAction:updateLater];
+    
+    [self presentViewController:alertVC animated:NO completion:nil];
+    
     //    NSLog(@"%ld-%ld",indexPath.section,indexPath.row);
 }
 //设置cell的内边距

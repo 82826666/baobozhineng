@@ -113,7 +113,7 @@ static NSInteger seq = 0;
 }
 
 -(void)jpushTest{
-    [JPUSHService setAlias:@"wujianyang" completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+    [JPUSHService setAlias:GET_USERDEFAULT(USER_ID) completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         NSLog(@"code:%ld content:%@ seq:%ld",iResCode,iAlias,seq);
     } seq:[self seq]];
 }

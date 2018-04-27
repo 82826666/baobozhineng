@@ -169,7 +169,7 @@ static NSString *headerReuseIdentifier = @"hearderID";
                              @"device_type":[dic objectForKey:@"type"],
                              @"cmd":[cmd jsonStringEncoded]
                              };
-    NSLog(@"params:%@",params);
+//    NSLog(@"params:%@",params);
     [[APIManager sharedManager]deviceZigbeeCmdsWithParameters:params success:^(id data) {
         label.accessibilityValue = @"0";
         NSDictionary *datadic = data;

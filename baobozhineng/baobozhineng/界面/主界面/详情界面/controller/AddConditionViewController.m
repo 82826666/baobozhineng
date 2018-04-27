@@ -87,8 +87,12 @@
     }
     NSArray *startTime = [_start_Time.text componentsSeparatedByString:@":"];
     NSArray *endTime = [_end_Time.text componentsSeparatedByString:@":"];
+    CGFloat sh = [[startTime objectAtIndex:0] integerValue];
+    CGFloat smi = [[startTime objectAtIndex:1] integerValue];
+    CGFloat eh = [[endTime objectAtIndex:0] integerValue];
+    CGFloat emi = [[endTime objectAtIndex:1] integerValue];
     NSDictionary *dic = @{@"type":@"33111",@"value":@[
-                                  @{@"w":str,@"h":[startTime objectAtIndex:0],@"mi":[startTime objectAtIndex:1]},          @{@"w":str,@"h":[endTime objectAtIndex:0],@"mi":[startTime objectAtIndex:1]},
+                                  @{@"w":str,@"h":@(sh),@"mi":@(smi)},          @{@"w":str,@"h":@(eh),@"mi":@(emi)},
                                   ]};
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[AddScene2ViewController class]]) {

@@ -188,7 +188,8 @@ static NSString *identifier = @"cellID";
             for (int i = 0; i < arr.count; i++) {
                 [self.dataSouce addObject:[arr objectAtIndex:i]];
             }
-            [self.collectionView reloadData];
+//            NSLog(@"nsd:%@",self.dataSouce);
+//            [self.collectionView reloadData];
         }
     } failure:^(NSError *error) {
         

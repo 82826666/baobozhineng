@@ -60,7 +60,7 @@ NS_ENUM(NSInteger,cellState){
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
+    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     //一开始是正常状态；
     cellState = NormalState;
     
@@ -205,15 +205,17 @@ NS_ENUM(NSInteger,cellState){
     NSString *imageName = @"";
     NSString *supText = @"";
     NSString *nameText = @"";
+    NSDictionary *dic;
     if (indexPath.section == 1) {
-        NSDictionary *dic = [self.sensorArr objectAtIndex:indexPath.row];
+        dic = [self.sensorArr objectAtIndex:indexPath.row];
         imageName = @"in_scene_select_hand";//[dic objectForKey:@"icon"]
         nameText = [dic objectForKey:@"name"];
     }else if (indexPath.section == 2){
-        NSDictionary *dic = [self.deviceArr objectAtIndex:indexPath.row];
+        dic = [self.deviceArr objectAtIndex:indexPath.row];
+//        NSLog(@"devicearr:%@",self.deviceArr);
         imageName = [dic objectForKey:@"icon"];
         nameText = [dic objectForKey:@"name"];
-        supText = [[dic objectForKey:@"status"] integerValue] == 0 ? @"关" : @"开";
+        supText = [[dic objectForKey:@"status"] integerValue] == 1 ? @"开" : @"关";
     }
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView setImage:[UIImage imageNamed:imageName]];
@@ -237,6 +239,9 @@ NS_ENUM(NSInteger,cellState){
     
     UILabel *sup = [[UILabel alloc]initWithFrame:CGRectMake(imageView.right - 15, -5, 40, 30)];
     sup.text = supText;
+    sup.accessibilityIdentifier = [dic objectForKey:@"type"];
+    sup.accessibilityValue = @"0";
+    sup.tag = 2330;
     
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.bottom, SCREEN_WIDTH/4, 30)];
     name.textAlignment = NSTextAlignmentCenter;
@@ -307,6 +312,14 @@ NS_ENUM(NSInteger,cellState){
 //代理的优先级比属性高
 //点击时间监听
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath]; //即为要得到的cell
+    UILabel *label = (UILabel*)[cell.contentView subviewsWithTag:2330];
+    CGFloat value = [label.accessibilityValue integerValue];
+    if (value == 1) {
+        return ;
+    }else{
+        label.accessibilityValue = @"1";
+    }
     NSInteger section  = indexPath.section;
     NSInteger row = indexPath.row;
     NSDictionary *dic;
@@ -316,9 +329,11 @@ NS_ENUM(NSInteger,cellState){
         NSDictionary *params = @{@"master_id":GET_USERDEFAULT(MASTER_ID),@"scene_id":[dic objectForKey:@"scene_id"]};
         [[APIManager sharedManager]deviceTriggerSceneWithParameters:params success:^(id data) {
             NSDictionary *datadic = data;
+            label.accessibilityValue = @"0";
 //            NSLog(@"data:%@",data);
             if([[datadic objectForKey:@"code"] intValue] == 200){
                 [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
+                label.text = [label.text isEqualToString:@"开"] ?  @"关" : @"开";
             }else{
                 [[AlertManager alertManager] showError:3.0 string:[datadic objectForKey:@"msg"]];
             }
@@ -327,29 +342,29 @@ NS_ENUM(NSInteger,cellState){
         }];
     }else if (section == 2){
         dic = [self.deviceArr objectAtIndex:row];
-        UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        UILabel *label = (UILabel*)[cell.contentView subviewsWithTag:3003303];
-        NSString *status = [label.text isEqualToString:@"开"] ? @"0" : @"1";
+        CGFloat type = [[dic objectForKey:@"type"] integerValue];
+        CGFloat devid = [[dic objectForKey:@"devid"] integerValue];
+        CGFloat status = [label.text isEqualToString:@"开"] ? 0 : 1;
+        CGFloat ch = [[dic objectForKey:@"ch"]integerValue];
         NSDictionary *cmd = @{
                               @"cmd":@"edit",
-                              @"type":[dic objectForKey:@"type"],
-                              @"devid":[dic objectForKey:@"devid"],
-                              @"value":status,
-                              @"ch":@"1"
+                              @"type":@(type),
+                              @"devid":@(devid),
+                              @"value":@(status),
+                              @"ch":@(ch)
                               };
         NSDictionary *params = @{
                                  @"master_id":GET_USERDEFAULT(MASTER_ID),
-                                 @"device_type":[dic objectForKey:@"type"],
+                                 @"device_type":@(type),
                                  @"cmd":[cmd jsonStringEncoded]
                                  };
-//        NSLog(@"params:%@",params);
         [[APIManager sharedManager]deviceZigbeeCmdsWithParameters:params success:^(id data) {
             NSDictionary *datadic = data;
-            NSLog(@"data:%@",datadic);
-            //&& [datadic objectForKey:@"data"] objectForKey:@"stauts"
+            label.accessibilityValue = @"0";
             if([[datadic objectForKey:@"code"] intValue] == 200 ){
                 if ([[[datadic objectForKey:@"data"] objectForKey:@"status"] integerValue] >= 0) {
                     [[AlertManager alertManager] showError:3.0 string:@"发送cmd命令成功"];
+                    label.text = [label.text isEqualToString:@"开"] ?  @"关" : @"开";
                 }
             }else{
                 [[AlertManager alertManager] showError:3.0 string:@"发送cmd命令失败"];
@@ -671,6 +686,7 @@ NS_ENUM(NSInteger,cellState){
 -(void)getDevice{
     [[APIManager sharedManager]deviceGetDeviceShortcutWithParameters:@{@"master_id":GET_USERDEFAULT(MASTER_ID)} success:^(id data) {
         NSMutableArray *arr = [data objectForKey:@"data"];
+//        NSLog(@"arr:%@",arr);
         if ([arr isKindOfClass:[NSArray class]]) {
             self.deviceArr = arr;
         }else{
