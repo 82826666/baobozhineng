@@ -20,6 +20,8 @@
 #import "QRCodeGenerateVC.h"
 #import "WCQRCodeScanningVC.h"
 #import <AVFoundation/AVFoundation.h>
+// 引入JPush功能所需头文件 start
+#import "JPUSHService.h"
 static NSString *identifier = @"cellID";
 static NSString *headerReuseIdentifier = @"hearderID";
 NS_ENUM(NSInteger,cellState){
@@ -57,10 +59,10 @@ NS_ENUM(NSInteger,cellState){
 @end
 
 @implementation Usual2ViewController
-
+static NSInteger seq = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
+//    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     //一开始是正常状态；
     cellState = NormalState;
     
@@ -609,6 +611,7 @@ NS_ENUM(NSInteger,cellState){
         [self getWeather];
         [self getSensor];
         [self getDevice];
+        [self jpushTest];
         if (GET_USERDEFAULT(MASTER) != nil) {
             if([GET_USERDEFAULT(MASTER) isKindOfClass:[NSArray class]])
             {
@@ -763,6 +766,15 @@ NS_ENUM(NSInteger,cellState){
     
     [alertC addAction:alertA];
     [self presentViewController:alertC animated:YES completion:nil];
+}
+-(void)jpushTest{
+    [JPUSHService setAlias:[NSString stringWithFormat:@"%@",GET_USERDEFAULT(USER_ID)] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        NSLog(@"code:%ld content:%@ seq:%ld",iResCode,iAlias,seq);
+    } seq:[self seq]];
+}
+
+- (NSInteger)seq {
+    return ++ seq;
 }
 /*
 #pragma mark - Navigation

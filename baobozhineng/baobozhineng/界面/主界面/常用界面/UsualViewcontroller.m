@@ -83,7 +83,7 @@ static NSInteger seq = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadUi];
-    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
+//    NSLog(@"token:%@",GET_USERDEFAULT(USER_TOKEN));
     // Do any additional setup after loading the view.
     _moreEquipmentTitleArray = [NSMutableArray arrayWithArray:@[@"分享",@"添加主机",@"添加设备"]];
     _moreEquipmentImgArray = [NSMutableArray arrayWithArray:@[@"in_common_more_share.png",@"in_common_more_add.png",@"in_common_more_equipment.png"]];
